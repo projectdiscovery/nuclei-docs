@@ -6,34 +6,6 @@ The templates are written in `YAML` which specifies a simple human readable form
 
 Let's start with the basics and define our own workflow file for detecting the presence of a `.git/config` file on a webserver and take it from there.
 
-## Table of Contents
-
-   * [Templating Guide](#templating-guide)
-      * [Template Details](#template-details)
-         * [<strong>Info</strong>](#info)
-         * [<strong>HTTP Requests</strong>](#http-requests)
-            * [<strong>Method</strong>](#method)
-            * [<strong>Redirects</strong>](#redirects)
-            * [<strong>Path</strong>](#path)
-            * [<strong>Headers</strong>](#headers)
-            * [<strong>Body</strong>](#body)
-            * [<strong>Matchers</strong>](#matchers)
-               * [<strong>Types</strong>](#types)
-               * [<strong>Conditions</strong>](#conditions)
-               * [<strong>Matched Parts</strong>](#matched-parts)
-               * [<strong>Multiple Matchers</strong>](#multiple-matchers)
-            * [Extractors](#extractors)
-            * [<strong>Example HTTP Template</strong>](#example-http-template)
-         * [<strong>DNS Requests</strong>](#dns-requests)
-            * [<strong>Type</strong>](#type)
-            * [<strong>Name</strong>](#name)
-            * [<strong>Class</strong>](#class)
-            * [<strong>Recursion</strong>](#recursion)
-            * [<strong>Retries</strong>](#retries)
-            * [<strong>Matchers</strong>](#matchers)
-            * [<strong>Example DNS Template</strong>](#example-dns-template)
-         * [<strong>Chained workflow</strong>](#chained-workflow)
-
 ## Template Details
 
 Each template has a unique ID which is used during output writing to specify the template name for an output line.
@@ -47,7 +19,7 @@ id: git-config
 
 ID must not contain spaces. This is done to allow easier output parsing.
 
-### Info
+### Information
 
 Next important piece of information about a template is the **info** block. Info block provides more context on the purpose of the template and the **author**. It can also contain a **severity** field which indicates the severity of the template.
 
