@@ -133,12 +133,15 @@ requests:
   - method: GET
 
     # Example of sending some headers to the servers
+
     headers:
-      X-Client-IP: "127.0.0.1"
-      X-Remote-IP: "127.0.0.1"
-      X-Remote-Addr: "127.0.0.1"
-      X-Forwarded-For: "127.0.0.1"
-      X-Originating-IP: "127.0.0.1"
+
+      X-Client-IP: 127.0.0.1
+      X-Remote-IP: 127.0.0.1
+      X-Remote-Addr: 127.0.0.1
+      X-Forwarded-For: 127.0.0.1
+      X-Originating-IP: 127.0.0.1
+
     path:
       - "{{BaseURL}}/server-status"
     matchers:
