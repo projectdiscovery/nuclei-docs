@@ -75,13 +75,14 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Templating Guide:
+
+  - Home:
     - /
-  - Template Examples:
-    - examples
-  # - Template Examples:
-  #   - HTTP: examples/http.md OR examples/http
   - Get Started:
     - get-started
+  - Templating Guide:
+    - guide
+  - Template Examples:
+    - examples
   - Releases:
     - releases
