@@ -75,14 +75,16 @@ markdown_extensions:
 
 # Page tree
 nav:
-
   - Home:
     - /
   - Get Started:
-    - get-started
+    - /get-started
   - Templating Guide:
-    - guide
+    - /guide
   - Template Examples:
-    - examples
+    - HTTP: examples/http.md
+    - DNS: examples/dns.md
+    - RAW Request & Fuzzing: examples/raw.md
+    - Workflow: examples/workflow.md
   - Releases:
-    - releases
+    - /releases
