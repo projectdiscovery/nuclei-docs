@@ -1,5 +1,9 @@
 # Running locally
 
+```
+alias python=/usr/local/bin/python3
+```
+
 Run the following command to serve a local copy at http://127.0.0.1:8000
 
 ```
