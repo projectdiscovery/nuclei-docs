@@ -13,24 +13,31 @@ variables:
   # variables names as user defind, it could be anything.
   # relative path support is now added into nuclei engine for better UX.
 
-  jira: panels/detect-jira.yaml
-  jira_cve_1: cves/CVE-2018-20824.yaml
-  jira_cve_2: cves/CVE-2019-3399.yaml
-  jira_cve_3: cves/CVE-2019-11581.yaml
-  jira_cve_4: cves/CVE-2017-18101.yaml
+variables:
+        jira_detect: technologies/jira-detect.yaml
+        jira_signup: security-misconfiguration/jira-service-desk-signup.yaml
+        jira_projects: security-misconfiguration/jira-unauthenticated-projects.yaml
+        jira_dashboard: security-misconfiguration/jira-unauthenticated-dashboards.yaml
+        jira_filters: security-misconfiguration/jira-unauthenticated-popular-filters.yaml
+        jira_user_picker: security-misconfiguration/jira-unauthenticated-user-picker.yaml
+        jira_cve_1: cves/CVE-2019-8449.yaml
+        jira_cve_2: cves/CVE-2019-8451.yaml
+        jira_cve_3: cves/CVE-2017-9506.yaml
+        jira_cve_4: cves/CVE-2018-20824.yaml
+        jira_cve_5: cves/CVE-2019-3396.yaml
 
 logic:
-  |
- # defening conditionals templates.
-  if jira() {
-
- # if above conditon retruns true, run all the below tempaltes.
- # if above conditon fails, no tempaltes will be executed.
-
-    jira_cve_1()
-    jira_cve_2()
-    jira_cve_3()
-    jira_cve_4()
-
-  }
+        |
+        if jira_detect(){
+                jira_signup()
+                jira_projects()
+                jira_dashboard()
+                jira_filters()
+                jira_user_picker()
+                jira_cve_1()
+                jira_cve_2()
+                jira_cve_3()
+                jira_cve_4()
+                jira_cve_5()
+        }
 ```
