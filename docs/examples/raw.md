@@ -75,9 +75,9 @@ info:
   author: pdteam
   severity: info
 
-requests:
-
 # HTTP Intruder fuzzing with in template payload support. 
+
+requests:
 
   - payloads:
       username: 
@@ -96,17 +96,14 @@ requests:
     # Available types: sniper, pitchfork and clusterbomb
 
     raw:
-      # Request with simple param and header manipulation with DSL functions
       - |
-        POST /?username={{"username"}}&paramb={{"password"}} HTTP/1.1
+        POST /?username={{username}}&paramb={{password}} HTTP/1.1
         User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)
         Host: {{Hostname}}
         another_header: {{base64("password")}}
         Accept: */*
 
         body=test
-
-        # This is body
 
     matchers:
       - type: word
