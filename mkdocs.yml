@@ -78,13 +78,19 @@ nav:
   - Home:
     - /
   - Get Started:
-    - /get-started
+    - Install: get-started/#get-started
+    - Features: get-started/#features
+    - Uses: get-started/#uses
+    - Contribution: get-started.md
+    - License: get-started/#license
   - Templating Guide:
     - /guide
   - Template Examples:
     - HTTP: examples/http.md
     - DNS: examples/dns.md
-    - RAW Request & Fuzzing: examples/raw.md
+    - RAW HTTP: examples/raw.md
+    - Fuzzing: examples/fuzzing.md
     - Workflow: examples/workflow.md
   - Releases:
-    - /releases
+    - Nuclei: releases/nuclei.md
+    - Templates: releases/nuclei-templates.md

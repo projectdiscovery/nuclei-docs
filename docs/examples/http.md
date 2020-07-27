@@ -163,12 +163,12 @@ info:
 requests:
   - method: POST
     path:
-      - {{BaseURL}}/graphql
+      - {{BaseURL}}/admin
 
-    body: '{"query":"query IntrospectionQuery{__schema {queryType { name }}}"}'
+    body: 'admin=test'
 
     matchers:
       - type: word
         words:
-          - '{"data":{"__schema":{"queryType":'
+          - Welcome Admin
 ```
