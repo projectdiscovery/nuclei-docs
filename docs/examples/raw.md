@@ -1,5 +1,3 @@
-## RAW Request & Fuzzing 
-
 ### Basic template
 
 ```yaml

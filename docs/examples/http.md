@@ -1,7 +1,3 @@
-# Template Examples
-
-## HTTP
-
 ### Basic Template
 
 ```yaml

@@ -1,5 +1,3 @@
-## DNS  
-
 ### Basic template
 
 ```yaml
