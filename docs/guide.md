@@ -50,69 +50,6 @@ Requests start with a request block which specifies the start of the requests fo
 requests:
 ```
 
-At this point you can define raw requests like the following ones (as of now it's suggested to leave the `Host` header as in the example with the variable `{{Hostname}}`).
-
-```yaml
-requests:
-  - raw:
-    - |
-        GET /path1/ HTTP/1.1
-        User-Agent: chrome
-        Host: {{Hostname}}
-        Accept: a1/b1
-    - |
-        POST /path2/ HTTP/1.1
-        User-Agent: chrome
-        Host: {{Hostname}}
-        Accept: a2/b2
-
-        This is the request Body
-```
-
-Otherwise you can define structured requests as described in the following paragraphs. Requests can be fine tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers. A recent addition in raw requests has been the introduction of intruder-like functionalities. It's possible to define placeholders as `{{placeholder}}`, and perform Sniper, Pitchfork and ClusterBomb attacks. The wordlist for these attacks needs to be defined during the request definition under the `Payload` field. Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values. Here follows an example:
-
-```yaml
-id: dummy-raw
-info:
-  name: Example-Fuzzing
-
-requests:
-  - payloads:
-      param_a: /home/user/wordlist_param_a.txt
-      param_b: /home/user/wordlist_param_b.txt
-    attack: clusterbomb # Available options: sniper, pitchfork and clusterbomb
-    raw:
-      # Request with simple param and header manipulation with DSL functions
-      - |
-          POST /?param_a={{param_a}}&paramb={{param_b}} HTTP/1.1
-          User-Agent: {{param_a}}
-          Host: {{Hostname}}
-          another_header: {{base64(param_b)}}
-          Accept: */*
-
-          This is the Body
-      # Request with body manipulation
-      - |
-          DELETE / HTTP/1.1
-          User-Agent: nuclei
-          Host: {{Hostname}}
-          
-          This is the body {{sha256(param_a)}}
-      # Yet another one
-      - |
-          PUT / HTTP/1.1
-          Host: {{Hostname}}
-          
-          This is again the request body {{html_escape(param_a)}} + {{hex_encode(param_b))}}
-    matchers:
-      - type: word
-        words:
-          - "title"
-          - "body"
-```
-
-This functionality is **not optimized** for speed as the internal http library needs to be set explicitly with connection reuse policy.
-
 #### Method
 
 First thing in the request is **method**. Request method can be **GET**, **POST**, **PUT**, **DELETE**, etc depending on the needs.
@@ -245,18 +182,20 @@ matchers:
       - "contains(toupper(body), md5(cookie))" # Check if the MD5 sum of cookies is contained in the uppercase body
 ```
 
-Every part of a http response can be matched:
+Every part of a HTTP response can be matched with DSL matcher:
 
 | Response Part    | Description                                     | Example                   |
 |------------------|-------------------------------------------------|---------------------------|
-| content_length   | Header Content-Length                           | content_length >= 1024    |
+| content_length   | Content-Length Header                           | content_length >= 1024    |
 | status_code      | Response Status Code                            | status_code==200          |
 | all_headers      | Unique string containing all headers            | len(all_headers)          |
 | body             | Body as string                                  | len(body)                 |
-| header_name      | Lowercase header name with "-" converted to "_" | len(user_agent)           |
+| header_name      | Lowercase header name with `-` converted to `_` | len(user_agent)           |
 | raw              | Headers + Response                              | len(raw)                  |
 
-This is the list for a dns response:
+
+
+This is the list for a DNS response supported by DSL matcher:
 
 | Response Part    | Description                       | Example                   |
 |------------------|-----------------------------------|---------------------------|
@@ -267,33 +206,6 @@ This is the list for a dns response:
 | ns               | Response Authority Section        | len(ns)                   |
 | raw              | Full Response                     | len(raw)                  |
 
-The helper functions are:
-
-| Helper Function | Description                               | Example                                                                                        |
-|-----------------|-------------------------------------------|------------------------------------------------------------------------------------------------|
-| len             | Length of a string                        | len("Hello") // Result: 5                                                                      |
-| toupper         | string to uppercase                       | toupper("Hello") // Result: "HELLO"                                                            |
-| tolower         | string to lowercase                       | tolower("Hello") // Result: "hello"                                                            |
-| replace         | Replace string parts                      | replace("Hello", "He", "Ha") // Result: "Hallo"                                                |
-| trim            | Remove trailing unicode chars             | trim("aaaHelloddd", "ad") // Result: "Hello"                                                   |
-| trimleft        | Remove unicode chars from left            | trimleft("aaaHelloddd", "ad") // Result: "Helloddd"                                            |
-| trimright       | Remove unicode chars from right           | trimleft("aaaHelloddd", "ad") // Result: "aaaHello"                                            |
-| trimspace       | Remove trailing spaces                    | trimspace("  Hello  ") // Result: "Hello"                                                      |
-| trimprefix      | Trim specified prefix                     | trimprefix("aaHelloaa", "aa") // Result: "Helloaa"                                             |
-| trimsuffix      | Trim specified suffix                     | trimsuffix("aaHelloaa", "aa") // Result: "aaHello"                                             |
-| base64          | Encode string to base64                   | base64("Hello") // Result: "SGVsbG8="                                                          |
-| base64_decode   | Decode string from base64                 | base64_decode("SGVsbG8=") // Result: "Hello"                                                   |
-| url_encode   | URL encode a string                 | url_encode("https://projectdiscovery.io/test?a=1") // Result: "https:%2F%2Fprojectdiscovery.io%3Ftest=1"     |
-| url_decode   | URL decode a string                 | url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1") // Result: "https://projectdiscovery.io/test?a=1"     |
-| hex_encode   | Hex encode a string                 | hex_encode("aa") // Result: "6161"     |
-| hex_decode   | Hex decode a string                 | hex_decode("6161") // Result: "aa"     |
-| html_escape   | Hex encode a string                 | html_escape("<html><body>test</body></html>") // Result: "&lt;html&gt;&lt;body&gt;test&lt;/body&gt;&lt;/html&gt;"     |
-| html_unescape   | Hex decode a string                 | html_unescape("&lt;html&gt;&lt;body&gt;test&lt;/body&gt;&lt;/html&gt;") // Result: "<html><body>test</body></html>"     |
-| md5             | Calculate md5 of string                   | md5("Hello") // Result: "8b1a9953c4611296a827abf8c47804d7"                                     |
-| sha256          | Calculate sha256 of string                | sha256("Hello") // Result: "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969"  |
-| sha1          | Calculate sha1 of string                | sha1("Hello") // Result: "f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0"  |
-| contains        | Verify if a string contains another one   | contains("Hello", "lo") // Result: True                                                        |
-| regex           | Verify a regex versus a string            | regex("H([a-z]+)o", "Hello") // Result: True                                                   |
 
 ##### Conditions
 
@@ -465,40 +377,6 @@ Here we used extractor name as variable `api_key` which holds the value and can 
 
 Note:- You can use `internal: true` when you only want to use extractor as dynamic variable, this will avoid printing extracted values in the terminal. 
 
-+ Example of RAW request utilizing extractor as dynamic variable:- 
-
-```yaml
-requests:
-  - raw:
-      - |
-        GET /menu/stc HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept-Encoding: gzip, deflate
-        Accept: */*
-        Connection: close
-
-      - |
-        POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept-Encoding: gzip, deflate
-        Accept: */*
-        Connection: close
-        Content-Type: application/xml
-        X-NITRO-USER: oY39DXzQ
-        X-NITRO-PASS: ZuU9Y9c1
-        token: api_key
-
-    extractors:
-      - type: regex
-        name: api_key
-        part: body
-        internal: true
-        regex:
-          - "(?m)[0-9]{3,10}\\.[0-9]+"
-```
-
 #### **Example HTTP Template**
 
 The final template file for the `.git/config` file mentioned above is as follows:
@@ -521,6 +399,96 @@ requests:
         words:
           - "[core]"
 ```
+
+### HTTP Raw requests
+
+Another way to create request is using raw requests which comes with more flexibility and support of DSL helper functions, like the following ones (as of now it's suggested to leave the `Host` header as in the example with the variable `{{Hostname}}`).
+
+```yaml
+requests:
+  - raw:
+    - |
+        POST /path2/ HTTP/1.1
+        Host: {{Hostname}}
+        Content-Length: 1
+        Origin: https://www.google.com
+        Content-Type: application/x-www-form-urlencoded
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3526.0 Safari/537.36 autochrome/blue
+        Accept-Encoding: gzip, deflate
+        Accept-Language: en-US,en;q=0.9
+
+        test=body
+```
+
+Requests can be fine tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers. A recent addition in raw requests has been the introduction of **intruder**-like functionalities. It's possible to define placeholders as `{{placeholder}}`, and perform **Sniper**, **Pitchfork** and **ClusterBomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the `Payload` field, Nuclei supports both file based and wordlist defined within template and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values. Here follows an example:
+
+```yaml
+id: http-raw-request
+info:
+  name: Example-Fuzzing
+
+requests:
+
+  - payloads:
+      username: 
+      - admin
+
+      password: 
+      - admin
+      - guest
+      - password
+      - test
+      - 12345
+      - 123456
+
+    attack: clusterbomb
+
+    # Supported attack types: sniper, pitchfork and clusterbomb
+
+    raw:
+      # Request with simple header manipulation with DSL functions
+      - |
+        GET /manager/html HTTP/1.1
+        Host: {{Hostname}}
+        Authorization: Basic {{base64('username:password')}}
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
+        Accept-Encoding: gzip, deflate
+        Accept-Language: en-US,en;q=0.9
+        Connection: close
+    matchers:
+      - type: status
+        status:
+          - 200
+```
+
+Here is the list of all available and supported helper functions:
+
+| Helper Function | Description                               | Example                                                                                        |
+|-----------------|-------------------------------------------|------------------------------------------------------------------------------------------------|
+| len             | Length of a string                        | len("Hello") // Result: 5                                                                      |
+| toupper         | string to uppercase                       | toupper("Hello") // Result: "HELLO"                                                            |
+| tolower         | string to lowercase                       | tolower("Hello") // Result: "hello"                                                            |
+| replace         | Replace string parts                      | replace("Hello", "He", "Ha") // Result: "Hallo"                                                |
+| trim            | Remove trailing unicode chars             | trim("aaaHelloddd", "ad") // Result: "Hello"                                                   |
+| trimleft        | Remove unicode chars from left            | trimleft("aaaHelloddd", "ad") // Result: "Helloddd"                                            |
+| trimright       | Remove unicode chars from right           | trimleft("aaaHelloddd", "ad") // Result: "aaaHello"                                            |
+| trimspace       | Remove trailing spaces                    | trimspace("  Hello  ") // Result: "Hello"                                                      |
+| trimprefix      | Trim specified prefix                     | trimprefix("aaHelloaa", "aa") // Result: "Helloaa"                                             |
+| trimsuffix      | Trim specified suffix                     | trimsuffix("aaHelloaa", "aa") // Result: "aaHello"                                             |
+| base64          | Encode string to base64                   | base64("Hello") // Result: "SGVsbG8="                                                          |
+| base64_decode   | Decode string from base64                 | base64_decode("SGVsbG8=") // Result: "Hello"                                                   |
+| url_encode      | URL encode a string                       | url_encode("https://projectdiscovery.io/test?a=1") // Result: "https:%2F%2Fprojectdiscovery.io%3Ftest=1"     |
+| url_decode      | URL decode a string                       | url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1") // Result: "https://projectdiscovery.io/test?a=1"     |
+| hex_encode      | Hex encode a string                       | hex_encode("aa") // Result: "6161"     |
+| hex_decode      | Hex decode a string                       | hex_decode("6161") // Result: "aa"     |
+| html_escape     | Hex encode a string                       | html_escape("<html><body>test</body></html>") // Result: "&lt;html&gt;&lt;body&gt;test&lt;/body&gt;&lt;/html&gt;"     |
+| html_unescape   | Hex decode a string                       | html_unescape("&lt;html&gt;&lt;body&gt;test&lt;/body&gt;&lt;/html&gt;") // Result: "<html><body>test</body></html>"     |
+| md5             | Calculate md5 of string                   | md5("Hello") // Result: "8b1a9953c4611296a827abf8c47804d7"                                     |
+| sha256          | Calculate sha256 of string                | sha256("Hello") // Result: "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969"  |
+| sha1            | Calculate sha1 of string                  | sha1("Hello") // Result: "f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0"  |
+| contains        | Verify if a string contains another one   | contains("Hello", "lo") // Result: True                                                        |
+| regex           | Verify a regex versus a string            | regex("H([a-z]+)o", "Hello") // Result: True                                                   |
+
 
 ### DNS Requests
 
@@ -592,15 +560,13 @@ Matchers are just equal to HTTP, but the search is performed on the whole dns re
 
 ##### Types
 
-Multiple matchers can be specified in a request. There are basically 5 types of matchers:
+Multiple matchers can be specified in a request. There are basically 3 types of matchers:
 
 | Matcher Type | Part Matched               |
 | ------------ | -------------------------- |
-| size         | Response size              |
-| word         | Response                   |
-| regex        | Response                   |
-| binary       | Response                   |
-| dsl          | Response                   |
+| word         | DNS Response               |
+| regex        | DNS Response               |
+| dsl          | DNS Response               |
 
 #### **Example DNS Template**
 
