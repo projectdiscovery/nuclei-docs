@@ -175,6 +175,18 @@ Body specifies a body to be sent along with the request. For instance:
 ```yaml
 # Body is a string sent along with the request
 body: "{\"some random JSON\"}"
+
+# Body is a string sent along with the request
+body: "admin=test"
+```
+
+#### Session
+
+To maintain cookie based browser like session between multiple requests, you can simply use `cookie-reuse: true` in your template, Useful in cases where you want to maintain session between series of request to complete the exploit chain and to perform authenticated scans. 
+
+```yaml
+# cookie-reuse accepts boolean input and false as default
+cookie-reuse: true
 ```
 
 #### Matchers
@@ -292,7 +304,7 @@ Multiple words and regexes can be specified in a single matcher and can be confi
 
 ##### Matched Parts
 
-Multiple parts of the response can also be matched for the request.
+Multiple parts of the response can also be matched for the request, default matched part is `body` if not defined. 
 
 | Part   | Matched Part                         |
 | ------ | ------------------------------------ |
@@ -370,20 +382,121 @@ While using multiple matchers the default condition is to follow OR operation in
 
 #### Extractors
 
-Extractors are another important feature of nuclei. Extractors can be used to extract and display in results a match from the response body or headers based on a regular expression.
+Extractors are another important feature of nuclei. Extractors can be used to extract and display in results a match from the response body or headers based on available types.
 
-Currently only `regex` type extractors are supported. A sample extractor for extracting API keys from the response body is as follows:
+##### Types
+
+Multiple extractors can be specified in a request, as of now we support two type of extractors.
+
+| Extractor Type | Part Matched             |
+| ------------ | -------------------------- |
+| regex        | Response body or headers   |
+| kval         | Response headers or cookie |
+
+Example extractor for response body using regex, you can use the following syntax.
 
 ```yaml
 # A list of extractors for text extraction
 extractors:
-  # type of the extractor, only regex for now.
+  # type of the extractor.
   - type: regex
     # part of the response to extract (can be headers, all too)
     part: body
     # regex to use for extraction.
     regex:
       - "(A3T[A-Z0-9]|AKIA|AGPA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}"
+```
+To extract `key-value` formatted data from the header, you can use the following syntax.
+
+
+```yaml
+# A list of extractors for text extraction
+extractors:
+  # type of the extractor
+      - type: kval
+        part: header
+        kval:
+        # header value to extract from response
+          - content-type
+```
+
+To extract `key-value` formatted data from cookie, you can use the following syntax.
+
+
+```yaml
+# A list of extractors for text extraction
+extractors:
+  # type of the extractor
+      - type: kval
+        kval:
+        # cookie value to extract from response
+          - PHPSESSID
+```
+
+##### Matched Parts
+
+Multiple parts of the response can also be extracted for the request, default matched part is `body` if not defined. 
+
+| Part   | Matched Part                         |
+| ------ | ------------------------------------ |
+| body   | Body of the response                 |
+| header | Header of the response               |
+| all    | Both body and header of the response |
+
+Note:- `kval` extractor only supported for header and cookies. 
+
+##### Dynamic extractor
+
+Extractor plays an important role while writing an template for chained request which requires dynamic value to use at run time, for example CSRF tokens, headers or any values requires to complete the chain.  
+
++ Example of defining extractor as dynamic variable:-
+
+```yaml
+    extractors:
+      - type: regex
+        name: api_key
+        part: body
+        internal: true
+        regex:
+          - "(?m)[0-9]{3,10}\\.[0-9]+"
+```
+
+Here we used extractor name as variable `api_key` which holds the value and can be reused in any part of the request dynamically, this feature is supported in RAW request format only. 
+
+Note:- You can use `internal: true` when you only want to use extractor as dynamic variable, this will avoid printing extracted values in the terminal. 
+
++ Example of RAW request utilizing extractor as dynamic variable:- 
+
+```yaml
+requests:
+  - raw:
+      - |
+        GET /menu/stc HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: python-requests/2.24.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
+        Connection: close
+
+      - |
+        POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: python-requests/2.24.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
+        Connection: close
+        Content-Type: application/xml
+        X-NITRO-USER: oY39DXzQ
+        X-NITRO-PASS: ZuU9Y9c1
+        token: api_key
+
+    extractors:
+      - type: regex
+        name: api_key
+        part: body
+        internal: true
+        regex:
+          - "(?m)[0-9]{3,10}\\.[0-9]+"
 ```
 
 #### **Example HTTP Template**
@@ -489,7 +602,7 @@ Multiple matchers can be specified in a request. There are basically 5 types of 
 | binary       | Response                   |
 | dsl          | Response                   |
 
-## **Example DNS Template**
+#### **Example DNS Template**
 
 The final example template file for performing `A` query, and check if CNAME and A records are in the response is as follows:
 
@@ -518,27 +631,31 @@ dns:
         condition: and
 ```
 
-# Chained workflow
+### Workflows
 
 It's also possible to create conditional templates which executes after matching the condition from the previous templates, mostly useful for vulnerability detection and exploitation and tech based detection and exploitation, single, multiple along with directory based templates can be executed in chained workflow template.  
 
-Chained workflow supports both HTTP and DNS request based templates. 
+Chained workflow supports both **HTTP** and **DNS** based templates, workflow consist of two part, **variable** and **logic** which makes use of [Tengo](https://github.com/d5/tengo), A fast script language for Go. 
 
-Example of running single / multiple templates only if `detect-jira.yaml` is detected host running Jira application. 
+
+
+Variables:-
+
++ You can define variable names of your choice referencing template path of your need. 
++ You can not use dash (-) in variable name (Tengo rule)
++ Template reference supports both relative/full path. 
+
+Logic:- 
+
++ 
+
+#### Single template chain 
+
+Example of running single / multiple templates if `detect-jira.yaml` detects host running Jira application. 
 
 ```yaml
-id: workflow-example
-info:
-  name: Jira-Pawner
-  author: mzack9999
-  description: Detect Jira and if found; then check for CVEs in list.
-
 variables:
 
-  # defining templates using variables. 
-  # variables names as user-defined, it could be anything.  
-  # relative path support is now added into the nuclei engine for better UX. 
-  
   jira: panels/detect-jira.yaml
   jira_cve_1: cves/CVE-2018-20824.yaml
   jira_cve_2: cves/CVE-2019-3399.yaml
@@ -556,25 +673,15 @@ logic:
   }
 ```
 
-Example of running directory based templates when `detect-jira.yaml` is detected host running Jira application, based on this you can define your own workflow to run scans based on any or specific stacks. 
+#### Directory based chains
+
+Workflows also support directory, so you can run set of multiple templates at once, useful when scanning for tech based vulnerabilities. 
 
 ```yaml
-id: workflow-example
-info:
-  name: Jira-Pawner
-  author: mzack9999
-  description: Detect Jira and if found; perform custom pwn.
-
 variables:
 
-  # defining templates using variables. 
-  # variables names as user-defined, it could be anything.  
-  # relative path support is now added into the nuclei engine for better UX. 
-
   jira: panels/detect-jira.yaml
-  jira_pwn: my-jira-templates/
-
- # defining directory to run all the templates
+  jira_pwn: local-templates/jira/
 
 logic: 
     |
@@ -583,4 +690,68 @@ logic:
 
   }
 ```
+
+#### Chaining multiple matchers
+
+In case of multiple matchers, you can define more specific conditions using name of the matcher, as example, here is an template running specific templates in multiple conditions. 
+```yaml
+variables:
+        tech_detect: technologies/tech-detect.yaml
+        wp_users: files/wordpress-user-enumeration.yaml
+        wp_xss: vulnerabilities/wordpress-xss.yaml
+        drupal_rce: vulnerabilities/drupal-rce.yaml
+        joomla_xss: vulnerabilities/joomla-xss.yaml
+
+logic:
+  |
+  tech_detect()
+  if tech_detect["wordpress"] {
+                wp_users()
+                wp_xss()
+        }
+  if tech_detect["drupal"] {
+                drupal_rce()
+        }
+  if tech_detect["joomla"] {
+                joomla_xss()
+        }
+```
+
+Here is an example of workflow for detecting Jira and running Jira exploits on found hosts.  
+
+#### **Example Workflow Template**
+
+```yaml
+id: workflow-example
+info:
+  name: Test Workflow Template
+  author: pdteam
+
+variables:
+        jira_detect: technologies/jira-detect.yaml
+        jira_cve_1: cves/CVE-2019-8449.yaml
+        jira_cve_2: cves/CVE-2019-8451.yaml
+        jira_cve_3: cves/CVE-2017-9506.yaml
+        jira_cve_4: cves/CVE-2018-20824.yaml
+        jira_cve_5: cves/CVE-2019-3396.yaml
+
+  # Template/s can be defined as variables.
+  # Variables names are user-defind.
+  # Relative/full path can be used to define template path.
+  # Dash (-) can not be used in variable name.
+  # Logics can be used to define condition execution.
+  # As listed below, if jira_detect is true, then only all other templates will be checked. 
+
+
+logic:
+        |
+        if jira_detect(){
+                jira_cve_1()
+                jira_cve_2()
+                jira_cve_3()
+                jira_cve_4()
+                jira_cve_5()
+        }
+```
+
 
