@@ -200,11 +200,11 @@ This is the list for a DNS response supported by DSL matcher:
 | Response Part    | Description                       | Example                   |
 |------------------|-----------------------------------|---------------------------|
 | rcode            | Response status                   | rcode == "NXDOMAIN        |
-| question         | Response Question Section         | len(question)             |
-| extra            | Response Extra Section            | len(extra)                |
-| answer           | Response Answers Section          | len(answer)               |
-| ns               | Response Authority Section        | len(ns)                   |
-| raw              | Full Response                     | len(raw)                  |
+| question         | Response question section         | len(question)             |
+| extra            | Response extra section            | len(extra)                |
+| answer           | Response answers section          | len(answer)               |
+| ns               | Response authority section        | len(ns)                   |
+| raw              | Full response                     | len(raw)                  |
 
 
 ##### Conditions
