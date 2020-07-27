@@ -613,7 +613,11 @@ Variables:-
 
 Logic:- 
 
-+ 
++ Yaml textual string containing the workflow logic in Tengo
++ It's possible to declare variables
++ Supports If and For operators
++ Provide helper functions to interact with the external OS (eg. call external program, write to external file, evaluate environment variables)
++ Templates accepts external arguments, allowing to chain output of one as input of the other
 
 #### Single template chain 
 
