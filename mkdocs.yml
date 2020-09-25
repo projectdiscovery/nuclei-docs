@@ -1,0 +1,118 @@
+site_name: Nuclei - Community Powered Vulnerability Scanner
+site_description: Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.
+repo_url: https://github.com/projectdiscovery/nuclei/
+# Copyright
+copyright: Copyright &copy; 2019 - 2020 ProjectDiscovery
+
+# Configuration
+theme:
+  features:
+    - tabs
+  name: null
+  custom_dir: material
+
+  # 404 page
+  static_templates:
+    - 404.html
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: false
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  font:
+    text: Nunito Sans
+    code: Roboto Mono
+  favicon: static/favicon.png
+  icon:
+    logo: logo
+
+  logo: static/logo.png
+
+# Plugins
+plugins:
+  - search
+
+# Google Analytics
+
+google_analytics: 
+  - UA-165996103-1
+  - auto
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/projectdiscovery/nuclei
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/pdnuclei
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.attr_list
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+
+# Page tree
+nav:
+  - Home:
+    - index.md
+
+  - Get Started:
+    - Install: nuclei/get-started.md
+    - Features: nuclei/get-started/#features
+    - Uses: nuclei/get-started/#using-nuclei
+    - Contribution: nuclei/get-started/#code-contribution
+    - License: nuclei/get-started/#license
+
+  - Templating Guide:
+    - Templating Guide: templating-guide/index.md
+    - Template Details: templating-guide/#template-details
+    - HTTP Requests: templating-guide/#http-requests
+    - DNS Requests: templating-guide/#dns-requests
+    - HTTP Raw requests: templating-guide/#http-raw-requests
+    - Workflows: templating-guide/#workflows
+
+  - Template Examples:
+    - HTTP: template-examples/http.md
+    - DNS: template-examples/dns.md
+    - RAW HTTP: template-examples/raw.md
+    - Fuzzing: template-examples/fuzzing.md
+    - Workflow: template-examples/workflow.md
+
+  - Releases:
+    - Nuclei: releases/changelog.md
