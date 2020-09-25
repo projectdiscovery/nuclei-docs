@@ -2,27 +2,27 @@
 
 ## Nuclei v2.1.1
 
-+ Added negative matcher support
-+ Added support for severity filtering with `severity` flag  by @manuelbua
-+ Added support for template exclusions with `exclude` flag by @manuelbua
++ Added **negative matcher support**
++ Added **support for severity based filtering** with `severity` flag  by @manuelbua
++ Added **support for template exclusions** with `exclude` flag by @manuelbua
 + Added `.nuclei-ignore` file support
-+ Added Rate limit per host by @CasperGN 
++ Added **rate limit per host** with `rl`flag by @CasperGN 
 + Added template list support with `tl` flag by @vzamanillo
 + Added template name field in JSON output by @vzamanillo
 + Added color support for severity by @vzamanillo
 + Added Progress bar support with the silent flag by @vzamanillo
-+ Added support for using local templates along with nuclei-templates
++ **Added support for using local templates along with nuclei-templates**
 + Added template preloading at the start of the scan
 + Added support for  golangci lint by @vzamanillo
 + Added JSON output support for DNS templates by @Marmelatze
 + Added centralize template loaded info message, add output coloring by @manuelbua
 + Added template ID on HTTP request error message @vzamanillo
 + Added severity information in the output by @vzamanillo
-+ Added match groups support in regex extractor
-+ Fixed a failed request error on multiple URLs
++ Added **match groups support in regex extractor**
++ **Fixed a failed request error on multiple URLs**
 + Fixed a bug with helper function by @organiccrap
-+ Fixed a bug with port conflict input with URLs and templates by @vzamanillo
-+ Fixed a bug with Workflow detecting "No Results" by @vzamanillo
++ **Fixed a bug with port conflict input with URLs and templates** by @vzamanillo
++ **Fixed a bug with Workflow detecting `No Results`** by @vzamanillo
 + Fixed inconsistent output printing in the terminal
 + Fixed No JSON output with workflows
 + Fixed a bug with matches when multiple headers with the same name by @CasperGN 
