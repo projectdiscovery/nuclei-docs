@@ -113,6 +113,7 @@ nav:
     - RAW HTTP: template-examples/raw.md
     - Fuzzing: template-examples/fuzzing.md
     - Workflow: template-examples/workflow.md
+    - Smuggling: template-examples/smuggling.md
 
   - Releases:
     - Nuclei: releases/changelog.md
