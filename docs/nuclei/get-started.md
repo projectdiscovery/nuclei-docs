@@ -63,7 +63,7 @@ cat urls.txt | docker run -v /path-to-nuclei-templates:/go/src/app/ -i projectdi
 ### Automation integration
 
 ```bash
-subfinder -dL domains.txt -silent | httpx -silent | nulcei -t cves/ -o cves.txt
+subfinder -dL domains.txt -silent | httpx -silent | nuclei -t cves/ -o cves.txt
 ```
 
 ## Code contribution
