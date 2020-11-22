@@ -246,6 +246,24 @@ matchers:
 
 Similarly, matchers can be written to match anything that you want to find in the response body allowing unlimited creativity and extensibility.
 
+
+##### Negative Matchers
+
+All types of matchers also support negative/opposite conditions, mostly useful when you looking to match with exclusions, it can be used by adding `negative: true` in the **matchers** block.
+
+Here is an example syntax using `negative` condition, this will return all the URLs not having `PHPSESSID` in the response header. 
+
+```yaml
+matchers:
+  - type: word
+    words:
+      - "PHPSESSID"
+    part: header
+    negative: true
+```
+
+In same manner, `negative` condition can be used with single or multiple matchers.
+
 ##### Multiple Matchers
 
 Multiple matchers can be used in a single template to fingerprint multiple conditions with a single request.
@@ -520,6 +538,65 @@ An example of the using using `clusterbomb` attack to fuzz.
 
     # Available attack types: sniper, pitchfork and clusterbomb
 ```
+
+#### RAW HTTP Support
+
+Nuclei also supports [rawhttp](https://github.com/projectdiscovery/rawhttp) for complete request control and customization allowing any kind of malformed requests checks for issues like HTTP request smuggling, Host header injection, CRLF with malformed characters and more, **rawhttp** library is disabled as default and can be used by including `unsafe: true` in the request block. 
+
+Here is an example for HTTP request smuggling detection using `rawhttp`. 
+
+```yaml
+requests:
+  - raw:
+    - |
+        POST / HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Content-Length: 150
+        Transfer-Encoding: chunked
+
+        0
+
+        GET /post?postId=5 HTTP/1.1
+        User-Agent: a"/><script>alert(1)</script>
+        Content-Type: application/x-www-form-urlencoded
+        Content-Length: 5
+
+        x=1
+    - |
+        GET /post?postId=5 HTTP/1.1
+        Host: {{Hostname}}
+
+    unsafe: true  # enables rawhttp client
+    matchers:
+      - type: dsl
+        dsl:
+          - 'contains(body, "<script>alert(1)</script>")'
+```
+
+Using `rawhttp` also enable automatic handling of `host` header and `content-length` header, to disable this behavior, `disable-automatic-content-length-header` and  `disable-automatic-host-header` can be used in following manner. 
+
+```
+requests:
+  - raw:
+    - |
+        POST / HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Content-Length: 150
+        Transfer-Encoding: chunked
+
+        0
+
+    unsafe: true  # enables rawhttp client
+    disable-automatic-content-length-header: true
+    disable-automatic-host-header: true
+    matchers:
+      - type: dsl
+        dsl:
+          - 'contains(body, "<script>alert(1)</script>")'
+```
+
 
 #### Helper functions
 
