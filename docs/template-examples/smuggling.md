@@ -1,7 +1,7 @@
 ### Basic CL.TE
 
 ```yaml
-id: TE.CL-http-smuggling
+id: CL.TE-http-smuggling
 
 info:
   name: HTTP request smuggling, basic CL.TE vulnerability
