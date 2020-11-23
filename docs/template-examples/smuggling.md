@@ -5,8 +5,9 @@ id: CL.TE-http-smuggling
 
 info:
   name: HTTP request smuggling, basic CL.TE vulnerability
-  author: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
+  author: pdteam
   severity: info
+  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
 requests:
   - raw:
@@ -47,8 +48,9 @@ id: TE.CL-http-smuggling
 
 info:
   name: HTTP request smuggling, basic TE.CL vulnerability
-  author: https://portswigger.net/web-security/request-smuggling/lab-basic-te-cl
+  author: pdteam
   severity: info
+  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-te-cl
 
 requests:
   - raw:
@@ -95,8 +97,9 @@ id: smuggling-bypass-front-end-controls-cl-te
 
 info:
   name: HTTP request smuggling to bypass front-end security controls, CL.TE vulnerability
-  author: https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te
+  author: pdteam
   severity: info
+  lab: https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te
 
 requests:
   - raw:
@@ -145,8 +148,9 @@ id: confirming-cl-te-via-differential-responses-http-smuggling
 
 info:
   name: HTTP request smuggling, confirming a CL.TE vulnerability via differential responses
-  author: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses
+  author: pdteam
   severity: info
+  lab: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses
 
 requests:
   - raw:
@@ -187,8 +191,9 @@ id: confirming-te-cl-via-differential-responses-http-smuggling
 
 info:
   name: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
-  author: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses
+  author: pdteam
   severity: info
+  lab: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses
 
 requests:
   - raw:
