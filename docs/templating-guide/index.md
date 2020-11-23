@@ -188,27 +188,27 @@ matchers:
 
 Every part of a HTTP response can be matched with DSL matcher:
 
-| Response Part    | Description                                     | Example                   |
-|------------------|-------------------------------------------------|---------------------------|
-| content_length   | Content-Length Header                           | content_length >= 1024    |
-| status_code      | Response Status Code                            | status_code==200          |
-| all_headers      | Unique string containing all headers            | len(all_headers)          |
-| body             | Body as string                                  | len(body)                 |
-| header_name      | Lowercase header name with `-` converted to `_` | len(user_agent)           |
-| raw              | Headers + Response                              | len(raw)                  |
+| Response Part  | Description                                     | Example                |
+| -------------- | ----------------------------------------------- | ---------------------- |
+| content_length | Content-Length Header                           | content_length >= 1024 |
+| status_code    | Response Status Code                            | status_code==200       |
+| all_headers    | Unique string containing all headers            | len(all_headers)       |
+| body           | Body as string                                  | len(body)              |
+| header_name    | Lowercase header name with `-` converted to `_` | len(user_agent)        |
+| raw            | Headers + Response                              | len(raw)               |
 
 
 
 This is the list for a DNS response supported by DSL matcher:
 
-| Response Part    | Description                       | Example                   |
-|------------------|-----------------------------------|---------------------------|
-| rcode            | Response status                   | rcode == "NXDOMAIN        |
-| question         | Response question section         | len(question)             |
-| extra            | Response extra section            | len(extra)                |
-| answer           | Response answers section          | len(answer)               |
-| ns               | Response authority section        | len(ns)                   |
-| raw              | Full response                     | len(raw)                  |
+| Response Part | Description                | Example            |
+| ------------- | -------------------------- | ------------------ |
+| rcode         | Response status            | rcode == "NXDOMAIN |
+| question      | Response question section  | len(question)      |
+| extra         | Response extra section     | len(extra)         |
+| answer        | Response answers section   | len(answer)        |
+| ns            | Response authority section | len(ns)            |
+| raw           | Full response              | len(raw)           |
 
 
 ##### Conditions
@@ -322,10 +322,10 @@ Extractors are another important feature of nuclei. Extractors can be used to ex
 
 Multiple extractors can be specified in a request, as of now we support two type of extractors.
 
-| Extractor Type | Part Matched             |
-| ------------ | -------------------------- |
-| regex        | Response body or headers   |
-| kval         | Response headers or cookie |
+| Extractor Type | Part Matched               |
+| -------------- | -------------------------- |
+| regex          | Response body or headers   |
+| kval           | Response headers or cookie |
 
 Example extractor for response body using regex, you can use the following syntax.
 
@@ -340,6 +340,7 @@ extractors:
     regex:
       - "(A3T[A-Z0-9]|AKIA|AGPA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}"
 ```
+
 To extract `key-value` formatted data from the header, you can use the following syntax.
 
 
@@ -472,11 +473,10 @@ requests:
         Content-Length: 1
         Origin: https://www.google.com
         Content-Type: application/x-www-form-urlencoded
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3526.0 Safari/537.36 autochrome/blue
-        
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Accept-Language: en-US,en;q=0.9
 
-        test=body
+        a=test&b=pd
 ```
 
 Requests can be fine tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers.  Here follows an example:
@@ -602,31 +602,31 @@ requests:
 
 Here is the list of all supported helper functions can be used in the RAW requests:
 
-| Helper function | Description                               | Example                                                                       |
-|-----------------|-------------------------------------------|-------------------------------------------------------------------------------|
-| len             | Length of a string                        | len("Hello")                                                                  |
-| toupper         | String to uppercase                       | toupper("Hello")                                |
-| tolower         | String to lowercase                       | tolower("Hello")                                |
-| replace         | Replace string parts                      | replace("Hello", "He", "Ha")                            |
-| trim            | Remove trailing unicode chars             | trim("aaaHelloddd", "ad")                             |
-| trimleft        | Remove unicode chars from left            | trimleft("aaaHelloddd", "ad")                           |
-| trimright       | Remove unicode chars from right           | trimleft("aaaHelloddd", "ad")                           |
-| trimspace       | Remove trailing spaces                    | trimspace("  Hello  ")                              |
-| trimprefix      | Trim specified prefix                     | trimprefix("aaHelloaa", "aa")                           |
-| trimsuffix      | Trim specified suffix                     | trimsuffix("aaHelloaa", "aa")                           |
-| base64          | Encode string to base64                   | base64("Hello")                                 |
-| base64_decode   | Decode string from base64                 | base64_decode("SGVsbG8=")                             |
-| url_encode      | URL encode a string                       | url_encode("hxxps://projectdiscovery.io/test?a=1")                |
-| url_decode      | URL decode a string                       | url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1")              |
-| hex_encode      | Hex encode a string                       | hex_encode("aa")                                |
-| hex_decode      | Hex decode a string                       | hex_decode("6161")                                |
-| html_escape     | Hex encode a string                       | html_escape("<html><body>test</body></html>")                                 |
-| html_unescape   | Hex decode a string                       | html_unescape("&lt;html&gt;&lt;body&gt;test&lt;/body&gt;&lt;/html&gt;")       |
-| md5             | Calculate md5 of string                   | md5("Hello")                                      |
-| sha256          | Calculate sha256 of string                | sha256("Hello")                                 |
-| sha1            | Calculate sha1 of string                  | sha1("Hello")                                   |
-| contains        | Verify if a string contains another one   | contains("Hello", "lo")                             |
-| regex           | Verify a regex versus a string            | regex("H([a-z]+)o", "Hello")                          |
+| Helper function | Description                             | Example                                                      |
+| --------------- | --------------------------------------- | ------------------------------------------------------------ |
+| len             | Length of a string                      | len("Hello")                                                 |
+| toupper         | String to uppercase                     | toupper("Hello")                                             |
+| tolower         | String to lowercase                     | tolower("Hello")                                             |
+| replace         | Replace string parts                    | replace("Hello", "He", "Ha")                                 |
+| trim            | Remove trailing unicode chars           | trim("aaaHelloddd", "ad")                                    |
+| trimleft        | Remove unicode chars from left          | trimleft("aaaHelloddd", "ad")                                |
+| trimright       | Remove unicode chars from right         | trimleft("aaaHelloddd", "ad")                                |
+| trimspace       | Remove trailing spaces                  | trimspace("  Hello  ")                                       |
+| trimprefix      | Trim specified prefix                   | trimprefix("aaHelloaa", "aa")                                |
+| trimsuffix      | Trim specified suffix                   | trimsuffix("aaHelloaa", "aa")                                |
+| base64          | Encode string to base64                 | base64("Hello")                                              |
+| base64_decode   | Decode string from base64               | base64_decode("SGVsbG8=")                                    |
+| url_encode      | URL encode a string                     | url_encode("hxxps://projectdiscovery.io/test?a=1")           |
+| url_decode      | URL decode a string                     | url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1")       |
+| hex_encode      | Hex encode a string                     | hex_encode("aa")                                             |
+| hex_decode      | Hex decode a string                     | hex_decode("6161")                                           |
+| html_escape     | Hex encode a string                     | html_escape("<html><body>test</body></html>")                |
+| html_unescape   | Hex decode a string                     | html_unescape("&lt;html&gt;&lt;body&gt;test&lt;/body&gt;&lt;/html&gt;") |
+| md5             | Calculate md5 of string                 | md5("Hello")                                                 |
+| sha256          | Calculate sha256 of string              | sha256("Hello")                                              |
+| sha1            | Calculate sha1 of string                | sha1("Hello")                                                |
+| contains        | Verify if a string contains another one | contains("Hello", "lo")                                      |
+| regex           | Verify a regex versus a string          | regex("H([a-z]+)o", "Hello")                                 |
 
 
 An example of the using helper function in the header. 
@@ -756,11 +756,11 @@ Matchers are just equal to HTTP, but the search is performed on the whole dns re
 
 Multiple matchers can be specified in a request. There are basically 3 types of matchers:
 
-| Matcher Type | Part Matched               |
-| ------------ | -------------------------- |
-| word         | DNS Response               |
-| regex        | DNS Response               |
-| dsl          | DNS Response               |
+| Matcher Type | Part Matched |
+| ------------ | ------------ |
+| word         | DNS Response |
+| regex        | DNS Response |
+| dsl          | DNS Response |
 
 #### **Example DNS Template**
 
@@ -793,129 +793,112 @@ dns:
 
 ### Workflows
 
-It's also possible to create conditional templates which executes after matching the condition from the previous templates, mostly useful for vulnerability detection and exploitation and tech based detection and exploitation, single, multiple along with directory based templates can be executed in chained workflow template.  
+Workflows are powerful utility of nuclei and most efficient way to use nuclei templates where all the templates can be configured based on specific needs of users, one can configure a workflow in a way that ensures / control complete nuclei templates checks from a single workflow, the use cases varies depending upon the users needs.
 
-Chained workflow supports both **HTTP** and **DNS** based templates, workflow consist of two part, **variable** and **logic** which makes use of [Tengo](https://github.com/d5/tengo), A fast script language for Go. 
+[Tengo](https://github.com/d5/tengo), a scripting engine is used as a base for nuclei workflows which provides a very powerful and highly customizable engine for users to automate all their needs.
 
-
-
-Variables:-
-
-+ You can define variable names of your choice referencing template path of your need. 
-+ You can not use dash (-) in variable name (Tengo rule)
-+ Template reference supports both relative/full path. 
-
-Logic:- 
-
-+ Yaml textual string containing the workflow logic in Tengo
-+ It's possible to declare variables
-+ Supports If and For operators
-+ Provide helper functions to interact with the external OS (eg. call external program, write to external file, evaluate environment variables)
-+ Templates accepts external arguments, allowing to chain output of one as input of the other
-
-#### Single template chain 
-
-Example of running single / multiple templates if `detect-jira.yaml` detects host running Jira application. 
+Workflows can be defined with `workflows` attribute, following the `template` or `subtemplates` to executes, and we can write two type of workflows. 
 
 ```yaml
-variables:
-
-  jira: panels/detect-jira.yaml
-  jira_cve_1: cves/CVE-2018-20824.yaml
-  jira_cve_2: cves/CVE-2019-3399.yaml
-  jira_cve_3: cves/CVE-2019-11581.yaml
-  jira_cve_4: cves/CVE-2017-18101.yaml
-
-logic: 
-    |
-  if jira() {
-    jira_cve_1()
-    jira_cve_2()
-    jira_cve_3()
-    jira_cve_4()
-
-  }
-```
-
-#### Directory based chains
-
-Workflows also support directory, so you can run set of multiple templates at once, useful when scanning for tech based vulnerabilities. 
-
-```yaml
-variables:
-
-  jira: panels/detect-jira.yaml
-  jira_pwn: local-templates/jira/
-
-logic: 
-    |
-  if jira() {
-    jira_pwn()
-
-  }
-```
-
-#### Chaining multiple matchers
-
-In case of multiple matchers, you can define more specific conditions using name of the matcher, as example, here is an template running specific templates in multiple conditions. 
-```yaml
-variables:
-        tech_detect: technologies/tech-detect.yaml
-        wp_users: files/wordpress-user-enumeration.yaml
-        wp_xss: vulnerabilities/wordpress-xss.yaml
-        drupal_rce: vulnerabilities/drupal-rce.yaml
-        joomla_xss: vulnerabilities/joomla-xss.yaml
-
-logic:
-  |
-  tech_detect()
-  if tech_detect["wordpress"] {
-                wp_users()
-                wp_xss()
-        }
-  if tech_detect["drupal"] {
-                drupal_rce()
-        }
-  if tech_detect["joomla"] {
-                joomla_xss()
-        }
-```
-
-Here is an example of workflow for detecting Jira and running Jira exploits on found hosts.  
-
-#### **Example Workflow Template**
-
-```yaml
-id: workflow-example
-info:
-  name: Test Workflow Template
-  author: pdteam
-
-variables:
-        jira_detect: technologies/jira-detect.yaml
-        jira_cve_1: cves/CVE-2019-8449.yaml
-        jira_cve_2: cves/CVE-2019-8451.yaml
-        jira_cve_3: cves/CVE-2017-9506.yaml
-        jira_cve_4: cves/CVE-2018-20824.yaml
-        jira_cve_5: cves/CVE-2019-3396.yaml
-
-  # Template/s can be defined as variables.
-  # Variables names are user-defind.
-  # Relative/full path can be used to define template path.
-  # Dash (-) can not be used in variable name.
-  # Logics can be used to define condition execution.
-  # As listed below, if jira_detect is true, then only all other templates will be checked. 
-
-
-logic:
-        |
-        if jira_detect(){
-                jira_cve_1()
-                jira_cve_2()
-                jira_cve_3()
-                jira_cve_4()
-                jira_cve_5()
-        }
+# Workflows starts form this block.
+workflows:
+  - template: technologies/template-to-execute.yaml
 ```
 
 
+
+**Type of workflows**
+
+1. Generic workflows
+2. Conditional workflows
+
+**Generic workflows**
+
+In generic workflow one can define a single or multiple template executions from a single workflow, it can be list of specific templates or list of directory containing multiple templates.
+
+For example:- 
+
+```yaml
+# A workflow that runs all config related templates on the list of give URLs.
+
+workflows:
+  - template: files/git-config.yaml
+  - template: files/svn-config.yaml
+  - template: files/env-file.yaml
+  - template: files/backup-files.yaml
+```
+
+```yaml
+# A workflow that runs specific list of checks defined for your project.
+
+workflows:
+  - template: cves/
+  - template: files/
+  - template: toknes/
+  - template: mis-configs/
+```
+
+
+
+**Conditional workflows**
+
+You can also create conditional templates which executes after matching the condition from the previous templates, mostly useful for vulnerability detection and exploitation and tech based detection and exploitation, single, multiple along with directory based templates can be executed in chained workflow template. 
+
+
+**Templates based conditional check**
+
+For example:- 
+
+```yaml
+# A workflow that executes subtemplates when base template gets matched.
+
+workflows:
+  - template: technologies/jira-detect.yaml
+    subtemplates:
+      - template: exploits/jira-exploit-1.yaml
+      - template: exploits/jira-exploit-1.yaml
+```
+
+**Templates and matcher name based conditional check**
+
+For example:- 
+
+
+```yaml
+# A workflow that executes subtemplates when a matcher of base template gets matched.
+
+workflows:
+  - template: technologies/tech-detect.yaml
+    matchers:
+      - name: vbulletin
+        subtemplates:
+          - template: exploits/vbulletin-exp1.yaml
+          - template: exploits/vbulletin-exp2.yaml
+      - name: jboss
+        subtemplates:
+          - template: exploits/jboss-exp1.yaml
+          - template: exploits/jboss-exp2.yaml
+```
+
+In similar manner, one can create as much conditions you want to execute specific templates based on certain conditions.
+
+**Templates and matcher name based multi level conditional check**
+
+For example:- 
+
+```yaml
+# A workflow showcasing chain of template executions that runs only if the previous templates get matched.
+
+workflows:
+  - template: technologies/tech-detect.yaml
+    matchers:
+      - name: lotus-domino
+        subtemplates:
+          - template: technologies/lotus-domino-version.yaml
+            subtemplates:
+              - template: cves/xx-yy-zz.yaml
+                subtemplates:
+                  - template: cves/xx-xx-xx.yaml
+```
+
+Conditional workflows are great examples of performing checks and vulnerability detection in most efficient manner instead of spraying all the templates on your all the targets, and generally comes of with good ROI of your time and good for the target projects and websites as well.
