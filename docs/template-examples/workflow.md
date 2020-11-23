@@ -1,4 +1,40 @@
-### Basic Template
+### Generic workflows
+
+```yaml
+id: workflow-example
+info:
+  name: Test Workflow Template
+  author: pdteam
+
+workflows:
+  - template: /root/jira-detect.yaml
+  - template: /root/confluence-detect.yaml
+`
+
+
+### Basic conditional workflows
+
+
+```yaml
+
+id: springboot-workflow
+
+info:
+  name: Springboot Security Checks
+  author: dwisiswant0
+
+workflows:
+
+  - template: security-misconfiguration/springboot-detect.yaml
+    subtemplates:
+      - template: cves/CVE-2018-1271.yaml
+      - template: cves/CVE-2018-1271.yaml
+      - template: cves/CVE-2020-5410.yaml
+      - template: vulnerabilities/springboot-actuators-jolokia-xxe.yaml
+      - template: vulnerabilities/springboot-h2-db-rce.yaml
+```
+
+### Conditional workflows with matcher
 
 
 ```yaml
@@ -7,34 +43,32 @@ info:
   name: Test Workflow Template
   author: pdteam
 
-variables:
-        jira_detect: technologies/jira-detect.yaml
-        jira_cve_1: cves/CVE-2019-8449.yaml
-        jira_cve_2: cves/CVE-2019-8451.yaml
-        jira_cve_3: cves/CVE-2017-9506.yaml
-        jira_cve_4: cves/CVE-2018-20824.yaml
-        jira_cve_5: cves/CVE-2019-3396.yaml
+workflows:
 
-  # Template/s can be defined as variables.
-  # Variables names are user-defind.
-  # Relative/full path can be used to define template path.
-  # Dash (-) can not be used in variable name.
-  # Logics can be used to define condition execution.
-  # As listed below, if jira_detect is true, then only all other templates will be checked. 
-
-
-logic:
-        |
-        if jira_detect(){
-                jira_cve_1()
-                jira_cve_2()
-                jira_cve_3()
-                jira_cve_4()
-                jira_cve_5()
-        }
+  - template: technologies/tech-detect.yaml
+    matchers:
+      - name: wordpress
+        subtemplates:
+          - template: cves/CVE-2019-6715.yaml
+          - template: cves/CVE-2019-9978.yaml
+          - template: files/wordpress-db-backup.yaml
+          - template: files/wordpress-debug-log.yaml
+          - template: files/wordpress-directory-listing.yaml
+          - template: files/wordpress-emergency-script.yaml
+          - template: files/wordpress-installer-log.yaml
+          - template: files/wordpress-tmm-db-migrate.yaml
+          - template: files/wordpress-user-enumeration.yaml
+          - template: security-misconfiguration/wordpress-accessible-wpconfig.yaml
+          - template: vulnerabilities/sassy-social-share.yaml
+          - template: vulnerabilities/w3c-total-cache-ssrf.yaml
+          - template: vulnerabilities/wordpress-duplicator-path-traversal.yaml
+          - template: vulnerabilities/wordpress-social-metrics-tracker.yaml
+          - template: vulnerabilities/wordpress-wordfence-xss.yaml
+          - template: vulnerabilities/wordpress-wpcourses-info-disclosure.yaml
 ```
 
-### Multiple Matchers
+
+### Multiple Matcher workflow
 
 
 ```yaml
@@ -43,73 +77,17 @@ info:
   name: Test Workflow Template
   author: pdteam
 
-variables:
-        tech_detect: technologies/tech-detect.yaml
-        wp_users: files/wordpress-user-enumeration.yaml
-
-  # Template/s can be defined as variables.
-  # Variables names are user-defind.
-  # Relative/full path can be used to define template path.
-  # Dash (-) can not be used in variable name.
-  # Logics can be used to define condition execution.
-  # As listed below, if jira_detect is true, then only all other templates will be checked.
-
-logic:
-  |
-  tech_detect()
-
-  // Run the template
-  // Verify matchers of your choice
-
-  if tech_detect["wordpress"] {
-
-  // Run next template if matched
-
-    wp_users()
-  }
-```
-
-
-### Multiple Matcher Chain
-
-
-```yaml
-id: workflow-multiple-matcher
-info:
-  name: Test Workflow Template
-  author: pdteam
-
-variables:
-        tech_detect: technologies/tech-detect.yaml
-        wp_users: files/wordpress-user-enumeration.yaml
-        wp_xss: vulnerabilities/wordpress-xss.yaml
-        drupal_rce: vulnerabilities/drupal-rce.yaml
-        joomla_xss: vulnerabilities/joomla-xss.yaml
-
-
-  # Template/s can be defined as variables.
-  # Variables names are user-defind.
-  # Relative/full path can be used to define template path.
-  # Dash (-) can not be used in variable name.
-  # Logics can be used to define condition execution.
-  # As listed below, if jira_detect is true, then only all other templates will be checked.
-
-logic:
-  |
-  tech_detect()
-
-  if tech_detect["wordpress"] {
-                wp_users()
-                wp_xss()
-        }
-
-  if tech_detect["drupal"] {
-                drupal_rce()
-        }
-
-  if tech_detect["joomla"] {
-                joomla_xss()
-        }
+workflows:
+  - template: technologies/tech-detect.yaml
+    match:
+      - value: vbulletin
+        subtemplates:
+          - template: /root/vbulletin-exp1.yaml
+          - template: /root/vbulletin-exp2.yaml
+      - value: jboss
+        subtemplates:
+          - template: /root/jboss-exp1.yaml
+          - template: /root/jboss-exp2.yaml
 ```
 
 ### Custom headers
