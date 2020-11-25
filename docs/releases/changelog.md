@@ -2,55 +2,42 @@
 
 ## Nuclei v2.2.0 - 20 Nov 2020
 
-### Added:- 
-
-#### Fuzzing Enhancements:-
-
-Added **Turbo intruder** support for fuzzing
-Added **HTTP pipeline** support for fuzzing
-Added **Connection pooling** support for fuzzing
-Added **Raw HTTP** support for malformed HTTP requests.
-Added support for **Race condition** testing
-Added `§variable§` marker for fuzzing
-Added `stats` in multithreaded requests (fuzzing)
-
-#### General Enhancements:-
-
-Added **YAML syntax support for workflows**
-Added **Project file** support for request reuse
-Added global rate limit support
-Added **burp collaborator** support
-Added [hmap](https://github.com/projectdiscovery/hmap) for reducing memory uses
-Added [clistats](https://github.com/projectdiscovery/clistats) in place of a progress bar
-Added support to **DSL matcher to match each unique request**
-Added trace log (`-trace-log`) support
-Added `-templates-version` flag to list template version
-Added `-no-meta` flag to ignore meta information
-Added dynamic field support in the template info block
-Added `bulk-size` flag
-Added **response time support to DSL**
-Added type to specify type of request
-Added **mmh3** hashing support in helper functions
-Added shared resolver cache among various HTTP clients
-Added fuzzing payloads output values to json output
-Added `.nuclei-ignore` file from current working directory
-Added comments support in `.nuclei-ignore` file
-Added `stop-at-first-match` flag
-Added flag to disable host header and content length
-Added host information in the JSON response by @savushkin-yauheni
-
-### Updated:-
-
-Updated flag `nC` to `no-color` 
-Updated flag `json-requests` to `include-rr`
-Updated flag `pbar` to `stats`
-
-### Fixed:- 
-
-Fixed a bug with ignoring paths in the input file by @vzamanillo
-Fixed a bug with raw requests redirect
-Fixed a bug with debug flag to display post body
-Fixed a panic with trace log
++ Added **Turbo intruder** support for fuzzing
++ Added **HTTP pipeline** support for fuzzing
++ Added **Connection pooling** support for fuzzing
++ Added **Raw HTTP** support for malformed HTTP requests.
++ Added support for **Race condition** testing
++ Added `§variable§` marker for fuzzing
++ Added `stats` in multithreaded requests (fuzzing)
++ Added **YAML syntax support for workflows**
++ Added **Project file** support for request reuse
++ Added global rate limit support
++ Added **burp collaborator** support
++ Added [hmap](https://github.com/projectdiscovery/hmap) for reducing memory uses
++ Added [clistats](https://github.com/projectdiscovery/clistats) in place of a progress bar
++ Added support to **DSL matcher to match each unique request**
++ Added trace log (`-trace-log`) support
++ Added `-templates-version` flag to list template version
++ Added `-no-meta` flag to ignore meta information
++ Added dynamic field support in the template info block
++ Added `bulk-size` flag
++ Added **response time support to DSL**
++ Added type to specify type of request
++ Added **mmh3** hashing support in helper functions
++ Added shared resolver cache among various HTTP clients
++ Added fuzzing payloads output values to json output
++ Added `.nuclei-ignore` file from current working directory
++ Added comments support in `.nuclei-ignore` file
++ Added `stop-at-first-match` flag
++ Added flag to disable host header and content length
++ Added host information in the JSON response by @savushkin-yauheni
++ Updated flag `nC` to `no-color` 
++ Updated flag `json-requests` to `include-rr`
++ Updated flag `pbar` to `stats`
++ Fixed a bug with ignoring paths in the input file by @vzamanillo
++ Fixed a bug with raw requests redirect
++ Fixed a bug with debug flag to display post body
++ Fixed a panic with trace log
 
 ## Nuclei v2.1.1
 
