@@ -1,4 +1,4 @@
-MKDocs version of documentation for https://nuclei.projectdiscovery.io
+Github project for Nuclei documentation website https://nuclei.projectdiscovery.io
 
 <details>
 <summary>Local version of nuclei-docs</summary>
