@@ -964,3 +964,48 @@ requests:
         status:
           - 200
 ```
+
+#### HTTP Connection pooling
+
+While the earlier versions of nuclei did not do connection pooling, users can now configure templates to either use HTTP connection pooling or not. This allows for faster scanning based on requirement.
+
+To enable connection pooling in the template, `threads` attribute with number value can be defined in the payloads sections.
+
+`Connection: Close` header can not be used in HTTP connection pooling template, otherwise engine will fail and fallback to standard HTTP requests.
+
+An example template using HTTP connection pooling-
+
+```yaml
+id: fuzzing-example
+info:
+  name: Connection pooling example
+  author: pdteam
+  severity: info
+
+requests:
+  - payloads:
+      password: password.txt
+
+    threads: 40
+    attack: sniper
+
+    raw:
+      - |
+        GET /protected HTTP/1.1
+        Host: {{Hostname}}
+        Authorization: Basic {{base64('admin:§password§')}}
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
+        Accept-Language: en-US,en;q=0.9
+        Connection: close
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "Unique string"
+        part: body    
+```
