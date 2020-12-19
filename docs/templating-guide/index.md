@@ -814,7 +814,7 @@ workflows:
 1. Generic workflows
 2. Conditional workflows
 
-**Generic workflows**
+#### Generic Workflows
 
 In generic workflow one can define a single or multiple template executions from a single workflow, it can be list of specific templates or list of directory containing multiple templates.
 
@@ -842,7 +842,7 @@ workflows:
 
 
 
-**Conditional workflows**
+#### Conditional Workflows
 
 You can also create conditional templates which executes after matching the condition from the previous templates, mostly useful for vulnerability detection and exploitation and tech based detection and exploitation, single, multiple along with directory based templates can be executed in chained workflow template. 
 
@@ -904,3 +904,63 @@ workflows:
 ```
 
 Conditional workflows are great examples of performing checks and vulnerability detection in most efficient manner instead of spraying all the templates on your all the targets, and generally comes of with good ROI of your time and good for the target projects and websites as well.
+
+
+### Advance Fuzzing
+
+We’ve enriched nuclei to allow advanced fuzzing of web servers. Users can now use multiple options to tune HTTP fuzzing workflows.
+
+#### HTTP Pipelining
+
+HTTP Pipelining support has been added which allows multiple HTTP requests to be sent on the same connection inspired from [http-desync-attacks-request-smuggling-reborn](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
+
+Before running HTTP pipelining based templates, make sure the running target supports HTTP Pipeline connection, otherwise nuclei engine fallback to stranded HTTP request. 
+
+If you wanted to confirm the given domain or list of subdomains supports HTTP Pipelining? [httpx](https://github.com/projectdiscovery/) has a flag `-pipeline` to probe it.
+
+An example configuring pipelining attributes of nuclei template.
+
+```yaml
+    unsafe: true
+    pipeline: true
+    pipeline-max-connections: 40
+    pipeline-max-workers: 25000
+```
+
+
+An example template demonstrating pipelining capabilities of nuclei has been provided below-
+
+```yaml
+id: pipeline-testing
+info:
+  name: pipeline testing
+  author: pdteam
+  severity: info
+
+requests:
+
+  - payloads:
+      path: path_wordlist.txt
+
+    attack: sniper
+    unsafe: true
+    pipeline: true
+    pipeline-max-connections: 40
+    pipeline-max-workers: 25000
+
+    raw:
+      - |
+        GET /§path§ HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0
+        Accept: application/json, text/plain, */*
+        Accept-Language: en-US,en;q=0.5
+        Referer: {{BaseURL}}
+        Connection: keep-alive        
+
+    matchers:
+      - type: status
+        part: header
+        status:
+          - 200
+```
