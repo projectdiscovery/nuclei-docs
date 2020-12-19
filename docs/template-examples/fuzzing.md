@@ -29,7 +29,7 @@ requests:
 
     raw:
       - |
-        POST /?username={{username}}&paramb={{password}} HTTP/1.1
+        POST /?username=§username§&paramb=§password§ HTTP/1.1
         User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)
         Host: {{Hostname}}
         another_header: {{base64("password")}}
@@ -66,8 +66,8 @@ requests:
     raw:
       # Request with simple param and header manipulation with DSL functions
       - |
-        POST /?param_a={{param_a}}&paramb={{param_b}} HTTP/1.1
-        User-Agent: {{param_a}}
+        POST /?param_a=§param_a§&paramb=§param_b§ HTTP/1.1
+        User-Agent: §param_a§
         Host: {{Hostname}}
         another_header: {{base64(param_b)}}
         Accept: */*
@@ -191,7 +191,7 @@ requests:
         Content-Type: application/xml
         X-NITRO-USER: oY39DXzQ
         X-NITRO-PASS: ZuU9Y9c1
-        rand_key: randkey
+        rand_key: §randkey§
 
         <appfwprofile><login></login></appfwprofile>
 
@@ -204,7 +204,7 @@ requests:
         Content-Type: application/xml
         X-NITRO-USER: oY39DXzQ
         X-NITRO-PASS: ZuU9Y9c1
-        rand_key: randkey
+        rand_key: §randkey§
 
         <clipermission></clipermission>
 
