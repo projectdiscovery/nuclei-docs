@@ -25,7 +25,7 @@ ID must not contain spaces. This is done to allow easier output parsing.
 
 ### Information
 
-Next important piece of information about a template is the **info** block. Info block provides more context on the purpose of the template and the **author**. It can also contain a **severity** field which indicates the severity of the template.
+Next important piece of information about a template is the **info** block. Info block provides more context on the purpose of the template and the **author**. It also contain **severity** field which indicates the severity of the template, **info** block supports dynamic fields, so one can define N number of `key: value` formatted fields to make template information more relevant for the checks you are writing.
 
 Let's add an **info** block to our template as well.
 
@@ -35,10 +35,12 @@ info:
   name: Git Config File Detection Template
   # Author is the name of the author for the template
   author: Ice3man
-  # Severity is the severity for the template.
+  # Severity is the severity for the check.
   severity: medium
-  #  Description optionally describes the template.
+  # Description optionally describes the template.
   description: Searches for the pattern /.git/config on passed URLs.
+  # CVSS is impact score of the check.
+  cvss: 4.6 
 ```
 
 Actual requests and corresponding matchers are placed below the info block and they perform the task of making requests to target servers and finding if the template request was successful.
