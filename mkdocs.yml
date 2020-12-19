@@ -106,6 +106,7 @@ nav:
     - DNS Requests: templating-guide/#dns-requests
     - HTTP Raw requests: templating-guide/#http-raw-requests
     - Workflows: templating-guide/#workflows
+    - Advance Fuzzing: templating-guide/#advance-fuzzing
 
   - Template Examples:
     - HTTP: template-examples/http.md
