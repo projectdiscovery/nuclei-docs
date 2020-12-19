@@ -9,7 +9,7 @@ info:
 workflows:
   - template: /root/jira-detect.yaml
   - template: /root/confluence-detect.yaml
-`
+```
 
 
 ### Basic conditional workflows
@@ -33,6 +33,29 @@ workflows:
       - template: vulnerabilities/springboot-actuators-jolokia-xxe.yaml
       - template: vulnerabilities/springboot-h2-db-rce.yaml
 ```
+
+### Multi conditional workflows
+
+```yaml
+
+id: springboot-workflow
+
+info:
+  name: Springboot Security Checks
+  author: dwisiswant0
+
+workflows:
+  - template: technologies/tech-detect.yaml
+    matchers:
+      - name: lotus-domino
+        subtemplates:
+          - template: technologies/lotus-domino-version.yaml
+            subtemplates:
+              - template: cves/xx-yy-zz.yaml
+                subtemplates:
+                  - template: cves/xx-xx-xx.yaml
+```
+
 
 ### Conditional workflows with matcher
 
@@ -88,84 +111,4 @@ workflows:
         subtemplates:
           - template: /root/jboss-exp1.yaml
           - template: /root/jboss-exp2.yaml
-```
-
-### Custom headers
-
-```yaml
-id: custom-headers
-info:
-  name: Test Workflow Template
-  author: pdteam
-
-  # Cookie-Reuse and custom headers within workflow
-
-cookie-reuse: true
-variables:
-  bruteforce: nuclei-templates/examples/bruteforce-login.yaml
-  pwnemail: nuclei-templates/examples/pwn-email.yaml
-logic:
-  |
-  // module import
-  fmt := import("fmt")
-  os := import("os")
-
-  // defining custom headers 
-  externalHeaders := {
-    "x-bug-bounty": "mzack9999",
-  }
-
-  // defining custom parameters
-
-  externalArgumentsBrute := {
-    "username": "mzack9999",
-    "passwords": ["pass1", "pass2", "pass3"]
-  }
-
-  // defining custom parameters
-
-  externalArgumentsPwn := {
-    "newemail": "attacker@pwn.something",
-  }
-
-
-  if bruteforce(externalHeaders, externalArgumentsBrute) {
-    // template `pwnemail` will use cookies set by `bruteforce`
-    pwnemail(externalHeaders, externalArgumentsPwn)
-  }
-```
-
-
-### Custom workflow 
-
-```yaml
-id: custom-workflows
-info:
-  name: Test Workflow Template
-  author: pdteam
-
-variables:
-  google_key: tokens/google-api-key.yaml
-
-logic:
-  |
-  fmt := import("fmt")
-  os := import("os")
-
-    if google_key() {
-
-      // send notification via slack
-      // apikey is the name of extractor defind in google-api-key.yaml
-
-      slacktoken := os.getenv("slacktoken")
-      slackCmd :=  os.exec("slacknotify", "-key", slacktoken, google_key["apikey"])
-      slackCmd.run()
-
-      // saving data on the system
-
-      file := os.create("workflow.output.txt")
-      file.write_string(google_key["apikey"])
-      file.close()
-    }
-  }
 ```
