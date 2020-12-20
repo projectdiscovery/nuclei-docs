@@ -969,7 +969,7 @@ requests:
 
 While the earlier versions of nuclei did not do connection pooling, users can now configure templates to either use HTTP connection pooling or not. This allows for faster scanning based on requirement.
 
-To enable connection pooling in the template, `threads` attribute with number value can be defined in the payloads sections.
+To enable connection pooling in the template, `threads` attribute can be defined with respective number of threads you wanted to use in the payloads sections.
 
 `Connection: Close` header can not be used in HTTP connection pooling template, otherwise engine will fail and fallback to standard HTTP requests.
 
@@ -1009,3 +1009,105 @@ requests:
           - "Unique string"
         part: body    
 ```
+
+#### HTTP Smuggling
+
+HTTP Smuggling is a class of Web-Attacks recently made popular by [Portswigger’s Research](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn) into the topic. For an in-depth overview, please visit the article linked above.
+
+In the open source space, detecting http smuggling is difficult particularly due to the requests for detection being malformed by nature. Nuclei is able to reliably detect HTTP Smuggling vulnerabilities utilising the [rawhttp](https://github.com/projectdiscovery/rawhttp) engine.
+
+The most basic example of a HTTP Smuggling vulnerability is CL.TE Smuggling. An example template to detect a CE.TL HTTP Smuggling vulnerability is provided below using the `unsafe: true` attribute for rawhttp based requests.
+
+```yaml
+id: CL.TE-http-smuggling
+
+info:
+  name: HTTP request smuggling, basic CL.TE vulnerability
+  author: pdteam
+  severity: info
+  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
+
+requests:
+  - raw:
+    - |
+      POST / HTTP/1.1
+      Host: {{Hostname}}
+      Connection: keep-alive
+      Content-Type: application/x-www-form-urlencoded
+      Content-Length: 6
+      Transfer-Encoding: chunked
+      
+      0
+      
+      G      
+    - |
+      POST / HTTP/1.1
+      Host: {{Hostname}}
+      Connection: keep-alive
+      Content-Type: application/x-www-form-urlencoded
+      Content-Length: 6
+      Transfer-Encoding: chunked
+      
+      0
+      
+      G
+            
+    unsafe: true
+    matchers:
+      - type: word
+        words:
+          - 'Unrecognized method GPOST'
+```
+
+More examples are available in [template-examples](https://nuclei.projectdiscovery.io/template-examples/smuggling/
+) section for smuggling templates.
+
+
+#### Race conditions
+
+Race Conditions are another class of bugs not easily automated via traditional tooling. Burp Suite introduced a Gate mechanism to Turbo Intruder where all the bytes for all the requests are sent expect the last one at once which is only sent together for all requests synchronizing the send event.
+
+We have implemented **Gate** mechanism in nuclei engine and allow them run via templates which makes the testing for this specfic bug class simple and portable.
+
+To enable race condition check within template, `race` attribute can be set to `true` and `race_count` defines the number of simultaneous request you want to initiate.
+
+Below is an example template where the same request is repeated for 10 times using the gate logic.
+
+```yaml
+id: race-condition-testing
+
+info:
+  name: Race condition testing
+  author: pdteam
+  severity: info
+
+requests:
+  - raw:
+      - |
+        POST /coupons HTTP/1.1
+        Host: {{Hostname}}
+        Pragma: no-cache
+        Cache-Control: no-cache, no-transform
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+
+        promo_code=20OFF        
+
+    race: true
+    race_count: 10
+
+    matchers:
+      - type: status
+        part: header
+        status:
+          - 200
+```
+
+You can simply replace the `POST` request with any suspected vulnerable request and change the `race_count` as per your need and it's ready to run.
+
+```bash
+nuclei -t race.yaml -target https://api.target.com
+```
+
+The best part of this is you can simply share your crafted template with your team mates, triage/security team to replicate the issue on the other side with ease.
+
+
