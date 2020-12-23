@@ -75,7 +75,7 @@ An example of the usage:
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}/login.php
+      - "{{BaseURL}}/login.php"
     redirects: true
     max-redirects: 3
 ```
