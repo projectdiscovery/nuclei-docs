@@ -486,7 +486,7 @@ Requests can be fine tuned to perform the exact tasks as desired. Nuclei request
 
 #### Intruder payloads
 
-It's possible to define placeholders with simple keywords (or using brackets {{helper_function(keyword)}} in case mutator functions are needed), and perform **Sniper**, **Pitchfork** and **ClusterBomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
+It's possible to define placeholders with simple keywords (or using brackets {{helper_function(variable)}} in case mutator functions are needed), and perform **Sniper**, **Pitchfork** and **ClusterBomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
 
 Payloads are defined using variable name and can be referenced in the request between `§` marker, for example **§variable_name§**.
 
@@ -529,7 +529,7 @@ For example, if you used `clusterbomb` or `pitchfork` as attack type and defined
 
 #### Intruder attack 
 
-For using intruder, we support multiple attack types, including `sniper` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder on CLI. 
+When using intruder, we support multiple attack types, including `sniper` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder on CLI. 
 
 An example of the using using `clusterbomb` attack to fuzz. 
 
@@ -675,7 +675,7 @@ requests:
       - |
         GET /manager/html HTTP/1.1
         Host: {{Hostname}}
-        Authorization: Basic {{base64('username:password')}}
+        Authorization: Basic {{base64(username + ':' + password)}}
         User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
         Accept-Language: en-US,en;q=0.9
         Connection: close
