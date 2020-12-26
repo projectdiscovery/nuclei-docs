@@ -32,7 +32,7 @@ requests:
         POST /?username=§username§&paramb=§password§ HTTP/1.1
         User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)
         Host: {{Hostname}}
-        another_header: {{base64("password")}}
+        another_header: {{base64('§password§')}}
         Accept: */*
         body=test
 
@@ -69,7 +69,7 @@ requests:
         POST /?param_a=§param_a§&paramb=§param_b§ HTTP/1.1
         User-Agent: §param_a§
         Host: {{Hostname}}
-        another_header: {{base64(param_b)}}
+        another_header: {{base64('§param_b§')}}
         Accept: */*
 
         admin=test
@@ -81,13 +81,13 @@ requests:
         User-Agent: nuclei
         Host: {{Hostname}}
 
-        {{sha256(param_a)}} 
+        {{sha256('§param_a§')}} 
 
       - |
         PUT / HTTP/1.1
         Host: {{Hostname}}
 
-        {{html_escape(param_a)}} + {{hex_encode(param_b))}}
+        {{html_escape('§param_a§')}} + {{hex_encode('§param_b§'))}}
 
     matchers:
       - type: word
