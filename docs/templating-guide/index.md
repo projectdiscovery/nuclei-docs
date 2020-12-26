@@ -531,7 +531,32 @@ For example, if you used `clusterbomb` or `pitchfork` as attack type and defined
 
 When using intruder, we support multiple attack types, including `sniper` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder on CLI. 
 
-An example of the using using `clusterbomb` attack to fuzz. 
+##### Types of attack
+
+  - sniper
+  - pitchfork
+  - clusterbomb
+
+**Sniper:-**
+
+> The sniper attack uses only one payload set, and it replaces only one position at a time. It loops through the payload set, first replacing only the first marked position with the payload and leaving all other positions to their original value. After its done with the first position, it continues with the second position.
+
+**Pitchfork:-**
+
+> The pitchfork attack type uses one payload set for each position. It places the first payload in the first position, the second payload in the second position, and so on.
+
+> It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.
+
+
+**Clusterbomb:-** 
+
+> The cluster bomb attack tries all different combinations of payloads. It still puts the first payload in the first position, and the second payload in the second position. But when it loops through the payload sets, it tries all combinations.
+
+> This attack type is useful for a brute-force attack. Load a list of commonly used usernames in the first payload set, and a list of commonly used passwords in the second payload set. The cluster bomb attack will then try all combinations.
+
+You can read more about attack types [here](https://www.sjoerdlangkemper.nl/2017/08/02/burp-intruder-attack-types/). 
+
+An example of the using using `clusterbomb` attack to fuzz.
 
 ```yaml
 # Defining HTTP Intruder attack type
