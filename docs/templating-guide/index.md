@@ -1146,7 +1146,7 @@ For the scenario when multiple requests needs to be sent in order to exploit the
 
 Below is an example template where multiple (5) unique request will be sent at the same time using the gate logic.
 
-```
+```yaml
 id: multi-request-race
 
 info:
