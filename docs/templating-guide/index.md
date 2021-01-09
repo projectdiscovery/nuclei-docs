@@ -1132,6 +1132,79 @@ You can simply replace the `POST` request with any suspected vulnerable request 
 nuclei -t race.yaml -target https://api.target.com
 ```
 
+**Multi request race condition testing**
+
+For the scenario when multiple requests needs to be sent in order to exploit the race condition, we can make use of threads.
+
+```yaml
+    threads: 5
+    race: true
+```
+
+`threads` is a total number of request you wanted make with the template to perform race condition testing.
+
+
+Below is an example template where multiple (5) unique request will be sent at the same time using the gate logic.
+
+```
+id: multi-request-race
+
+info:
+  name: Race condition testing with multiple requests
+  author: pd-team
+  severity: info
+
+requests:
+  - raw:  
+      - |
+        POST / HTTP/1.1
+        Pragma: no-cache
+        Host: {{Hostname}}
+        Cache-Control: no-cache, no-transform
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+
+        id=1
+        
+      - |
+        POST / HTTP/1.1
+        Pragma: no-cache
+        Host: {{Hostname}}
+        Cache-Control: no-cache, no-transform
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+
+        id=2
+
+      - |
+        POST / HTTP/1.1
+        Pragma: no-cache
+        Host: {{Hostname}}
+        Cache-Control: no-cache, no-transform
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+
+        id=3
+
+      - |
+        POST / HTTP/1.1
+        Pragma: no-cache
+        Host: {{Hostname}}
+        Cache-Control: no-cache, no-transform
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+
+        id=4
+
+      - |
+        POST / HTTP/1.1
+        Pragma: no-cache
+        Host: {{Hostname}}
+        Cache-Control: no-cache, no-transform
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+
+        id=5
+
+    threads: 5
+    race: true
+```
+
 The best part of this is you can simply share your crafted template with your team mates, triage/security team to replicate the issue on the other side with ease.
 
 
