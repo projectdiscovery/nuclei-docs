@@ -603,7 +603,7 @@ requests:
 
 Using `rawhttp` also enable automatic handling of `host` header and `content-length` header, to disable this behavior, `disable-automatic-content-length-header` and  `disable-automatic-host-header` can be used in following manner. 
 
-```
+```yaml
 requests:
   - raw:
     - |
