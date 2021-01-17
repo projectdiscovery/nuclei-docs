@@ -860,9 +860,8 @@ workflows:
 
 workflows:
   - template: cves/
-  - template: files/
-  - template: toknes/
-  - template: mis-configs/
+  - template: exposed-tokens/
+  - template: exposures/
 ```
 
 
