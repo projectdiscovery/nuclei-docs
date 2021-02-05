@@ -58,12 +58,7 @@ nuclei -l urls.txt -t files/ -t tokens/ -t cves/ -o output.txt
 ### Running with docker
 
 ```bash
-cat urls.txt | docker run -v /path-to-nuclei-templates:/go/src/app/ -i projectdiscovery/nuclei -t ./files/git-config.yaml > results.txt
-```
-### Automation integration
-
-```bash
-subfinder -dL domains.txt -silent | httpx -silent | nuclei -t cves/ -o cves.txt
+cat urls.txt | docker run -v /path-to-nuclei-templates:/app/nuclei-templates -i projectdiscovery/nuclei -t /app/nuclei-templates/exposed-tokens/ > results.txt
 ```
 
 ## Code contribution
