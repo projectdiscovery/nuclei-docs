@@ -92,7 +92,7 @@ nav:
   - Home:
     - index.md
 
-  - Get Started:
+  - Getting Started:
     - Install: nuclei/get-started.md
     - Features: nuclei/get-started/#features
     - Uses: nuclei/get-started/#using-nuclei
