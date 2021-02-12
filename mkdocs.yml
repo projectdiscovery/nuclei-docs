@@ -2,7 +2,7 @@ site_name: Nuclei - Community Powered Vulnerability Scanner
 site_description: Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.
 repo_url: https://github.com/projectdiscovery/nuclei/
 # Copyright
-copyright: Copyright &copy; 2019 - 2020 ProjectDiscovery
+copyright: Copyright &copy; 2021 ProjectDiscovery, Inc.
 
 # Configuration
 theme:
