@@ -93,8 +93,7 @@ nav:
     - index.md
 
   - Getting Started:
-    - Install: nuclei/get-started.md
-    - Features: nuclei/get-started/#features
+    - Features: nuclei/get-started/#nuclei-features
     - Uses: nuclei/get-started/#using-nuclei
     - Contribution: nuclei/get-started/#code-contribution
     - License: nuclei/get-started/#license
