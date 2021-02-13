@@ -121,17 +121,15 @@ This will display help for the tool. Here are all the switches it supports.
 
 ## Running **Nuclei**
 
-Nuclei templates can executed in multiple ways, `t` flag is used to provide template file or/and directory, single or multiple templates or directory can be used using multiple `t` input, here are few examples,
+Nuclei templates can be executed in multiple ways, `t` flag is used to provide template file or/and directory, single or multiple templates or directory can be used using multiple `t` input, here are few examples,
 
-!!! info ""
-    Running **exposures/configs/git-config.yaml** template on `target_urls.txt`
+!!! info "Running nuclei with single template"
 
 ```
 nuclei -t exposures/configs/git-config.yaml -l target_urls.txt
 ```
 
-!!! info ""
-	Running **cves/2020/** template directory on `target_urls.txt`
+!!! info "Running nuclei with template directory"
 
 ```
 nuclei -t cves/2020/ -l target_urls.txt
@@ -189,7 +187,7 @@ Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 
 Since release of nuclei `v2.1.1`, Nuclei got support of `.nuclei-ignore` file that works along with `update-templates` flag of nuclei, in `.nuclei-ignore` file, you can define all the template directory or template path that you wanted to exclude from all nuclei scans.
 
-Here is the [default list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore) of `nuclei-ignore` file that gets downloaded along with template download/update using `update-templates` flag and exclude the listed templates and directory from execution.
+Here is the ==[default list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)== of `nuclei-ignore` file that gets downloaded along with template download/update using `update-templates` flag and exclude the listed templates and directory from execution.
 
 
 !!! warning
@@ -200,6 +198,9 @@ You can always add, update and remove entires from `.nuclei-ignore` file using a
 ```
 $HOME/nuclei-templates/.nuclei-ignore
 ```
+!!! abstract "Why nuclei-ignore?"
+    
+    To ensure nuclei is not getting used to hammer the web servers with templates that are meant to be used for specific use cases, including workflows, templates templates and more, templates that has **severe** impact, e.g DOS.
 
 Nuclei also supports template exclusion at run time using `exclude` flag, `exclude` flag works in similar manner as `t` flag, single or multiple template files or directory can be provided using `exclude` flag multiple times.
 
@@ -214,6 +215,8 @@ Nuclei also supports template exclusion at run time using `exclude` flag, `exclu
     ```
     nuclei -l target_urls.txt -t nuclei-templates -exclude exposed-panels/ -exclude technologies
     ```
+
+
 
 ## **Code** Contribution
 
