@@ -116,4 +116,5 @@ nav:
     - Smuggling: template-examples/smuggling.md
 
   - Releases:
-    - Nuclei: releases/changelog.md
+    - Nuclei: releases/nuclei-changelog.md
+    - Templates: releases/templates-changelog.md

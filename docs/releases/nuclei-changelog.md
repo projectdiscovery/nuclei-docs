@@ -1,6 +1,6 @@
 # Changelog
 
-## Nuclei v2.2.0 - 20 Nov 2020
+## [Nuclei v2.2.0 - 20 Nov 2020](https://github.com/projectdiscovery/nuclei/releases/tag/v2.2.0)
 
 !!! example ""
 
@@ -41,7 +41,7 @@
 	+ Fixed a bug with debug flag to display post body
 	+ Fixed a panic with trace log
 
-## Nuclei v2.1.1
+## [Nuclei v2.1.1](https://github.com/projectdiscovery/nuclei/releases/tag/v2.1.1)
 
 !!! example ""
 
@@ -74,7 +74,7 @@
 	+ Updated nuclei-templates current and outdated messages
 	+ Updated template loading UI message by @vzamanillo
 
-## Nuclei v2.1.0
+## [Nuclei v2.1.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.1.0)
 
 !!! example ""
 
@@ -89,27 +89,27 @@
 	+ Fixed relative path issue with payloads.
 	+ Fixed dockerfile go version.
 
-## Nuclei v2.0.4
+## [Nuclei v2.0.4](https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.4)
 
 !!! example ""
 
 	+ Better error handling for templates by @manuelbua
 	+ Fixed an issue with release binary.
 
-## Nuclei v2.0.3
+## [Nuclei v2.0.3](https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.3)
 
 !!! example ""
 
 	+ Fixed bugs in raw-requests.
 	+ Fixed update template issue.
 
-## Nuclei v2.0.2
+## [Nuclei v2.0.2](https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.2)
 
 !!! example ""
 
 	+ Fixed an issue with failed requests.
 
-## Nuclei v2.0.1
+## [Nuclei v2.0.1](https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.1)
 
 !!! example ""
 
@@ -117,7 +117,7 @@
 	+ Fixed error with auto-updates Github rate limit.
 	+ Fixed defaults to OR condition when no condition is specified.
 
-## Nuclei v2.0.0
+## [Nuclei v2.0.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.0)
 
 !!! example ""
 
@@ -129,20 +129,20 @@
 	+ Added template updates feature with auto-updates, etc.
 	+ Fixed blank output file bug.
 
-## Nuclei v1.1.7
+## [Nuclei v1.1.7](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.7)
 
 !!! example ""
 
 	+ Added better verbose and debug modes.
 	+ Inform user and no output file in case of 0 results.
 
-## Nuclei v1.1.6
+## [Nuclei v1.1.6](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.6)
 
 !!! example ""
 
 	+ Updated default user-agent to include project details
 
-## Nuclei v1.1.5
+## [Nuclei v1.1.5](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.5)
 
 !!! example ""
 
@@ -151,14 +151,14 @@
 	+ Fixed bug in body decompression
 	+ Added global headers via CLI
 
-## Nuclei v1.1.4
+## [Nuclei v1.1.4](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.4)
 
 !!! example ""
 
 	+ Small improvements.
 	+ General Fixes.
 
-## Nuclei v1.1.3
+## [Nuclei v1.1.3](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.3)
 
 !!! example ""
 
@@ -166,13 +166,13 @@
 	+ Raw requests
 	+ Proxy (http/socks5)
 
-## Nuclei v1.1.2
+## [Nuclei v1.1.2](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.2)
 
 !!! example ""
 
 	+ Fixed a bug with DNS requests and output file.
 
-## Nuclei v1.1.1
+## [Nuclei v1.1.1](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.1)
 
 !!! example ""
 
@@ -181,7 +181,7 @@
 	+ Binary Matcher support
 	+ Conditional redirects support within templates.
 
-## Nuclei v1.1.0
+## [Nuclei v1.1.0](https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.0)
 
 !!! example ""
 
@@ -189,13 +189,13 @@
 	+ Added extractors for custom text extraction from templates
 	+ Fixed a bug with default headers
 
-## Nuclei v1.0.1
+## [Nuclei v1.0.1](https://github.com/projectdiscovery/nuclei/releases/tag/v1.0.1)
 
 !!! example ""
 
 	+ Fixed go.mod file issue
 
-## Nuclei v1.0.0
+## [Nuclei v1.0.0](https://github.com/projectdiscovery/nuclei/releases/tag/v1.0.0)
 
 !!! example ""
 
