@@ -1,5 +1,29 @@
 # Changelog
 
+## [Templates v8.0.9 - 22 Feb 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.0.9)
+
+!!! check "Newly added templates (19)"
+
+	- cves/2020/CVE-2020-24571.yaml by @pikpikcu
+	- cves/2020/CVE-2020-26073.yaml by @madrobot
+	- cves/2019/CVE-2019-14205.yaml by @pikpikcu
+	- cves/2019/CVE-2019-16097.yaml by @pikpikcu
+	- cves/2019/CVE-2019-18393.yaml by @pikpikcu
+	- cves/2018/CVE-2018-1000861.yaml by @dhiyaneshDK
+	- cves/2018/CVE-2018-12613.yaml by @pikpikcu
+	- exposures/configs/ftp-credentials-exposure.yaml by @pikpikcu
+	- exposures/configs/sftp-credentials-exposure.yaml by @sheikhrishad
+	- exposures/logs/laravel-log-file.yaml by @sheikhrishad
+	- exposures/logs/npm-log-file.yaml by @sheikhrishad
+	- technologies/harbor-detect.yaml by @pikpikcu
+	- vulnerabilities/other/dedecms-openredirect.yaml by @pikpikcu
+	- vulnerabilities/other/finereport-path-traversal.yaml by @pikpikcu
+	- vulnerabilities/other/metinfo-lfi.yaml by @pikpikcu
+	- vulnerabilities/other/seacms-rce.yaml by @pikpikcu
+	- vulnerabilities/other/webui-rce.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wordpress-xmlrpc-listmethods.yaml by @0ut0fb4nd
+	- workflows/harbor-workflow.yaml by @pikpikcu
+
 ## [Templates v8.0.8 - 16 Feb 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.0.8)
 
 !!! check "Newly added templates (36)"
