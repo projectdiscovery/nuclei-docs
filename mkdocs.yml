@@ -110,10 +110,11 @@ nav:
   - Template Examples:
     - HTTP: template-examples/http.md
     - DNS: template-examples/dns.md
-    - RAW HTTP: template-examples/raw.md
-    - Fuzzing: template-examples/fuzzing.md
+    - Network: template-examples/network.md
+    - RAW HTTP: template-examples/http-raw.md
+    - HTTP Fuzzing: template-examples/http-fuzzing.md
+    - HTTP Smuggling: template-examples/http-smuggling.md
     - Workflow: template-examples/workflow.md
-    - Smuggling: template-examples/smuggling.md
 
   - Releases:
     - Nuclei: releases/nuclei-changelog.md
