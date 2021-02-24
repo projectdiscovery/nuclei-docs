@@ -39,7 +39,7 @@ plugins:
 
 # Google Analytics
 
-google_analytics: 
+google_analytics:
   - UA-165996103-1
   - auto
 
@@ -86,36 +86,42 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
-
 # Page tree
 nav:
   - Home:
-    - index.md
+      - index.md
 
   - Getting Started:
-    - Features: nuclei/get-started/#nuclei-features
-    - Uses: nuclei/get-started/#using-nuclei
-    - Contribution: nuclei/get-started/#code-contribution
-    - License: nuclei/get-started/#license
+      - Features: nuclei/get-started/#nuclei-features
+      - Uses: nuclei/get-started/#using-nuclei
+      - Contribution: nuclei/get-started/#code-contribution
+      - License: nuclei/get-started/#license
 
   - Templating Guide:
-    - Templating Guide: templating-guide/index.md
-    - Template Details: templating-guide/#template-details
-    - HTTP Requests: templating-guide/#http-requests
-    - DNS Requests: templating-guide/#dns-requests
-    - HTTP Raw requests: templating-guide/#http-raw-requests
-    - Workflows: templating-guide/#workflows
-    - Advance Fuzzing: templating-guide/#advance-fuzzing
+      - Introduction: templating-guide/index.md
+      - Template Details: templating-guide/#template-details
+      - Operators:
+          - Matchers: templating-guide/operators/matchers.md
+          - Extractors: templating-guide/operators/extractors.md
+      - DNS: templating-guide/protocols/dns.md
+      - HTTP: 
+          - Index: templating-guide/protocols/http.md
+          - Raw requests: templating-guide/protocols/http/#raw-requests
+          - Advance Fuzzing: templating-guide/protocols/http/#advance-fuzzing
+      - Network: templating-guide/protocols/network.md
+      - Helper Functions: templating-guide/helper-functions.md
+      - Workflows: templating-guide/workflows.md
 
   - Template Examples:
-    - HTTP: template-examples/http.md
-    - DNS: template-examples/dns.md
-    - Network: template-examples/network.md
-    - RAW HTTP: template-examples/http-raw.md
-    - HTTP Fuzzing: template-examples/http-fuzzing.md
-    - HTTP Smuggling: template-examples/http-smuggling.md
-    - Workflow: template-examples/workflow.md
+      - HTTP:
+          - Index: template-examples/http.md
+          - RAW: template-examples/http-raw.md
+          - Fuzzing: template-examples/http-fuzzing.md
+          - Smuggling: template-examples/http-smuggling.md
+      - DNS: template-examples/dns.md
+      - Network: template-examples/network.md
+      - Workflow: template-examples/workflow.md
 
   - Releases:
-    - Nuclei: releases/nuclei-changelog.md
-    - Templates: releases/templates-changelog.md
+      - Nuclei: releases/nuclei-changelog.md
+      - Templates: releases/templates-changelog.md

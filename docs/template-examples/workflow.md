@@ -1,5 +1,7 @@
 ### Generic workflows
 
+A generic workflow that runs two templates, one to detect Jira and another to detect Confluence.
+
 ```yaml
 id: workflow-example
 info:
@@ -14,9 +16,9 @@ workflows:
 
 ### Basic conditional workflows
 
+A condition based workflow, which first tries to detect if springboot is running on a target. If springboot is found, a list of exploits for it are ran. 
 
 ```yaml
-
 id: springboot-workflow
 
 info:
@@ -24,7 +26,6 @@ info:
   author: dwisiswant0
 
 workflows:
-
   - template: security-misconfiguration/springboot-detect.yaml
     subtemplates:
       - template: cves/CVE-2018-1271.yaml
@@ -34,10 +35,11 @@ workflows:
       - template: vulnerabilities/springboot-h2-db-rce.yaml
 ```
 
-### Multi conditional workflows
+### Multi condition workflows
+
+This template demostrates nested workflows with nuclei, where there's multiple levels of chaining of templates.
 
 ```yaml
-
 id: springboot-workflow
 
 info:
@@ -59,6 +61,7 @@ workflows:
 
 ### Conditional workflows with matcher
 
+This template detects if wordpress is running on an input host, and if found a list of exploits and cves for wordpress are ran
 
 ```yaml
 id: workflow-example
@@ -67,7 +70,6 @@ info:
   author: pdteam
 
 workflows:
-
   - template: technologies/tech-detect.yaml
     matchers:
       - name: wordpress
@@ -93,6 +95,7 @@ workflows:
 
 ### Multiple Matcher workflow
 
+Very similar to the last example, with multiple matcher names.
 
 ```yaml
 id: workflow-multiple-matcher

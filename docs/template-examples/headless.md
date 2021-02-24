@@ -1,4 +1,4 @@
-### Basic Network Request
+### Basic Network Request Template
 
 This template connects to a network service, sends some data and reads 4 bytes from the response. Matchers are ran to identify valid response, which in this case is `PONG`.
 
@@ -23,7 +23,7 @@ network:
           - "PONG"
 ```
 
-### TLS Network Request
+### Basic TLS Network Request Template
 
 Similar to the above template, but the connection to the service is done with TLS enabled.
 
@@ -48,7 +48,7 @@ network:
           - "PONG"
 ```
 
-### Hex Input Request
+### Hex Input Network Request Template
 
 This template connects to a network service, sends some data encoded in hexadecimal to the server and reads 4 bytes from the response. Matchers are ran to identify valid response, which in this case is `PONG`. The match words here are encoded in Hexadecimal, using `encoding: hex` option of matchers.
 
@@ -77,7 +77,7 @@ network:
           - "504f4e47"
 ```
 
-### Input Expressions
+### Input Expressions in network Templates
 
 Inputs specified in network also support DSL Helper Expressions, so you can create your own complex inputs using variety of nuclei helper functions. The below template is an example of using `hex_decode` function to send decoded input over wire.
 
@@ -100,10 +100,10 @@ network:
       - type: word
         words:
           - "logicalSessionTimeout"
-          - "localTime"
+          - "localTime
 ```
 
-### Multi-Step Requests
+### Multi-Step Network Request Templates
 
 This last example is an RCE in proFTPd which if vulnerable, allows to place arbitrary files in any directory on the server. The detection process involves a random string on each nuclei run using `{{randstr}}`, and sending multiple lines of FTP input to the vulnerable server. At the end, a successful match is detected with the presence of `Copy successful` in the response.
 

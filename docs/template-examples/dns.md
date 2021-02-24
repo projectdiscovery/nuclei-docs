@@ -1,5 +1,7 @@
 ### Basic template
 
+Basic DNS Request to detect if a CNAME record exists for an input.
+
 ```yaml
 id: basic-dns-example
 
@@ -22,6 +24,8 @@ dns:
 ```
 
 ### Multiple matcher
+
+An example showcasing multiple matchers of nuclei, allowing detection of Subdomains with CNAME records that point to either `zendesk.com` or `github.io`.
 
 ```yaml
 id: multiple-matcher
