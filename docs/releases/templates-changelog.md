@@ -1,5 +1,43 @@
 # Changelog
 
+## [Templates v8.1.0 - 26 Feb 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.0)
+
+!!! check "Newly added templates (32)"
+
+	- cves/2021/CVE-2021-21972.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-17496.yaml by @pussycat0x 
+	- cves/2020/CVE-2020-22840.yaml by @geeknik
+	- cves/2017/CVE-2017-7269.yaml by @thomas_from_offensity
+	- cves/2016/CVE-2016-7552.yaml by @dwisiswant0
+	- cves/2015/CVE-2015-5688.yaml by @pikpikcu
+	- default-logins/dell/dell-idrac-default-login.yaml by @kophjager007
+	- default-logins/rockmongo/rockmongo-default-credentials.yaml by @pikpikcu
+	- exposures/apis/openapi.yaml by @pikpikcu
+	- exposures/configs/awstats-config.yaml by @hackerrishad
+	- exposures/configs/awstats-script.yaml by @hackerrishad
+	- exposures/configs/honeywell-scada-config.yaml by @alperenkesk 
+	- exposures/files/bower-json.yaml by @oppsec
+	- exposures/files/yarn-lock.yaml by @oppsec
+	- miscellaneous/joomla-htaccess.yaml by @oppsec
+	- miscellaneous/joomla-manifest-file.yaml by @oppsec
+	- miscellaneous/phpmyadmin-setup.yaml by @hackerrishad
+	- misconfiguration/haproxy-status.yaml by @DhiyaneshGeek
+	- misconfiguration/horde-unauthenticated.yaml by @pikpikcu
+	- misconfiguration/java-melody-exposed.yaml by @DhiyaneshGeek
+	- misconfiguration/tcpconfig.yaml by @DhiyaneshGeek
+	- misconfiguration/ups-status.yaml by @DhiyaneshGeek
+	- technologies/dell-idrac-detect.yaml by @kophjager007
+	- technologies/gunicorn-detect.yaml by @joanbono 
+	- vulnerabilities/other/rockmongo-xss.yaml by @pikpikcu
+	- vulnerabilities/other/weiphp-path-traversal.yaml by @pikpikcu
+	- vulnerabilities/other/zhiyuan-oa-info-leak.yaml by @pikpikcu
+	- vulnerabilities/other/zhiyuan-oa-session-leak.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wordpress-affiliatewp-log.yaml by @DhiyaneshGeek
+	- vulnerabilities/wordpress/wp-license-file.yaml by @YashGoti
+	- vulnerabilities/wordpress/wp-uploads-listing.yaml by @YashGoti
+	- workflows/dell-idrac-workflow.yaml by @kophjager007
+
+
 ## [Templates v8.0.9 - 22 Feb 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.0.9)
 
 !!! check "Newly added templates (19)"
