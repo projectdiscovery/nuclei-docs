@@ -1,5 +1,44 @@
 # Changelog
 
+## [Templates v8.1.1 - 1 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.1)
+
+!!! check "Newly added templates (34)"
+
+	- cves/2021/CVE-2021-3129.yaml by @z3bd
+	- cves/2021/CVE-2021-3378.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-11853.yaml by @dwisiswant0 
+	- cves/2020/CVE-2020-11854.yaml by @dwisiswant0 
+	- cves/2020/CVE-2020-35729.yaml by @dwisiswant0 
+	- cves/2018/CVE-2018-1335.yaml by @pikpikcu
+	- cves/2017/CVE-2017-16877.yaml by @pikpikcu
+	- cves/2010/CVE-2010-2861.yaml by @pikpikcu
+	- default-logins/UCMDB/micro-focus-ucmdb-default-credentials.yaml by @dwisiswant0
+	- default-logins/axis2/axis2-default-password.yaml by @pikpikcu
+	- default-logins/dell/dell-idrac9-default-login.yaml by @kophjager007
+	- default-logins/frps/frp-default-credentials.yaml by @pikpikcu
+	- exposed-panels/crush-ftp-login.yaml by @DhiyaneshGeek
+	- exposed-panels/d-link-wireless.yaml by @DhiyaneshGeek
+	- exposed-panels/jfrog.yaml by @DhiyaneshGeek
+	- exposed-panels/microsoft-exchange-login.yaml by @DhiyaneshGeek
+	- exposed-panels/plesk-onyx.yaml by @DhiyaneshGeek
+	- exposed-panels/powerlogic-ion.yaml by @DhiyaneshGeek
+	- exposed-panels/radius-manager.yaml by @DhiyaneshGeek
+	- exposed-panels/siteomat-login.yaml by @DhiyaneshGeek
+	- exposed-panels/unauthenticated-frp.yaml by @pikpikcu
+	- exposed-panels/vigor-login.yaml by @DhiyaneshGeek
+	- exposed-panels/vmware-horizon.yaml by @DhiyaneshGeek
+	- exposed-panels/web-local-craft.yaml by @DhiyaneshGeek
+	- exposed-panels/xenmobile-login.yaml by @DhiyaneshGeek
+	- miscellaneous/moodle-changelog.yaml by @oppsec
+	- misconfiguration/phpmyadmin-wooyun.yaml by @DhiyaneshGeek
+	- technologies/dell/dell-idrac6-detect.yaml by @kophjager007
+	- technologies/dell/dell-idrac7-detect.yaml by @kophjager007
+	- technologies/dell/dell-idrac8-detect.yaml by @kophjager007
+	- vulnerabilities/other/duomicms-sql-injection.yaml by @pikpikcu
+	- vulnerabilities/other/ruijie-networks-lfi.yaml by @pikpikcu
+	- vulnerabilities/other/ruijie-networks-rce.yaml by @pikpikcu
+	- workflows/micro-focus-workflow.yaml by @dwisiswant0
+
 ## [Templates v8.1.0 - 26 Feb 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.0)
 
 !!! check "Newly added templates (32)"
