@@ -1,5 +1,50 @@
 # Changelog
 
+## [Templates v8.1.2 - 6 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.2)
+
+!!! check "Newly added templates (40)"
+
+	- cves/2021/CVE-2021-21315.yaml by @pikpikcu
+	- cves/2021/CVE-2021-26855.yaml by @Mad-robot
+	- cves/2021/CVE-2021-27132.yaml by @geeknik
+	- cves/2021/CVE-2021-27330.yaml by @pikpikcu
+	- cves/2020/CVE-2020-21224.yaml by @pikpikcu
+	- cves/2020/CVE-2020-26948.yaml by @dwisiswant0
+	- cves/2019/CVE-2019-0221.yaml by @pikpikcu
+	- cves/2019/CVE-2019-17538.yaml by @pussycat0x
+	- cves/2018/CVE-2018-11776.yaml by @pikpikcu
+	- cves/2017/CVE-2017-12611.yaml by @pikpikcu
+	- cves/2017/CVE-2017-9791.yaml by @pikpikcu
+	- cves/2017/CVE-2017-9805.yaml by @pikpikcu
+	- cves/2013/CVE-2013-1965.yaml by @pikpikcu
+	- cves/2012/CVE-2012-0392.yaml by @pikpikcu
+	- cves/2008/CVE-2008-2650.yaml by @pussycat0x
+	- cves/2007/CVE-2007-4556.yaml by @pikpikcu
+	- default-logins/alibaba/alibaba-canal-default-password.yaml by @pikpikcu
+	- exposed-panels/acunetix-panel.yaml by @joanbono
+	- exposed-panels/advance-setup.yaml by @DhiyaneshGeek
+	- exposed-panels/blue-iris-login.yaml by @DhiyaneshGeek
+	- exposed-panels/checkmarx-panel.yaml by @joanbono
+	- exposed-panels/cisco-integrated-login.yaml by @DhiyaneshGeek
+	- exposed-panels/cisco-security-details.yaml by @DhiyaneshGeek
+	- exposed-panels/hivemanager-login-panel.yaml by @binaryfigments
+	- exposed-panels/hmc-hybris-panel.yaml by @dogasantos
+	- exposed-panels/keenetic-web-login.yaml by @DhiyaneshGeek
+	- exposed-panels/nessus-panel.yaml by @joanbono
+	- exposed-panels/remote-ui-login.yaml by @DhiyaneshGeek
+	- exposed-panels/sphider-login.yaml by @DhiyaneshGeek
+	- exposed-panels/total-web.yaml by @DhiyaneshGeek
+	- exposures/configs/exposed-bitkeeper.yaml by @daffainfo
+	- exposures/configs/exposed-bzr.yaml by @daffainfo
+	- exposures/configs/exposed-darcs.yaml by @daffainfo
+	- exposures/configs/exposed-hg.yaml by @daffainfo
+	- exposures/configs/joomla-config-file.yaml by @oppsec
+	- misconfiguration/d-link-arbitary-fileread.yaml by @DhiyaneshGeek
+	- technologies/burp-api-detect.yaml by @joanbono
+	- technologies/ilo-detect.yaml by @milo2012
+	- technologies/microsoft-echange-server-detect.yaml by @pikpikcu
+	- vulnerabilities/other/simple-employee-rce.yaml by @pikpikcu
+
 ## [Templates v8.1.1 - 1 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.1)
 
 !!! check "Newly added templates (34)"
