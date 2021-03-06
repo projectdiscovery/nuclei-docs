@@ -92,6 +92,7 @@ nav:
       - index.md
 
   - Getting Started:
+      - Index: nuclei/get-started.md
       - Features: nuclei/get-started/#nuclei-features
       - Uses: nuclei/get-started/#using-nuclei
       - Contribution: nuclei/get-started/#code-contribution
@@ -104,12 +105,12 @@ nav:
           - Matchers: templating-guide/operators/matchers.md
           - Extractors: templating-guide/operators/extractors.md
       - DNS: templating-guide/protocols/dns.md
+      - File: templating-guide/protocols/file.md
       - HTTP: 
           - Index: templating-guide/protocols/http.md
           - Raw requests: templating-guide/protocols/http/#raw-requests
           - Advance Fuzzing: templating-guide/protocols/http/#advance-fuzzing
-      - Headless:
-          - Index: templating-guide/protocols/headless.md
+      - Headless: templating-guide/protocols/headless.md
       - Network: templating-guide/protocols/network.md
       - Helper Functions: templating-guide/helper-functions.md
       - Workflows: templating-guide/workflows.md
@@ -121,6 +122,8 @@ nav:
           - Fuzzing: template-examples/http-fuzzing.md
           - Smuggling: template-examples/http-smuggling.md
       - DNS: template-examples/dns.md
+      - File: template-examples/file.md
+      - Headless: template-examples/headless.md
       - Network: template-examples/network.md
       - Workflow: template-examples/workflow.md
 

