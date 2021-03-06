@@ -117,10 +117,10 @@ nav:
 
   - Template Examples:
       - HTTP:
-          - Index: template-examples/http.md
-          - RAW: template-examples/http-raw.md
-          - Fuzzing: template-examples/http-fuzzing.md
-          - Smuggling: template-examples/http-smuggling.md
+          - Base HTTP: template-examples/http.md
+          - Raw HTTP: template-examples/http-raw.md
+          - Unsafe HTTP: template-examples/http-smuggling.md
+          - HTTP Payloads: template-examples/http-fuzzing.md
       - DNS: template-examples/dns.md
       - File: template-examples/file.md
       - Headless: template-examples/headless.md

@@ -576,20 +576,3 @@ requests:
     threads: 5
     race: true
 ```
-
-### Matchers / Extractor Parts
-
-Valid `part` values supported by **HTTP** protocol for Matchers / Extractor are - 
-
-| Value                | Description                               |
-|----------------------|-------------------------------------------|
-| request              | Raw HTTP Request                          |
-| response             | Raw HTTP Response                         |
-| content_length       | HTTP Content Length                       |
-| status_code          | HTTP Status Code                          |
-| body                 | HTTP Response Body                        |
-| header / all_headers | HTTP Response Headers                     |
-| all                  | HTTP Header + Body                        |
-| duration             | Time Taken for the request in seconds     |
-| `header_name`        | Name of a HTTP response header with value |
-| `cookie_name`        | Name of a HTTP cookie with value          |
