@@ -1,6 +1,6 @@
 ### Network Requests
 
-Nuclei can act as an automatable Netcat, allowing users to send bytes across the wire and receive them, while providing matching and extracting capabilities on the response.
+Nuclei can act as an automatable **Netcat**, allowing users to send bytes across the wire and receive them, while providing matching and extracting capabilities on the response.
 
 Network Requests start with a **network** block which specifies the start of the requests for the template.
 
@@ -77,7 +77,7 @@ Nuclei can also do TLS connection to the target server. Just add `tls://` as pre
 
 ```yaml
 host:
-  - "tls://{{Hostname}}:21"
+  - "tls://{{Hostname}}"
 ```
 
 If a port is specified in the host, the user supplied port is ignored and the template port takes presedence.
@@ -110,7 +110,7 @@ network:
   - inputs:
       - data: "{{hex_decode('3a000000a741000000000000d40700000000000061646d696e2e24636d640000000000ffffffff130000001069736d6173746572000100000000')}}"
     host:
-      - "{{Hostname}}:27017"
+      - "{{Hostname}}"
     read-size: 2048
     matchers:
       - type: word

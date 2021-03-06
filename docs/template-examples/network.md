@@ -12,7 +12,7 @@ info:
 
 network:
   - host: 
-      - "{{Hostname}}:8082"
+      - "{{Hostname}}"
     inputs:
       - data: "PING\r\n"
     read-size: 4
@@ -37,7 +37,7 @@ info:
 
 network:
   - host: 
-      - "tls://{{Hostname}}:8082"
+      - "tls://{{Hostname}}"
     inputs:
       - data: "PING\r\n"
     read-size: 4
@@ -62,7 +62,7 @@ info:
 
 network:
   - host: 
-      - "{{Hostname}}:8082"
+      - "{{Hostname}}"
     inputs:
       - data: "50494e47"
         type: hex
@@ -94,7 +94,7 @@ network:
   - inputs:
       - data: "{{hex_decode('3a000000a741000000000000d40700000000000061646d696e2e24636d640000000000ffffffff130000001069736d6173746572000100000000')}}"
     host:
-      - "{{Hostname}}:27017"
+      - "{{Hostname}}"
     read-size: 2048
     matchers:
       - type: word
@@ -127,7 +127,7 @@ network:
         read: 1024
       - data: "site cpto /var/www/html/{{randstr}}\r\n"
     host:
-      - "{{Hostname}}:21"
+      - "{{Hostname}}"
     read-size: 1024
     matchers:
       - type: word
