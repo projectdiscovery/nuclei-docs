@@ -12,10 +12,9 @@ The templates are written in `YAML` which specifies a simple human readable form
 
 Each template has a unique ID which is used during output writing to specify the template name for an output line.
 
-The template file ends with **yaml** extension. The template files can be created any text editor of your choice.
+The template file ends with **YAML** extension. The template files can be created any text editor of your choice.
 
 ```yaml
-# id contains the unique identifier for the template.
 id: git-config
 ```
 
@@ -31,16 +30,11 @@ Example of an info block -
 
 ```yaml
 info:
-  # Name is the name of the template
   name: Git Config File Detection Template
-  # Author is the name of the author for the template
   author: Ice3man
-  # Severity is the severity for the check.
   severity: medium
-  # Description optionally describes the template.
   description: Searches for the pattern /.git/config on passed URLs.
-  # Tags is a list of tags for the template
-  tags: git,file,medium
+  tags: git,config
 ```
 
 Actual requests and corresponding matchers are placed below the info block and they perform the task of making requests to target servers and finding if the template request was successful.

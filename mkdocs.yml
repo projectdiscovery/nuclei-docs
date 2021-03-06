@@ -101,17 +101,17 @@ nav:
   - Templating Guide:
       - Introduction: templating-guide/index.md
       - Template Details: templating-guide/#template-details
-      - Operators:
-          - Matchers: templating-guide/operators/matchers.md
-          - Extractors: templating-guide/operators/extractors.md
-      - DNS: templating-guide/protocols/dns.md
-      - File: templating-guide/protocols/file.md
       - HTTP: 
-          - Index: templating-guide/protocols/http.md
+          - Base requests: templating-guide/protocols/http.md
           - Raw requests: templating-guide/protocols/http/#raw-requests
           - Advance Fuzzing: templating-guide/protocols/http/#advance-fuzzing
       - Headless: templating-guide/protocols/headless.md
       - Network: templating-guide/protocols/network.md
+      - DNS: templating-guide/protocols/dns.md
+      - File: templating-guide/protocols/file.md
+      - Operators:
+          - Matchers: templating-guide/operators/matchers.md
+          - Extractors: templating-guide/operators/extractors.md
       - Helper Functions: templating-guide/helper-functions.md
       - Workflows: templating-guide/workflows.md
 
