@@ -1,6 +1,6 @@
 ### Network Requests
 
-TCP Network based protocols can be modelled in nuclei with ease. Nuclei can act as an automatable Netcat, allowing users to send bytes across the wire and receive them, while providing matching and extracting capabilities on the response.
+Nuclei can act as an automatable Netcat, allowing users to send bytes across the wire and receive them, while providing matching and extracting capabilities on the response.
 
 Network Requests start with a **network** block which specifies the start of the requests for the template.
 
@@ -34,7 +34,7 @@ Helper function expressions can also be defined in input and will be first evalu
 
 ```yaml
 inputs:
-  - data: "hex_decode("50494e47")\r\n"
+  - data: 'hex_decode("50494e47")\r\n'
 ```
 
 One last thing that can be done with inputs is reading data from the socket. Specifying `read-size` with a non-zero value will do the trick. You can also assign the read data some name, so matching can be done on that part.
@@ -79,6 +79,8 @@ Nuclei can also do TLS connection to the target server. Just add `tls://` as pre
 host:
   - "tls://{{Hostname}}:21"
 ```
+
+If a port is specified in the host, the user supplied port is ignored and the template port takes presedence.
 
 #### Matchers / Extractor Parts
 

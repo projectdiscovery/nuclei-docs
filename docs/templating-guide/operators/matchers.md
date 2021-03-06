@@ -1,19 +1,19 @@
-#### Matchers
+### Matchers
 
-Matchers are the core of nuclei. They are what make the tool so powerful. Multiple type of combinations and checks can be added to ensure that the results you get are free from false-positives.
+Matchers allow different type of flexible comparisons on protocol responses. They are what makes nuclei so powerful, checks are very simple to write and multiple checks can be added as per need for very effective scanning.
 
-##### Types
+#### Types
 
 Multiple matchers can be specified in a request. There are basically 6 types of matchers:
 
-| Matcher Type | Part Matched               |
-| ------------ | -------------------------- |
-| status       | Status Code of Response    |
-| size         | Content Length of Response |
-| word         | Response body or headers   |
-| regex        | Response body or headers   |
-| binary       | Response body              |
-| dsl          | All Response Parts         |
+| Matcher Type | Part Matched                |
+|--------------|-----------------------------|
+| status       | Integer Comparisons of Part |
+| size         | Content Length of Part      |
+| word         | Part for a protocol         |
+| regex        | Part for a protocol         |
+| binary       | Part for a protocol         |
+| dsl          | Part for a protocol         |
 
 To match status codes for responses, you can use the following syntax.
 
@@ -40,11 +40,22 @@ matchers:
     part: body
 ```
 
-To match size, similar structure can be followed. If the status code of response from the site matches any single one specified in the matcher, the request is marked as successful.
+Matchers also support hex encoded data which will be decoded and matched.
+
+```yaml
+matchers:
+  - type: word
+    encoding: hex
+    words:
+      - "50494e47"
+    condition: or
+    part: body
+```
 
 **Word** and **Regex** matchers can be further configured depending on the needs of the users.
 
-Complex matchers of type **dsl** allows to build more elaborated expressions with helper functions, this is an example of a complex DSL matcher:
+Complex matchers of type **dsl** allows to build more elaborate expressions with helper functions. These function allow access to Protocol Response which contains variety of data based on each protocol. See protocol specific documentation to learn about different returned results.
+
 
 ```yaml
 matchers:
@@ -54,10 +65,10 @@ matchers:
       - "contains(toupper(body), md5(cookie))" # Check if the MD5 sum of cookies is contained in the uppercase body
 ```
 
-Every part of a HTTP response can be matched with DSL matcher:
+Every part of a Protocol response can be matched with DSL matcher. Some examples - 
 
 | Response Part  | Description                                     | Example                |
-| -------------- | ----------------------------------------------- | ---------------------- |
+|----------------|-------------------------------------------------|------------------------|
 | content_length | Content-Length Header                           | content_length >= 1024 |
 | status_code    | Response Status Code                            | status_code==200       |
 | all_headers    | Unique string containing all headers            | len(all_headers)       |
@@ -66,24 +77,18 @@ Every part of a HTTP response can be matched with DSL matcher:
 | raw            | Headers + Response                              | len(raw)               |
 
 
-##### Conditions
+#### Conditions
 
 Multiple words and regexes can be specified in a single matcher and can be configured with different conditions like **AND** and **OR**.
 
 1. **AND** - Using AND conditions allows matching of all the words from the list of words for the matcher. Only then will the request be marked as successful when all the words have been matched.
 2. **OR** - Using OR conditions allows matching of a single word from the list of matcher. The request will be marked as successful when even one of the word is matched for the matcher.
 
-##### Matched Parts
+#### Matched Parts
 
 Multiple parts of the response can also be matched for the request, default matched part is `body` if not defined. 
 
-| Part   | Matched Part                         |
-| ------ | ------------------------------------ |
-| body   | Body of the response                 |
-| header | Header of the response               |
-| all    | Both body and header of the response |
-
-Example matchers for response body using the AND condition:
+Example matchers for HTTP response body using the AND condition:
 
 ```yaml
 matchers:
@@ -102,9 +107,9 @@ matchers:
 Similarly, matchers can be written to match anything that you want to find in the response body allowing unlimited creativity and extensibility.
 
 
-##### Negative Matchers
+#### Negative Matchers
 
-All types of matchers also support negative/opposite conditions, mostly useful when you looking to match with exclusions, it can be used by adding `negative: true` in the **matchers** block.
+All types of matchers also support negative conditions, mostly useful when you look for a match with an exclusions. This can be used by adding `negative: true` in the **matchers** block.
 
 Here is an example syntax using `negative` condition, this will return all the URLs not having `PHPSESSID` in the response header. 
 
@@ -117,9 +122,7 @@ matchers:
     negative: true
 ```
 
-In same manner, `negative` condition can be used with single or multiple matchers.
-
-##### Multiple Matchers
+#### Multiple Matchers
 
 Multiple matchers can be used in a single template to fingerprint multiple conditions with a single request.
 
@@ -149,7 +152,7 @@ matchers:
     part: header
 ```
 
-##### Matchers Condition
+#### Matchers Condition
 
 While using multiple matchers the default condition is to follow OR operation in between all the matchers, AND operation can be used to make sure return the result if all matchers returns true.
 

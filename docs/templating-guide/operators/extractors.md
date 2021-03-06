@@ -1,17 +1,15 @@
-#### Extractors
+### Extractors
 
-Extractors are another important feature of nuclei. Extractors can be used to extract and display in results a match from the response body or headers based on available types.
+Extractors can be used to extract and display in results a match from the response returned by a module.
 
-##### Types
+#### Types
 
-Multiple extractors can be specified in a request, as of now we support two type of extractors.
+Multiple extractors can be specified in a request. As of now we support two type of extractors.
 
-| Extractor Type | Part Matched               |
-| -------------- | -------------------------- |
-| regex          | Response body or headers   |
-| kval           | Response headers or cookie |
+1. **regex** - Extract data from a **part** based on a Regular Expression.
+2. **kval** - Extract a part from the protocol result.
 
-Example extractor for response body using regex, you can use the following syntax.
+Example extractor for HTTP Response body using **regex** - 
 
 ```yaml
 # A list of extractors for text extraction
@@ -25,7 +23,7 @@ extractors:
       - "(A3T[A-Z0-9]|AKIA|AGPA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}"
 ```
 
-To extract `key-value` formatted data from the header, you can use the following syntax.
+A **kval** extractor example to extract `content-type` header from HTTP Protocol Response.
 
 
 ```yaml
@@ -39,36 +37,11 @@ extractors:
           - content-type
 ```
 
-To extract `key-value` formatted data from cookie, you can use the following syntax.
+#### Dynamic extractor
 
+Extractors can be used to capture Dynamic Values on runtime while writing Multi-Request templates. CSRF Tokens, Session Headers, etc can be extracted and used in requests.
 
-```yaml
-# A list of extractors for text extraction
-extractors:
-  # type of the extractor
-      - type: kval
-        kval:
-        # cookie value to extract from response
-          - PHPSESSID
-```
-
-##### Matched Parts
-
-Multiple parts of the response can also be extracted for the request, default matched part is `body` if not defined. 
-
-| Part   | Matched Part                         |
-| ------ | ------------------------------------ |
-| body   | Body of the response                 |
-| header | Header of the response               |
-| all    | Both body and header of the response |
-
-Note:- `kval` extractor only supported for header and cookies. 
-
-##### Dynamic extractor
-
-Extractor plays an important role while writing an template for chained request which requires dynamic value to use at run time, for example CSRF tokens, headers or any values requires to complete the chain.  
-
-+ Example of defining extractor as dynamic variable:-
+Example of defining a dynamic extractor with name `api_key` which will capture a regex based pattern from the request.
 
 ```yaml
     extractors:
@@ -80,11 +53,13 @@ Extractor plays an important role while writing an template for chained request 
           - "(?m)[0-9]{3,10}\\.[0-9]+"
 ```
 
-Here we used extractor name as variable `api_key` which holds the value and can be reused in any part of the request dynamically, this feature is supported in RAW request format only. 
+Here we used extractor name as variable `api_key` which holds the extracted value and can be used in any part of the next requests. 
 
-Note:- You can use `internal: true` when you only want to use extractor as dynamic variable, this will avoid printing extracted values in the terminal. 
+This feature is supported in RAW request format only. 
 
-Extraction of regex content can also be specific for **matchgroups**.
+Note:- You can use `internal: true` when you only want to use extractor as dynamic variable as this will avoid printing extracted values in the terminal. 
+
+An optional regex **match-group** can also be specified for the regex for more complex matches.
 
 ```yaml
 # A list of extractors for text extraction
@@ -103,20 +78,7 @@ extractors:
       - '<input\sname="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})"\s/>'
 ```
 
-The above extractor with name `csrf_token` will hold the value extracted (by `([[:alnum:]]{16}))` as `abcdefgh12345678`. This is compared to not using the group variable.
+The above extractor with name `csrf_token` will hold the value extracted (by `([[:alnum:]]{16}))` as `abcdefgh12345678`. 
 
-```yaml
-# A list of extractors for text extraction
-extractors:
-  # type of extractor
-  - type: regex
-    # Let's reuse the extracted CSRF token
-    name: csrf_html_tag
-    part: body
-    # No group here
-    regex:
-      - '<input\sname="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})"\s/>'
-```
-
-The above extractor with name `csrf_html_tag` will hold the full match (by `<input name="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})" />`) as `<input name="csrf_token" type="hidden" value="abcdefgh12345678" />`.
+If no group option is provided with this regex, the above extractor with name `csrf_html_tag` will hold the full match (by `<input name="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})" />`) as `<input name="csrf_token" type="hidden" value="abcdefgh12345678" />`.
 
