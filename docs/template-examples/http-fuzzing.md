@@ -1,5 +1,8 @@
 ### HTTP Intruder fuzzing
 
+This template makes a defined POST request in RAW format along with in template defined payloads running `clusterbomb` intruder and checking for string match against response.
+
+
 ```yaml
 id: multiple-raw-example
 info:
@@ -43,6 +46,8 @@ requests:
 ```
 
 ### Fuzzing multiple requests 
+
+This template makes a defined POST request in RAW format along with wordlist based payloads running `clusterbomb` intruder and checking for string match against response.
 
 ```yaml
 id: multiple-raw-example
@@ -98,6 +103,8 @@ requests:
 
 ### Authenticated fuzzing
 
+This template makes a subsequent HTTP requests with defined requests maintaining sessions between each requests and checking for string match against response.
+
 ```yaml
 id: multiple-raw-example
 info:
@@ -111,7 +118,7 @@ requests:
         GET / HTTP/1.1
         Host: {{Hostname}}
         Origin: {{BaseURL}}
-        Connection: close
+        Cookie: session=12312321sdasdsa
         User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko)
         Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
         Accept-Language: en-US,en;q=0.9
@@ -138,6 +145,7 @@ requests:
 
 ### Dynamic variable support
 
+This template makes a subsequent HTTP requests maintaining sessions between each requests, dynamically extracting data from one request and reusing them into another request using variable name and checking for string match against response.
 
 ```yaml
 id: CVE-2020-8193

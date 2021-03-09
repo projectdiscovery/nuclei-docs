@@ -1,5 +1,8 @@
 ### Basic template
 
+This template makes GET request to `/` path in RAW format and checking for string match against response.
+
+
 ```yaml
 id: basic-raw-example
 info:
@@ -25,6 +28,9 @@ requests:
 ```
 
 ### Multiple RAW request
+
+This template makes GET and POST request sequentially in RAW format and checking for string match against response.
+
 
 ```yaml
 id: multiple-raw-example

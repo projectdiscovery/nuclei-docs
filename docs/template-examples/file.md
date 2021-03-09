@@ -12,8 +12,9 @@ info:
 
 file:
   - extensions:
-      - .pub
+      - pub
     max-size: 1024 # read very small chunks
+
     matchers:
       - type: word
         words:
@@ -36,9 +37,10 @@ file:
   - extensions:
       - all
     denylist:
-      - .pub
+      - pub
     no-recursive: true
     max-size: 1024 # read very small chunks
+
     matchers:
       - type: word
         words:

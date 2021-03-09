@@ -1,5 +1,7 @@
 ### Basic CL.TE
 
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
 ```yaml
 id: CL.TE-http-smuggling
 
@@ -42,6 +44,9 @@ requests:
 ```
 
 ### Basic TE.CL
+
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
 
 ```yaml
 id: TE.CL-http-smuggling
@@ -91,6 +96,9 @@ requests:
 ```
 
 ### Frontend bypass CL.TE
+
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
 
 ```yaml
 id: smuggling-bypass-front-end-controls-cl-te
@@ -143,6 +151,9 @@ requests:
 
 ### Differential responses based CL.TE
 
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
+
 ```yaml
 id: confirming-cl-te-via-differential-responses-http-smuggling
 
@@ -185,6 +196,9 @@ requests:
 ```
 
 ### Differential responses based TE.CL
+
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
 
 ```yaml
 id: confirming-te-cl-via-differential-responses-http-smuggling
