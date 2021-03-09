@@ -1,5 +1,18 @@
 # Changelog
 
+## [Templates v8.1.3 - 9 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.3)
+
+!!! check "Newly added templates (08)"
+
+	- default-logins/nexus/nexus-default-password.yaml by @pikpikcu 
+	- exposed-panels/oki-data.yaml by @DhiyaneshGeek 
+	- exposed-panels/weatherlink.yaml by @DhiyaneshGeek 
+	- exposed-panels/wso2-management-console.yaml by @DhiyaneshGeek 
+	- exposures/configs/ruijie-information-disclosure.yaml by @DhiyaneshGeek 
+	- misconfiguration/gitlab-snippets.yaml
+	- misconfiguration/solr-query-dashboard.yaml by @DhiyaneshGeek 
+	- misconfiguration/unauthenticated-mongo-express.yaml by @DhiyaneshGeek 
+
 ## [Templates v8.1.2 - 6 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.2)
 
 !!! check "Newly added templates (40)"
