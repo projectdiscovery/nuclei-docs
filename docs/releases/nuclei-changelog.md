@@ -1,5 +1,48 @@
 # Changelog
 
+## [Nuclei v2.3.0 - 10 March 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.0)
+!!! example ""
+
+	- 58237f1 Added headless chrome based templates support
+	- fc6d2d7 Added network based (TCP) support.
+	- fc6d2d7 Added file based template support.
+	- fc6d2d7 Added config file support.
+	- fc6d2d7 Added network based (TCP) support.
+	- fc6d2d7 Added HTTP Request clusterning for similar paths.
+	- fc6d2d7 Added passive support for HTTP based templates.
+	- 1a3fea6 Added -w/workflows to only run workflow based templates
+	- 1cfc5ce Added request condition support.
+	- 31ce4b1 Added workflows flag + new templates flag to run newly added ones
+	- 41a9ed8 Added support for system resolvers.
+	- 17d0b34 Added expressions package + expressions support to network protocols
+	- 8a7cabb Added hex encoding support in matchers
+	- 8e56f14 Added dns fallback support
+	- 1d398d1 Added missing rawhttp option override
+	- 37ce0a7 Added TLS protocol test
+	- ec3f85e Added parallelism to workflows
+	- 15708cb Added simple json based http metrics support
+	- cc31d6a Added helper functions to payloads
+	- b155f18 Added r flag to allow users usage of custom resolvers
+	- 72e9a72 Added support for http response redirect chain print and match
+	- ec86542 Added offline http response processing feature
+	- 0e2d8dc Added max http body resp size option
+	- 291ee15 Added tag based template support execution.
+	- 038b4aa Added Jira,Github,Gitlab issue tracker integration to nuclei
+	- e7f82cd Added goflags library support.
+	- 1fa79d6 Added reworked generators package
+	- e6958d7 Moved colorizer stuff to pkg/output
+	- e1bbb9d Moved tracefile to pkg/output + misC
+	- a4c1d2d Fixed output endpoint in unsafe request without host header
+	- 53a4046 Fixed multiple bugs with rawhttp
+	- d963fc0 Fixed rawhttp header formatting issues
+	- a86bc9e Fixed raw http newline formatting
+	- 8cf1471 Fixed a bug with workflows
+	- 99e66d7 Fixed a bug with workflow
+	- 155c847 Fixed a bug with request count.
+	- f1ed743 Fixed underscore in header names for kval matcher
+	- 5d8a436 Fixed path & port parsing for raw requests
+
+
 ## [Nuclei v2.2.0 - 20 Nov 2020](https://github.com/projectdiscovery/nuclei/releases/tag/v2.2.0)
 
 !!! example ""
