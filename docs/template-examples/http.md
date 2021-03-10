@@ -1,5 +1,8 @@
 ### Basic Template
 
+This template requests `/` path of URL and match string in the resposne.
+
+
 ```yaml
 id: basic-example
 
@@ -19,6 +22,9 @@ requests:
 ```
 
 ### Multiple matchers
+
+This template requests `/` path of URL and run multiple OR based matchers against response.
+
 
 ```yaml
 id: http-multiple-matchers
@@ -58,6 +64,9 @@ requests:
 
 ### Matchers with conditions
 
+This template requests `/` path of URL and runs two matchers, one with AND conditions with string match in header and another matcher against response body.
+
+
 ```yaml
 id: matchers-conditions
 
@@ -86,6 +95,8 @@ requests:
 ```
 
 ### Multiple matcher conditions
+
+This template requests `/` path of URL and runs two matchers with AND conditions, one with OR conditions with string match in header and another matcher against response body, both condition has to be true in order to match this template.
 
 ```yaml
 id: multiple-matchers-conditions
@@ -117,6 +128,8 @@ requests:
 ```
 
 ### Custom headers
+
+This template requests `/` path of the URL as GET request with additional custom headers defined in the template.   
 
 ```yaml
 id: custom-headers
@@ -151,6 +164,10 @@ requests:
 ```
 
 ### POST requests
+
+This template makes POST request to `/admin` endpoint with defined data as body parameter in the template.   
+
+
 
 ```yaml
 id: post-request
