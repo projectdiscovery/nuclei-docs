@@ -86,6 +86,20 @@ To maintain cookie based browser like session between multiple requests, you can
 cookie-reuse: true
 ```
 
+#### Request Condition
+
+Request condition allows to check for condition between multiple requests for writing complex checks and exploits involving multiple HTTP request to complete the exploit chain.
+
+with DSL matcher, it can be utilized by adding `req-condition: true` and numbers as suffix with respective attributes, `status_code_1`, `status_code_3`, and`body_2` for example.
+
+
+```yaml
+    req-condition: true
+    matchers:
+      - type: dsl
+        dsl:
+          - "status_code_1 == 404 && status_code_2 == 200 && contains((body_2), 'secret_string')"
+```
 
 #### **Example HTTP Template**
 
