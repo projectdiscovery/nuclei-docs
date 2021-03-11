@@ -1,5 +1,27 @@
 # Changelog
 
+## [Templates v8.1.4 - 10 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.4)
+
+!!! check "Newly added templates (17)"
+
+	- cves/2021/CVE-2021-21978.yaml @dwisiswant0 
+	- cves/2020/CVE-2020-12256.yaml by @pikpikcu
+	- cves/2020/CVE-2020-12259.yaml by @pikpikcu
+	- cves/2020/CVE-2020-13483.yaml by @pikpikcu
+	- cves/2020/CVE-2020-14413.yaml by @pikpikcu
+	- cves/2015/CVE-2015-2080.yaml by @pikpikcu
+	- exposed-panels/cisco-sd-wan.yaml by @z3bd
+	- headless/dvwa-headless-automatic-login.yaml
+	- headless/postmessage-tracker.yaml
+	- headless/prototype-pollution-check.yaml
+	- headless/window-name-domxss.yaml
+	- misconfiguration/http-etcd-unauthenticated-api-data-leak.yaml by @DhiyaneshGeek
+	- network/exposed-redis.yaml
+	- network/exposed-zookeeper.yaml
+	- network/memcached-stats.yaml
+	- network/mongodb-detect.yaml
+	- network/mongodb-unauth.yaml
+
 ## [Templates v8.1.3 - 9 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.3)
 
 !!! check "Newly added templates (08)"
