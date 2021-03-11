@@ -237,7 +237,7 @@ Here is an example of HTTP request smuggling detection template using `rawhttp`.
 ```yaml
 requests:
   - raw:
-    - |
+    - |+
         POST / HTTP/1.1
         Host: {{Hostname}}
         Content-Type: application/x-www-form-urlencoded
@@ -252,7 +252,7 @@ requests:
         Content-Length: 5
 
         x=1
-    - |
+    - |+
         GET /post?postId=5 HTTP/1.1
         Host: {{Hostname}}
 
@@ -360,7 +360,7 @@ requests:
     pipeline-max-workers: 25000
 
     raw:
-      - |
+      - |+
         GET /§path§ HTTP/1.1
         Host: {{Hostname}}
         User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0
@@ -439,7 +439,7 @@ info:
 
 requests:
   - raw:
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Connection: keep-alive
@@ -450,7 +450,7 @@ requests:
       0
       
       G      
-    - |
+    - |+
       POST / HTTP/1.1
       Host: {{Hostname}}
       Connection: keep-alive
