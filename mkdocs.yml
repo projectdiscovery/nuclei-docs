@@ -121,6 +121,8 @@ nav:
           - Raw HTTP: template-examples/http-raw.md
           - Unsafe HTTP: template-examples/http-smuggling.md
           - HTTP Payloads: template-examples/http-fuzzing.md
+          - Race Condition: template-examples/http-race-conditions.md
+
       - DNS: template-examples/dns.md
       - File: template-examples/file.md
       - Headless: template-examples/headless.md
