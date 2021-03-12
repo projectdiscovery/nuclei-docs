@@ -212,17 +212,17 @@ Nuclei templates can be executed in multiple ways, currently using **tags, templ
     nuclei -w workflows/wordpress-workflow.yaml -w workflows/jira-workflow.yaml -l urls.txt
     ```
 
-??? info "Running nuclei with severity filter"
+??? info "Running nuclei with severity"
 
     **Severity** flag is used to run templates with specific or multiple severities altogether. 
 
-    !!! check "Running nuclei with severity filter"
+    !!! check "Running nuclei with single severity"
 
     ```
     nuclei -t cves/ -severity critical -l urls.txt
     ```
 
-    !!! check "Running nuclei with multiple severity filter"
+    !!! check "Running nuclei with multiple severity"
 
     ```
     nuclei -t cves/ -t vulnerabilities -severity critical,high -l urls.txt
