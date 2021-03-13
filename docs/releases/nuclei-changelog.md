@@ -1,5 +1,15 @@
 # Changelog
 
+## [Nuclei v2.3.1 - 14 March 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.1)
+!!! example ""
+
+	- Fixed a bug with `severity` flag parsing
+	- Fixed panic crash with http status codes
+	- Fixed retries in DNS requests failing
+	- Added `exclude-tags/etags` support, `dos` tag will be excluded as default.
+	- Added support to severity using tags, (-tags low,high)
+	- Added issue-tracker-config file
+
 ## [Nuclei v2.3.0 - 10 March 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.0)
 !!! example ""
 
