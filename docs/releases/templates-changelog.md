@@ -1,5 +1,39 @@
 # Changelog
 
+## [Templates v8.1.5 - 15 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.5)
+
+!!! check "Newly added templates (30)"
+
+	- cves/2021/CVE-2021-25281.yaml by @madrobot
+	- cves/2020/CVE-2020-13700.yaml by @pikpikcu
+	- cves/2020/CVE-2020-14092.yaml by @princechaddha
+	- cves/2020/CVE-2020-24186.yaml by @Ganofins
+	- cves/2020/CVE-2020-35951.yaml by @princechaddha
+	- cves/2018/CVE-2018-1207.yaml by @dwisiswant0
+	- cves/2018/CVE-2018-18778.yaml by @dhiyaneshDK
+	- cves/2018/CVE-2018-3810.yaml by @princechaddha
+	- cves/2018/CVE-2018-6910.yaml by @pikpikcu
+	- cves/2018/CVE-2018-7700.yaml by @pikpikcu
+	- cves/2017/CVE-2017-3881.yaml by @dwisiswant0
+	- cves/2015/CVE-2015-3306.yaml by @pdteam
+	- default-logins/dvwa/dvwa-default-login.yaml @pdteam
+	- exposed-panels/cisco-finesse-login.yaml by @dhiyaneshDK
+	- exposed-panels/mini-start-page.yaml by @dhiyaneshDK
+	- exposed-panels/tuxedo-connected-controller.yaml by @dhiyaneshDK
+	- exposures/configs/circleci-config.yaml by @geeknik
+	- exposures/configs/circleci-ssh-config.yaml by @geeknik
+	- misconfiguration/gitlab/gitlab-public-repos.yaml by @ldionmarcil
+	- misconfiguration/panasonic-network-management.yaml by @dhiyaneshDk
+	- network/unauth-ftp.yaml by @C3l3si4n
+	- technologies/openam-detection.yaml by @xelkomy
+	- technologies/thinkcmf-detection.yaml by @pikpikcu
+	- vulnerabilities/moodle/moodle-jitsi-plugin-xss.yaml by @aceseven
+	- vulnerabilities/other/parentlink-xss.yaml by @r3naissance
+	- vulnerabilities/other/pmb-local-file-disclosure.yaml by @dhiyaneshDk
+	- vulnerabilities/wordpress/wordpress-auth-bypass-wptimecapsule.yaml by @princechaddha
+	- vulnerabilities/wordpress/wordpress-rce-simplefilelist.yaml by @princechaddha
+	- vulnerabilities/wordpress/wordpress-total-upkeep-backup-download.yaml by @princechaddha
+
 ## [Templates v8.1.4 - 10 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.4)
 
 !!! check "Newly added templates (17)"
