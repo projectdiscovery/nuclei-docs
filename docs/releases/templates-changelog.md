@@ -1,6 +1,6 @@
 # Changelog
 
-## [Templates v8.1.5 - 15 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.5)
+## [Templates v8.1.5 - 15 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.5)
 
 !!! check "Newly added templates (30)"
 
@@ -34,7 +34,7 @@
 	- vulnerabilities/wordpress/wordpress-rce-simplefilelist.yaml by @princechaddha
 	- vulnerabilities/wordpress/wordpress-total-upkeep-backup-download.yaml by @princechaddha
 
-## [Templates v8.1.4 - 10 March 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.4)
+## [Templates v8.1.4 - 10 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.4)
 
 !!! check "Newly added templates (17)"
 
