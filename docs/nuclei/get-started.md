@@ -1,12 +1,12 @@
 ## **Nuclei** Features
 
 
-!!! example "Features"
+!!! example "Features."
 
-	* HTTP | DNS | TCP  | FILE support
-	* Fully configurable templates.
-	* Large scale scanning.
-	* Easily write your own templates.
+    * HTTP | DNS | TCP  | FILE support
+    * Fully configurable templates.
+    * Large scale scanning.
+    * Easily write your own templates.
 
 
 ## **Nuclei** Installation
@@ -19,7 +19,7 @@
     ```
 
     !!! info
-		Nuclei requires latest **GO** version to install successfully.
+        Nuclei require latest **GO** version to install successfully.
 
 === "Brew"
 
@@ -28,7 +28,7 @@
     ```
 
     !!! info
-		Supported in **macOS** (or Linux)
+        Supported in **macOS** (or Linux)
 
 === "Docker"
 
@@ -47,7 +47,7 @@
     ```
 
     !!! info
-		Nuclei requires latest **GO** version to install successfully.
+        Nuclei require the latest **GO** version to install successfully.
 === "Binary"
 
     ```
@@ -55,22 +55,22 @@
     ```
 
     !!! tip
-		- Download the latest binary for your OS.
-		- Unzip the binary with `tar -xzvf nuclei-*.tar.gz`
+        - Download the latest binary for your OS.
+        - Unzip the binary with `tar -xzvf nuclei-*.tar.gz`
 
 ## Template **Download**
 
-Nuclei templates can be downloaded and update using `update-templates` flag of nuclei which downloads latest release from [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates/releases) GitHub project, a community curated list of templates that are ready to use.
+Nuclei templates can be downloaded and update using the `update-templates` flag of nuclei, which downloads the latest release from [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates/releases) GitHub project, a community-curated list of templates that are ready to use.
 
 ```
 nuclei -update-templates
 ```
 
 !!! abstract "Info"
-	**update-templates** flag download/pulls the latest release from https://github.com/projectdiscovery/nuclei-templates/releases, that does not include recently added templates in the master branch.
+    **update-templates** flag download/pulls the latest release from https://github.com/projectdiscovery/nuclei-templates/releases, that does not include recently added templates in the master branch.
 
 !!! tip
-	Writing your own unique templates will always keep you one step ahead of others.
+    Writing your own unique templates will always keep you one step ahead of others.
 
 ## **Nuclei** Usage
 
@@ -164,7 +164,7 @@ Nuclei templates can be executed in multiple ways, currently using **tags, templ
 
 ??? info "Running nuclei using tags"
     
-    **Tags** can be used for template execution with or without need of template directory/flag, if **templates/t** flag is used with `tags`, the tags will be applied on the particular template directory, otherwise it will run all the templates with matched tag from default template download location (`$HOME/nuclei-templates/`).
+    **Tags** can be used for template execution with or without the need of template directory/flag, if **templates/t** flag is used with `tags`, the tags will be applied on the particular template directory, otherwise, it will run all the templates with matched tag from default template download location (`$HOME/nuclei-templates/`).
 
     !!! check "Running nuclei with single tags"
 
@@ -198,7 +198,7 @@ Nuclei templates can be executed in multiple ways, currently using **tags, templ
 
 ??? info "Running nuclei with workflows"
 
-    **Workflows** are best possible way to manage and run multiple templates using single workflow file for custom and dedicated workflow depending on the project and test case.
+    **Workflows** are the best possible way to manage and run multiple templates using a single workflow file for custom and dedicated workflow depending on the project and test case.
 
     !!! check "Running nuclei with workflow"
 
@@ -237,13 +237,76 @@ Nuclei templates can be executed in multiple ways, currently using **tags, templ
     ``` 
 
 !!! warning
-	Nuclei accepts **URLs** as input format in order to execute HTTP templates.
+    Nuclei accept **URLs** as input format in order to execute HTTP templates.
 
 !!! tip
-	[httpx](https://github.com/projectdiscovery/httpx) can be used to generate URLs from subdomains as a input for nuclei.
+    [httpx](https://github.com/projectdiscovery/httpx) can be used to generate URLs from subdomains as a input for nuclei.
+
+## Nuclei **Reporting**
+
+Nuclei comes with reporting module support with the release of [v2.3.0](https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021) supporting GitHub, GitLab, and Jira integration, this allows nuclei engine to create automatic tickets on the supported platform based on found results.
+
+<table>
+  <tr>
+    <th>Platform</th>
+    <td>GitHub</td>
+    <td>GitLab</td>
+    <td>Jira</td>
+
+  </tr>
+  <tr>
+    <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+  </tr>
+</table>
+
+
+`-rc, -report-config` flag can be used to provide a config file to read configuration details of the platform to integrate. Here is an [example config file](https://github.com/projectdiscovery/nuclei/blob/master/v2/cmd/nuclei/issue-tracker-config.yaml) for all supported platforms.
+
+
+
+For example, to create tickets on GitHub, create a config file with the following content and replace the appropriate values:-
+
+```yaml
+# Github contains configuration options for GitHub issue tracker
+
+github: 
+  username: "$user"
+  owner: "$user"
+  token: "$token"
+  project-name: "testing-project"
+  issue-label: "Nuclei"
+```
+
+**Running nuclei with reporting module:-**
+
+```bash
+nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml
+```
+
+Similarly, other platforms can be configured. Reporting module also supports basic filtering and duplicate checks to avoid duplicate ticket creation.
+
+```yaml
+allow-list:
+  severity: high,critical
+```
+
+This will ensure to only creating tickets for issues identified with **high** and **critical** severity; similarly, `deny-list` can be used to exclude issues with a specific severity.
+
+If you are running periodic scans on the same assets, you might want to consider `-rdb, -report-db` flag that creates a local copy of the valid findings in the given directory utilized by reporting module to compare and **create tickets for unique issues only**.
+
+```bash
+nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
+```
+
 ## Rate **Limits**
 
-Nuclei have multiple rate limit controls for multiple factors including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flags with description.
+Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
 
 | Flag                   | Description                                                          |
 | ---------------------- | ---------------------------------------------------------------------|
@@ -251,33 +314,33 @@ Nuclei have multiple rate limit controls for multiple factors including a number
 | bulk-size              | Control the number of hosts to process in parallel for each template |
 | c                      | Control the number of templates to process in parallel               |
 
-	
+    
 
 Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 
 !!! tip
-	`rate-limit` flag takes precedence over other two flag, number of request/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
+    `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
 
 ## Template **Exclusion**
 
-Since release of nuclei `v2.1.1`, Nuclei got support of `.nuclei-ignore` file that works along with `update-templates` flag of nuclei, in `.nuclei-ignore` file, you can define all the template directory or template path that you wanted to exclude from all nuclei scans.
+Since the release of nuclei `v2.1.1`, Nuclei got the support of `.nuclei-ignore` file that works along with `update-templates` flag of nuclei, in `.nuclei-ignore` file, you can define all the template directory or template path that you wanted to exclude from all nuclei scans.
 
 Here is the ==[default list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)== of `nuclei-ignore` file that gets downloaded along with template download/update using `update-templates` flag and exclude the listed templates and directory from execution.
 
 
 !!! warning
-	`.nuclei-ignore` works only when templates are downloaded using `update-templates` flag.
+    `.nuclei-ignore` works only when templates are downloaded using `update-templates` flag.
 
-You can always add, update and remove entires from `.nuclei-ignore` file using any preferred text editor from following location,
+You can always add, update and remove entries from `.nuclei-ignore` file using any preferred text editor from the following location,
 
 ```
 $HOME/nuclei-templates/.nuclei-ignore
 ```
 !!! abstract "Why nuclei-ignore?"
     
-    To ensure nuclei is not getting used to hammer the web servers with templates that are meant to be used for specific use cases, including workflows, templates templates and more, templates that has **severe** impact, e.g DOS.
+    To ensure nuclei is not getting used to hammer the web servers with templates that are meant to be used for specific use cases, including workflows, templates, and more, templates that have **severe** impact, e.g., DOS.
 
-Nuclei also supports template exclusion at run time using `exclude` flag, `exclude` flag works in similar manner as `t` flag, single or multiple template files or directory can be provided using `exclude` flag multiple times.
+Nuclei also support template exclusion at run time using `exclude` flag, `exclude` flag works in a similar manner as `t` flag, single or multiple template files or directory can be provided using `exclude` flag multiple times.
 
 !!! info "Running nuclei with single template exclusion"
 
@@ -295,7 +358,7 @@ Nuclei also supports template exclusion at run time using `exclude` flag, `exclu
 
 ## **Code** Contribution
 
-[Nuclei templates](https://github.com/projectdiscovery/nuclei-templates) are base of nuclei project, we appreciate if you can write and submit new templates to keep this project alive, and one of the reason to keep us motivated to keep working on this project. 
+[Nuclei templates](https://github.com/projectdiscovery/nuclei-templates) are the base of the nuclei project. We appreciate it if you can write and submit new templates to keep this project alive, and one of the reasons to keep us motivated to keep working on this project. 
 
 ##License
 
