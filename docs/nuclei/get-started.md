@@ -82,6 +82,8 @@ This will display help for the tool. Here are all the switches it supports.
 
 ??? info "nuclei -h"
 ```
+ | Flag                                 | Description                                                  |
+ | ------------------------------------ | ------------------------------------------------------------ |
    -H, -header value                      Custom Header.
    -biid, -burp-collaborator-biid string  Burp Collaborator BIID
    -bs, -bulk-size int                    Maximum Number of hosts analyzed in parallel per template (default 25)
