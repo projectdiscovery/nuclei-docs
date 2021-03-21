@@ -1,5 +1,32 @@
 # Changelog
 
+## [Templates v8.1.6 - 21 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.6)
+
+!!! check "Newly added templates (22)"
+
+	- cves/2021/CVE-2021-22986.yml by @iamnoooob @rootxharsh 
+	- cves/2020/CVE-2020-14883.yaml by @pikpikcu 
+	- cves/2020/CVE-2020-16139.yaml by @pikpikcu 
+	- cves/2020/CVE-2020-29164.yaml by @geeknik 
+	- cves/2020/CVE-2020-9483.yaml by @pikpikcu 
+	- cves/2018/CVE-2018-11784.yaml by @geeknik 
+	- cves/2019/CVE-2019-0230.yaml by @geeknik 
+	- default-logins/xxljob/xxljob-default-login.yaml
+	- dns/ec2-detection.yaml by @melbadry9 by pdteam
+	- dns/worksites-detection.yaml by @melbadry9
+	- exposed-panels/aims-password-portal.yaml by @DhiyaneshGeek 
+	- exposed-panels/pandora-fms-console.yaml by @DhiyaneshGeek 
+	- iot/contacam.yaml by @DhiyaneshGeek 
+	- iot/epmp-login.yaml by @DhiyaneshGeek 
+	- iot/hp-laserjet-detect.yaml by @DhiyaneshGeek 
+	- iot/internet-service.yaml by @DhiyaneshGeek 
+	- misconfiguration/exposed-sqlite-manager.yaml by @DhiyaneshGeek 
+	- vulnerabilities/generic/error-based-sql-injection.yaml by @geeknik 
+	- vulnerabilities/other/tpshop-directory-traversal.yaml by @pikpikcu 
+	- vulnerabilities/other/viewlinc-crlf-injection.yaml by @geeknik 
+	- vulnerabilities/other/xdcms-sqli.yaml by @pikpikcu 
+	- vulnerabilities/wordpress/wordpress-infinitewp-auth-bypass.yaml by @princechaddha 
+
 ## [Templates v8.1.5 - 15 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.5)
 
 !!! check "Newly added templates (30)"
