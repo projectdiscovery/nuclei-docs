@@ -11,8 +11,8 @@
 	- cves/2020/CVE-2020-9483.yaml by @pikpikcu 
 	- cves/2018/CVE-2018-11784.yaml by @geeknik 
 	- cves/2019/CVE-2019-0230.yaml by @geeknik 
-	- default-logins/xxljob/xxljob-default-login.yaml
-	- dns/ec2-detection.yaml by @melbadry9 by pdteam
+	- default-logins/xxljob/xxljob-default-login.yaml by pdteam
+	- dns/ec2-detection.yaml by @melbadry9
 	- dns/worksites-detection.yaml by @melbadry9
 	- exposed-panels/aims-password-portal.yaml by @DhiyaneshGeek 
 	- exposed-panels/pandora-fms-console.yaml by @DhiyaneshGeek 
