@@ -1,5 +1,11 @@
 # Changelog
 
+## [Templates v8.1.7 - 21 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.7)
+
+!!! check "Newly added templates (0)"
+
+	- Bug fixes
+
 ## [Templates v8.1.6 - 21 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.6)
 
 !!! check "Newly added templates (22)"
