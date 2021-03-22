@@ -1,5 +1,20 @@
 # Changelog
 
+## [Nuclei v2.3.2 - 22 March 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.2)
+!!! example ""
+
+	- **Added markdown export to disk in the reporting module (`-de reports`)**
+	- Fixed body length error with report integration module.
+	- Fixed matched counter bug in metrics endpoint.
+	- Fixed config file parser bug.
+	- Fixed bug with `nuclei-ignore` file.
+	- Fixed a bug with stats counter.
+	- Fixed a bug with running newly added templates (`-nt` flag)
+	- Fixed a but making all workflows to run on running single workflow
+	- Fixed panic crash with DNS module.
+	- Fixed a bug to exclude timestamp when `no-meta` flag is used.
+	- Fixed crash when running with a non-root user.
+
 ## [Nuclei v2.3.1 - 14 March 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.1)
 !!! example ""
 
