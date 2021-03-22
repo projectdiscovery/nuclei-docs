@@ -89,6 +89,7 @@ This will display help for the tool. Here are all the switches it supports.
     -bs, -bulk-size int                    Maximum Number of hosts analyzed in parallel per template (default 25)
     -c, -concurrency int                   Maximum Number of templates executed in parallel (default 10)
     -config string                         Nuclei configuration file
+    -de, -disk-export string               Directory on disk to export reports in markdown to
     -debug                                 Debugging request and responses
     -debug-req                             Debugging request
     -debug-resp                            Debugging response
@@ -115,7 +116,7 @@ This will display help for the tool. Here are all the switches it supports.
     -ra, -random-agent                     Use randomly selected HTTP User-Agent header value
     -rl, -rate-limit int                   Maximum requests to send per second (default 150)
     -rc, -report-config string             Nuclei Reporting Module configuration file
-    -rdb, -report-db string                Local Nuclei Reporting Database
+    -rdb, -report-db string                Local Nuclei Reporting Database (Always use this to persistent report data)
     -retries int                           Number of times to retry a failed request (default 1)
     -show-browser                          Show the browser on the screen
     -si, -stats-interval int               Number of seconds between each stats line (default 5)
@@ -244,6 +245,65 @@ Nuclei templates can be executed in multiple ways, currently using **tags, templ
 !!! tip
     [httpx](https://github.com/projectdiscovery/httpx) can be used to generate URLs from subdomains as a input for nuclei.
 
+## Rate **Limits**
+
+Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
+
+| Flag                   | Description                                                          |
+| ---------------------- | ---------------------------------------------------------------------|
+| rate-limit             | Control the total number of request to send per seconds              |
+| bulk-size              | Control the number of hosts to process in parallel for each template |
+| c                      | Control the number of templates to process in parallel               |
+
+    
+
+Feel free to play with these flags to tune your nuclei scan speed and accuracy.
+
+!!! tip
+    `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
+
+## Template **Exclusion**
+
+Nuclei supports multiple ways to exclude templates for the execution, as default **nuclei excludes two type of templates**.
+
+- [Template from ignore list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)
+- Templates with `dos` tags
+
+
+!!! abstract "Why nuclei-ignore?"
+    
+    To ensure templates that are not meant to be used for generic scan, including fuzzing, bruteforce, headless, templates that have **severe** impact, e.g., DOS.
+
+Nuclei also support template exclusion at run time using `-exclude` and `-exclude-tags` flag.
+
+**exclude** flag is used to exclude single/multiple templates and directory, multiple `-exclude` flag can be used to provide multiple values.
+
+!!! info "Running nuclei with single template exclusion"
+
+    ```
+    nuclei -l urls.txt -t cves/ -exclude cves/2020/CVE-2020-XXXX.yaml
+    ```
+
+!!! info "Running nuclei with multiple template exclusion"
+
+    ```
+    nuclei -l urls.txt -t nuclei-templates/ -exclude exposed-panels/ -exclude technologies
+    ```
+
+**exclude-tags** flag is used to exclude templates with given tags, multiple tags can be excluded using comma separate values.
+
+!!! info "Running nuclei with single tags exclusion"
+
+    ```
+    nuclei -l urls.txt -t cves/ -etags xss
+    ```
+
+!!! info "Running nuclei with multiple tags exclusion"
+
+    ```
+    nuclei -l urls.txt -t cves/ -etags sqli,rce
+    ```
+
 ## Nuclei **Reporting**
 
 Nuclei comes with reporting module support with the release of [v2.3.0](https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021) supporting GitHub, GitLab, and Jira integration, this allows nuclei engine to create automatic tickets on the supported platform based on found results.
@@ -254,10 +314,13 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
     <td>GitHub</td>
     <td>GitLab</td>
     <td>Jira</td>
+    <td>Markdown</td>
 
   </tr>
   <tr>
     <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
     <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
     </td>
     <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
@@ -306,56 +369,15 @@ If you are running periodic scans on the same assets, you might want to consider
 nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
 ```
 
-## Rate **Limits**
+### Markdown Export
 
-Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
+Nuclei supports markdown export of valid findings with `-de, -disk-export` flag, this flag takes directory as input to store markdown formatted reports.
 
-| Flag                   | Description                                                          |
-| ---------------------- | ---------------------------------------------------------------------|
-| rate-limit             | Control the total number of request to send per seconds              |
-| bulk-size              | Control the number of hosts to process in parallel for each template |
-| c                      | Control the number of templates to process in parallel               |
+Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-de`.
 
-    
-
-Feel free to play with these flags to tune your nuclei scan speed and accuracy.
-
-!!! tip
-    `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
-
-## Template **Exclusion**
-
-Since the release of nuclei `v2.1.1`, Nuclei got the support of `.nuclei-ignore` file that works along with `update-templates` flag of nuclei, in `.nuclei-ignore` file, you can define all the template directory or template path that you wanted to exclude from all nuclei scans.
-
-Here is the ==[default list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)== of `nuclei-ignore` file that gets downloaded along with template download/update using `update-templates` flag and exclude the listed templates and directory from execution.
-
-
-!!! warning
-    `.nuclei-ignore` works only when templates are downloaded using `update-templates` flag.
-
-You can always add, update and remove entries from `.nuclei-ignore` file using any preferred text editor from the following location,
-
+```bash
+nuclei -l urls.txt -t cves/ -irr -disk-export reports
 ```
-$HOME/nuclei-templates/.nuclei-ignore
-```
-!!! abstract "Why nuclei-ignore?"
-    
-    To ensure nuclei is not getting used to hammer the web servers with templates that are meant to be used for specific use cases, including workflows, templates, and more, templates that have **severe** impact, e.g., DOS.
-
-Nuclei also support template exclusion at run time using `exclude` flag, `exclude` flag works in a similar manner as `t` flag, single or multiple template files or directory can be provided using `exclude` flag multiple times.
-
-!!! info "Running nuclei with single template exclusion"
-
-    ```
-    nuclei -l target_urls.txt -t cves/ -exclude cves/2020/CVE-2020-XXXX.yaml
-    ```
-
-!!! info "Running nuclei with multiple template exclusion"
-
-    ```
-    nuclei -l target_urls.txt -t nuclei-templates -exclude exposed-panels/ -exclude technologies
-    ```
-
 
 
 ## **Code** Contribution
