@@ -304,6 +304,59 @@ Nuclei also support template exclusion at run time using `-exclude` and `-exclud
     nuclei -l urls.txt -t cves/ -etags sqli,rce
     ```
 
+
+## Nuclei **Config**
+
+!!! abstract "goflags"
+
+    Since release of [v.2.3.2](https://blog.projectdiscovery.io/nuclei-v2-3-0-release/) nuclei uses [goflags](https://github.com/projectdiscovery/goflags) for clean CLI experience and long/short formatted flags.
+
+    [goflags](https://github.com/projectdiscovery/goflags) comes with auto-generated config file support that coverts all available CLI flags into config file, basically you can define all CLI flags into config file to avoid repetitive CLI flags that loads as default for every scan of nuclei.
+
+    Default path of nuclei config file is `$HOME/.config/nuclei/config.yaml`, uncomment and configure the flags you wish to run as default.
+
+Here is an example config file:-
+
+```yaml
+# Headers to include with each request.
+header:
+  - 'X-BugBounty-Hacker: h1.com/geekboy'
+  - 'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64)'
+
+# Templates with tags to run
+tags: rce,lfi
+
+# Templates with tags to exclude
+exclude-tags: info
+
+# Templates to scan
+templates:
+  - cves/
+  - vulnerabilities/
+  - misconfiguration/
+
+# Templates to exclude scan
+exclude:
+  - vulnerabilities/xxx
+  - misconfiguration/xxxx
+
+# Send random User-agent for each scan
+random-agent: false
+
+# Rate limit configuration for scan
+rate-limit: 500
+bulk-size: 50
+concurrency: 50
+```
+
+Once configured, **config file be used as default**, additionally custom config file can be also provided using `-config` flag.
+
+!!! info "Running nuclei with custom config file"
+
+    ```
+    nuclei -config project.yaml -list urls.txt
+    ```
+
 ## Nuclei **Reporting**
 
 Nuclei comes with reporting module support with the release of [v2.3.0](https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021) supporting GitHub, GitLab, and Jira integration, this allows nuclei engine to create automatic tickets on the supported platform based on found results.
