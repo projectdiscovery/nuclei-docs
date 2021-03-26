@@ -1,27 +1,24 @@
+!!! info "Requests"
+    Nuclei offers extensive support for various features related to HTTP protocol. Raw and Model based HTTP requests are supported, along with options Non-RFC client requests support too. Payloads can also be specified and raw requests can be transformed based on payload values along with many more capabilities that are shown later on this Page.
 
-## HTTP Requests
-
-Nuclei offers extensive support for various features related to HTTP protocol. Raw and Model based HTTP requests are supported, along with options Non-RFC client requests support too. Payloads can also be specified and raw requests can be transformed based on payload values along with many more capabilities that are shown later on this Page.
-
-HTTP Requests start with a `request` block which specifies the start of the requests for the template.
+    HTTP Requests start with a `request` block which specifies the start of the requests for the template.
 
 ```yaml
 # Start the requests for the template right here
 requests:
 ```
 
-#### Method
-
-First thing in the request is **method**. Request method can be **GET**, **POST**, **PUT**, **DELETE**, etc depending on the needs.
+!!! info "Method"
+    Request method can be **GET**, **POST**, **PUT**, **DELETE**, etc depending on the needs.
 
 ```yaml
 # Method is the method for the request
 method: GET
 ```
 
-#### Redirects
+!!! info "Redirects"
 
-Redirection conditions can be specified per each template. By default, redirects are not followed. However, if desired, they can be enabled with `redirects: true` in request details. 10 redirects are followed at maximum by default which should be good enough for most use cases. More fine grained control can be exercised over number of redirects followed by using `max-redirects` field.
+    Redirection conditions can be specified per each template. By default, redirects are not followed. However, if desired, they can be enabled with `redirects: true` in request details. 10 redirects are followed at maximum by default which should be good enough for most use cases. More fine grained control can be exercised over number of redirects followed by using `max-redirects` field.
 
 An example of the usage:
 
@@ -34,12 +31,18 @@ requests:
     max-redirects: 3
 ```
 
-#### Path
+!!! warning
+    Currently redirects are defined per template, not per request.
 
-The next part of the requests is the **path** of the request path. Dynamic variables can be placed in the path to modify its behavior on runtime. Variables start with `{{` and end with `}}` and are case-sensitive.
+!!! info "Path"
 
-1. **BaseURL** - Placing BaseURL as a variable in the path will lead to it being replaced on runtime in the request by the original URL as specified in the target file.
-2. **Hostname** - Hostname variable is replaced by the hostname of the target on runtime.
+    The next part of the requests is the **path** of the request path. Dynamic variables can be placed in the path to modify its behavior on runtime.
+
+    Variables start with `{{` and end with `}}` and are case-sensitive.
+
+    **{{BaseURL}}** - This will replace on runtime in the request by the original URL as specified in the target file.
+
+    **{{Hostname}}** - Hostname variable is replaced by the hostname of the target on runtime.
 
 Some sample dynamic variable replacement examples:
 
@@ -124,7 +127,7 @@ requests:
           - "[core]"
 ```
 
-### Raw requests
+### RAW HTTP requests
 
 Another way to create request is using raw requests which comes with more flexibility and support of DSL helper functions, like the following ones (as of now it's suggested to leave the `Host` header as in the example with the variable `{{Hostname}}`), All the Matcher, Extractor capabilities can be used with RAW requests in same the way described above. 
 
@@ -143,24 +146,37 @@ requests:
         a=test&b=pd
 ```
 
-Requests can be fine tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers.  Here follows an example:
+Requests can be fine tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers.
+
+RAW request format also supports [various helper functions](https://nuclei.projectdiscovery.io/templating-guide/helper-functions/) letting us do run time manipulation with input. An example of the using a helper function in the header. 
+
+```yaml
+    raw:
+      - |
+        GET /manager/html HTTP/1.1
+        Host: {{Hostname}}
+        Authorization: Basic {{base64('username:password')}} # Helper function to encode input at run time.
+        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
+        Accept-Language: en-US,en;q=0.9
+        Connection: close
+```
 
 
-#### Intruder payloads
+### HTTP Fuzzing
 
-It's possible to define placeholders with simple keywords (or using brackets {{helper_function(variable)}} in case mutator functions are needed), and perform **Sniper**, **Pitchfork** and **ClusterBomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
+!!! info
+    Nuclei engine supports fuzzing module that allow to run various type of payloads in multiple format, It's possible to define placeholders with simple keywords (or using brackets `{{helper_function(variable)}}` in case mutator functions are needed), and perform **sniper**, **pitchfork** and **clusterbomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
 
-Payloads are defined using variable name and can be referenced in the request between `§` marker, for example **§variable_name§**.
+    Payloads are defined using variable name and can be referenced in the request in between `§ §` or `{{ }}` marker.
 
 An example of the using payloads with local wordlist:
 
 ```yaml
 requests:
 
-# HTTP Intruder fuzzing using local wordlist.
-
+    # HTTP Intruder fuzzing using local wordlist.
   - payloads:
-      parameter: params.txt
+      paths: params.txt
       header: local.txt
 
 ```
@@ -170,67 +186,82 @@ An example of the using payloads with in template wordlist support:
 ```yaml
 requests:
 
-# HTTP Intruder fuzzing using in template wordlist.
-
-requests:
-
+    # HTTP Intruder fuzzing using in template wordlist.
   - payloads:
-
       password:
         - admin
         - guest
         - password
-        - test
-        - 12345
-        - 123456
 ```
 
 **Note:-** be careful while selecting attack type, as unexpected input will break the template. 
 
 For example, if you used `clusterbomb` or `pitchfork` as attack type and defined only one variable in the payload section, template will fail to compile, as `clusterbomb` or `pitchfork` expect more then one variable to use in the template. 
 
-#### Intruder attack 
+#### Attack mode
 
-When using intruder, we support multiple attack types, including `sniper` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder on CLI. 
+Nuclei engine supports multiple attack types, including `sniper` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder.
 
-##### Types of attack
+<table>
+  <tr>
+    <th>Type</th>
+    <td>sniper</td>
+    <td>pitchfork</td>
+    <td>clusterbomb</td>
 
-  - sniper
-  - pitchfork
-  - clusterbomb
+  </tr>
+  <tr>
+    <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+  </tr>
+</table>
 
-**Sniper:-**
-
-> The sniper attack uses only one payload set, and it replaces only one position at a time. It loops through the payload set, first replacing only the first marked position with the payload and leaving all other positions to their original value. After its done with the first position, it continues with the second position.
-
-**Pitchfork:-**
-
-> The pitchfork attack type uses one payload set for each position. It places the first payload in the first position, the second payload in the second position, and so on.
-
-> It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.
+!!! abstract "sniper"
+    The sniper attack uses only one payload set, and it replaces only one position at a time. It loops through the payload set, first replacing only the first marked position with the payload and leaving all other positions to their original value. After its done with the first position, it continues with the second position.
 
 
-**Clusterbomb:-** 
+!!! abstract "pitchfork"
+    The pitchfork attack type uses one payload set for each position. It places the first payload in the first position, the second payload in the second position, and so on.
 
-> The cluster bomb attack tries all different combinations of payloads. It still puts the first payload in the first position, and the second payload in the second position. But when it loops through the payload sets, it tries all combinations.
+    It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.
 
-> This attack type is useful for a brute-force attack. Load a list of commonly used usernames in the first payload set, and a list of commonly used passwords in the second payload set. The cluster bomb attack will then try all combinations.
+!!! abstract "clusterbomb"
+    The cluster bomb attack tries all different combinations of payloads. It still puts the first payload in the first position, and the second payload in the second position. But when it loops through the payload sets, it tries all combinations.
 
-You can read more about attack types [here](https://www.sjoerdlangkemper.nl/2017/08/02/burp-intruder-attack-types/). 
+    It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.
+
+    This attack type is useful for a brute-force attack. Load a list of commonly used usernames in the first payload set, and a list of commonly used passwords in the second payload set. The cluster bomb attack will then try all combinations.
+
+    More details [here](https://www.sjoerdlangkemper.nl/2017/08/02/burp-intruder-attack-types/). 
 
 An example of the using using `clusterbomb` attack to fuzz.
 
 ```yaml
-# Defining HTTP Intruder attack type
+requests:
+  - payloads:
+      path: helpers/wordlists/prams.txt
+      header: helpers/wordlists/header.txt
 
+    # Defining HTTP fuzz attack type
     attack: clusterbomb
 
-    # Available attack types: sniper, pitchfork and clusterbomb
+    raw:
+      - |
+        POST /?file={{path}} HTTP/1.1
+        User-Agent: {{header}}
+        Host: {{Hostname}}
 ```
 
-#### RAW HTTP Support
+#### Unsafe HTTP Requests
 
-Nuclei also supports [rawhttp](https://github.com/projectdiscovery/rawhttp) for complete request control and customization allowing any kind of malformed requests checks for issues like HTTP request smuggling, Host header injection, CRLF with malformed characters and more. **rawhttp** library is disabled by default and can be enabled by including `unsafe: true` in the request block. 
+Nuclei supports [rawhttp](https://github.com/projectdiscovery/rawhttp) for complete request control and customization allowing **any kind of malformed requests** for issues like HTTP request smuggling, Host header injection, CRLF with malformed characters and more.
+
+**rawhttp** library is disabled by default and can be enabled by including `unsafe: true` in the request block. 
 
 Here is an example of HTTP request smuggling detection template using `rawhttp`. 
 
@@ -256,67 +287,16 @@ requests:
         GET /post?postId=5 HTTP/1.1
         Host: {{Hostname}}
 
-    unsafe: true  # enables rawhttp client
+    # Enables rawhttp client
+    unsafe: true
+
     matchers:
       - type: dsl
         dsl:
           - 'contains(body, "<script>alert(1)</script>")'
 ```
 
-An example of the using a helper function in the header. 
 
-```yaml
-    raw:
-      # Request with simple header manipulation with DSL functions
-      - |
-        GET /manager/html HTTP/1.1
-        Host: {{Hostname}}
-        Authorization: Basic {{base64('username:password')}}
-        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
-        Accept-Language: en-US,en;q=0.9
-        Connection: close
-```
-
-#### **Example RAW Template**
-
-```yaml
-id: http-raw-request
-info:
-  name: Example-Fuzzing
-
-requests:
-
-  - payloads:
-      username:
-        - admin
-
-      password:
-        - admin
-        - guest
-        - password
-        - test
-        - 12345
-        - 123456
-
-    attack: clusterbomb
-
-    # Supported attack types: sniper, pitchfork and clusterbomb
-
-    raw:
-      # Request with simple header manipulation with DSL functions
-      - |
-        GET /manager/html HTTP/1.1
-        Host: {{Hostname}}
-        Authorization: Basic {{base64(username + ':' + password)}}
-        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
-        Accept-Language: en-US,en;q=0.9
-        Connection: close
-
-    matchers:
-      - type: status
-        status:
-          - 200
-```
 ### Advance Fuzzing
 
 We’ve enriched nuclei to allow advanced fuzzing of web servers. Users can now use multiple options to tune HTTP fuzzing workflows.

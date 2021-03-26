@@ -103,8 +103,11 @@ nav:
       - Template Details: templating-guide/#template-details
       - HTTP: 
           - Base requests: templating-guide/protocols/http.md
-          - Raw requests: templating-guide/protocols/http/#raw-requests
+          - Raw requests: templating-guide/protocols/http/#raw-http-requests
+          - HTTP fuzzing: templating-guide/protocols/http/#http-fuzzing
+          - Unsafe HTTP requests: templating-guide/protocols/http/#unsafe-http-requests
           - Advance Fuzzing: templating-guide/protocols/http/#advance-fuzzing
+          - Offline HTTP: templating-guide/protocols/http/#advance-fuzzing
       - Headless: templating-guide/protocols/headless.md
       - Network: templating-guide/protocols/network.md
       - DNS: templating-guide/protocols/dns.md
