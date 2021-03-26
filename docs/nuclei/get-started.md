@@ -320,7 +320,7 @@ Here is an example config file:-
 ```yaml
 # Headers to include with each request.
 header:
-  - 'X-BugBounty-Hacker: h1.com/geekboy'
+  - 'X-BugBounty-Hacker: h1/geekboy'
   - 'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64)'
 
 # Templates with tags to run
