@@ -48,7 +48,6 @@ matchers:
     encoding: hex
     words:
       - "50494e47"
-    condition: or
     part: body
 ```
 
