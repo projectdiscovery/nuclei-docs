@@ -432,6 +432,29 @@ Including request/response in the markdown report is optional, and included when
 nuclei -l urls.txt -t cves/ -irr -disk-export reports
 ```
 
+## Scan **Metrics**
+
+Nuclei expose running scan metrics on a local port `9092` when `-metrics` flag is used and can be accessed at **localhost:9092/metrics**, default port to exposes scan information is configurable using `-metrics-port` flag.
+
+Here is an example to query `metrics` while running nuclei as following `nuclei -t cves/ -l urls.txt -metrics`
+
+```json
+
+curl -s localhost:9092/metrics | jq .
+
+{
+  "duration": "0:00:03",
+  "errors": "2",
+  "hosts": "1",
+  "matched": "0",
+  "percent": "99",
+  "requests": "350",
+  "rps": "132",
+  "startedAt": "2021-03-27T18:02:18.886745+05:30",
+  "templates": "256",
+  "total": "352"
+}
+```
 
 ## **Code** Contribution
 
