@@ -438,10 +438,12 @@ Nuclei expose running scan metrics on a local port `9092` when `-metrics` flag i
 
 Here is an example to query `metrics` while running nuclei as following `nuclei -t cves/ -l urls.txt -metrics`
 
-```json
+```bash
 
 curl -s localhost:9092/metrics | jq .
+```
 
+```json
 {
   "duration": "0:00:03",
   "errors": "2",
