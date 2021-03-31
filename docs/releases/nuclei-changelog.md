@@ -1,5 +1,11 @@
 # Changelog
 
+## [Nuclei v2.3.3 - 1 April 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.3)
+!!! example ""
+
+	- Fixed a bug with `.nuclei-ignore` file update
+	- Fixed a bug and removed `random-agent` flag (now used as default)
+
 ## [Nuclei v2.3.2 - 22 March 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.2)
 !!! example ""
 
