@@ -1,5 +1,56 @@
 # Changelog
 
+## [Templates v8.1.8 - 1 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.8)
+
+!!! check "Newly added templates (46)"
+
+	- cves/2021/CVE-2021-21975.yaml by @luci
+	- cves/2021/CVE-2021-26295.yaml by @madrobot
+	- cves/2020/CVE-2020-15148.yaml by @pikpikcu
+	- cves/2020/CVE-2020-17453.yaml by @madrobot
+	- cves/2020/CVE-2020-23517.yaml by @geeknik
+	- cves/2020/CVE-2020-25078.yaml by @pikpikcu
+	- cves/2020/CVE-2020-28208.yaml by @pdteam
+	- cves/2020/CVE-2020-35489.yaml by @soyelmago
+	- cves/2015/CVE-2015-3337.yaml by @pdteam
+	- cves/2016/CVE-2016-10033.yaml by @princechaddha
+	- cves/2017/CVE-2017-1000170.yaml by @dwisiswant0
+	- cves/2017/CVE-2017-17562.yaml by @geeknik
+	- cves/2018/CVE-2018-0101.yaml by @dwisiswant0
+	- exposed-panels/adobe-component-login.yaml by @DhiyaneshGeek
+	- exposed-panels/fiorilaunchpad-logon.yaml by @DhiyaneshGeek
+	- exposed-panels/joomla-panel.yaml by @its0x08
+	- exposed-panels/netlify-cms.yaml by @sullo
+	- exposed-panels/open-stack-dashboard-login.yaml by @dhiyaneshDK
+	- exposed-panels/sitefinity-login.yaml by @dhiyaneshDK
+	- exposed-panels/wago-plc-panel.yaml by @its0x08
+	- exposed-panels/wordpress-login.yaml by @its0x08
+	- exposed-panels/zte-panel.yaml by @its0x08
+	- exposures/backups/settings-php-files.yaml by @hackerrishad
+	- exposures/configs/eea-disclosure.yaml by @pikpikcu
+	- fuzzing/adminer-panel-fuzz.yaml by @geeknik
+	- fuzzing/header-command-injection.yaml by @geeknik
+	- fuzzing/wp-plugin-scan.yaml by @pdteam
+	- iot/liveview-axis-camera.yaml by @DhiyaneshGeek
+	- iot/mobotix-guest-camera.yaml by @DhiyaneshGeek
+	- iot/nuuno-network-login.yaml by @DhiyaneshGeek
+	- miscellaneous/detect-dns-over-https.yaml by @geeknik
+	- miscellaneous/detect-options-method.yaml by @pdteam
+	- miscellaneous/unpatched-coldfusion.yaml by @Daviey
+	- misconfiguration/gitlab/gitlab-public-signup.yaml by @pdteam
+	- misconfiguration/phpmyadmin-setup.yaml by @thevillagehacker
+	- takeovers/freshdesk-takeover.yaml by @NagliNagli
+	- takeovers/medium-takeover.yaml by @rtcms
+	- technologies/bolt-cms-detect.yaml by @cydave
+	- technologies/bookstack-detect.yaml by @cydave
+	- technologies/moinmoin-detect.yaml by @cydave
+	- technologies/opencast-detect.yaml by @cydave
+	- technologies/shopware-detect.yaml by @cydave
+	- technologies/strapi-cms-detect.yaml by @cydave
+	- vulnerabilities/rockethcat/unauth-message-read.yaml by @rojan-rijal
+	- vulnerabilities/thinkcmf/thinkcmf-arbitrary-code-execution.yaml by @pikpikcu
+	- workflows/worksite-takeover-workflow.yaml @pdteam
+
 ## [Templates v8.1.7 - 21 Mar 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.7)
 
 !!! check "Newly added templates (0)"
