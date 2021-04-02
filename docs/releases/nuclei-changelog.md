@@ -1,5 +1,11 @@
 # Changelog
 
+## [Nuclei v2.3.4 - 2 April 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.4)
+!!! example ""
+
+	- Added improved template exclusion support using tags.
+	- Fixed errors listing with excluded templates.
+
 ## [Nuclei v2.3.3 - 1 April 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.3)
 !!! example ""
 
