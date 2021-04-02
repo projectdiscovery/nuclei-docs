@@ -262,6 +262,28 @@ Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 !!! tip
     `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
 
+## Traffic **Tagging**
+
+Many BugBounty platform/programs/ requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
+
+
+!!! info "Setting custom header using config file"
+
+    ```yaml
+    # Headers to include with each request.
+    header:
+      - 'X-BugBounty-Hacker: h1/geekboy'
+      - 'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) / nuclei'
+    ```
+
+!!! info "Setting custom header using CLI flag"
+
+
+    ```yaml
+    nuclei -header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) / nuclei' -list urls.txt -tags cves
+    ```
+
+
 ## Template **Exclusion**
 
 Nuclei supports multiple ways to exclude templates for the execution, as default **nuclei excludes two type of templates**.
