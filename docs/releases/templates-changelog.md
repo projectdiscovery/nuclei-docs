@@ -1,5 +1,17 @@
 # Changelog
 
+## [Templates v8.1.9 - 2 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.9)
+
+!!! check "Newly added templates (7)"
+
+	- cves/2021/CVE-2021-21402.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-24550.yaml by @DhiyaneshGeek
+	- exposures/configs/netrc.yaml by @geeknik
+	- iot/upnp-device.yaml by @geeknik
+	- technologies/jellyfin-detect.yaml by @dwisiswant0
+	- vulnerabilities/generic/cache-poisoning.yaml by @melbadry9
+	- workflows/jellyfin-workflow.yaml by @dwisiswant0
+
 ## [Templates v8.1.8 - 1 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.8)
 
 !!! check "Newly added templates (46)"
