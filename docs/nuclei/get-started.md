@@ -444,7 +444,7 @@ If you are running periodic scans on the same assets, you might want to consider
 nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
 ```
 
-### Markdown Export
+**<ins>Markdown Export</ins>**
 
 Nuclei supports markdown export of valid findings with `-de, -disk-export` flag, this flag takes directory as input to store markdown formatted reports.
 
@@ -484,6 +484,6 @@ curl -s localhost:9092/metrics | jq .
 
 [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates) are the base of the nuclei project. We appreciate it if you can write and submit new templates to keep this project alive, and one of the reasons to keep us motivated to keep working on this project. 
 
-##License
+## License
 
 Nuclei is distributed under MIT [License](https://github.com/projectdiscovery/nuclei/blob/master/LICENSE.md).
