@@ -172,21 +172,21 @@ Nuclei templates can be executed in multiple ways, currently using **tags, templ
     !!! check "Running nuclei with single tags"
 
     ```
-    nuclei -tags cve -u urls.txt
+    nuclei -tags cve -l urls.txt
     ```
 
     ```
-    nuclei -tags network -u urls.txt
+    nuclei -tags network -l urls.txt
     ```
 
     ```
-    nuclei -tags logs -u urls.txt
+    nuclei -tags logs -l urls.txt
     ```
 
     !!! check "Running nuclei with tags along with directory"
 
     ```
-    nuclei -tags config -t exposures/ -u urls.txt
+    nuclei -tags config -t exposures/ -l urls.txt
     ```
 
     !!! check "Running nuclei with multiple tags"
