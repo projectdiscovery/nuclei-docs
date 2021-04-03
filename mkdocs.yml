@@ -136,3 +136,8 @@ nav:
   - Releases:
       - Nuclei: releases/nuclei-changelog.md
       - Templates: releases/templates-changelog.md
+
+  - FAQ:
+      - Nuclei FAQ: faq/nuclei.md
+      - Templates FAQ: faq/templates.md
+
