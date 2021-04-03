@@ -10,9 +10,9 @@
 
 	We wanted something that was simple enough to be used by ==**everyone**== while complex enough to integrate into the modern web with all its intricacies. The features implemented in nuclei are tailored to allow very rapid prototyping of complex security checks.
 
-??? info "Scans nuclei engine supports?"
+??? info "Type of modules nuclei engine supports?"
 
-	Nuclei engine supports following type of scans.
+	Nuclei engine supports following type of modules.
 
 	- [HTTP](https://nuclei.projectdiscovery.io/templating-guide/protocols/http/)
 	- [DNS](https://nuclei.projectdiscovery.io/templating-guide/protocols/dns/)
