@@ -23,7 +23,7 @@
 
 ??? info "How to run nuclei templates?"
 
-	Nuclei templates can be executed using template name or tags, using `-t`, `-tags` flag respectively.
+	Nuclei templates can be executed using template name or tags, using `-t`, `-tags` flag, respectively.
 
 	```
 	nuclei -tags cve -list target_urls.txt
@@ -31,13 +31,13 @@
 
 ??? info "I want to contribute nuclei templates 😁"
 
-	You are always welcome, to share your nuclei template with community you can either open [GitHub issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=nuclei-template&template=submit-template.md&title=%5Bnuclei-template%5D+template-name) with template details or open a Github [pull request](https://github.com/projectdiscovery/nuclei-templates/pulls) with your nuclei templates. If you don't have a GitHub account, you can also make use of [discord server](https://discord.gg/projectdiscovery) to share the template with us and we will make sure to add them into project asap.
+	You are always welcome to share your nuclei template with the community you can either open [GitHub issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=nuclei-template&template=submit-template.md&title=%5Bnuclei-template%5D+template-name) with template details or open a Github [pull request](https://github.com/projectdiscovery/nuclei-templates/pulls) with your nuclei templates. If you don't have a GitHub account, you can also make use of [discord server](https://discord.gg/projectdiscovery) to share the template with us and we will make sure to add them into the project asap.
 
 
 ??? warning "I'm getting false-positive results!"
-	Nuclei templates is **community-contributed** project and we try our best in our capacity to manually review them before merging them into template project, still it's possible that some templates with weak matcher slipped through manual verification and becomes the part of the project producing false positive results. **Templates are as good as it's matchers.**
+	Nuclei templates is **community-contributed** project, and we try our best in our capacity to manually review them before merging them into template project, still, it's possible that some templates with weak matcher slipped through manual verification and becomes part of the project producing false-positive results. **Templates are as good as its matchers.**
 
-	If you identified a templates producing false positive/negative results, here are few steps that you can follow to quickly fix the templates.
+	If you identified templates producing false positive/negative results, here are few steps that you can follow to fix the templates quickly.
 
 	??? info "Found template producing false +ve/-ve result but not sure about it?"
 
@@ -47,14 +47,14 @@
 
 		Please open a GitHub [issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=false-positive&template=false-positive.md&title=%5Bfalse-positive%5D+template-name+) with details, and we will quickly address the problem and update the template.
 
-	??? info "Found template producing false +ve/-ve result and know how to fix it?"
+	??? info "Found template producing a false +ve/-ve result and know how to fix it?"
 
 		Please open a GitHub [pull request](https://github.com/projectdiscovery/nuclei-templates/pulls) with fix.
 
 ??? warning "I'm not able to run all templates!"
 
-	Nuclei follows default list of templates that are excluded from default run and listed here https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore, this is to ensure someone not running few templates that are not meant to run along with all templates or excluded to run safe scans, we do not suggest running them unless you are running them for specific use case.
+	Nuclei follow the default list of templates that are excluded from default run and are listed here https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore, this is to ensure someone not running few templates that are not meant to run along with all templates or excluded to run safe scans. We do not suggest running them unless you are running them for the specific use case.
 
 ??? warning "Templates exist on GitHub but not running with nuclei?"
 
-	When you download or update nuclei templates using nuclei binary, it downloads all the templates from latest release, all templates added after release exist in the master branch and will be added to nuclei when new template release will be created.
+	When you download or update nuclei templates using nuclei binary, it downloads all the templates from the latest release. All templates added after release exist in the master branch and added to nuclei when a new template release would be created.
