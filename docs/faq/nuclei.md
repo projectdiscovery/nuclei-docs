@@ -21,7 +21,7 @@
 
 ??? info "What kind of scans can I perform with nuclei?"
 
-	Nuclei can be used to detect security vulnerabilities in **web applications**, **networks**, **DNS** based misconfiguration, and **secret scanning** in source code or files on the local file system.
+	Nuclei can be used to detect security vulnerabilities in **Web Applications**, **Networks**, **DNS** based misconfiguration, and **Secret scanning** in source code or files on the local file system.
 
 ??? info "How well-maintained is this project?"
 
