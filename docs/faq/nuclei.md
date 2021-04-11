@@ -5,12 +5,12 @@
 	It has two components, 1) [Nuclei](http://github.com/projectdiscovery/nuclei) engine - the core of the project allows scripting HTTP / DNS / Network / Headless / File protocols based checks in a very simple to read-and-write YAML-based format. 2) Nuclei [templates](http://github.com/projectdiscovery/nuclei-templates) - ready-to-use **community-contributed** vulnerability templates.
 
 
-??? info "What modules does nuclei engine support?"
+??? info "What was the genesis behind nuclei?"
 	Traditional scanners always lacked the features to allow easy-to-write custom checks on top of their engine. And this is how we started developing Nuclei with a core focus on simplicity, modularity, and the ability to scan on many assets.
 
 	We wanted something simple enough to be used by ==**everyone**== while complex enough to integrate into the modern web with its intricacies. The features implemented in nuclei are tailored to allow very rapid prototyping of complex security checks.
 
-??? info "Type of modules nuclei engine supports?"
+??? info "What modules does nuclei engine support?"
 
 	Nuclei engine supports the following type of modules.
 
