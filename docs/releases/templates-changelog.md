@@ -1,5 +1,84 @@
 # Changelog
 
+## [Templates v8.2.0 - 14 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.0)
+
+!!! check "Newly added templates (73)"
+
+	- **exposed-tokens** moved under **exposures/tokens** directory.
+	- cves/2021/CVE-2021-30151.yaml by @DhiyaneshDk
+	- cves/2020/CVE-2020-15500.yaml by @Akash.C
+	- cves/2020/CVE-2020-35846.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-35847.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-35848.yaml by @dwisiswant0
+	- cves/2018/CVE-2018-2894.yaml by @geeknik
+	- cves/2018/CVE-2018-7422.yaml by @LuskaBol
+	- cves/2017/CVE-2017-7921.yaml by @princechaddha
+	- misconfiguration/aem/aem-default-get-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-gql-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-hash-querybuilder.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-jcr-querybuilder.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-merge-metadata-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-querybuilder-feed-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-querybuilder-internal-path-read.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-querybuilder-json-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-userinfo-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-wcm-suggestions-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aws-object-listing.yaml by @DhiyaneshGeek
+	- misconfiguration/gitlab/gitlab-user-enumeration.yaml by @pikpikcu
+	- misconfiguration/unautneicated-cache-purge.yaml by @xElkomy
+	- vulnerabilities/moodle/moodle-xss.yaml by @shifa123
+	- vulnerabilities/other/core-chuangtian-cloud-rce.yaml by @pikpikcu
+	- vulnerabilities/other/empirecms-xss.yaml by @pikpikcu
+	- vulnerabilities/other/erp-nc-directory-traversal.yaml by @pikpikcu
+	- vulnerabilities/other/etouch-v2-sqli.yaml by @pikpikcu
+	- vulnerabilities/other/eyou-email-rce.yaml by @pikpikcu
+	- vulnerabilities/other/oa-v9-uploads-file.yaml by @pikpikcu
+	- vulnerabilities/other/qi-anxin-netkang-next-generation-firewall-rce.yaml by @pikpikcu
+	- vulnerabilities/other/turbocrm-xss.yaml by @pikpikcu
+	- network/mysql-native-cred-bruteforce.yaml by @iamthefrogy
+	- network/openssh5.3-detect.yaml by @iamthefrogy
+	- default-logins/nagios/nagios-default-credential.yaml by @iamthefrogy
+	- default-logins/smartweb/ruijie-smartweb-default-password.yaml by @pikpikcu
+	- exposed-panels/somfy-login.yaml by @DhiyaneshGeek
+	- exposures/configs/coremail-config-disclosure.yaml by @princechaddha
+	- exposures/configs/s3cmd-config.yaml by @Ice3man543
+	- exposures/configs/yii-debugger.yaml by @geeknik
+	- exposures/logs/access-log.yaml by @sheikhrishad
+	- exposures/logs/laravel-telescope.yaml by @geeknik
+	- exposures/tokens/amazon/amazon-sns-topic.yaml by @Ice3man543
+	- exposures/tokens/artifactory/artifactory-api-password.yaml by @Ice3man543
+	- exposures/tokens/artifactory/artifactory-api-token.yaml by @Ice3man543
+	- exposures/tokens/bitly/bitly-secret-key.yaml by @Ice3man543
+	- exposures/tokens/cloudinary/cloudinary-credentials.yaml by @Ice3man543
+	- exposures/tokens/discord/discord-webhook.yaml by @Ice3man543
+	- exposures/tokens/generic/jdbc-connection-string.yaml by @Ice3man543
+	- exposures/tokens/generic/jwt-token.yaml by @Ice3man543
+	- exposures/tokens/google/google-calendar-link.yaml by @Ice3man543
+	- exposures/tokens/google/oauth-access-key.yaml by @Ice3man543
+	- exposures/tokens/microsoft/microsoft-teams-webhook.yaml by @Ice3man543
+	- exposures/tokens/newrelic/newrelic-admin-api-key.yaml by @Ice3man543
+	- exposures/tokens/newrelic/newrelic-insights-key.yaml by @Ice3man543
+	- exposures/tokens/newrelic/newrelic-rest-api-key.yaml by @Ice3man543
+	- exposures/tokens/newrelic/newrelic-synthetics-location-key.yaml by @Ice3man543
+	- exposures/tokens/paypal/braintree-access-token.yaml by @Ice3man543
+	- exposures/tokens/picatic/picatic-api-key.yaml by @Ice3man543
+	- exposures/tokens/sendgrid/sendgrid-api-key.yaml by @Ice3man543
+	- exposures/tokens/slack/slack-user-token.yaml by @Ice3man543
+	- exposures/tokens/slack/slack-webhook-token.yaml by @Ice3man543
+	- exposures/tokens/sonarqube/sonarqube-token.yaml by @Ice3man543
+	- exposures/tokens/stripe/stripe-restricted-key.yaml by @Ice3man543
+	- exposures/tokens/stripe/stripe-secret-key.yaml by @Ice3man543
+	- exposures/tokens/zapier/zapier-webhook-token.yaml by @Ice3man543
+	- exposures/tokens/zoho/zoho-webhook-token.yaml by @Ice3man543
+	- miscellaneous/display-via-header.yaml by @geeknik
+	- technologies/aws-bucket-service.yaml by @pdteam
+	- technologies/cockpit-detect.yaml by @dwisiswant0
+	- technologies/google-bucket-service.yaml by @pdteam
+	- workflows/aem-workflow.yaml by @DhiyaneshGeek
+	- workflows/cockpit-workflow.yaml by @dwisiswant0
+	- workflows/gitlab-workflow.yaml by @pdteam
+	- workflows/ruijie-workflow.yaml by @pikpikcu
+
 ## [Templates v8.1.9 - 2 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.1.9)
 
 !!! check "Newly added templates (7)"
