@@ -109,11 +109,10 @@ This will display help for the tool. Here are all the switches it supports.
     -page-timeout int                      Seconds to wait for each page in headless (default 20)
     -passive                               Enable Passive HTTP response processing mode
     -project                               Use a project folder to avoid sending same request multiple times
-    -project-path string                   Use a user defined project folder, temporary folder is used if not specified but enabled
+    -project-path string                   Use a user defined project folder
     -proxy-socks-url string                URL of the proxy socks server
     -proxy-url string                      URL of the proxy server
     -r, -resolvers string                  File containing resolver list for nuclei
-    -ra, -random-agent                     Use randomly selected HTTP User-Agent header value
     -rl, -rate-limit int                   Maximum requests to send per second (default 150)
     -rc, -report-config string             Nuclei Reporting Module configuration file
     -rdb, -report-db string                Local Nuclei Reporting Database (Always use this to persistent report data)
