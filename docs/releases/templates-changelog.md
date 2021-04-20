@@ -1,5 +1,34 @@
 # Changelog
 
+## [Templates v8.2.1 - 20 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.1)
+
+!!! check "Newly added templates (24)"
+
+	- cves/2021/CVE-2021-28937.yaml by @geeknik
+	- cves/2021/CVE-2021-3374.yaml by @geeknik
+	- cves/2020/CVE-2020-19625.yaml by @geeknik
+	- cves/2017/CVE-2017-12542.yaml by @pikpikcu
+	- cves/2019/CVE-2019-17270.yaml by @pikpikcu
+	- cves/2015/CVE-2015-1880.yaml by @pikpikcu
+	- cves/2011/CVE-2011-0049.yaml by @pikpikcu
+	- cves/2009/CVE-2009-1151.yaml by @princechaddha
+	- exposures/configs/exposed-authentication-asmx.yaml by @DhiyaneshGeek
+	- exposures/configs/kyan-network-credentials-disclosure.yaml by @pikpikcu
+	- exposures/configs/ruijie-smartweb-disclosure.yaml by @pikpikcu
+	- exposures/configs/saia-web-server-info.yaml by @DhiyaneshGeek
+	- exposures/configs/ssh-authorized-keys.yaml by @geeknik
+	- exposures/configs/ssh-known-hosts.yaml by @geeknik
+	- exposures/files/phpunit.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wordpress-wordfence-waf-bypass-xss.yaml by @shifa123
+	- misconfiguration/laravel-debug-enabled.yaml by @notsoevilweasel
+	- misconfiguration/sonarqube-public-projects.yaml by @sickwell
+	- exposed-panels/polycom-login.yaml by @DhiyaneshGeek
+	- exposed-panels/sauter-login.yaml by @DhiyaneshGeek
+	- fuzzing/wordpress-plugins-detect.yaml by @0xcrypto
+	- fuzzing/wordpress-themes-detect.yaml by @0xcrypto
+	- technologies/mautic-crm-detect.yaml by @cydave
+	- technologies/plone-cms-detect.yaml by @cydave
+
 ## [Templates v8.2.0 - 14 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.0)
 
 !!! check "Newly added templates (73)"
