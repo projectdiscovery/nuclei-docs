@@ -361,9 +361,6 @@ exclude:
   - vulnerabilities/xxx
   - misconfiguration/xxxx
 
-# Send random User-agent for each scan
-random-agent: false
-
 # Rate limit configuration for scan
 rate-limit: 500
 bulk-size: 50
