@@ -1,5 +1,37 @@
 # Changelog
 
+## [Templates v8.2.2 - 23 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.2)
+
+!!! check "Newly added templates (27)"
+
+	- cves/2021/CVE-2021-27905.yaml by @shifa123
+	- cves/2021/CVE-2021-24146.yaml by @random-robbie
+	- cves/2020/CVE-2020-35338.yaml by @jeyaseelan8
+	- cves/2019/CVE-2019-15859.yaml by @geeknik
+	- cves/2019/CVE-2019-10068.yaml by @davidmckennirey
+	- cves/2018/CVE-2018-8770.yaml by @princechaddha
+	- cves/2018/CVE-2018-17246.yaml by @princechaddha
+	- cves/2017/CVE-2017-8917.yaml by @princechaddha
+	- cves/2017/CVE-2017-5521.yaml by @geeknik
+	- cves/2017/CVE-2017-15715.yaml by @geeknik
+	- cves/2015/CVE-2015-8399.yaml by @princechaddha
+	- cves/2015/CVE-2015-7297.yaml by @princechaddha
+	- cves/2014/CVE-2014-4210.yaml by @princechaddha
+	- cves/2014/CVE-2014-3704.yaml by @princechaddha
+	- cves/2014/CVE-2014-2321.yaml by @geeknik
+	- vulnerabilities/apache/apache-solr-file-read.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/74cms-sqli.yaml by @princechaddha
+	- vulnerabilities/other/feifeicms-lfr.yaml by @princechaddha
+	- vulnerabilities/other/maccmsv10-backdoor.yaml by @princechaddha
+	- vulnerabilities/other/myucms-lfr.yaml by @princechaddha
+	- vulnerabilities/other/nuuo-file-inclusion.yaml by @princechaddha
+	- misconfiguration/unauthenticated-popup-upload.yaml by @DhiyaneshGeek
+	- default-logins/chinaunicom/chinaunicom-modem-default-credentials.yaml by @princechaddha
+	- default-logins/viewpoint/trilithic-viewpoint-default.yaml by @davidmckennirey
+	- exposed-panels/opennms-web-console.yaml by @DhiyaneshGeek
+	- exposures/configs/cisco-network-config.yaml by @DhiyaneshGeek
+	- technologies/grav-cms-detect.yaml by @cydave
+
 ## [Templates v8.2.1 - 20 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.1)
 
 !!! check "Newly added templates (24)"
