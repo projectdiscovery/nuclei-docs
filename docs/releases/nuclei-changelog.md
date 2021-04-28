@@ -1,5 +1,12 @@
 # Changelog
 
+## [Nuclei v2.3.5 - 28 April 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.5)
+!!! example ""
+
+	- Fix for not setting custom user agent in templates by @yabeow
+	- Fix for missing IP in the JSON when URLs contain hostname:port by @seb-elttam
+	- Fix for temporary file cleanups
+
 ## [Nuclei v2.3.4 - 2 April 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.4)
 !!! example ""
 
