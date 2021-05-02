@@ -1,6 +1,6 @@
 # Changelog
 
-## [Templates v8.2.3 - 2nd May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.3)
+## [Templates v8.2.3 - 2 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.3)
 
 !!! check "Newly added templates (37)"
 
