@@ -1,5 +1,47 @@
 # Changelog
 
+## [Templates v8.2.3 - 2nd May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.3)
+
+!!! check "Newly added templates (37)"
+
+	- cves/2021/CVE-2021-29442.yaml by @dwisiswant0
+	- cves/2019/CVE-2019-13462.yaml by @securitytest3r
+	- cves/2020/CVE-2020-9054.yaml by @DhiyaneshGeek
+	- cves/2020/CVE-2020-9315.yaml by @DhiyaneshGeek
+	- exposed-panels/circarlife-setup.yaml by @geeknik
+	- exposed-panels/netscalar-aaa-login.yaml by @DhiyaneshGeek
+	- exposed-panels/sharecenter-login.yaml by @DhiyaneshGeek
+	- exposures/backups/exposed-mysql-initial.yaml by @Elsfa7-110
+	- exposures/configs/apache-config.yaml by @hackerrishad 
+	- exposures/configs/exposed-sharepoint-list.yaml by @Elsfa7-110
+	- exposures/configs/httpd-config.yaml by @hackerrishad 
+	- exposures/configs/nginx-config.yaml by @hackerrishad 
+	- exposures/configs/php-fpm-config.yaml by @hackerrishad 
+	- exposures/configs/proftpd-config.yaml by @hackerrishad 
+	- exposures/configs/samba-config.yaml by @hackerrishad 
+	- exposures/configs/svnserve-config.yaml by @hackerrishad 
+	- exposures/logs/circarlife-system-log.yaml by @geeknik
+	- misconfiguration/aem/aem-bg-servlet.yaml by @DhiyaneshGeek
+	- misconfiguration/aem/aem-login-status.yaml by @DhiyaneshGeek
+	- misconfiguration/spidercontrol-scada-server-info.yaml by @geeknik
+	- misconfiguration/springboot/springboot-httptrace.yaml by @pdteam
+	- network/deprecated-sshv1-detection.yaml by @iamthefrogy
+	- network/ganglia-xml-grid-monitor.yaml by @geeknik
+	- network/java-rmi-detect.yaml by @F1tz
+	- network/weblogic-iiop-detect.yaml by @F1tz
+	- network/weblogic-t3-detect.yaml by @F1tz
+	- takeovers/freshservice-takeover.yaml by @pdelteil
+	- technologies/nginx-version.yaml by @pdelteil 
+	- vulnerabilities/other/WooYun-2015-148227.yaml by @princechaddha
+	- vulnerabilities/other/chamilo-lms-sqli.yaml by @underfl0w
+	- vulnerabilities/other/ecology-springframework-directory-traversal.yaml by @princechaddha
+	- vulnerabilities/other/landray-oa-fileread.yaml by @pikpikcu
+	- vulnerabilities/other/spark-webui-unauth.yaml by @princechaddha
+	- vulnerabilities/other/unauth-spark-api.yaml by @princechaddha
+	- vulnerabilities/other/xiuno-bbs-reinstallation.yaml by @princechaddha
+	- vulnerabilities/other/xunchi-file-read.yaml by @princechaddha
+	- vulnerabilities/other/zcms-v3-sqli.yaml by @princechaddha
+
 ## [Templates v8.2.2 - 23 April 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.2)
 
 !!! check "Newly added templates (27)"
