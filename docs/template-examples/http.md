@@ -189,3 +189,26 @@ requests:
         words:
           - Welcome Admin
 ```
+
+#### Time based Matcher
+
+This template is example of DSL based duration matcher that returns `true` when the response time matched the defined duration, in this case 6 or more than 6 seconds.
+
+```yaml
+id: time-based-matcher
+
+info:
+  name: DSL based response time matcher
+  author: pdteam
+  severity: none
+
+requests:
+  - raw:
+      - |
+        GET /slow HTTP/1.1
+
+    matchers:
+      - type: dsl
+        dsl:
+          - 'duration>=6'
+```
