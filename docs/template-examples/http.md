@@ -190,7 +190,7 @@ requests:
           - Welcome Admin
 ```
 
-#### Time based Matcher
+### Time based Matcher
 
 This template is example of DSL based duration matcher that returns `true` when the response time matched the defined duration, in this case 6 or more than 6 seconds.
 
