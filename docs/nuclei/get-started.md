@@ -98,6 +98,11 @@ This will display help for the tool. Here are all the switches it supports.
     -headless                              Enable headless browser based templates support
     -impact, -severity value               Templates to run based on severity, supports single and multiple severity.
     -irr, -include-rr                      Write requests/responses for matches in JSON output
+    -interactions-cache-size int           Number of requests to keep in interactions cache (default 5000)
+    -interactions-cooldown-period int      Extra time for interaction polling before exiting (default 5)
+    -interactions-eviction int             Number of seconds to wait before evicting requests from cache (default 60)
+    -interactions-poll-duration int        Number of seconds before each interaction poll request (default 5)
+    -interactsh-url string                 Interactsh Server URL (default https://interact.sh)
     -json                                  Write json output to files
     -l, -list string                       List of URLs to run templates on
     -metrics                               Expose nuclei metrics on a port
@@ -105,11 +110,12 @@ This will display help for the tool. Here are all the switches it supports.
     -nc, -no-color                         Disable colors in output
     -nt, -new-templates                    Only run newly added templates
     -nm, -no-meta                          Don't display metadata for the matches
+    -no-interactsh                         Do not use interactsh server for blind interaction polling
     -o, -output string                     File to write output to (optional)
     -page-timeout int                      Seconds to wait for each page in headless (default 20)
     -passive                               Enable Passive HTTP response processing mode
     -project                               Use a project folder to avoid sending same request multiple times
-    -project-path string                   Use a user defined project folder
+    -project-path string                   Use a user defined project folder, temporary folder is used if not specified but enabled
     -proxy-socks-url string                URL of the proxy socks server
     -proxy-url string                      URL of the proxy server
     -r, -resolvers string                  File containing resolver list for nuclei
