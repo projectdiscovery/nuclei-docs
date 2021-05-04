@@ -115,6 +115,7 @@ nav:
       - Operators:
           - Matchers: templating-guide/operators/matchers.md
           - Extractors: templating-guide/operators/extractors.md
+      - OOB Testing: templating-guide/interactsh.md
       - Helper Functions: templating-guide/helper-functions.md
       - Preprocessors: templating-guide/preprocessors.md
       - Workflows: templating-guide/workflows.md

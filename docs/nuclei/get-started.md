@@ -6,6 +6,7 @@
     * HTTP | DNS | TCP  | FILE support
     * Fully configurable templates.
     * Large scale scanning.
+    * Out of band based detections.
     * Easily write your own templates.
 
 
