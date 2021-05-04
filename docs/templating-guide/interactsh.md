@@ -5,7 +5,7 @@ Since release of [Nuclei v2.3.6](https://github.com/projectdiscovery/nuclei/rele
 
 `{{interactsh-url}}` placeholder is supported in **http** and **network** requests.
 
-An example of nuclei request with {{interactsh-url}} placeholders is provided below. These are replaced on runtime with unique interact.sh URLs.
+An example of nuclei request with `{{interactsh-url}}` placeholders is provided below. These are replaced on runtime with unique interact.sh URLs.
 
 ```yaml
   - raw:
