@@ -1,5 +1,11 @@
 # Changelog
 
+## [Nuclei v2.3.6 - 4 May 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.6)
+!!! example ""
+
+	- [Interactsh integration](https://blog.projectdiscovery.io/nuclei-interactsh-integration/) into Nuclei
+	- Improved support for custom host header w/ template and CLI flag
+
 ## [Nuclei v2.3.5 - 28 April 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.5)
 !!! example ""
 
