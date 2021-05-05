@@ -1,5 +1,25 @@
 # Changelog
 
+## [Templates v8.2.4 - 5 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.4)
+
+!!! check "Newly added templates (15)"
+
+	- cves/2021/CVE-2021-29441.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-7247.yaml by @princechaddha
+	- cves/2019/CVE-2019-8446.yaml by @dhiyaneshDk
+	- cves/2018/CVE-2018-10141.yaml by @dhiyaneshDk
+	- cves/2017/CVE-2017-12629.yaml by @dwisiswant0
+	- cves/2017/CVE-2017-3506.yaml by @pdteam
+	- exposures/configs/oracle-ebs-credentials-disclosure.yaml by @dhiyaneshDk
+	- exposures/files/gogs-install-exposure.yaml by @dhiyaneshDk
+	- exposures/logs/oracle-ebs-sqllog-disclosure.yaml by @dhiyaneshDk
+	- misconfiguration/nginx/nginx-vhost-traffic-status.yaml by @geeknik
+	- technologies/kubernetes-version.yaml by @raesene
+	- vulnerabilities/other/concrete-xss.yaml by @shifacyclewla,@hackergautam
+	- vulnerabilities/other/ecology-filedownload-directory-traversal.yaml by @princechaddha
+	- vulnerabilities/other/gloo-unauth.yaml by @dhiyaneshDk
+	- vulnerabilities/other/hashicorp-consul-rce.yaml by @pikpikcu
+
 ## [Templates v8.2.3 - 2 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.3)
 
 !!! check "Newly added templates (37)"
