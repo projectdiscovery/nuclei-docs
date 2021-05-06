@@ -1,4 +1,4 @@
-Since release of [Nuclei v2.3.6](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.6), Nuclei supports using the [interact.sh](https://github.com/projectdiscovery/interactsh) API to achieve OOB based vulnerability scanning with automatic Request correlation built in. It's as easy as writing `{{interactsh-url}}`  anywhere in the request, and adding a matcher for `interact_protoco`. Nuclei will handle correlation of the interaction to the template & the request it was generated from allowing effortless OOB scanning.
+Since release of [Nuclei v2.3.6](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.6), Nuclei supports using the [interact.sh](https://github.com/projectdiscovery/interactsh) API to achieve OOB based vulnerability scanning with automatic Request correlation built in. It's as easy as writing `{{interactsh-url}}`  anywhere in the request, and adding a matcher for `interact_protocol`. Nuclei will handle correlation of the interaction to the template & the request it was generated from allowing effortless OOB scanning.
 
 
 ### Interactsh Placeholder
