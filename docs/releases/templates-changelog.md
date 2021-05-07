@@ -1,5 +1,25 @@
 # Changelog
 
+## [Templates v8.2.5 - 8 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.5)
+
+!!! check "Newly added templates (15)"
+
+	- cves/2021/CVE-2021-28073.yaml by @z3bd
+	- cves/2021/CVE-2021-30461.yaml by @shifacyclewala,hackergautam
+	- cves/2020/CVE-2020-9490.yaml by @philippedelteil
+	- exposed-panels/bitrix-panel.yaml by @juicypotato1 
+	- exposed-panels/monitorix-exposure.yaml by @geeknik
+	- exposures/configs/plesk-stat.yaml by @th3.d1p4k
+	- exposures/logs/darkstat-detect.yaml by @geeknik
+	- exposures/logs/pyramid-debug-toolbar.yaml by @geeknik
+	- exposures/logs/squid-analysis-report-generator.yaml by @geeknik
+	- misconfiguration/exposed-kafdrop.yaml by @DhiyaneshGeek
+	- vulnerabilities/oracle/oracle-ebs-xss.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/joomla-com-fabrik-lfi.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/kafdrop-xss.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/ueditor-file-upload.yaml by @princechaddha
+	- vulnerabilities/other/wuzhicms-sqli.yaml by @princechaddha
+
 ## [Templates v8.2.4 - 5 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.4)
 
 !!! check "Newly added templates (15)"
