@@ -1,5 +1,22 @@
 # Changelog
 
+## [Templates v8.2.6 - 12 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.6)
+
+!!! check "Newly added templates (12)"
+
+	- cves/2017/CVE-2017-12149.yaml by @fopina
+	- default-logins/showdoc/showdoc-default-password.yaml by @pikpikcu
+	- exposures/configs/ruijie-phpinfo.yaml by @pikpikcu
+	- exposures/logs/php-debug-bar.yaml by @DhiyaneshGeek
+	- misconfiguration/cloudflare-image-ssrf.yaml by @vavkamil
+	- misconfiguration/sap-directory-listing.yaml by @DhiyaneshGeek
+	- misconfiguration/unauthenticated-netdata.yaml by @DhiyaneshGeek
+	- misconfiguration/unauthenticated-zippkin.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/showdoc-file-upload-rce.yaml by @pikpikcu
+	- exposed-panels/microsoft-exchange-control-panel.yaml by @r3dg33k
+	- exposures/backups/php-backup-files.yaml by @StreetOfHackerR007
+	- fuzzing/xff-403-bypass.yaml by @vavkamil
+
 ## [Templates v8.2.5 - 8 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.5)
 
 !!! check "Newly added templates (15)"
