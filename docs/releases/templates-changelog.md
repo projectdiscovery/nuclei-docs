@@ -4,12 +4,12 @@
 
 !!! check "Newly added templates (6)"
 
-	- cves/2021/CVE-2021-31537.yaml
-	- default-logins/panabit/panabit-default-password.yaml
-	- misconfiguration/apache-filename-brute-force.yaml
-	- network/rdp-detect.yaml
-	- technologies/springboot-actuator.yaml
-	- technologies/wazuh-detect.yaml
+	- cves/2021/CVE-2021-31537.yaml by @geeknik 
+	- misconfiguration/apache-filename-brute-force.yaml by @geeknik
+	- network/rdp-detect.yaml by @princechaddha 
+	- default-logins/panabit/panabit-default-password.yaml by @pikpikcu 
+	- technologies/springboot-actuator.yaml by pdteam
+	- technologies/wazuh-detect.yaml by @cydave
 
 ## [Templates v8.2.6 - 12 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.6)
 
