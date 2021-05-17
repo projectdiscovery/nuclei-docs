@@ -1,5 +1,23 @@
 # Changelog
 
+## [Templates v8.2.8 - 17 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.8)
+
+!!! check "Newly added templates (13)"
+
+	- cves/2021/CVE-2021-24176.yaml by @Ganofins
+	- cves/2021/CVE-2021-27651.yaml by @idealphase
+	- cves/2014/CVE-2014-3744.yaml by @geeknik
+	- default-logins/flir/flir-ax8-default-credentials.yaml by @pikpikcu
+	- vulnerabilities/other/flir-path-traversal.yaml by @pikpikcu
+	- vulnerabilities/other/natshell-path-traversal.yaml by @pikpikcu
+	- vulnerabilities/other/resin-cnnvd-200705-315.yaml by @princechaddha
+	- exposures/files/joomla-file-listing.yaml by @iampritam97
+	- miscellaneous/google-floc-disabled.yaml by @geeknik
+	- miscellaneous/tabnabbing-check.yaml by @bolli95
+	- misconfiguration/unauthenticated-tensorboard.yaml by @DhiyaneshGeek
+	- technologies/octobercms-detect.yaml by @cydave
+	- technologies/voipmonitor-detect.yaml by @bu1xuan2
+
 ## [Templates v8.2.7 - 16 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.7)
 
 !!! check "Newly added templates (6)"
