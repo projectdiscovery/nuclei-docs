@@ -1,5 +1,29 @@
 # Changelog
 
+## [Templates v8.2.9 - 20 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.9)
+
+!!! check "Newly added templates (19)"
+
+	- cves/2021/CVE-2021-29622.yaml by @geeknik
+	- cves/2020/CVE-2020-36112.yaml by @geeknik
+	- cves/2009/CVE-2009-0545.yaml by @geeknik
+	- vulnerabilities/magento/magento-2-exposed-api.yaml by @techbrunch
+	- vulnerabilities/magento/magento-cacheleak.yaml by @techbrunch
+	- vulnerabilities/magento/magento-unprotected-dev-files.yaml by @techbrunch
+	- vulnerabilities/other/fanruanoa2012-disclosure.yaml by @bu1xuan2
+	- misconfiguration/springboot/springboot-beans.yaml by @ajaysenr
+	- exposures/configs/nagios-status-page.yaml by @DhiyaneshGeek
+	- exposures/files/ioncube-loader-wizard.yaml by @Mubspatel
+	- exposed-panels/exposed-nomad.yaml by pdteam
+	- exposed-panels/magento-admin-panel.yaml by @techbrunch
+	- exposed-panels/saferoads-vms-login.yaml by @DhiyaneshGeek
+	- technologies/fanruanoa-detect.yaml by @bu1xuan2
+	- technologies/fanruanoa2012-detect.yaml by @bu1xuan2
+	- technologies/landrayoa-detect.yaml by @bu1xuan2
+	- technologies/magento-detect.yaml by @techbrunch
+	- technologies/pega-detect.yaml by @sshell
+	- workflows/magento-workflow.yaml by @techbrunch
+
 ## [Templates v8.2.8 - 17 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.8)
 
 !!! check "Newly added templates (13)"
