@@ -1,5 +1,24 @@
 # Changelog
 
+## [Templates v8.3.0 - 25 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.0)
+
+!!! check "Newly added templates (14)"
+
+	- cves/2021/CVE-2021-27850.yaml by pdteam
+	- cves/2020/CVE-2020-15227.yaml by @Becivells
+	- vulnerabilities/other/maian-cart-preauth-rce.yaml by pdteam
+	- misconfiguration/cx-cloud-upload-detect.yaml by @DhiyaneshGeek
+	- misconfiguration/kubeflow-dashboard-unauth.yaml by @DhiyaneshGeek
+	- misconfiguration/pinpoint-unauth.yaml by @DhiyaneshGeek
+	- default-logins/jenkins/jenkins-default.yaml by @Zandros0
+	- exposed-panels/cx-cloud-login.yaml by @DhiyaneshGeek
+	- exposed-panels/jenkins-login.yaml by @Zandros0
+	- exposed-panels/phppgadmin-panel.yaml by @Ganofins
+	- exposed-panels/plesk-obsidian.yaml by @DhiyaneshGeek
+	- exposed-panels/server-backup-login.yaml by @DhiyaneshGeek
+	- technologies/maian-cart-detect.yaml by pdteam
+	- technologies/xxljob-admin-detect.yaml by pdteam
+
 ## [Templates v8.2.9 - 20 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.2.9)
 
 !!! check "Newly added templates (19)"
