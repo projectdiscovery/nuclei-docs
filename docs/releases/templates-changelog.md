@@ -17,8 +17,8 @@
 	- vulnerabilities/wordpress/wp-site-editor-lfi.yaml by @0x240x23elu
 	- vulnerabilities/wordpress/wp-tutor-lfi.yaml by @0x240x23elu
 	- vulnerabilities/wordpress/wp-wechat-broadcast-lfi.yaml by @0x240x23elu
-	- exposures/configs/esmtprc-config.yaml by geeknik
-	- exposures/configs/robomongo-credential.yaml by geeknik
+	- exposures/configs/esmtprc-config.yaml by @geeknik
+	- exposures/configs/robomongo-credential.yaml by @geeknik
 	- exposed-panels/portainer-init-deploy.yaml by @princechaddha
 	- exposed-panels/securenvoy-panel.yaml by @0xrod
 	- iot/xp-webcam.yaml by @AashiqRamachandran
