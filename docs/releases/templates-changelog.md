@@ -1,5 +1,29 @@
 # Changelog
 
+## [Templates v8.3.1 - 29 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.1)
+
+!!! check "Newly added templates (19)"
+
+	- cves/2021/CVE-2021-33564.yaml by @0xsapra
+	- cves/2020/CVE-2020-35736.yaml by @pikpikcu
+	- cves/2017/CVE-2017-1000486.yaml by @Morn98
+	- vulnerabilities/other/natshell-rce.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wp-config-setup.yaml by @princechaddha
+	- vulnerabilities/wordpress/wp-full-path-disclosure.yaml by @blacklist-arcc
+	- vulnerabilities/wordpress/wp-install.yaml by @princechaddha
+	- vulnerabilities/wordpress/wp-localize-post-lfi.yaml by @0x240x23elu
+	- vulnerabilities/wordpress/wp-mail-masta-lfi.yaml by @0x240x23elu
+	- vulnerabilities/wordpress/wp-simple-fields-lfi.yaml by @0x240x23elu
+	- vulnerabilities/wordpress/wp-site-editor-lfi.yaml by @0x240x23elu
+	- vulnerabilities/wordpress/wp-tutor-lfi.yaml by @0x240x23elu
+	- vulnerabilities/wordpress/wp-wechat-broadcast-lfi.yaml by @0x240x23elu
+	- exposures/configs/esmtprc-config.yaml by geeknik
+	- exposures/configs/robomongo-credential.yaml by geeknik
+	- exposed-panels/portainer-init-deploy.yaml by @princechaddha
+	- exposed-panels/securenvoy-panel.yaml by @0xrod
+	- iot/xp-webcam.yaml by @AashiqRamachandran
+	- technologies/jsf-detection.yaml by @Morn98
+
 ## [Templates v8.3.0 - 25 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.0)
 
 !!! check "Newly added templates (14)"
