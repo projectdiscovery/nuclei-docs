@@ -1,5 +1,11 @@
 # Changelog
 
+## [Nuclei v2.3.7 - 10 May 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.7)
+!!! example ""
+
+	- Improvements to interactsh integration
+	- Fixed fatal error with interactsh client
+
 ## [Nuclei v2.3.6 - 4 May 2021](https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.6)
 !!! example ""
 
