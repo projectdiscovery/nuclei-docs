@@ -1,5 +1,52 @@
 # Changelog
 
+## [Templates v8.3.2 - 1 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.2)
+
+!!! check "Newly added templates (41)"
+
+	- cves/2021/CVE-2021-21985.yaml by @dorkerdevil
+	- cves/2017/CVE-2017-14535.yaml by @pikpikcu
+	- cves/2017/CVE-2017-3528.yaml by @Akokonunes
+	- vulnerabilities/other/blue-ocean-excellence-lfi.yaml by @pikpikcu
+	- vulnerabilities/other/hjtcloud-arbitrary-file-read.yaml by @pikpikcu
+	- vulnerabilities/other/hjtcloud-rest-arbitrary-file-read.yaml by @pikpikcu
+	- vulnerabilities/other/ns-asg-file-read.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wordpress-db-repair.yaml by @aldo-moreno-leon
+	- vulnerabilities/wordpress/wp-plugin-statistics-sqli.yaml by @Udyz
+	- exposures/configs/exposed-vscode.yaml by @AashiqRamachandran
+	- exposures/configs/hikvision-info-leak.yaml by @pikpikcu
+	- default-logins/arl/arl-default-password.yaml by @pikpikcu
+	- default-logins/szhe/szhe-default-password.yaml by @pikpikcu
+	- dns/dns-waf-detect.yaml by @1u4nx
+	- exposed-panels/clave-login-panel.yaml by @linfatall
+	- exposed-panels/ems-login-panel.yaml by @linfatall
+	- exposed-panels/lancom-router-panel.yaml by @linfatall
+	- exposed-panels/openerp-database.yaml by @impramodsargar
+	- exposed-panels/servicedesk-login-panel.yaml by @AashiqRamachandran
+	- exposed-panels/synnefo-admin-panel.yaml by @impramodsargar
+	- exposed-panels/zenario-login-panel.yaml by @linfatall
+	- technologies/default-apache-test-page.yaml by @DhiyaneshGeek
+	- technologies/default-apache2-page.yaml by @DhiyaneshGeek
+	- technologies/default-apache2-ubuntu-page.yaml by @DhiyaneshGeek
+	- technologies/default-asp.net-page.yaml by @DhiyaneshGeek
+	- technologies/default-centos-test-page.yaml by @DhiyaneshGeek
+	- technologies/default-django-page.yaml by @DhiyaneshGeek
+	- technologies/default-fastcgi-page.yaml by @DhiyaneshGeek
+	- technologies/default-fedora-page.yaml by @DhiyaneshGeek
+	- technologies/default-glassfish-server-page.yaml by @DhiyaneshGeek
+	- technologies/default-iis7-page.yaml by @DhiyaneshGeek
+	- technologies/default-jetty-page.yaml by @DhiyaneshGeek
+	- technologies/default-microsoft-azure-page.yaml by @DhiyaneshGeek
+	- technologies/default-nginx-page.yaml by @DhiyaneshGeek
+	- technologies/default-oracle-application-page.yaml by @DhiyaneshGeek
+	- technologies/default-payara-server-page.yaml by @DhiyaneshGeek
+	- technologies/default-plesk-page.yaml by @DhiyaneshGeek
+	- technologies/default-redhat-test-page.yaml by @DhiyaneshGeek
+	- technologies/default-ssltls-test-page.yaml by @DhiyaneshGeek
+	- technologies/default-tomcat-page.yaml by @DhiyaneshGeek
+	- technologies/default-windows-server-page.yaml by @DhiyaneshGeek
+
+
 ## [Templates v8.3.1 - 29 May 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.1)
 
 !!! check "Newly added templates (19)"
