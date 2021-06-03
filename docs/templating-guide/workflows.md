@@ -55,7 +55,7 @@ workflows:
       - template: exploits/jira-exploit-1.yaml
 ```
 
-**Natcher Name based condition check**
+**Matcher Name based condition check**
 
 A workflow that executes subtemplates when a matcher of base template is found in result.
 
