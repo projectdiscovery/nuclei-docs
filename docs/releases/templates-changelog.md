@@ -1,5 +1,21 @@
 # Changelog
 
+## [Templates v8.3.3 - 4 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.3)
+
+!!! check "Newly added templates (11)"
+
+	- cves/2020/CVE-2020-11978.yaml by pdteam
+	- cnvd/CNVD-2021-30167.yaml by @pikpikcu
+	- default-logins/apache/airflow-default-credentials.yaml by pdteam
+	- vulnerabilities/other/odoo-cms-redirect.yaml by @Akokonunes
+	- exposures/configs/detect-drone-config.yaml by @geeknik
+	- misconfiguration/airflow/airflow-debug.yaml by pdteam
+	- misconfiguration/alibaba-mongoshake-unauth.yaml by @pikpikcu
+	- exposed-panels/airflow-panel.yaml by pdteam
+	- exposed-panels/dotcms-admin-panel.yaml by @impramodsargar
+	- technologies/airflow-detect.yaml by pdteam
+	- workflows/airflow-workflow.yaml by pdteam
+
 ## [Templates v8.3.2 - 1 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.2)
 
 !!! check "Newly added templates (41)"
