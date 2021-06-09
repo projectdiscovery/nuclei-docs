@@ -1,5 +1,35 @@
 # Changelog
 
+## [Templates v8.3.4 - 10 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.4)
+
+!!! check "Newly added templates (25)"
+
+	- cves/2021/CVE-2021-24285.yaml by @shreyapohekar
+	- cves/2021/CVE-2021-24316.yaml by @Akokonunes
+	- cves/2020/CVE-2020-36289.yaml by @DhiyaneshGeek
+	- cves/2020/CVE-2020-6308.yaml by @Mad-robot
+	- cves/2019/CVE-2019-2767.yaml by @Mad-robot
+	- cves/2019/CVE-2019-2616.yaml by pdteam
+	- cves/2017/CVE-2017-9140.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/interlib-fileread.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wp-mailchimp-log-exposure.yaml by @AashiqRamachandran
+	- vulnerabilities/wordpress/wp-popup-listing.yaml by @AashiqRamachandran
+	- miscellaneous/apple-app-site-association.yaml by @DhiyaneshGeek
+	- miscellaneous/email-extractor.yaml by @DhiyaneshGeek
+	- misconfiguration/artifactory-anonymous-deploy.yaml by @DhiyaneshGeek
+	- misconfiguration/exposed-jquery-file-upload.yaml by @DhiyaneshGeek
+	- misconfiguration/private-key-exposure.yaml by @AashiqRamachandran
+	- misconfiguration/sap/sap-netweaver-info-leak.yaml by pdteam
+	- misconfiguration/iis-internal-ip-disclosure.yaml by @WillD96
+	- exposed-panels/luci-login-detection.yaml by @AashiqRamachandran
+	- exposures/configs/zend-config-file.yaml by pdteam
+	- exposures/files/shellscripts.yaml by @DhiyaneshGeek
+	- network/sap-router-info-leak.yaml by pdteam
+	- network/sap-router.yaml by pdteam
+	- technologies/firebase-urls.yaml by @DhiyaneshGeek
+	- technologies/sap-netweaver-webgui.yaml by pdteam
+	- iot/epson-wf-series.yaml by @AashiqRamachandran
+
 ## [Templates v8.3.3 - 4 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.3)
 
 !!! check "Newly added templates (11)"
