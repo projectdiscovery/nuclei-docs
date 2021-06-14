@@ -1,5 +1,66 @@
 # Changelog
 
+## [Templates v8.3.5 - 13 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.5)
+
+!!! check "Newly added templates (56)"
+
+	- cves/2018/CVE-2018-16836.yaml by @Akokonunes
+	- cves/2017/CVE-2017-5487.yaml by @Manas_Harsh, @daffainfo
+	- cves/2014/CVE-2014-2383.yaml by @Akokonunes
+	- exposed-panels/landfill-remote-monitoring-control.yaml by @geeknik
+	- exposed-panels/rstudio-detect.yaml by @pdelteil 
+	- exposures/configs/phalcon-framework-source.yaml by @pdelteil 
+	- exposures/tokens/generic/shoppable-token.yaml by @pdelteil
+	- fuzzing/mdb-database-file.yaml by pdteam
+	- technologies/nexus-detect.yaml by @righettod
+	- vulnerabilities/other/ckan-dom-based-xss.yaml by @DhiyaneshGeek
+	- vulnerabilities/other/mpsec-lfi.yaml by @pikpikcu
+	- vulnerabilities/other/php-timeclock-xss.yaml by @pikpikcu
+	- vulnerabilities/other/php-zerodium-backdoor-rce.yaml by @DhiyaneshGeek
+	- vulnerabilities/wordpress/wordpress-db-backup-listing.yaml by @skar4444
+	- file/android/adb-backup-enabled.yaml by @0xgaurang
+	- file/android/biometric-detect.yaml by @0xgaurang
+	- file/android/certificate-validation.yaml by @0xgaurang
+	- file/android/content-scheme.yaml by @0xgaurang
+	- file/android/debug-enabled.yaml by @0xgaurang
+	- file/android/dynamic-broadcast-receiver.yaml by @0xgaurang
+	- file/android/file-scheme.yaml by @0xgaurang
+	- file/android/provider-path.yaml by @0xgaurang
+	- file/android/webview-addjavascript-interface.yaml by @0xgaurang
+	- file/android/webview-javascript.yaml by @0xgaurang
+	- file/android/webview-load-url.yaml by @0xgaurang
+	- file/android/webview-universal-access.yaml by @0xgaurang
+	- file/keys/amazon-mws-auth-token.yaml by @0xgaurang
+	- file/keys/aws-access-id.yaml by @0xgaurang
+	- file/keys/aws-cognito.yaml by @0xgaurang
+	- file/keys/cloudinary.yaml by @0xgaurang
+	- file/keys/credentials.yaml by @0xgaurang
+	- file/keys/dynatrace-token.yaml by @0xgaurang
+	- file/keys/facebook-client-id.yaml by @0xgaurang
+	- file/keys/facebook-secret.yaml by @0xgaurang
+	- file/keys/firebase-database.yaml by @0xgaurang
+	- file/keys/gcp-service-account.yaml by @0xgaurang
+	- file/keys/google-api.yaml by @0xgaurang
+	- file/keys/linkedin-id.yaml by @0xgaurang
+	- file/keys/mailchimp-api.yaml by @0xgaurang
+	- file/keys/mailgun-api.yaml by @0xgaurang
+	- file/keys/paypal-braintree-token.yaml by @0xgaurang
+	- file/keys/pictatic-api-key.yaml by @0xgaurang
+	- file/keys/private-key.yaml by @0xgaurang
+	- file/keys/s3-bucket.yaml by @0xgaurang
+	- file/keys/sendgrid-api.yaml by @0xgaurang
+	- file/keys/shopify-custom-token.yaml by @0xgaurang
+	- file/keys/shopify-private-token.yaml by @0xgaurang
+	- file/keys/shopify-shared-secret.yaml by @0xgaurang
+	- file/keys/shopify-token.yaml by @0xgaurang
+	- file/keys/slack-api.yaml by @0xgaurang
+	- file/keys/slack-webhook.yaml by @0xgaurang
+	- file/keys/square-access-token.yaml by @0xgaurang
+	- file/keys/square-oauth-secret.yaml by @0xgaurang
+	- file/keys/stripe-api-key.yaml by @0xgaurang
+	- file/keys/twilio-api.yaml by @0xgaurang
+	- file/keys/twitter-secret.yaml by @0xgaurang
+
 ## [Templates v8.3.4 - 10 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.4)
 
 !!! check "Newly added templates (25)"
