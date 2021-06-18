@@ -1,5 +1,40 @@
 # Changelog
 
+## [Templates v8.3.6 - 18 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.6)
+
+!!! check "Newly added templates (30)"
+
+	- cves/2021/CVE-2021-28854.yaml by pdteam
+	- cves/2021/CVE-2021-24237.yaml by @Akokonunes
+	- cves/2021/CVE-2021-22214.yaml by @skar4444
+	- cves/2019/CVE-2019-7254.yaml by @Akokonunes
+	- cves/2018/CVE-2018-1000533.yaml by @pikpikcu
+	- cves/2018/CVE-2018-16668.yaml by @geeknik
+	- cves/2018/CVE-2018-16670.yaml by @geeknik
+	- cves/2018/CVE-2018-16671.yaml by @geeknik
+	- cves/2013/CVE-2013-2248.yaml by @Akokonunes
+	- cnvd/CNVD-2021-15822.yaml by @pikpikcu
+	- vulnerabilities/confluence/confluence-ssrf-sharelinks.yaml by @Techbrunch
+	- vulnerabilities/gitlab/gitlab-user-enumeration.yaml by @skar4444
+	- vulnerabilities/gitlab/gitlab-user-open-api.yaml by @skar4444
+	- vulnerabilities/other/tamronos-rce.yaml by @pikpikcu
+	- vulnerabilities/wordpress/wpdm-cache-session.yaml by @DhiyaneshGeek
+	- misconfiguration/adobe/adobe-connect-username-exposure.yaml by @DhiyaneshGeek
+	- misconfiguration/adobe/adobe-connect-version.yaml by @DhiyaneshGeek
+	- misconfiguration/ssrf-via-oauth-misconfig.yaml by @mrsin15
+	- default-logins/gitlab/gitlab-weak-login.yaml by @skar4444
+	- exposed-panels/adobe-connect-central-login.yaml by @DhiyaneshGeek
+	- exposed-panels/glpi-login.yaml by @DhiyaneshGeek
+	- exposed-panels/odoo-database-manager.yaml by @linfatall
+	- network/openssh-username-enumeration.yaml by @r3dg33k
+	- dns/nameserver-detection.yaml by pdteam
+	- headless/extract-urls.yaml  by @dwisiswant0
+	- technologies/detect-sentry.yaml by @Sicks3c
+	- technologies/metabase-detect.yaml by @revblock 
+	- technologies/sap-web-dispatcher-admin-portal.yaml by @randomstr1ng
+	- technologies/sap-web-dispatcher.yaml by @randomstr1ng 
+	- technologies/vmware-vrealize-detect.yaml by @milo2012
+
 ## [Templates v8.3.5 - 13 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.5)
 
 !!! check "Newly added templates (56)"
