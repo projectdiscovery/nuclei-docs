@@ -1,5 +1,84 @@
 # Changelog
 
+## [Templates v8.3.7 - 30 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.7)
+
+!!! check "Newly added templates (74)"
+
+	- cves/2021/CVE-2021-21234.yaml by @gy741
+	- cves/2021/CVE-2021-21389.yaml by @lotusdll
+	- cves/2021/CVE-2021-28164.yaml by @noamrathaus
+	- cves/2021/CVE-2021-28169.yaml by @pikpikcu
+	- cves/2021/CVE-2021-3223.yaml by @gy741
+	- cves/2021/CVE-2021-35464.yaml by @madrobot
+	- cves/2020/CVE-2020-11110.yaml by @emadshanab
+	- cves/2020/CVE-2020-11930.yaml by @dhiyaneshDK
+	- cves/2020/CVE-2020-25495.yaml by @0x_Akoko
+	- cves/2020/CVE-2020-3580.yaml by @0x_Akoko
+	- cves/2019/CVE-2019-3401.yaml by @milo2012
+	- cves/2019/CVE-2019-7481.yaml by @_darrenmartyn
+	- cves/2018/CVE-2018-16299.yaml by @0x_Akoko
+	- cves/2018/CVE-2018-17254.yaml by @Suman_Kar
+	- cves/2018/CVE-2018-18775.yaml by @0x_Akoko
+	- cves/2018/CVE-2018-18777.yaml by @0x_Akoko
+	- cves/2018/CVE-2018-9995.yaml by @princechaddha
+	- cves/2017/CVE-2017-12794.yaml by @pikpikcu
+	- cves/2017/CVE-2017-15944.yaml by @emadshanab
+	- cves/2015/CVE-2015-8813.yaml by @emadshanab
+	- cves/2012/CVE-2012-3153.yaml by @sidahmed-malaoui
+	- vulnerabilities/wordpress/alfacgiapi-wordpress.yaml by @pussycat0x
+	- vulnerabilities/wordpress/wordpress-bbpress-plugin-listing.yaml by @dhiyaneshDK
+	- vulnerabilities/wordpress/wordpress-elementor-plugin-listing.yaml by @dhiyaneshDk
+	- vulnerabilities/wordpress/wordpress-gtranslate-plugin-listing.yaml by @dhiyaneshDk
+	- vulnerabilities/wordpress/wordpress-redirection-plugin-listing.yaml by @dhiyaneshDk
+	- vulnerabilities/wordpress/wordpress-updraftplus-pem-key.yaml by @dhiyaneshDk
+	- vulnerabilities/wordpress/wordpress-woocommerce-listing.yaml by @dhiyaneshDK
+	- vulnerabilities/wordpress/wp-123contactform-plugin-listing.yaml by @pussycat0x
+	- vulnerabilities/wordpress/wp-gtranslate-open-redirect.yaml by @dhiyaneshDK
+	- vulnerabilities/wordpress/wp-multiple-theme-ssrf.yaml by @madrobot
+	- vulnerabilities/wordpress/wp-plugin-utlimate-member.yaml by @pussycat0x
+	- vulnerabilities/wordpress/wpmudev-my-calender-xss.yaml by @dhiyaneshDk
+	- vulnerabilities/wordpress/wpmudev-pub-keys.yaml by @dhiyaneshDk
+	- vulnerabilities/other/huawei-hg659-lfi.yaml by @pikpikcu
+	- vulnerabilities/other/jeewms-lfi.yaml by @pikpikcu
+	- vulnerabilities/other/resin-inputfile-fileread.yaml by @princechaddha
+	- vulnerabilities/other/resin-viewfile-lfr.yaml by @princechaddha
+	- default-logins/zmanda/zmanda-default-credential.yaml by @Techryptic
+	- misconfiguration/aem/aem-crx-bypass.yaml by @dhiyaneshDK
+	- misconfiguration/phpmyadmin-sql.php-server.yaml by @pussycat0x
+	- misconfiguration/zhiyuan-oa-unauthorized.yaml by @pikpikcu
+	- takeovers/flywheel-takeover.yaml by @smaranchand
+	- takeovers/sprintful-takeover.yaml by @Mhdsamx
+	- exposed-panels/adobe-experience-manager-login.yaml by @dhiyaneshDK
+	- exposed-panels/akamai-cloudtest.yaml by @emadshanab
+	- exposed-panels/avtech-dvr-exposure.yaml by @geeknik
+	- exposed-panels/calendarix-panel.yaml by @r3dg33k
+	- exposed-panels/iptime-router.yaml by @gy741
+	- exposed-panels/jenkins-api-panel.yaml by @righettod
+	- exposed-panels/livezilla-login-panel.yaml by @__Fazal
+	- exposed-panels/mikrotik-routeros.yaml by @gy741
+	- exposed-panels/netis-router.yaml by @gy741
+	- exposed-panels/plastic-scm-login.yaml by @dhiyaneshDK
+	- exposed-panels/sitecore-login-panel.yaml by @b4uh0lz
+	- exposed-panels/zoho-manageengine-adaudit.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-adselfservice-plus.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-analyticsplus.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-apex-helpdesk.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-applications-manager.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-assetexplorer.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-desktop.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-opmanager.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-servicedesk.yaml by @dhiyaneshDK
+	- exposed-panels/zoho-manageengine-supportcenter.yaml by @dhiyaneshDK
+	- miscellaneous/addeventlistener-detect.yaml by @yavolo
+	- miscellaneous/clientaccesspolicy.yaml by @emadshanab
+	- network/expn-mail-detect.yaml by @r3dg33k
+	- network/smb-v1-detection.yaml by @r3dg33k
+	- network/smtp-detection.yaml by @r3dg33k
+	- network/starttls-mail-detect.yaml by @r3dg33k
+	- network/vsftpd-detection.yaml by @pussycat0x
+	- technologies/rhymix-cms-detect.yaml by @gy741
+	- technologies/webmodule-ee.yaml by @pussycat0x
+
 ## [Templates v8.3.6 - 18 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.6)
 
 !!! check "Newly added templates (30)"
