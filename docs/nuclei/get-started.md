@@ -138,7 +138,7 @@ This will display help for the tool. Here are all the switches it supports.
     -timeout int                           Time to wait in seconds before timeout (default 5)
     -tl                                    List available templates
     -trace-log string                      File to write sent requests trace log
-    -ud, -update-directory string          Directory storing nuclei-templates (default /home/kali/nuclei-templates)
+    -ud, -update-directory string          Directory storing nuclei-templates (default /root/nuclei-templates)
     -ut, -update-templates                 Download / updates nuclei community templates
     -v, -verbose                           Show verbose output
     -version                               Show version of nuclei
