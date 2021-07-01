@@ -449,12 +449,12 @@ nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
 
 **<ins>Markdown Export</ins>**
 
-Nuclei supports markdown export of valid findings with `-de, -disk-export` flag, this flag takes directory as input to store markdown formatted reports.
+Nuclei supports markdown export of valid findings with `-me, -markdown-export` flag, this flag takes directory as input to store markdown formatted reports.
 
-Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-de`.
+Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-me`.
 
 ```bash
-nuclei -l urls.txt -t cves/ -irr -disk-export reports
+nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 ```
 
 ## Scan **Metrics**
