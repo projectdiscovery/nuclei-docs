@@ -270,7 +270,7 @@ Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 
 ## Traffic **Tagging**
 
-Many BugBounty platform/programs/ requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
+Many BugBounty platform/programs requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
 
 
 !!! info "Setting custom header using config file"
