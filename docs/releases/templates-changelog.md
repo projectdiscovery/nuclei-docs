@@ -1,5 +1,43 @@
 # Changelog
 
+## [Templates v8.3.8 - 04 July 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.8)
+
+!!! check "Newly added templates (32)"
+
+	- cves/2021/CVE-2021-29203.yaml by @madrobot
+	- cves/2021/CVE-2021-24406.yaml by @0x_Akoko
+	- cves/2021/CVE-2021-24210.yaml by @0x_Akoko
+	- cves/2020/CVE-2020-1938.yaml by @milo2012
+	- cves/2019/CVE-2019-13101.yaml by @skar4444
+	- cves/2018/CVE-2018-8715.yaml by @milo2012
+	- cves/2018/CVE-2018-2893.yaml by @milo2012
+	- cves/2018/CVE-2018-2628.yaml by @milo2012
+	- cves/2018/CVE-2018-1000130.yaml by @milo2012
+	- cves/2017/CVE-2017-9822.yaml by @milo2012
+	- vulnerabilities/jolokia/jolokia-heap-info-disclosure.yaml by @milo2012
+	- vulnerabilities/other/coldfusion-debug-xss.yaml by @dhiyaneshDK
+	- vulnerabilities/other/jfrog-unauth-build-exposed.yaml by @dhiyaneshDK
+	- vulnerabilities/wordpress/wp-plugin-1-flashgallery-listing.yaml by @pussycat0x
+	- vulnerabilities/wordpress/wp-plugin-marmoset-viewer-xss.yaml by @johnjhacking
+	- default-logins/oracle/oracle-bi-default-credentials.yaml by @milo2012
+	- default-logins/spectracom/spectracom-default-credential.yaml by @madrobot
+	- default-logins/wifisky/wifisky-default-password.yaml by @pikpikcu
+	- exposures/configs/javascript-env.yaml by @pdp
+	- exposures/logs/jboss-seam-debug-page.yaml by @dhiyaneshDK
+	- misconfiguration/jetty-showcontexts-enable.yaml by @dhiyaneshDK
+	- misconfiguration/unauthenticated-glances.yaml by @remonsec
+	- misconfiguration/unauthorized-plastic-scm.yaml by @DEENA
+	- exposed-panels/apiman-panel.yaml by @righettod 
+	- exposed-panels/csod-panel.yaml by @righettod 
+	- exposed-panels/grails-database-admin-console.yaml by @emadshanab
+	- exposed-panels/itop-panel.yaml by @righettod
+	- exposed-panels/octoprint-login.yaml by @affix
+	- exposed-panels/sapfiori-panel.yaml by @righettod
+	- exposed-panels/wildfly-panel.yaml by @righettod
+	- network/detect-rsyncd.yaml by @vsh00t,@geeknik
+	- technologies/sonicwall-email-security-detect.yaml by @gy741
+
+
 ## [Templates v8.3.7 - 30 June 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.7)
 
 !!! check "Newly added templates (74)"
