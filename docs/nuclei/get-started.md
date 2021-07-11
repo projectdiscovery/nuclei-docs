@@ -3,10 +3,10 @@
 
 !!! example "Features."
 
-    * HTTP | DNS | TCP  | FILE support
+    * HTTP | DNS | TCP | FILE support
     * Fully configurable templates.
     * Large scale scanning.
-    * Out of band based detections.
+    * Out of band based detection.
     * Easily write your own templates.
 
 
@@ -160,7 +160,7 @@ nuclei -u https://example.com
 Custom template directory or multiple template directory can be executed as follows,
 
 ```sh
-nuclei -u https://example.com -t cves -t exposures
+nuclei -u https://example.com -t cves/ -t exposures/
 ```
 
 Similarly, Templates can be executed against list of URLs.
@@ -183,138 +183,53 @@ nuclei -list http_urls.txt -w workflows/wordpress-workflow.yaml
 
 ### Nuclei **Filters**
 
-Nuclei engine supports multiple 3 basic filters to customize template execution.
+Nuclei engine supports three basic filters to customize template execution.
 
-1) **Tags** (`tags`)
 
-Worked based on `tags` information available in the template.
+1. Tags (`-tags`)
 
-2) **Severity** (`severity/impact`)
+    Filter based on tags field available in the template.
 
-Worked based on `severity` information available in the template.
+2. Severity (`-severity`)
 
-3) **Author** (`author`)
+    Filter based on severity field available in the template.
 
-Worked based on `author` information available in the template.
+3. Author (`-author`)
+
+    Filter based on author field available in the template.
 
 As default, Filters are applied on installed path of templates and can be customized with manual template path input.
 
 For example, below command will run all the templates installed at `~/nuclei-templates/` directory and has `cve` tags in it.
 
 ```sh
-nuclei -u https://example.com -tags logs
+nuclei -u https://example.com -tags cve
 ```
 
-And this example will run all the templates available under `~/nuclei-templates/exposures/` directory and has `logs` tag in it.
+And this example will run all the templates available under `~/nuclei-templates/exposures/` directory and has `config` tag in it.
 
 ```sh
-nuclei -u https://example.com -tags logs -t exposures/
+nuclei -u https://example.com -tags config -t exposures/
 ```
 
+Multiple filters works together with AND condition, below example runs all template with `cve` tags AND has `critical` OR `high` severity AND `geeknik` as author of template.
 
-??? info "Running nuclei with templates"
+```sh
+nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
+```
 
-    **Templates** flag is used to provide template file or/and directory, single or multiple templates or directory can be used using multiple **t** flag inputs.
+Similarly, all filters are supported in workflows as well.
 
-    !!! check "Running nuclei with single template"
-    
-    ```
-    nuclei -t exposures/configs/git-config.yaml -l urls.txt
-    ```
-    
-    !!! check "Running nuclei with template directory"
-    
-    ```
-    nuclei -t cves/2021/ -l urls.txt
-    ```
-    
-    !!! check "Running nuclei with multiple template directory"
-    
-    ```
-    nuclei -t cves/2020/ -t exposed-tokens -t misconfiguration -l urls.txt
-    ```
 
-??? info "Running nuclei using tags"
-    
-    **Tags** can be used for template execution with or without the need of template directory/flag, if **templates/t** flag is used with `tags`, the tags will be applied on the particular template directory, otherwise, it will run all the templates with matched tag from default template download location (`$HOME/nuclei-templates/`).
+```sh
+nuclei -w workflows/wordpress-workflow.yaml -severity critical,high -list http_urls.txt
+```
 
-    !!! check "Running nuclei with single tags"
+!!! info "Workflows"
 
-    ```
-    nuclei -tags cve -l urls.txt
-    ```
+    In Workflows, Nuclei filters are applied on templates or sub-templates running via workflows, not on the workflows itself.
 
-    ```
-    nuclei -tags network -l urls.txt
-    ```
-
-    ```
-    nuclei -tags logs -l urls.txt
-    ```
-
-    !!! check "Running nuclei with tags along with directory"
-
-    ```
-    nuclei -tags config -t exposures/ -l urls.txt
-    ```
-
-    !!! check "Running nuclei with multiple tags"
-
-    ```
-    nuclei -tags lfi,ssrf,rce -t cves/ -l urls.txt
-    ````
-
-    ```
-    nuclei -tags xss -t vulnerabilities/ -l urls.txt
-    ````
-
-??? info "Running nuclei with workflows"
-
-    **Workflows** are the best possible way to manage and run multiple templates using a single workflow file for custom and dedicated workflow depending on the project and test case.
-
-    !!! check "Running nuclei with workflow"
-
-    ```
-    nuclei -w workflows/wordpress-workflow.yaml -l wordpress_urls.txt
-    ```
-
-    !!! check "Running nuclei with multiple workflow"
-
-    ```
-    nuclei -w workflows/wordpress-workflow.yaml -w workflows/jira-workflow.yaml -l urls.txt
-    ```
-
-??? info "Running nuclei with severity"
-
-    **Severity** flag is used to run templates with specific or multiple severities altogether. 
-
-    !!! check "Running nuclei with single severity"
-
-    ```
-    nuclei -t cves/ -severity critical -l urls.txt
-    ```
-
-    !!! check "Running nuclei with multiple severity"
-
-    ```
-    nuclei -t cves/ -t vulnerabilities -severity critical,high -l urls.txt
-    ```
-
-??? info "Running nuclei with docker"
-
-    !!! check "Running nuclei in docker container"
-    
-    ```
-    echo hackerone.com | docker run -v $HOME/nuclei-templates:/root/nuclei-templates -i projectdiscovery/nuclei:v2.3.0 -t dns > output.txt
-    ``` 
-
-!!! warning
-    Nuclei accept **URLs** as input format in order to execute HTTP templates.
-
-!!! tip
-    [httpx](https://github.com/projectdiscovery/httpx) can be used to generate URLs from subdomains as a input for nuclei.
-
-## Rate **Limits**
+### Rate **Limits**
 
 Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
 
@@ -331,7 +246,7 @@ Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 !!! tip
     `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
 
-## Traffic **Tagging**
+### Traffic **Tagging**
 
 Many BugBounty platform/programs requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
 
@@ -353,52 +268,66 @@ Many BugBounty platform/programs requires you to identify the HTTP traffic you m
     ```
 
 
-## Template **Exclusion**
+### Template **Exclusion**
 
-Nuclei supports multiple ways to exclude templates for the execution, as default **nuclei excludes two type of templates**.
+Nuclei supports a variety of methods for excluding / blocking templates from execution. By default, **nuclei** excludes the tags/templates listed below from execution to avoid unexpected fuzz based scans and some that are not supposed to run for mass scan, and these can be easily overwritten  with nuclei configuration file / flags.
 
-- [Template from ignore list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)
-- Templates with `dos` tags
+- Default [Template ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore) list.
 
 
-!!! abstract "Why nuclei-ignore?"
-    
-    To ensure templates that are not meant to be used for generic scan, including fuzzing, bruteforce, headless, templates that have **severe** impact, e.g., DOS.
+!!! danger ""
 
-Nuclei also support template exclusion at run time using `-exclude` and `-exclude-tags` flag.
+    **nuclei-ignore** file is not supposed to be updated / edited / removed by user, to overwrite default ignore list, utilize [nuclei configuration](https://nuclei.projectdiscovery.io/nuclei/get-started/#nuclei-config) file. 
 
-**exclude** flag is used to exclude single/multiple templates and directory, multiple `-exclude` flag can be used to provide multiple values.
+Nuclei engine supports two ways to manually exclude templates from scan,
 
-!!! info "Running nuclei with single template exclusion"
+1. Exclude Templates (`-exclude-templates/exclude`)
+
+    **exclude-templates** flag is used to exclude single or multiple templates and directory, multiple `-exclude-templates` flag can be used to provide multiple values.
+
+
+2. Exclude Tags (`-exclude-tags/etags`)
+
+    **exclude-tags** flag is used to exclude templates based in defined tags, single or multiple can be used to exclude templates.
+
+
+!!! info "Example of excluding single template"
 
     ```
-    nuclei -l urls.txt -t cves/ -exclude cves/2020/CVE-2020-XXXX.yaml
+    nuclei -list urls.txt -t cves/ -exclude-templates cves/2020/CVE-2020-XXXX.yaml
     ```
 
-!!! info "Running nuclei with multiple template exclusion"
+!!! info "Example of multiple template exclusion"
 
     ```
-    nuclei -l urls.txt -t nuclei-templates/ -exclude exposed-panels/ -exclude technologies
+    nuclei -list urls.txt -exclude-templates exposed-panels/ -exclude-templates technologies/
     ```
 
-**exclude-tags** flag is used to exclude templates with given tags, multiple tags can be excluded using comma separate values.
-
-!!! info "Running nuclei with single tags exclusion"
+!!! info "Example of excluding templates with single tag"
 
     ```
     nuclei -l urls.txt -t cves/ -etags xss
     ```
 
-!!! info "Running nuclei with multiple tags exclusion"
+!!! info "Example of excluding templates with multiple tags"
 
     ```
     nuclei -l urls.txt -t cves/ -etags sqli,rce
     ```
 
+To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore), Nuclei engine supports **include-tags** / **include-templates** flag.
+
+!!! info "Example of running blocked templates"
+
+    ```
+    nuclei -l urls.txt -include-tags iot,misc,fuzz
+    ```
+
+We can update the nuclei configuration file to include these tags for all scans.
 
 ## Nuclei **Config**
 
-!!! abstract "goflags"
+!!! abstract ""
 
     Since release of [v.2.3.2](https://blog.projectdiscovery.io/nuclei-v2-3-0-release/) nuclei uses [goflags](https://github.com/projectdiscovery/goflags) for clean CLI experience and long/short formatted flags.
 
@@ -445,7 +374,7 @@ bulk-size: 50
 concurrency: 50
 ```
 
-Once configured, **config file be used as default**, additionally custom config file can be also provided using `-config` flag.
+Once configured, **config file be used as default**, additionally multiple config file can be also provided using `-config` flag.
 
 !!! info "Running nuclei with custom config file"
 
@@ -554,6 +483,18 @@ curl -s localhost:9092/metrics | jq .
 }
 ```
 
+## Passive Scan
+
+Nuclei engine supports passive mode scanning for HTTP based template utilizing file support, with this support we can run HTTP based templates against locally stored HTTP response data collected from any other tool.
+
+```sh
+nuclei -passive -target http_data
+```
+
+!!! info ""
+
+    Passive mode support is limited for templates having `{{BasedURL}}` or `{{BasedURL/}}` as base path.
+    
 ## **Code** Contribution
 
 [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates) are the base of the nuclei project. We appreciate it if you can write and submit new templates to keep this project alive, and one of the reasons to keep us motivated to keep working on this project. 
