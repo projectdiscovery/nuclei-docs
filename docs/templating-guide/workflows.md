@@ -4,7 +4,7 @@ Workflows allow users to define an execution sequence for templates. The templat
 
 If the tech stack is known, we recommend creating your custom workflows to run your scans. This leads to much lower scan times with better results.
 
-Workflows can be defined with `workflows` attribute, following the `template` or `subtemplates` to execute.
+Workflows can be defined with `workflows` attribute, following the `template` / `subtemplates` and `tags` to execute.
 
 ```yaml
 workflows:
@@ -28,6 +28,7 @@ workflows:
   - template: files/svn-config.yaml
   - template: files/env-file.yaml
   - template: files/backup-files.yaml
+  - tags: xss,ssrf,cve,lfi
 ```
 
 A workflow that runs specific list of checks defined for your project.
@@ -37,6 +38,7 @@ workflows:
   - template: cves/
   - template: exposed-tokens/
   - template: exposures/
+  - tags: exposures
 ```
 
 #### Conditional Workflows
@@ -51,8 +53,8 @@ A workflow that executes subtemplates when base template gets matched.
 workflows:
   - template: technologies/jira-detect.yaml
     subtemplates:
-      - template: exploits/jira-exploit-1.yaml
-      - template: exploits/jira-exploit-1.yaml
+      - tags: jira
+      - template: exploits/jira/
 ```
 
 **Matcher Name based condition check**
