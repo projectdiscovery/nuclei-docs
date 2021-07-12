@@ -3,10 +3,10 @@
 
 !!! example "Features."
 
-    * HTTP | DNS | TCP  | FILE support
+    * HTTP | DNS | TCP | FILE support
     * Fully configurable templates.
     * Large scale scanning.
-    * Out of band based detections.
+    * Out of band based detection.
     * Easily write your own templates.
 
 
@@ -59,16 +59,11 @@
         - Download the latest binary for your OS.
         - Unzip the binary with `tar -xzvf nuclei-*.tar.gz`
 
-## Template **Download**
+## Nuclei **Templates**
 
-Nuclei templates can be downloaded and update using the `update-templates` flag of nuclei, which downloads the latest release from [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates/releases) GitHub project, a community-curated list of templates that are ready to use.
+Nuclei has had built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
 
-```
-nuclei -update-templates
-```
-
-!!! abstract "Info"
-    **update-templates** flag download/pulls the latest release from https://github.com/projectdiscovery/nuclei-templates/releases, that does not include recently added templates in the master branch.
+You may still use the `update-templates` flag to update the nuclei templates at any time; automatic updates happen every 24 hours.
 
 !!! tip
     Writing your own unique templates will always keep you one step ahead of others.
@@ -85,174 +80,156 @@ This will display help for the tool. Here are all the switches it supports.
     ```
     Flag                                   Description                                                 
     -------------------------------------  ------------------------------------------------------------
-    -H, -header value                      Custom Header.
-    -biid, -burp-collaborator-biid string  Burp Collaborator BIID
-    -bs, -bulk-size int                    Maximum Number of hosts analyzed in parallel per template (default 25)
-    -c, -concurrency int                   Maximum Number of templates executed in parallel (default 10)
-    -config string                         Nuclei configuration file
-    -debug                                 Debugging request and responses
-    -debug-req                             Debugging request
-    -debug-resp                            Debugging response
-    -et, -exclude value                    Templates to exclude, supports single and multiple templates using directory.
-    -etags, -exclude-tags value            Exclude templates with the provided tags
-    -headless                              Enable headless browser based templates support
-    -impact, -severity value               Templates to run based on severity, supports single and multiple severity.
-    -irr, -include-rr                      Write requests/responses for matches in JSON output
-    -interactions-cache-size int           Number of requests to keep in interactions cache (default 5000)
-    -interactions-cooldown-period int      Extra time for interaction polling before exiting (default 5)
-    -interactions-eviction int             Number of seconds to wait before evicting requests from cache (default 60)
-    -interactions-poll-duration int        Number of seconds before each interaction poll request (default 5)
-    -interactsh-url string                 Self Hosted Interactsh Server URL (default https://interact.sh)
-    -json                                  Write json output to files
-    -l, -list string                       List of URLs to run templates on
-    -me, -markdown-export string           Directory to export results in markdown format
-    -metrics                               Expose nuclei metrics on a port
-    -metrics-port int                      Port to expose nuclei metrics on (default 9092)
-    -nc, -no-color                         Disable colors in output
-    -nt, -new-templates                    Only run newly added templates
-    -nm, -no-meta                          Don't display metadata for the matches
-    -no-interactsh                         Do not use interactsh server for blind interaction polling
-    -o, -output string                     File to write output to (optional)
-    -page-timeout int                      Seconds to wait for each page in headless (default 20)
-    -passive                               Enable Passive HTTP response processing mode
-    -project                               Use a project folder to avoid sending same request multiple times
-    -project-path string                   Use a user defined project folder, temporary folder is used if not specified but enabled
-    -proxy-socks-url string                URL of the proxy socks server
-    -proxy-url string                      URL of the proxy server
-    -r, -resolvers string                  File containing resolver list for nuclei
-    -rl, -rate-limit int                   Maximum requests to send per second (default 150)
-    -rc, -report-config string             Nuclei Reporting Module configuration file
-    -rdb, -report-db string                Local Nuclei Reporting Database (Always use this to persistent report data)
-    -retries int                           Number of times to retry a failed request (default 1)
-    -se, -sarif-export string              File to export results in sarif format
-    -show-browser                          Show the browser on the screen
-    -si, -stats-interval int               Number of seconds between each stats line (default 5)
-    -silent                                Show only results in output
-    -spm, -stop-at-first-path              Stop processing http requests at first match (this may break template/workflow logic)
-    -stats                                 Display stats of the running scan
-    -system-resolvers                      Use system dns resolving as error fallback
-    -t, -templates value                   Templates to run, supports single and multiple templates using directory.
-    -tags value                            Tags to execute templates for
-    -u, -target string                     URL to scan with nuclei
-    -tv, -templates-version                Shows the installed nuclei-templates version
-    -timeout int                           Time to wait in seconds before timeout (default 5)
-    -tl                                    List available templates
-    -trace-log string                      File to write sent requests trace log
-    -ud, -update-directory string          Directory storing nuclei-templates (default /root/nuclei-templates)
-    -ut, -update-templates                 Download / updates nuclei community templates
-    -v, -verbose                           Show verbose output
-    -version                               Show version of nuclei
-    -w, -workflows value                   Workflows to run for nuclei
+    -H, -header value                  Custom Header.
+    -author value                      Templates to run based on author
+    -bs, -bulk-size int                Maximum Number of hosts analyzed in parallel per template (default 25)
+    -c, -concurrency int               Maximum Number of templates executed in parallel (default 10)
+    -config string                     Nuclei configuration file
+    -debug                             Debugging request and responses
+    -debug-req                         Debugging request
+    -debug-resp                        Debugging response
+    -et, -exclude value                Templates to exclude, supports single and multiple templates using directory.
+    -etags, -exclude-tags value        Exclude templates with the provided tags
+    -headless                          Enable headless browser based templates support
+    -impact, -severity value           Templates to run based on severity
+    -irr, -include-rr                  Write requests/responses for matches in JSON output
+    -include-tags value                Tags to force run even if they are in denylist
+    -include-templates value           Templates to force run even if they are in denylist
+    -interactions-cache-size int       Number of requests to keep in interactions cache (default 5000)
+    -interactions-cooldown-period int  Extra time for interaction polling before exiting (default 5)
+    -interactions-eviction int         Number of seconds to wait before evicting requests from cache (default 60)
+    -interactions-poll-duration int    Number of seconds before each interaction poll request (default 5)
+    -interactsh-url string             Self Hosted Interactsh Server URL (default https://interact.sh)
+    -json                              Write json output to files
+    -l, -list string                   List of URLs to run templates on
+    -me, -markdown-export string       Directory to export results in markdown format
+    -metrics                           Expose nuclei metrics on a port
+    -metrics-port int                  Port to expose nuclei metrics on (default 9092)
+    -nc, -no-color                     Disable colors in output
+    -nt, -new-templates                Only run newly added templates
+    -nm, -no-meta                      Don't display metadata for the matches
+    -no-interactsh                     Do not use interactsh server for blind interaction polling
+    -o, -output string                 File to write output to (optional)
+    -page-timeout int                  Seconds to wait for each page in headless (default 20)
+    -passive                           Enable Passive HTTP response processing mode
+    -project                           Use a project folder to avoid sending same request multiple times
+    -project-path string               Use a user defined project folder, temporary folder is used if not specified but enabled
+    -proxy-socks-url string            URL of the proxy socks server
+    -proxy-url string                  URL of the proxy server
+    -r, -resolvers string              File containing resolver list for nuclei
+    -rl, -rate-limit int               Maximum requests to send per second (default 150)
+    -rc, -report-config string         Nuclei Reporting Module configuration file
+    -rdb, -report-db string            Local Nuclei Reporting Database (Always use this to persistent report data)
+    -retries int                       Number of times to retry a failed request (default 1)
+    -se, -sarif-export string          File to export results in sarif format
+    -show-browser                      Show the browser on the screen
+    -si, -stats-interval int           Number of seconds between each stats line (default 5)
+    -silent                            Show only results in output
+    -spm, -stop-at-first-path          Stop processing http requests at first match (this may break template/workflow logic)
+    -stats                             Display stats of the running scan
+    -stats-json                        Write stats output in JSON format
+    -system-resolvers                  Use system dns resolving as error fallback
+    -t, -templates value               Templates to run, supports single and multiple templates using directory.
+    -tags value                        Tags to execute templates for
+    -u, -target string                 URL to scan with nuclei
+    -tv, -templates-version            Shows the installed nuclei-templates version
+    -timeout int                       Time to wait in seconds before timeout (default 5)
+    -tl                                List available templates
+    -trace-log string                  File to write sent requests trace log
+    -ud, -update-directory string      Directory storing nuclei-templates (default /Users/geekboy/nuclei-templates)
+    -ut, -update-templates             Download / updates nuclei community templates
+    -v, -verbose                       Show verbose output
+    -validate                          Validate the passed templates to nuclei
+    -version                           Show version of nuclei
+    -vv                                Display Extra Verbose Information
+    -w, -workflows value               Workflows to run for nuclei
     ```
 
 ## Running **Nuclei**
 
-Nuclei templates can be executed in multiple ways, currently using **tags, templates, severity** and **workflows**.
+Nuclei templates can be primarily executed in two ways,
+
+1) **Templates** (`-t/templates`)
+
+As default, all the templates (except nuclei-ignore list) gets executed from default template installation path.
+
+```sh
+nuclei -u https://example.com
+```
+
+Custom template directory or multiple template directory can be executed as follows,
+
+```sh
+nuclei -u https://example.com -t cves/ -t exposures/
+```
+
+Similarly, Templates can be executed against list of URLs.
+
+```sh
+nuclei -list http_urls.txt
+```
+
+2) **Workflows** (`-w/workflows`)
+
+```sh
+nuclei -u https://example.com -w workflows/
+```
+
+Similarly, Workflows can be executed against list of URLs.
+
+```sh
+nuclei -list http_urls.txt -w workflows/wordpress-workflow.yaml
+```
+
+### Nuclei **Filters**
+
+Nuclei engine supports three basic filters to customize template execution.
 
 
-??? info "Running nuclei with templates"
+1. Tags (`-tags`)
 
-    **Templates** flag is used to provide template file or/and directory, single or multiple templates or directory can be used using multiple **t** flag inputs.
+    Filter based on tags field available in the template.
 
-    !!! check "Running nuclei with single template"
-    
-    ```
-    nuclei -t exposures/configs/git-config.yaml -l urls.txt
-    ```
-    
-    !!! check "Running nuclei with template directory"
-    
-    ```
-    nuclei -t cves/2021/ -l urls.txt
-    ```
-    
-    !!! check "Running nuclei with multiple template directory"
-    
-    ```
-    nuclei -t cves/2020/ -t exposed-tokens -t misconfiguration -l urls.txt
-    ```
+2. Severity (`-severity`)
 
-??? info "Running nuclei using tags"
-    
-    **Tags** can be used for template execution with or without the need of template directory/flag, if **templates/t** flag is used with `tags`, the tags will be applied on the particular template directory, otherwise, it will run all the templates with matched tag from default template download location (`$HOME/nuclei-templates/`).
+    Filter based on severity field available in the template.
 
-    !!! check "Running nuclei with single tags"
+3. Author (`-author`)
 
-    ```
-    nuclei -tags cve -l urls.txt
-    ```
+    Filter based on author field available in the template.
 
-    ```
-    nuclei -tags network -l urls.txt
-    ```
+As default, Filters are applied on installed path of templates and can be customized with manual template path input.
 
-    ```
-    nuclei -tags logs -l urls.txt
-    ```
+For example, below command will run all the templates installed at `~/nuclei-templates/` directory and has `cve` tags in it.
 
-    !!! check "Running nuclei with tags along with directory"
+```sh
+nuclei -u https://example.com -tags cve
+```
 
-    ```
-    nuclei -tags config -t exposures/ -l urls.txt
-    ```
+And this example will run all the templates available under `~/nuclei-templates/exposures/` directory and has `config` tag in it.
 
-    !!! check "Running nuclei with multiple tags"
+```sh
+nuclei -u https://example.com -tags config -t exposures/
+```
 
-    ```
-    nuclei -tags lfi,ssrf,rce -t cves/ -l urls.txt
-    ````
+Multiple filters works together with AND condition, below example runs all template with `cve` tags AND has `critical` OR `high` severity AND `geeknik` as author of template.
 
-    ```
-    nuclei -tags xss -t vulnerabilities/ -l urls.txt
-    ````
+```sh
+nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
+```
 
-??? info "Running nuclei with workflows"
+Similarly, all filters are supported in workflows as well.
 
-    **Workflows** are the best possible way to manage and run multiple templates using a single workflow file for custom and dedicated workflow depending on the project and test case.
 
-    !!! check "Running nuclei with workflow"
+```sh
+nuclei -w workflows/wordpress-workflow.yaml -severity critical,high -list http_urls.txt
+```
 
-    ```
-    nuclei -w workflows/wordpress-workflow.yaml -l wordpress_urls.txt
-    ```
+!!! info "Workflows"
 
-    !!! check "Running nuclei with multiple workflow"
+    In Workflows, Nuclei filters are applied on templates or sub-templates running via workflows, not on the workflows itself.
 
-    ```
-    nuclei -w workflows/wordpress-workflow.yaml -w workflows/jira-workflow.yaml -l urls.txt
-    ```
-
-??? info "Running nuclei with severity"
-
-    **Severity** flag is used to run templates with specific or multiple severities altogether. 
-
-    !!! check "Running nuclei with single severity"
-
-    ```
-    nuclei -t cves/ -severity critical -l urls.txt
-    ```
-
-    !!! check "Running nuclei with multiple severity"
-
-    ```
-    nuclei -t cves/ -t vulnerabilities -severity critical,high -l urls.txt
-    ```
-
-??? info "Running nuclei with docker"
-
-    !!! check "Running nuclei in docker container"
-    
-    ```
-    echo hackerone.com | docker run -v $HOME/nuclei-templates:/root/nuclei-templates -i projectdiscovery/nuclei:v2.3.0 -t dns > output.txt
-    ``` 
-
-!!! warning
-    Nuclei accept **URLs** as input format in order to execute HTTP templates.
-
-!!! tip
-    [httpx](https://github.com/projectdiscovery/httpx) can be used to generate URLs from subdomains as a input for nuclei.
-
-## Rate **Limits**
+### Rate **Limits**
 
 Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
 
@@ -269,7 +246,7 @@ Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 !!! tip
     `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
 
-## Traffic **Tagging**
+### Traffic **Tagging**
 
 Many BugBounty platform/programs requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
 
@@ -291,52 +268,66 @@ Many BugBounty platform/programs requires you to identify the HTTP traffic you m
     ```
 
 
-## Template **Exclusion**
+### Template **Exclusion**
 
-Nuclei supports multiple ways to exclude templates for the execution, as default **nuclei excludes two type of templates**.
+Nuclei supports a variety of methods for excluding / blocking templates from execution. By default, **nuclei** excludes the tags/templates listed below from execution to avoid unexpected fuzz based scans and some that are not supposed to run for mass scan, and these can be easily overwritten  with nuclei configuration file / flags.
 
-- [Template from ignore list](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)
-- Templates with `dos` tags
+- Default [Template ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore) list.
 
 
-!!! abstract "Why nuclei-ignore?"
-    
-    To ensure templates that are not meant to be used for generic scan, including fuzzing, bruteforce, headless, templates that have **severe** impact, e.g., DOS.
+!!! danger ""
 
-Nuclei also support template exclusion at run time using `-exclude` and `-exclude-tags` flag.
+    **nuclei-ignore** file is not supposed to be updated / edited / removed by user, to overwrite default ignore list, utilize [nuclei configuration](https://nuclei.projectdiscovery.io/nuclei/get-started/#nuclei-config) file. 
 
-**exclude** flag is used to exclude single/multiple templates and directory, multiple `-exclude` flag can be used to provide multiple values.
+Nuclei engine supports two ways to manually exclude templates from scan,
 
-!!! info "Running nuclei with single template exclusion"
+1. Exclude Templates (`-exclude-templates/exclude`)
+
+    **exclude-templates** flag is used to exclude single or multiple templates and directory, multiple `-exclude-templates` flag can be used to provide multiple values.
+
+
+2. Exclude Tags (`-exclude-tags/etags`)
+
+    **exclude-tags** flag is used to exclude templates based in defined tags, single or multiple can be used to exclude templates.
+
+
+!!! info "Example of excluding single template"
 
     ```
-    nuclei -l urls.txt -t cves/ -exclude cves/2020/CVE-2020-XXXX.yaml
+    nuclei -list urls.txt -t cves/ -exclude-templates cves/2020/CVE-2020-XXXX.yaml
     ```
 
-!!! info "Running nuclei with multiple template exclusion"
+!!! info "Example of multiple template exclusion"
 
     ```
-    nuclei -l urls.txt -t nuclei-templates/ -exclude exposed-panels/ -exclude technologies
+    nuclei -list urls.txt -exclude-templates exposed-panels/ -exclude-templates technologies/
     ```
 
-**exclude-tags** flag is used to exclude templates with given tags, multiple tags can be excluded using comma separate values.
-
-!!! info "Running nuclei with single tags exclusion"
+!!! info "Example of excluding templates with single tag"
 
     ```
     nuclei -l urls.txt -t cves/ -etags xss
     ```
 
-!!! info "Running nuclei with multiple tags exclusion"
+!!! info "Example of excluding templates with multiple tags"
 
     ```
     nuclei -l urls.txt -t cves/ -etags sqli,rce
     ```
 
+To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore), Nuclei engine supports **include-tags** / **include-templates** flag.
+
+!!! info "Example of running blocked templates"
+
+    ```
+    nuclei -l urls.txt -include-tags iot,misc,fuzz
+    ```
+
+We can update the nuclei configuration file to include these tags for all scans.
 
 ## Nuclei **Config**
 
-!!! abstract "goflags"
+!!! abstract ""
 
     Since release of [v.2.3.2](https://blog.projectdiscovery.io/nuclei-v2-3-0-release/) nuclei uses [goflags](https://github.com/projectdiscovery/goflags) for clean CLI experience and long/short formatted flags.
 
@@ -347,29 +338,37 @@ Nuclei also support template exclusion at run time using `-exclude` and `-exclud
 Here is an example config file:-
 
 ```yaml
-# Headers to include with each request.
+# Headers to include with all HTTP request
 header:
   - 'X-BugBounty-Hacker: h1/geekboy'
-  - 'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64)'
 
-# Templates with tags to run
-tags: rce,lfi
-
-# Templates with tags to exclude
-exclude-tags: info
-
-# Templates to scan
+# Directory based template execution
 templates:
   - cves/
   - vulnerabilities/
   - misconfiguration/
 
-# Templates to exclude scan
-exclude:
+# Tags based template execution
+tags: exposures,cve
+
+# Templates Filters
+tags: exposures,cve
+author: geeknik,pikpikcu,dhiyaneshdk
+severity: critical,high,medium
+
+# Template Allowlist
+include-tags: dos,fuzz # Tag based inclusion (allows to overwrite nuclei-ignore list)
+include-templates: # Template based inclusion (allows to overwrite nuclei-ignore list)
   - vulnerabilities/xxx
   - misconfiguration/xxxx
 
-# Rate limit configuration for scan
+# Template Denylist
+exclude-tags: info # Tag based exclusion
+exclude-templates: # Template based exclusion
+  - vulnerabilities/xxx
+  - misconfiguration/xxxx
+
+# Rate Limit configuration
 rate-limit: 500
 bulk-size: 50
 concurrency: 50
@@ -484,6 +483,18 @@ curl -s localhost:9092/metrics | jq .
 }
 ```
 
+## Passive Scan
+
+Nuclei engine supports passive mode scanning for HTTP based template utilizing file support, with this support we can run HTTP based templates against locally stored HTTP response data collected from any other tool.
+
+```sh
+nuclei -passive -target http_data
+```
+
+!!! info ""
+
+    Passive mode support is limited for templates having `{{BasedURL}}` or `{{BasedURL/}}` as base path.
+    
 ## **Code** Contribution
 
 [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates) are the base of the nuclei project. We appreciate it if you can write and submit new templates to keep this project alive, and one of the reasons to keep us motivated to keep working on this project. 
