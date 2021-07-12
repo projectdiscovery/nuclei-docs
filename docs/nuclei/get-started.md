@@ -90,7 +90,6 @@ This will display help for the tool. Here are all the switches it supports.
     -bs, -bulk-size int                    Maximum Number of hosts analyzed in parallel per template (default 25)
     -c, -concurrency int                   Maximum Number of templates executed in parallel (default 10)
     -config string                         Nuclei configuration file
-    -de, -disk-export string               Directory on disk to export reports in markdown to
     -debug                                 Debugging request and responses
     -debug-req                             Debugging request
     -debug-resp                            Debugging response
@@ -103,9 +102,10 @@ This will display help for the tool. Here are all the switches it supports.
     -interactions-cooldown-period int      Extra time for interaction polling before exiting (default 5)
     -interactions-eviction int             Number of seconds to wait before evicting requests from cache (default 60)
     -interactions-poll-duration int        Number of seconds before each interaction poll request (default 5)
-    -interactsh-url string                 Interactsh Server URL (default https://interact.sh)
+    -interactsh-url string                 Self Hosted Interactsh Server URL (default https://interact.sh)
     -json                                  Write json output to files
     -l, -list string                       List of URLs to run templates on
+    -me, -markdown-export string           Directory to export results in markdown format
     -metrics                               Expose nuclei metrics on a port
     -metrics-port int                      Port to expose nuclei metrics on (default 9092)
     -nc, -no-color                         Disable colors in output
@@ -124,6 +124,7 @@ This will display help for the tool. Here are all the switches it supports.
     -rc, -report-config string             Nuclei Reporting Module configuration file
     -rdb, -report-db string                Local Nuclei Reporting Database (Always use this to persistent report data)
     -retries int                           Number of times to retry a failed request (default 1)
+    -se, -sarif-export string              File to export results in sarif format
     -show-browser                          Show the browser on the screen
     -si, -stats-interval int               Number of seconds between each stats line (default 5)
     -silent                                Show only results in output
@@ -270,7 +271,7 @@ Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 
 ## Traffic **Tagging**
 
-Many BugBounty platform/programs/ requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
+Many BugBounty platform/programs requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
 
 
 !!! info "Setting custom header using config file"
@@ -449,12 +450,12 @@ nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
 
 **<ins>Markdown Export</ins>**
 
-Nuclei supports markdown export of valid findings with `-de, -disk-export` flag, this flag takes directory as input to store markdown formatted reports.
+Nuclei supports markdown export of valid findings with `-me, -markdown-export` flag, this flag takes directory as input to store markdown formatted reports.
 
-Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-de`.
+Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-me`.
 
 ```bash
-nuclei -l urls.txt -t cves/ -irr -disk-export reports
+nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 ```
 
 ## Scan **Metrics**
