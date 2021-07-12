@@ -374,7 +374,7 @@ bulk-size: 50
 concurrency: 50
 ```
 
-Once configured, **config file be used as default**, additionally multiple config file can be also provided using `-config` flag.
+Once configured, **config file be used as default**, additionally custom config file can be also provided using `-config` flag.
 
 !!! info "Running nuclei with custom config file"
 
