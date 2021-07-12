@@ -1,7 +1,7 @@
 site_name: Nuclei - Community Powered Vulnerability Scanner
 site_description: Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.
 site_url: https://nuclei.projectdiscovery.io
-repo_url: https://github.com/projectdiscovery/nuclei-docs/
+repo_url: https://github.com/projectdiscovery/nuclei/
 copyright: Copyright &copy; 2021 ProjectDiscovery, Inc.
 
 # Configuration
@@ -94,7 +94,6 @@ nav:
   - Getting Started:
       - Index: nuclei/get-started.md
       - Features: nuclei/get-started/#nuclei-features
-      - Uses: nuclei/get-started/#using-nuclei
       - Contribution: nuclei/get-started/#code-contribution
       - License: nuclei/get-started/#license
 
@@ -107,7 +106,6 @@ nav:
           - HTTP fuzzing: templating-guide/protocols/http#http-fuzzing
           - Unsafe HTTP requests: templating-guide/protocols/http#unsafe-http-requests
           - Advance Fuzzing: templating-guide/protocols/http#advance-fuzzing
-          - Offline HTTP: templating-guide/protocols/http#advance-fuzzing
       - Headless: templating-guide/protocols/headless.md
       - Network: templating-guide/protocols/network.md
       - DNS: templating-guide/protocols/dns.md
