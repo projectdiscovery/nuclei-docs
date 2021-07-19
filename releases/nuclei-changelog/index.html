@@ -1,0 +1,1846 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.">
+      
+      
+        <link rel="canonical" href="https://nuclei.projectdiscovery.io/releases/nuclei-changelog/">
+      
+      
+      <link rel="shortcut icon" href="../../static/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Nuclei - Nuclei - Community Powered Vulnerability Scanner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.18dbb20c.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.0ec9b792.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-165996103-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-header-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../static/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Nuclei - Community Powered Vulnerability Scanner
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Nuclei
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/projectdiscovery/nuclei/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../nuclei/get-started/" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../templating-guide/" class="md-tabs__link">
+          Templating Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../template-examples/http/" class="md-tabs__link">
+          Template Examples
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Releases
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../faq/nuclei/" class="md-tabs__link">
+          FAQ
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../static/logo.png" alt="logo">
+
+    </a>
+    Nuclei - Community Powered Vulnerability Scanner
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/projectdiscovery/nuclei/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/#nuclei-features" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/#code-contribution" title="Contribution" class="md-nav__link">
+      Contribution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/#license" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Templating Guide
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Templating Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Templating Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/#template-details" title="Template Details" class="md-nav__link">
+      Template Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http/" title="Base requests" class="md-nav__link">
+      Base requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#raw-http-requests" title="Raw requests" class="md-nav__link">
+      Raw requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#http-fuzzing" title="HTTP fuzzing" class="md-nav__link">
+      HTTP fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#unsafe-http-requests" title="Unsafe HTTP requests" class="md-nav__link">
+      Unsafe HTTP requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#advance-fuzzing" title="Advance Fuzzing" class="md-nav__link">
+      Advance Fuzzing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8">
+    
+    <label class="md-nav__link" for="nav-3-8">
+      Operators
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Operators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Operators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/operators/matchers/" title="Matchers" class="md-nav__link">
+      Matchers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/operators/extractors/" title="Extractors" class="md-nav__link">
+      Extractors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/interactsh/" title="OOB Testing" class="md-nav__link">
+      OOB Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/helper-functions/" title="Helper Functions" class="md-nav__link">
+      Helper Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/preprocessors/" title="Preprocessors" class="md-nav__link">
+      Preprocessors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Template Examples
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Template Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Template Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-raw/" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-smuggling/" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-fuzzing/" title="HTTP Payloads" class="md-nav__link">
+      HTTP Payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-race-conditions/" title="Race Condition" class="md-nav__link">
+      Race Condition
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Releases
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Releases" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Nuclei
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Nuclei" class="md-nav__link md-nav__link--active">
+      Nuclei
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v237-10-may-2021" class="md-nav__link">
+    Nuclei v2.3.7 - 10 May 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v236-4-may-2021" class="md-nav__link">
+    Nuclei v2.3.6 - 4 May 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v235-28-april-2021" class="md-nav__link">
+    Nuclei v2.3.5 - 28 April 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v234-2-april-2021" class="md-nav__link">
+    Nuclei v2.3.4 - 2 April 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v233-1-april-2021" class="md-nav__link">
+    Nuclei v2.3.3 - 1 April 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v232-22-march-2021" class="md-nav__link">
+    Nuclei v2.3.2 - 22 March 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v231-14-march-2021" class="md-nav__link">
+    Nuclei v2.3.1 - 14 March 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v230-10-march-2021" class="md-nav__link">
+    Nuclei v2.3.0 - 10 March 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v220-20-nov-2020" class="md-nav__link">
+    Nuclei v2.2.0 - 20 Nov 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v211" class="md-nav__link">
+    Nuclei v2.1.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v210" class="md-nav__link">
+    Nuclei v2.1.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v204" class="md-nav__link">
+    Nuclei v2.0.4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v203" class="md-nav__link">
+    Nuclei v2.0.3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v202" class="md-nav__link">
+    Nuclei v2.0.2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v201" class="md-nav__link">
+    Nuclei v2.0.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v200" class="md-nav__link">
+    Nuclei v2.0.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v117" class="md-nav__link">
+    Nuclei v1.1.7
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v116" class="md-nav__link">
+    Nuclei v1.1.6
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v115" class="md-nav__link">
+    Nuclei v1.1.5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v114" class="md-nav__link">
+    Nuclei v1.1.4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v113" class="md-nav__link">
+    Nuclei v1.1.3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v112" class="md-nav__link">
+    Nuclei v1.1.2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v111" class="md-nav__link">
+    Nuclei v1.1.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v110" class="md-nav__link">
+    Nuclei v1.1.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v101" class="md-nav__link">
+    Nuclei v1.0.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v100" class="md-nav__link">
+    Nuclei v1.0.0
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../templates-changelog/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      FAQ
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        FAQ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/nuclei/" title="Nuclei FAQ" class="md-nav__link">
+      Nuclei FAQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/templates/" title="Templates FAQ" class="md-nav__link">
+      Templates FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v237-10-may-2021" class="md-nav__link">
+    Nuclei v2.3.7 - 10 May 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v236-4-may-2021" class="md-nav__link">
+    Nuclei v2.3.6 - 4 May 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v235-28-april-2021" class="md-nav__link">
+    Nuclei v2.3.5 - 28 April 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v234-2-april-2021" class="md-nav__link">
+    Nuclei v2.3.4 - 2 April 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v233-1-april-2021" class="md-nav__link">
+    Nuclei v2.3.3 - 1 April 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v232-22-march-2021" class="md-nav__link">
+    Nuclei v2.3.2 - 22 March 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v231-14-march-2021" class="md-nav__link">
+    Nuclei v2.3.1 - 14 March 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v230-10-march-2021" class="md-nav__link">
+    Nuclei v2.3.0 - 10 March 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v220-20-nov-2020" class="md-nav__link">
+    Nuclei v2.2.0 - 20 Nov 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v211" class="md-nav__link">
+    Nuclei v2.1.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v210" class="md-nav__link">
+    Nuclei v2.1.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v204" class="md-nav__link">
+    Nuclei v2.0.4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v203" class="md-nav__link">
+    Nuclei v2.0.3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v202" class="md-nav__link">
+    Nuclei v2.0.2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v201" class="md-nav__link">
+    Nuclei v2.0.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v200" class="md-nav__link">
+    Nuclei v2.0.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v117" class="md-nav__link">
+    Nuclei v1.1.7
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v116" class="md-nav__link">
+    Nuclei v1.1.6
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v115" class="md-nav__link">
+    Nuclei v1.1.5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v114" class="md-nav__link">
+    Nuclei v1.1.4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v113" class="md-nav__link">
+    Nuclei v1.1.3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v112" class="md-nav__link">
+    Nuclei v1.1.2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v111" class="md-nav__link">
+    Nuclei v1.1.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v110" class="md-nav__link">
+    Nuclei v1.1.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v101" class="md-nav__link">
+    Nuclei v1.0.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-v100" class="md-nav__link">
+    Nuclei v1.0.0
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/projectdiscovery/nuclei/edit/master/docs/releases/nuclei-changelog.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h2 id="nuclei-v237-10-may-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.7">Nuclei v2.3.7 - 10 May 2021</a><a class="headerlink" href="#nuclei-v237-10-may-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Improvements to interactsh integration</li>
+<li>Fixed fatal error with interactsh client</li>
+</ul>
+</div>
+<h2 id="nuclei-v236-4-may-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.6">Nuclei v2.3.6 - 4 May 2021</a><a class="headerlink" href="#nuclei-v236-4-may-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li><a href="https://blog.projectdiscovery.io/nuclei-interactsh-integration/">Interactsh integration</a> into Nuclei</li>
+<li>Improved support for custom host header w/ template and CLI flag</li>
+</ul>
+</div>
+<h2 id="nuclei-v235-28-april-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.5">Nuclei v2.3.5 - 28 April 2021</a><a class="headerlink" href="#nuclei-v235-28-april-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fix for not setting custom user agent in templates by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/yabeow" title="GitHub User: yabeow">@yabeow</a></li>
+<li>Fix for missing IP in the JSON when URLs contain hostname:port by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/seb-elttam" title="GitHub User: seb-elttam">@seb-elttam</a></li>
+<li>Fix for temporary file cleanups</li>
+</ul>
+</div>
+<h2 id="nuclei-v234-2-april-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.4">Nuclei v2.3.4 - 2 April 2021</a><a class="headerlink" href="#nuclei-v234-2-april-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Added improved template exclusion support using tags.</li>
+<li>Fixed errors listing with excluded templates.</li>
+</ul>
+</div>
+<h2 id="nuclei-v233-1-april-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.3">Nuclei v2.3.3 - 1 April 2021</a><a class="headerlink" href="#nuclei-v233-1-april-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed a bug with <code>.nuclei-ignore</code> file update</li>
+<li>Fixed a bug and removed <code>random-agent</code> flag (now used as default)</li>
+</ul>
+</div>
+<h2 id="nuclei-v232-22-march-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.2">Nuclei v2.3.2 - 22 March 2021</a><a class="headerlink" href="#nuclei-v232-22-march-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li><strong>Added markdown export to disk in the reporting module (<code>-de reports</code>)</strong></li>
+<li>Fixed body length error with report integration module.</li>
+<li>Fixed matched counter bug in metrics endpoint.</li>
+<li>Fixed config file parser bug.</li>
+<li>Fixed bug with <code>nuclei-ignore</code> file.</li>
+<li>Fixed a bug with stats counter.</li>
+<li>Fixed a bug with running newly added templates (<code>-nt</code> flag)</li>
+<li>Fixed a but making all workflows to run on running single workflow</li>
+<li>Fixed panic crash with DNS module.</li>
+<li>Fixed a bug to exclude timestamp when <code>no-meta</code> flag is used.</li>
+<li>Fixed crash when running with a non-root user.</li>
+</ul>
+</div>
+<h2 id="nuclei-v231-14-march-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.1">Nuclei v2.3.1 - 14 March 2021</a><a class="headerlink" href="#nuclei-v231-14-march-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed a bug with <code>severity</code> flag parsing</li>
+<li>Fixed panic crash with http status codes</li>
+<li>Fixed retries in DNS requests failing</li>
+<li>Added <code>exclude-tags/etags</code> support, <code>dos</code> tag will be excluded as default.</li>
+<li>Added support to severity using tags, (-tags low,high)</li>
+<li>Added issue-tracker-config file</li>
+</ul>
+</div>
+<h2 id="nuclei-v230-10-march-2021"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.3.0">Nuclei v2.3.0 - 10 March 2021</a><a class="headerlink" href="#nuclei-v230-10-march-2021" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Added Headless chrome based templates support</li>
+<li>Added Network based (TCP) support.</li>
+<li>Added File based template support.</li>
+<li>Added HTTP Request clusterning for similar paths.</li>
+<li>Added Tag based template execution.</li>
+<li>Added Config file support.</li>
+<li>Added passive support for HTTP based templates.</li>
+<li>Added w/workflows to only run workflow based templates</li>
+<li>Added Request condition support.</li>
+<li>Added Support for system resolvers.</li>
+<li>Added Rxpressions package + expressions support to network protocols</li>
+<li>Added Hex encoding support in matchers</li>
+<li>Added Dns fallback support</li>
+<li>Added Missing rawhttp option override</li>
+<li>Added TLS protocol test</li>
+<li>Added Parallelism to workflows</li>
+<li>Added Simple json based http metrics support</li>
+<li>Added Helper functions to payloads</li>
+<li>Added <code>r</code> flag to allow users usage of custom resolvers</li>
+<li>Added Support for http response redirect chain print and match</li>
+<li>Added max http body resp size option</li>
+<li>Added Jira,Github,Gitlab issue tracker integration to nuclei</li>
+<li>Added goflags library support.</li>
+<li>Added reworked generators package</li>
+<li>Moved colorizer stuff to pkg/output</li>
+<li>Moved tracefile to pkg/output + misC</li>
+<li>Fixed output endpoint in unsafe request without host header</li>
+<li>Fixed multiple bugs with rawhttp</li>
+<li>Fixed rawhttp header formatting issues</li>
+<li>Fixed raw http newline formatting</li>
+<li>Fixed a bug with workflows</li>
+<li>Fixed a bug with request count.</li>
+<li>Fixed underscore in header names for kval matcher</li>
+<li>Fixed path &amp; port parsing for raw requests</li>
+</ul>
+</div>
+<h2 id="nuclei-v220-20-nov-2020"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.2.0">Nuclei v2.2.0 - 20 Nov 2020</a><a class="headerlink" href="#nuclei-v220-20-nov-2020" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Added <strong>Turbo intruder</strong> support for fuzzing</li>
+<li>Added <strong>HTTP pipeline</strong> support for fuzzing</li>
+<li>Added <strong>Connection pooling</strong> support for fuzzing</li>
+<li>Added <strong>Raw HTTP</strong> support for malformed HTTP requests.</li>
+<li>Added support for <strong>Race condition</strong> testing</li>
+<li>Added <code>§variable§</code> marker for fuzzing</li>
+<li>Added <code>stats</code> in multithreaded requests (fuzzing)</li>
+<li>Added <strong>YAML syntax support for workflows</strong></li>
+<li>Added <strong>Project file</strong> support for request reuse</li>
+<li>Added global rate limit support</li>
+<li>Added <strong>burp collaborator</strong> support</li>
+<li>Added <a href="https://github.com/projectdiscovery/hmap">hmap</a> for reducing memory uses</li>
+<li>Added <a href="https://github.com/projectdiscovery/clistats">clistats</a> in place of a progress bar</li>
+<li>Added support to <strong>DSL matcher to match each unique request</strong></li>
+<li>Added trace log (<code>-trace-log</code>) support</li>
+<li>Added <code>-templates-version</code> flag to list template version</li>
+<li>Added <code>-no-meta</code> flag to ignore meta information</li>
+<li>Added dynamic field support in the template info block</li>
+<li>Added <code>bulk-size</code> flag</li>
+<li>Added <strong>response time support to DSL</strong></li>
+<li>Added type to specify type of request</li>
+<li>Added <strong>mmh3</strong> hashing support in helper functions</li>
+<li>Added shared resolver cache among various HTTP clients</li>
+<li>Added fuzzing payloads output values to json output</li>
+<li>Added <code>.nuclei-ignore</code> file from current working directory</li>
+<li>Added comments support in <code>.nuclei-ignore</code> file</li>
+<li>Added <code>stop-at-first-match</code> flag</li>
+<li>Added flag to disable host header and content length</li>
+<li>Added host information in the JSON response by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/savushkin-yauheni" title="GitHub User: savushkin-yauheni">@savushkin-yauheni</a></li>
+<li>Updated flag <code>nC</code> to <code>no-color</code> </li>
+<li>Updated flag <code>json-requests</code> to <code>include-rr</code></li>
+<li>Updated flag <code>pbar</code> to <code>stats</code></li>
+<li>Fixed a bug with ignoring paths in the input file by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Fixed a bug with raw requests redirect</li>
+<li>Fixed a bug with debug flag to display post body</li>
+<li>Fixed a panic with trace log</li>
+</ul>
+</div>
+<h2 id="nuclei-v211"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.1.1">Nuclei v2.1.1</a><a class="headerlink" href="#nuclei-v211" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Added <strong>negative matcher support</strong></li>
+<li>Added <strong>support for severity based filtering</strong> with <code>severity</code> flag  by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Added <strong>support for template exclusions</strong> with <code>exclude</code> flag by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Added <code>.nuclei-ignore</code> file support</li>
+<li>Added <strong>rate limit per host</strong> with <code>rl</code>flag by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/CasperGN" title="GitHub User: CasperGN">@CasperGN</a> </li>
+<li>Added template list support with <code>tl</code> flag by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Added template name field in JSON output by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Added color support for severity by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Added Progress bar support with the silent flag by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li><strong>Added support for using local templates along with nuclei-templates</strong></li>
+<li>Added template preloading at the start of the scan</li>
+<li>Added support for  golangci lint by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Added JSON output support for DNS templates by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/Marmelatze" title="GitHub User: Marmelatze">@Marmelatze</a></li>
+<li>Added centralize template loaded info message, add output coloring by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Added template ID on HTTP request error message <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Added severity information in the output by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Added <strong>match groups support in regex extractor</strong></li>
+<li><strong>Fixed a failed request error on multiple URLs</strong></li>
+<li>Fixed a bug with helper function by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/organiccrap" title="GitHub User: organiccrap">@organiccrap</a></li>
+<li><strong>Fixed a bug with port conflict input with URLs and templates</strong> by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li><strong>Fixed a bug with Workflow detecting <code>No Results</code></strong> by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+<li>Fixed inconsistent output printing in the terminal</li>
+<li>Fixed No JSON output with workflows</li>
+<li>Fixed a bug with matches when multiple headers with the same name by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/CasperGN" title="GitHub User: CasperGN">@CasperGN</a> </li>
+<li>Fixed <code>No result</code> found problem with and condition by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/Marmelatze" title="GitHub User: Marmelatze">@Marmelatze</a></li>
+<li>Fixed an issue with <code>all</code> matched part by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/rykkard" title="GitHub User: rykkard">@rykkard</a></li>
+<li>Updated nuclei-templates current and outdated messages</li>
+<li>Updated template loading UI message by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/vzamanillo" title="GitHub User: vzamanillo">@vzamanillo</a></li>
+</ul>
+</div>
+<h2 id="nuclei-v210"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.1.0">Nuclei v2.1.0</a><a class="headerlink" href="#nuclei-v210" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Nuclei engine rework. </li>
+<li>Added Progress bar with live results by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Added multiple input template support by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Added in-template cookie reuse</li>
+<li>Added key-value supported extractor</li>
+<li>Added dynamic extraction and reuse</li>
+<li>Added coloring support in output results by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Added wild-card template input support by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/wdahlenburg" title="GitHub User: wdahlenburg">@wdahlenburg</a></li>
+<li>Fixed relative path issue with payloads.</li>
+<li>Fixed dockerfile go version.</li>
+</ul>
+</div>
+<h2 id="nuclei-v204"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.4">Nuclei v2.0.4</a><a class="headerlink" href="#nuclei-v204" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Better error handling for templates by <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/manuelbua" title="GitHub User: manuelbua">@manuelbua</a></li>
+<li>Fixed an issue with release binary.</li>
+</ul>
+</div>
+<h2 id="nuclei-v203"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.3">Nuclei v2.0.3</a><a class="headerlink" href="#nuclei-v203" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed bugs in raw-requests.</li>
+<li>Fixed update template issue.</li>
+</ul>
+</div>
+<h2 id="nuclei-v202"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.2">Nuclei v2.0.2</a><a class="headerlink" href="#nuclei-v202" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed an issue with failed requests.</li>
+</ul>
+</div>
+<h2 id="nuclei-v201"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.1">Nuclei v2.0.1</a><a class="headerlink" href="#nuclei-v201" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed an issue with DSL helper function.</li>
+<li>Fixed error with auto-updates Github rate limit.</li>
+<li>Fixed defaults to OR condition when no condition is specified.</li>
+</ul>
+</div>
+<h2 id="nuclei-v200"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v2.0.0">Nuclei v2.0.0</a><a class="headerlink" href="#nuclei-v200" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed raw requests newlines and allow blank request path.</li>
+<li>Added relative path and auto-template fetching support from installed directory.</li>
+<li>Added single target support.</li>
+<li>Added json output support.</li>
+<li>Chained workflow support with conditions etc.</li>
+<li>Added template updates feature with auto-updates, etc.</li>
+<li>Fixed blank output file bug.</li>
+</ul>
+</div>
+<h2 id="nuclei-v117"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.7">Nuclei v1.1.7</a><a class="headerlink" href="#nuclei-v117" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Added better verbose and debug modes.</li>
+<li>Inform user and no output file in case of 0 results.</li>
+</ul>
+</div>
+<h2 id="nuclei-v116"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.6">Nuclei v1.1.6</a><a class="headerlink" href="#nuclei-v116" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Updated default user-agent to include project details</li>
+</ul>
+</div>
+<h2 id="nuclei-v115"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.5">Nuclei v1.1.5</a><a class="headerlink" href="#nuclei-v115" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Added intruder like support (sniper/pitchfork/clusterbomb)</li>
+<li>Fuzzing with DSL helpers</li>
+<li>Fixed bug in body decompression</li>
+<li>Added global headers via CLI</li>
+</ul>
+</div>
+<h2 id="nuclei-v114"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.4">Nuclei v1.1.4</a><a class="headerlink" href="#nuclei-v114" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Small improvements.</li>
+<li>General Fixes.</li>
+</ul>
+</div>
+<h2 id="nuclei-v113"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.3">Nuclei v1.1.3</a><a class="headerlink" href="#nuclei-v113" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Complex DSL queries</li>
+<li>Raw requests</li>
+<li>Proxy (http/socks5)</li>
+</ul>
+</div>
+<h2 id="nuclei-v112"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.2">Nuclei v1.1.2</a><a class="headerlink" href="#nuclei-v112" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed a bug with DNS requests and output file.</li>
+</ul>
+</div>
+<h2 id="nuclei-v111"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.1">Nuclei v1.1.1</a><a class="headerlink" href="#nuclei-v111" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Massive code refactor, conditions support + stdin input bug fix.</li>
+<li>DNS requests support</li>
+<li>Binary Matcher support</li>
+<li>Conditional redirects support within templates.</li>
+</ul>
+</div>
+<h2 id="nuclei-v110"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.1.0">Nuclei v1.1.0</a><a class="headerlink" href="#nuclei-v110" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed go.mod issue</li>
+<li>Added extractors for custom text extraction from templates</li>
+<li>Fixed a bug with default headers</li>
+</ul>
+</div>
+<h2 id="nuclei-v101"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.0.1">Nuclei v1.0.1</a><a class="headerlink" href="#nuclei-v101" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Fixed go.mod file issue</li>
+</ul>
+</div>
+<h2 id="nuclei-v100"><a href="https://github.com/projectdiscovery/nuclei/releases/tag/v1.0.0">Nuclei v1.0.0</a><a class="headerlink" href="#nuclei-v100" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<ul>
+<li>Initial Release</li>
+</ul>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../template-examples/workflow/" title="Workflow" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Workflow
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../templates-changelog/" title="Templates" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Templates
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2021 ProjectDiscovery, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/pdnuclei" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.877163d5.min.js"></script>
+      <script src="../../assets/javascripts/bundle.1688372e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.1b3b2620.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
