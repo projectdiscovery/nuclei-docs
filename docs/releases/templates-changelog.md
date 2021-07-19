@@ -1,5 +1,157 @@
 # Changelog
 
+## [Templates v8.4.1 - 20 July 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.4.1)
+
+!!! check "Newly added templates (134)"
+
+	- cves/2021/CVE-2021-33544.yaml by @gy741
+	- cves/2021/CVE-2021-31755.yaml by @gy741
+	- cves/2021/CVE-2021-30497.yaml by @gy741
+	- cves/2021/CVE-2021-24498.yaml by @suman_kar
+	- cves/2021/CVE-2021-24472.yaml by @Suman_Kar
+	- cves/2021/CVE-2021-24389.yaml by @daffainfo
+	- cves/2021/CVE-2021-24335.yaml by @daffainfo
+	- cves/2021/CVE-2021-24320.yaml by @daffainfo
+	- cves/2021/CVE-2021-24298.yaml by @daffainfo
+	- cves/2021/CVE-2021-21803.yaml by @gy741
+	- cves/2021/CVE-2021-21802.yaml by @gy741
+	- cves/2021/CVE-2021-21801.yaml by @gy741
+	- cves/2021/CVE-2021-21307.yaml by @dhiyaneshDk
+	- cves/2020/CVE-2020-35713.yaml by @gy741
+	- cves/2020/CVE-2020-28188.yaml by @gy741
+	- cves/2020/CVE-2020-27866.yaml by @gy741
+	- cves/2020/CVE-2020-26919.yaml by @gy741
+	- cves/2020/CVE-2020-25506.yaml by @gy741
+	- cves/2020/CVE-2020-24148.yaml by @dwisiswant0
+	- cves/2020/CVE-2020-17362.yaml by @daffainfo
+	- cves/2020/CVE-2020-12054.yaml by @daffainfo
+	- cves/2019/CVE-2019-9618.yaml by @daffainfo
+	- cves/2019/CVE-2019-20085.yaml by @daffainfo
+	- cves/2019/CVE-2019-19134.yaml by @daffainfo
+	- cves/2019/CVE-2019-16525.yaml by @daffainfo
+	- cves/2019/CVE-2019-16332.yaml by @daffainfo
+	- cves/2019/CVE-2019-15713.yaml by @daffainfo
+	- cves/2019/CVE-2019-12616.yaml by @Mohammedsaneem
+	- cves/2018/CVE-2018-9118.yaml by @0x_Akoko
+	- cves/2018/CVE-2018-5316.yaml by @daffainfo
+	- cves/2018/CVE-2018-20462.yaml by @daffainfo
+	- cves/2018/CVE-2018-16059.yaml by @daffainfo
+	- cves/2018/CVE-2018-12031.yaml by @daffainfo
+	- cves/2018/CVE-2018-11709.yaml by @daffainfo
+	- cves/2017/CVE-2017-9288.yaml by @daffainfo
+	- cves/2017/CVE-2017-18536.yaml by @daffainfo
+	- cves/2017/CVE-2017-17451.yaml by @daffainfo
+	- cves/2017/CVE-2017-17059.yaml by @daffainfo
+	- cves/2017/CVE-2017-17043.yaml by @daffainfo
+	- cves/2016/CVE-2016-10960.yaml by @daffainfo
+	- cves/2016/CVE-2016-10956.yaml by @daffainfo,@0x240x23elu
+	- cves/2016/CVE-2016-1000135.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000134.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000133.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000132.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000131.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000130.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000129.yaml by @daffainfo
+	- cves/2016/CVE-2016-1000128.yaml by @daffainfo
+	- cves/2015/CVE-2015-9480.yaml by @daffainfo
+	- cves/2015/CVE-2015-7823.yaml by @0x_Akoko
+	- cves/2015/CVE-2015-1000012.yaml by @daffainfo
+	- cves/2014/CVE-2014-4513.yaml by @daffainfo
+	- cves/2013/CVE-2013-4625.yaml by @daffainfo
+	- cves/2013/CVE-2013-4117.yaml by @daffainfo
+	- cves/2013/CVE-2013-3827.yaml by @Random-Robbie
+	- cves/2013/CVE-2013-2287.yaml by @daffainfo
+	- cves/2012/CVE-2012-5913.yaml by @daffainfo
+	- cves/2012/CVE-2012-4768.yaml by @daffainfo
+	- cves/2012/CVE-2012-4273.yaml by @daffainfo
+	- cves/2012/CVE-2012-4242.yaml by @daffainfo
+	- cves/2012/CVE-2012-2371.yaml by @daffainfo
+	- cves/2012/CVE-2012-1835.yaml by @daffainfo
+	- cves/2012/CVE-2012-0901.yaml by @daffainfo
+	- cves/2011/CVE-2011-5265.yaml by @daffainfo
+	- cves/2011/CVE-2011-5181.yaml by @daffainfo
+	- cves/2011/CVE-2011-5179.yaml by @daffainfo
+	- cves/2011/CVE-2011-5107.yaml by @daffainfo
+	- cves/2011/CVE-2011-5106.yaml by @daffainfo
+	- cves/2011/CVE-2011-4926.yaml by @daffainfo
+	- cves/2011/CVE-2011-4624.yaml by @daffainfo
+	- cves/2011/CVE-2011-4618.yaml by @daffainfo
+	- cves/2011/CVE-2011-1669.yaml by @daffainfo
+	- cves/2009/CVE-2009-1558.yaml by @daffainfo
+	- vulnerabilities/oscommerce/oscommerce-rce.yaml by @Suman_Kar
+	- vulnerabilities/other/hasura-graphql-ssrf.yaml by @princechaddha
+	- vulnerabilities/other/huijietong-cloud-fileread.yaml by @princechaddha
+	- vulnerabilities/other/mirai-unknown-rce.yaml by @gy741
+	- vulnerabilities/other/optilink-ont1gew-gpon-rce.yaml by @gy741
+	- vulnerabilities/other/yapi-rce.yaml by @pikpikcu
+	- vulnerabilities/wordpress/nativechurch-wp-theme-lfd.yaml by @0x_Akoko
+	- vulnerabilities/wordpress/wordpress-woocommerce-sqli.yaml by @rootxharsh,@iamnoooob,@S1r1u5_,@cookiehanhoan,@madrobot
+	- vulnerabilities/wordpress/wordpress-wordfence-lfi.yaml by @0x_Akoko
+	- vulnerabilities/wordpress/wp-church-admin-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-custom-tables-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-finder-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-flagem-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-knews-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-memphis-documents-library-lfi.yaml by @0x_Akoko
+	- vulnerabilities/wordpress/wp-nextgen-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-phpfreechat-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-plugin-lifterlms.yaml by @pussycat0x
+	- vulnerabilities/wordpress/wp-slideshow-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-socialfit-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-super-forms.yaml by @pussycat0x
+	- default-logins/aem/adobe-aem-default-credentials.yaml by @random-robbie
+	- default-logins/dell/dell-emc-ecom-default-credentials.yaml by @Techryptic (@Tech)
+	- default-logins/hortonworks/hortonworks-smartsense-default-credentials.yaml by @Techryptic (@Tech)
+	- default-logins/idemia/idemia-biometrics-default-credentials.yaml by @Techryptic (@Tech)
+	- default-logins/paloalto/panos-default-credentials.yaml by @Techryptic (@Tech)
+	- default-logins/ricoh/ricoh-weak-password.yaml by @gy741
+	- default-logins/visionhub/visionhub-default-credentials.yaml by @Techryptic (@Tech)
+	- exposures/configs/keycloak-openid-config.yaml by @rodnt
+	- exposures/logs/exposed-glances-api.yaml by @princechaddha
+	- exposures/logs/exposed-prometheus-log.yaml by @dhiyaneshDK
+	- exposures/logs/zm-system-log-detect.yaml by @pussycat0x
+	- misconfiguration/unauthenticated-alert-manager.yaml by @dhiyaneshDK
+	- misconfiguration/unauthorized-hp-printer.yaml by @pussycat0x
+	- misconfiguration/wamp-server-configuration.yaml by @pussycat0x
+	- exposed-panels/adobe-media-server.yaml by @dhiyaneshDK
+	- exposed-panels/coldfusion-administrator-login.yaml by @dhiyaneshDK
+	- exposed-panels/cortex-xsoar-login.yaml by @dhiyaneshDK
+	- exposed-panels/dell-wyse-management-suite-login.yaml by @gy741
+	- exposed-panels/faraday-login.yaml by @dhiyaneshDK
+	- exposed-panels/fastapi-docs.yaml by @github.com/its0x08
+	- exposed-panels/pgadmin-exposure.yaml by @princechaddha
+	- exposed-panels/solarwinds-servuftp-detect.yaml by @johnk3r
+	- exposed-panels/splunk-login.yaml by @dhiyaneshDK
+	- exposed-panels/terramaster-login.yaml by @gy741
+	- iot/brother-printer-detect.yaml by @pussycat0x
+	- iot/hp-device-info-detect.yaml by @pussycat0x
+	- iot/unauthorized-brother-access-detect.yaml by @pussycat0x
+	- network/ftp-default-creds.yaml by @pussycat0x
+	- network/printers-info-leak.yaml by @pussycat0x
+	- technologies/aem-detection.yaml by @shifacyclewala,@hackergautam
+	- technologies/crush-ftp-detect.yaml by @pussycat0x
+	- technologies/default-codeigniter-page.yaml by @dhiyaneshDK
+	- technologies/default-ibm-http-server.yaml by @dhiyaneshDK
+	- technologies/node-red-detect.yaml by @pikpikcu
+	- technologies/oracle-http-server-12c.yaml by @dhiyaneshDK
+	- technologies/sap-igs-detect.yaml by @_generic_human_
+	- technologies/seeddms-detect.yaml by @pussycat0x
+	- technologies/web-ftp-detect.yaml by @pussycat0x
+	- technologies/yapi-detect.yaml by @pikpikcu
+
+
+## [Templates v8.4.0 - 11 July 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.4.0)
+
+!!! check "Newly added templates (53)"
+
+	- cves/2020/CVE-2020-29395.yaml by @daffainfo 
+	- cves/2019/CVE-2019-15889.yaml by @daffainfo 
+	- cves/2019/CVE-2019-14470.yaml by @daffainfo
+	- cves/2014/CVE-2014-9094.yaml by @daffainfo
+	- cves/2013/CVE-2013-3526.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-ambience-xss.yaml by @daffainfo
+	- vulnerabilities/wordpress/wp-securimage-xss.yaml by @daffainfo
+
 ## [Templates v8.3.9 - 10 July 2021](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v8.3.9)
 
 !!! check "Newly added templates (53)"
