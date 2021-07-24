@@ -105,7 +105,7 @@ info:
 
 workflows:
   - template: technologies/tech-detect.yaml
-    match:
+    matchers:
       - value: vbulletin
         subtemplates:
           - template: /root/vbulletin-exp1.yaml
