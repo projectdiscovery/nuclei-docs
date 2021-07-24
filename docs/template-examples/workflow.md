@@ -9,8 +9,8 @@ info:
   author: pdteam
 
 workflows:
-  - template: /root/jira-detect.yaml
-  - template: /root/confluence-detect.yaml
+  - template: technologies/jira-detect.yaml
+  - template: technologies/confluence-detect.yaml
 ```
 
 
@@ -106,12 +106,12 @@ info:
 workflows:
   - template: technologies/tech-detect.yaml
     matchers:
-      - value: vbulletin
+      - name: vbulletin
         subtemplates:
-          - template: /root/vbulletin-exp1.yaml
-          - template: /root/vbulletin-exp2.yaml
-      - value: jboss
+          - tags: vbulletin
+
+      - name: jboss
         subtemplates:
-          - template: /root/jboss-exp1.yaml
-          - template: /root/jboss-exp2.yaml
+          - tags: jboss
+
 ```
