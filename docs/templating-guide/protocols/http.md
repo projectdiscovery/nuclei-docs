@@ -449,7 +449,7 @@ requests:
           - 'Unrecognized method GPOST'
 ```
 
-More examples are available in [template-examples](https://nuclei.projectdiscovery.io/template-examples/smuggling/
+More examples are available in [template-examples](https://nuclei.projectdiscovery.io/template-examples/http-smuggling/
 ) section for smuggling templates.
 
 
