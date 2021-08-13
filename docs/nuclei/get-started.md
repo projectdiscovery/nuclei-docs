@@ -57,7 +57,7 @@
 
     !!! tip
         - Download the latest binary for your OS.
-        - Unzip the binary with `tar -xzvf nuclei-*.tar.gz`
+        - Unzip the ready to run binary.
 
 ## Nuclei **Templates**
 
