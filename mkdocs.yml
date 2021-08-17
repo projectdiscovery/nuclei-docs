@@ -131,7 +131,7 @@ nav:
       - Headless: template-examples/headless.md
       - Network: template-examples/network.md
       - Workflow: template-examples/workflow.md
-      - Helpers: template-examples/helper-function.md
+      - Helpers: template-examples/helper-functions.md
 
   - Releases:
       - Nuclei: releases/nuclei-changelog.md
