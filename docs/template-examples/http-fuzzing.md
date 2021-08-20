@@ -14,7 +14,16 @@ info:
 
 requests:
 
-  - payloads:
+  - raw:
+      - |
+        POST /?username=§username§&paramb=§password§ HTTP/1.1
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)
+        Host: {{Hostname}}
+        another_header: {{base64('§password§')}}
+        Accept: */*
+        body=test
+
+    payloads:
       username:
         - admin
 
@@ -26,18 +35,7 @@ requests:
         - 12345
         - 123456
 
-    attack: clusterbomb
-
-    # Available types: sniper, pitchfork and clusterbomb
-
-    raw:
-      - |
-        POST /?username=§username§&paramb=§password§ HTTP/1.1
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)
-        Host: {{Hostname}}
-        another_header: {{base64('§password§')}}
-        Accept: */*
-        body=test
+    attack: clusterbomb # Available: sniper,pitchfork,clusterbomb
 
     matchers:
       - type: word
@@ -60,16 +58,7 @@ requests:
 
 # HTTP Intruder fuzzing wordlist based payload support. 
 
-  - payloads:
-      param_a: payloads/prams.txt
-      param_b: payloads/paths.txt
-
-    attack: clusterbomb
-
-    # Available types: sniper, pitchfork and clusterbomb
-
-    raw:
-      # Request with simple param and header manipulation with DSL functions
+  - raw:
       - |
         POST /?param_a=§param_a§&paramb=§param_b§ HTTP/1.1
         User-Agent: §param_a§
@@ -78,8 +67,6 @@ requests:
         Accept: */*
 
         admin=test
-
-      # Request with body with DSL helper manipulation
 
       - |
         DELETE / HTTP/1.1
@@ -93,6 +80,12 @@ requests:
         Host: {{Hostname}}
 
         {{html_escape('§param_a§')}} + {{hex_encode('§param_b§'))}}
+
+    payloads:
+      param_a: payloads/prams.txt
+      param_b: payloads/paths.txt
+
+    attack: clusterbomb # Available: sniper,pitchfork,clusterbomb
 
     matchers:
       - type: word
@@ -134,9 +127,7 @@ requests:
 
         testing=parameter
 
-    # Cookie-reuse maintain the session between all request like browser. 
-
-    cookie-reuse: true
+    cookie-reuse: true # Cookie-reuse maintain the session between all request like browser. 
     matchers:
       - type: word
         words:
@@ -154,8 +145,7 @@ info:
   name: Citrix unauthenticated LFI
   author: pdteam
   severity: high
-
-  # Source:- https://github.com/jas502n/CVE-2020-8193
+  reference: https://github.com/jas502n/CVE-2020-8193
 
 requests:
   - raw:
@@ -216,20 +206,15 @@ requests:
 
         <clipermission></clipermission>
 
-    cookie-reuse: true
-
-    # Using cookie-reuse to maintain session between each request, same as browser.
+    cookie-reuse: true # Using cookie-reuse to maintain session between each request, same as browser.
 
     extractors:
       - type: regex
-        name: randkey
+        name: randkey # Variable name
         part: body
         internal: true
         regex:
           - "(?m)[0-9]{3,10}\\.[0-9]+"
-
-    # Using rand_key as dynamic variable to make use of extractors at run time.
-
 
     matchers:
       - type: regex

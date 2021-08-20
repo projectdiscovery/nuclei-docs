@@ -172,10 +172,9 @@ RAW request format also supports [various helper functions](https://nuclei.proje
 An example of the using payloads with local wordlist:
 
 ```yaml
-requests:
-
     # HTTP Intruder fuzzing using local wordlist.
-  - payloads:
+
+    payloads:
       paths: params.txt
       header: local.txt
 
@@ -184,10 +183,9 @@ requests:
 An example of the using payloads with in template wordlist support:
 
 ```yaml
-requests:
-
     # HTTP Intruder fuzzing using in template wordlist.
-  - payloads:
+
+    payloads:
       password:
         - admin
         - guest
@@ -243,18 +241,16 @@ An example of the using using `clusterbomb` attack to fuzz.
 
 ```yaml
 requests:
-  - payloads:
-      path: helpers/wordlists/prams.txt
-      header: helpers/wordlists/header.txt
-
-    # Defining HTTP fuzz attack type
-    attack: clusterbomb
-
-    raw:
+  - raw:
       - |
         POST /?file={{path}} HTTP/1.1
         User-Agent: {{header}}
         Host: {{Hostname}}
+
+    payloads:
+      path: helpers/wordlists/prams.txt
+      header: helpers/wordlists/header.txt
+    attack: clusterbomb # Defining HTTP fuzz attack type
 ```
 
 #### Unsafe HTTP Requests
@@ -287,9 +283,7 @@ requests:
         GET /post?postId=5 HTTP/1.1
         Host: {{Hostname}}
 
-    # Enables rawhttp client
-    unsafe: true
-
+    unsafe: true # Enables rawhttp client
     matchers:
       - type: dsl
         dsl:
@@ -330,24 +324,20 @@ info:
 
 requests:
 
-  - payloads:
-      path: path_wordlist.txt
+  - raw:
+      - |+
+        GET /§path§ HTTP/1.1
+        Host: {{Hostname}}
+        Accept: application/json, text/plain, */*
+        Referer: {{BaseURL}}
 
+    payloads:
+      path: path_wordlist.txt
     attack: sniper
     unsafe: true
     pipeline: true
     pipeline-max-connections: 40
     pipeline-max-workers: 25000
-
-    raw:
-      - |+
-        GET /§path§ HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0
-        Accept: application/json, text/plain, */*
-        Accept-Language: en-US,en;q=0.5
-        Referer: {{BaseURL}}
-        Connection: keep-alive        
 
     matchers:
       - type: status
@@ -374,19 +364,19 @@ info:
   severity: info
 
 requests:
-  - payloads:
-      password: password.txt
 
-    threads: 40
-    attack: sniper
-
-    raw:
+  - raw:
       - |
         GET /protected HTTP/1.1
         Host: {{Hostname}}
         Authorization: Basic {{base64('admin:§password§')}}
         User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
         Accept-Language: en-US,en;q=0.9
+
+    payloads:
+      password: password.txt
+    threads: 40
+    attack: sniper
 
     matchers-condition: and
     matchers:

@@ -37,7 +37,8 @@ info:
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}/"
+      - "{{BaseURL}}"
+
     matchers:
       - type: word
         name: php
