@@ -194,7 +194,7 @@ An example of the using payloads with in template wordlist support:
 
 **Note:-** be careful while selecting attack type, as unexpected input will break the template. 
 
-For example, if you used `clusterbomb` or `pitchfork` as attack type and defined only one variable in the payload section, template will fail to compile, as `clusterbomb` or `pitchfork` expect more then one variable to use in the template. 
+For example, if you used `clusterbomb` or `pitchfork` as attack type and defined only one variable in the payload section, template will fail to compile, as `clusterbomb` or `pitchfork` expect more than one variable to use in the template. 
 
 #### Attack mode
 
