@@ -22,7 +22,7 @@ ID must not contain spaces. This is done to allow easier output parsing.
 
 ### Information
 
-Next important piece of information about a template is the **info** block. Info block provides **name**, **author**, **description**, **severity** and **tags**. It also contain **severity** field which indicates the severity of the template, **info** block also supports dynamic fields, so one can define N number of `key: value` blocks to provide more useful information about the template. **reference** is another popular tag to define external reference links for the template.
+Next important piece of information about a template is the **info** block. Info block provides **name**, **author**, **severity**, **description**, **reference** and **tags**. It also contain **severity** field which indicates the severity of the template, **info** block also supports dynamic fields, so one can define N number of `key: value` blocks to provide more useful information about the template. **reference** is another popular tag to define external reference links for the template.
 
 Another useful tag to always add in `info` block is **tags**. This allows you to set some custom tags to a template, depending on the purpose like `cve`, `rce` etc. This allows nuclei to identify templates with your input tags and only run them.
 
@@ -34,6 +34,7 @@ info:
   author: Ice3man
   severity: medium
   description: Searches for the pattern /.git/config on passed URLs.
+  reference: https://www.acunetix.com/vulnerabilities/web/git-repository-found/
   tags: git,config
 ```
 
