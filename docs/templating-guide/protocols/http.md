@@ -40,9 +40,35 @@ requests:
 
     Variables start with `{{` and end with `}}` and are case-sensitive.
 
-    **{{BaseURL}}** - This will replace on runtime in the request by the original URL as specified in the target file.
+    **{{BaseURL}}** - This will replace on runtime in the request by the input URL as specified in the target file.
 
-    **{{Hostname}}** - Hostname variable is replaced by the hostname of the target on runtime.
+    **{{RootURL}}** - This will replace on runtime in the request by the root URL as specified in the target file.
+
+    **{{Hostname}}** - Hostname variable is replaced by the hostname including port of the target on runtime.
+
+    **{{Host}}** - This will replace on runtime in the request by the input host as specified in the target file.
+
+    **{{Port}}** - This will replace on runtime in the request by the input port as specified in the target file.
+
+    **{{Path}}** - This will replace on runtime in the request by the input path as specified in the target file.
+
+    **{{File}}** - This will replace on runtime in the request by the input filename as specified in the target file.
+
+    **{{Scheme}}** - This will replace on runtime in the request by protocol scheme as specified in the target file.
+
+An example is provided below - https://example.com:443/foo/bar.php
+
+| Variable     | Value                               |
+|--------------|-------------------------------------|
+| {{BaseURL}}  | https://example.com:443/foo/bar.php |
+| {{RootURL}}  | https://example.com:443             |
+| {{Hostname}} | example.com:443                     |
+| {{Host}}     | example.com                         |
+| {{Port}}     | 443                                 |
+| {{Path}}     | /foo                                |
+| {{File}}     | bar.php                             |
+| {{Scheme}}   | https                               |
+
 
 Some sample dynamic variable replacement examples:
 
