@@ -191,7 +191,7 @@ RAW request format also supports [various helper functions](https://nuclei.proje
 ### HTTP Fuzzing
 
 !!! info
-    Nuclei engine supports fuzzing module that allow to run various type of payloads in multiple format, It's possible to define placeholders with simple keywords (or using brackets `{{helper_function(variable)}}` in case mutator functions are needed), and perform **sniper**, **pitchfork** and **clusterbomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
+    Nuclei engine supports fuzzing module that allow to run various type of payloads in multiple format, It's possible to define placeholders with simple keywords (or using brackets `{{helper_function(variable)}}` in case mutator functions are needed), and perform **batteringram**, **pitchfork** and **clusterbomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
 
     Payloads are defined using variable name and can be referenced in the request in between `§ §` or `{{ }}` marker.
 
@@ -224,12 +224,12 @@ For example, if you used `clusterbomb` or `pitchfork` as attack type and defined
 
 #### Attack mode
 
-Nuclei engine supports multiple attack types, including `sniper` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder.
+Nuclei engine supports multiple attack types, including `batteringram` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder.
 
 <table>
   <tr>
     <th>Type</th>
-    <td>sniper</td>
+    <td>batteringram</td>
     <td>pitchfork</td>
     <td>clusterbomb</td>
 
@@ -245,8 +245,8 @@ Nuclei engine supports multiple attack types, including `sniper` which generally
   </tr>
 </table>
 
-!!! abstract "sniper"
-    The sniper attack uses only one payload set, and it replaces only one position at a time. It loops through the payload set, first replacing only the first marked position with the payload and leaving all other positions to their original value. After its done with the first position, it continues with the second position.
+!!! abstract "batteringram"
+    The battering ram attack type places the same payload value in all positions. It uses only one payload set. It loops through the payload set and replaces all positions with the payload value.
 
 
 !!! abstract "pitchfork"
@@ -359,7 +359,7 @@ requests:
 
     payloads:
       path: path_wordlist.txt
-    attack: sniper
+    attack: batteringram
     unsafe: true
     pipeline: true
     pipeline-max-connections: 40
@@ -402,7 +402,7 @@ requests:
     payloads:
       password: password.txt
     threads: 40
-    attack: sniper
+    attack: batteringram
 
     matchers-condition: and
     matchers:

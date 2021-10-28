@@ -35,7 +35,7 @@ requests:
         - 12345
         - 123456
 
-    attack: clusterbomb # Available: sniper,pitchfork,clusterbomb
+    attack: clusterbomb # Available: batteringram,pitchfork,clusterbomb
 
     matchers:
       - type: word
@@ -85,7 +85,7 @@ requests:
       param_a: payloads/prams.txt
       param_b: payloads/paths.txt
 
-    attack: clusterbomb # Available: sniper,pitchfork,clusterbomb
+    attack: clusterbomb # Available: batteringram,pitchfork,clusterbomb
 
     matchers:
       - type: word
