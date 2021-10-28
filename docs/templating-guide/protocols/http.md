@@ -163,11 +163,7 @@ requests:
     - |
         POST /path2/ HTTP/1.1
         Host: {{Hostname}}
-        Content-Length: 1
-        Origin: https://www.google.com
         Content-Type: application/x-www-form-urlencoded
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko)
-        Accept-Language: en-US,en;q=0.9
 
         a=test&b=pd
 ```
@@ -182,9 +178,6 @@ RAW request format also supports [various helper functions](https://nuclei.proje
         GET /manager/html HTTP/1.1
         Host: {{Hostname}}
         Authorization: Basic {{base64('username:password')}} # Helper function to encode input at run time.
-        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
-        Accept-Language: en-US,en;q=0.9
-        Connection: close
 ```
 
 
@@ -203,7 +196,6 @@ An example of the using payloads with local wordlist:
     payloads:
       paths: params.txt
       header: local.txt
-
 ```
 
 An example of the using payloads with in template wordlist support:
@@ -218,13 +210,13 @@ An example of the using payloads with in template wordlist support:
         - password
 ```
 
-**Note:-** be careful while selecting attack type, as unexpected input will break the template. 
+**Note:** be careful while selecting attack type, as unexpected input will break the template. 
 
 For example, if you used `clusterbomb` or `pitchfork` as attack type and defined only one variable in the payload section, template will fail to compile, as `clusterbomb` or `pitchfork` expect more than one variable to use in the template. 
 
 #### Attack mode
 
-Nuclei engine supports multiple attack types, including `batteringram` which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder.
+Nuclei engine supports multiple attack types, including `batteringram` as default type which generally used to fuzz single parameter, `clusterbomb` and `pitchfork` for fuzzing multiple parameters which works same as classical burp intruder.
 
 <table>
   <tr>
@@ -276,7 +268,7 @@ requests:
     payloads:
       path: helpers/wordlists/prams.txt
       header: helpers/wordlists/header.txt
-    attack: clusterbomb # Defining HTTP fuzz attack type
+    attack: pitchfork # Defining HTTP fuzz attack type
 ```
 
 #### Unsafe HTTP Requests
@@ -349,17 +341,16 @@ info:
   severity: info
 
 requests:
-
   - raw:
       - |+
-        GET /§path§ HTTP/1.1
+        GET /{{path}} HTTP/1.1
         Host: {{Hostname}}
-        Accept: application/json, text/plain, */*
         Referer: {{BaseURL}}
 
+    attack: batteringram
     payloads:
       path: path_wordlist.txt
-    attack: batteringram
+
     unsafe: true
     pipeline: true
     pipeline-max-connections: 40
@@ -396,13 +387,11 @@ requests:
         GET /protected HTTP/1.1
         Host: {{Hostname}}
         Authorization: Basic {{base64('admin:§password§')}}
-        User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0
-        Accept-Language: en-US,en;q=0.9
 
+    attack: batteringram
     payloads:
       password: password.txt
     threads: 40
-    attack: batteringram
 
     matchers-condition: and
     matchers:
@@ -413,7 +402,7 @@ requests:
       - type: word
         words:
           - "Unique string"
-        part: body    
+        part: body
 ```
 
 #### Smuggling
@@ -492,9 +481,6 @@ requests:
       - |
         POST /coupons HTTP/1.1
         Host: {{Hostname}}
-        Pragma: no-cache
-        Cache-Control: no-cache, no-transform
-        User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
 
         promo_code=20OFF        
 

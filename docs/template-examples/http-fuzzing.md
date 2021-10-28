@@ -56,8 +56,6 @@ info:
 
 requests:
 
-# HTTP Intruder fuzzing wordlist based payload support. 
-
   - raw:
       - |
         POST /?param_a=§param_a§&paramb=§param_b§ HTTP/1.1
@@ -81,11 +79,10 @@ requests:
 
         {{html_escape('§param_a§')}} + {{hex_encode('§param_b§'))}}
 
+    attack: clusterbomb # Available types: batteringram,pitchfork,clusterbomb
     payloads:
       param_a: payloads/prams.txt
       param_b: payloads/paths.txt
-
-    attack: clusterbomb # Available: batteringram,pitchfork,clusterbomb
 
     matchers:
       - type: word
@@ -111,19 +108,11 @@ requests:
         GET / HTTP/1.1
         Host: {{Hostname}}
         Origin: {{BaseURL}}
-        Cookie: session=12312321sdasdsa
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko)
-        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-        Accept-Language: en-US,en;q=0.9
 
       - |
         POST /testing HTTP/1.1
         Host: {{Hostname}}
         Origin: {{BaseURL}}
-        Connection: close
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko)
-        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-        Accept-Language: en-US,en;q=0.9
 
         testing=parameter
 
