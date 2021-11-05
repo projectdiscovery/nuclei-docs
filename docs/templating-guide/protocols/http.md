@@ -255,7 +255,7 @@ Nuclei engine supports multiple attack types, including `batteringram` as defaul
 
     More details [here](https://www.sjoerdlangkemper.nl/2017/08/02/burp-intruder-attack-types/). 
 
-An example of the using using `clusterbomb` attack to fuzz.
+An example of the using `clusterbomb` attack to fuzz.
 
 ```yaml
 requests:
