@@ -19,7 +19,7 @@ dns:
     matchers:
       - type: word
         words:
-          # The response must contains a CNAME record
+          # The response must contain a CNAME record
           - "IN\tCNAME"
 ```
 

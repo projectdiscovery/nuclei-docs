@@ -46,7 +46,7 @@ By default, certain extensions are excluded in nuclei file module. A list of the
 
 **max-size** parameter can be provided which limits the maximum size (in bytes) of files read by nuclei engine.
 
-As default the `max-size` value is 5MB (5242880), Files larger than the `max-size` will not be processed.
+As default the `max-size` value is 5 MB (5242880), Files larger than the `max-size` will not be processed.
 
 -----
 

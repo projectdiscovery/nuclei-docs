@@ -93,7 +93,7 @@ requests:
 
 ### Authenticated fuzzing
 
-This template makes a subsequent HTTP requests with defined requests maintaining sessions between each requests and checking for string match against response.
+This template makes a subsequent HTTP requests with defined requests maintaining sessions between each request and checking for string match against response.
 
 ```yaml
 id: multiple-raw-example
@@ -125,7 +125,7 @@ requests:
 
 ### Dynamic variable support
 
-This template makes a subsequent HTTP requests maintaining sessions between each requests, dynamically extracting data from one request and reusing them into another request using variable name and checking for string match against response.
+This template makes a subsequent HTTP requests maintaining sessions between each request, dynamically extracting data from one request and reusing them into another request using variable name and checking for string match against response.
 
 ```yaml
 id: CVE-2020-8193

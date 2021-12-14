@@ -61,7 +61,7 @@
 
 ## Nuclei **Templates**
 
-Nuclei has had built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
+Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
 
 You may still use the `update-templates` flag to update the nuclei templates at any time; automatic updates happen every 24 hours.
 
@@ -389,14 +389,14 @@ templates:
 # Tags based template execution
 tags: exposures,cve
 
-# Templates Filters
+# Template Filters
 tags: exposures,cve
 author: geeknik,pikpikcu,dhiyaneshdk
 severity: critical,high,medium
 
 # Template Allowlist
-include-tags: dos,fuzz # Tag based inclusion (allows to overwrite nuclei-ignore list)
-include-templates: # Template based inclusion (allows to overwrite nuclei-ignore list)
+include-tags: dos,fuzz # Tag based inclusion (allows overwriting nuclei-ignore list)
+include-templates: # Template based inclusion (allows overwriting nuclei-ignore list)
   - vulnerabilities/xxx
   - misconfiguration/xxxx
 
@@ -454,7 +454,7 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
 For example, to create tickets on GitHub, create a config file with the following content and replace the appropriate values:-
 
 ```yaml
-# Github contains configuration options for GitHub issue tracker
+# GitHub contains configuration options for GitHub issue tracker
 
 github: 
   username: "$user"
@@ -497,7 +497,7 @@ nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 
 ## Scan **Metrics**
 
-Nuclei expose running scan metrics on a local port `9092` when `-metrics` flag is used and can be accessed at **localhost:9092/metrics**, default port to exposes scan information is configurable using `-metrics-port` flag.
+Nuclei expose running scan metrics on a local port `9092` when `-metrics` flag is used and can be accessed at **localhost:9092/metrics**, default port to expose scan information is configurable using `-metrics-port` flag.
 
 Here is an example to query `metrics` while running nuclei as following `nuclei -t cves/ -l urls.txt -metrics`
 

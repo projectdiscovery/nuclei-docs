@@ -99,7 +99,7 @@ dns:
     matchers:
       - type: word
         words:
-          # The response must contains a CNAME record
+          # The response must contain a CNAME record
           - "IN\tCNAME"
           # and also at least 1 A record
           - "IN\tA"

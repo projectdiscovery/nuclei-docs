@@ -1,6 +1,6 @@
 ### Helper Functions Examples
 
-Nuclei has a number of helper functions that may be used to conduct various run-time operations on the request block. Here's an example template that shows how to use all of the available helper functions.
+Nuclei has a number of helper functions that may be used to conduct various run-time operations on the request block. Here's an example template that shows how to use all the available helper functions.
 
 ```yaml
 id: helper-functions-examples
@@ -15,37 +15,53 @@ requests:
       - |
         GET / HTTP/1.1
         Host: {{Hostname}}
-        01: {{len("Hello")}}
-        02: {{toupper("Hello")}}
-        03: {{tolower("Hello")}}
-        04: {{replace("Hello", "He", "Ha")}}
-        05: {{replace_regex("test", "regextomach", "replacewith")}}
-        06: {{trim("aaaHelloddd", "ad")}}
-        07: {{trimleft("aaaHelloddd", "ad")}}
-        08: {{trimright("aaaHelloddd", "ad")}}
-        09: {{trimspace("  Hello  ")}}
-        10: {{trimprefix("aaHelloaa", "aa")}}
-        11: {{trimsuffix("aaHelloaa", "aa")}}
-        12: {{reverse("ab")}}
-        13: {{base64("Hello")}}
-        14: {{base64_py("Hello")}}
-        15: {{base64_decode("SGVsbG8=")}}
-        16: {{url_encode("hxxp://projectdiscovery.io/test?a=1")}}
-        17: {{url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1")}}
-        18: {{hex_encode("aa")}}
-        19: {{hex_decode("6161")}}
-        20: {{html_escape("<body>test</body>")}}
-        21: {{html_unescape("&lt;body&gt;test&lt;/body&gt;")}}
-        22: {{md5("Hello")}}
-        23: {{sha256("Hello")}}
-        24: {{sha1("Hello")}}
-        25: {{mmh3("Hello")}}
-        26: {{contains("Hello", "lo")}}
-        27: {{regex("H([a-z]+)o", "Hello")}}
-        28: {{rand_char("charset", "badchars")}}
-        32: {{rand_text_numeric(10, "123")}}
-        31: {{rand_text_alpha(10, "aaa")}}
-        30: {{rand_text_alphanumeric(10, "aaa1")}}
-        29: {{rand_base(10, "aaaa", "abcd")}}
-        33: {{rand_int(100, 102)}}
+        01: {{base64("Hello")}}
+        02: {{base64(1234)}}
+        03: {{base64_decode("SGVsbG8=")}}
+        04: {{base64_py("Hello")}}
+        05: {{contains("Hello", "lo")}}
+        06: {{generate_java_gadget("commons-collections3.1", "wget h}}
+        07: {{gzip("Hello")}}
+        08: {{hex_decode("6161")}}
+        09: {{hex_encode("aa")}}
+        10: {{html_escape("<body>test</body>")}}
+        11: {{html_unescape("&lt;body&gt;test&lt;/body&gt;")}}
+        12: {{len("Hello")}}
+        13: {{len(5555)}}
+        14: {{md5("Hello")}}
+        15: {{md5(1234)}}
+        16: {{mmh3("Hello")}}
+        17: {{print_debug(1+2, "Hello")}}
+        18: {{rand_base(5, "abc")}}
+        19: {{rand_base(5)}}
+        20: {{rand_char("abc")}}
+        21: {{rand_char()}}
+        22: {{rand_int(1, 10)}}
+        23: {{rand_int(10)}}
+        24: {{rand_int()}}
+        25: {{rand_text_alpha(10, "abc")}}
+        26: {{rand_text_alpha(10)}}
+        27: {{rand_text_alphanumeric(10, "ab12")}}
+        28: {{rand_text_alphanumeric(10)}}
+        29: {{rand_text_numeric(10, 123)}}
+        30: {{rand_text_numeric(10)}}
+        31: {{regex("H([a-z]+)o", "Hello")}}
+        32: {{remove_bad_chars("abcd", "bc")}}
+        33: {{replace("Hello", "He", "Ha")}}
+        34: {{replace_regex("He123llo", "(\\d+)", "")}}
+        35: {{reverse("abc")}}
+        36: {{sha1("Hello")}}
+        37: {{sha256("Hello")}}
+        38: {{to_lower("HELLO")}}
+        39: {{to_upper("hello")}}
+        40: {{trim("aaaHelloddd", "ad")}}
+        41: {{trim_left("aaaHelloddd", "ad")}}
+        42: {{trim_prefix("aaHelloaa", "aa")}}
+        43: {{trim_right("aaaHelloddd", "ad")}}
+        44: {{trim_space("  Hello  ")}}
+        45: {{trim_suffix("aaHelloaa", "aa")}}
+        46: {{unix_time(10)}}
+        47: {{url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1")}}
+        48: {{url_encode("https://projectdiscovery.io/test?a=1")}}
+        49: {{wait_for(1)}}
 ```

@@ -30,7 +30,7 @@ Interactsh interactions can be used with `word`, `regex` or `dsl` matcher/extrac
 
 
 !!! abstract "interactsh_request"
-    The request that the interact.sh server recieved.
+    The request that the interact.sh server received.
 
 !!! abstract "interactsh_response"
     The response that the interact.sh server sent to the client.

@@ -34,7 +34,7 @@ matchers:
   - type: binary
     binary:
       - "504B0304" # zip archive
-      - "526172211A070100" # rar RAR archive version 5.0
+      - "526172211A070100" # RAR archive version 5.0
       - "FD377A585A0000" # xz tar.xz archive
     condition: or
     part: body
@@ -53,7 +53,7 @@ matchers:
 
 **Word** and **Regex** matchers can be further configured depending on the needs of the users.
 
-Complex matchers of type **dsl** allows to build more elaborate expressions with helper functions. These function allow access to Protocol Response which contains variety of data based on each protocol. See protocol specific documentation to learn about different returned results.
+Complex matchers of type **dsl** allows building more elaborate expressions with helper functions. These function allow access to Protocol Response which contains variety of data based on each protocol. See protocol specific documentation to learn about different returned results.
 
 
 ```yaml
