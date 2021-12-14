@@ -9,7 +9,7 @@ requests:
 ```
 
 !!! info "Method"
-    Request method can be **GET**, **POST**, **PUT**, **DELETE**, etc depending on the needs.
+    Request method can be **GET**, **POST**, **PUT**, **DELETE**, etc. depending on the needs.
 
 ```yaml
 # Method is the method for the request
@@ -86,7 +86,7 @@ Multiple paths can also be specified in one request which will be requested for 
 Headers can also be specified to be sent along with the requests. Headers are placed in form of key/value pairs. An example header configuration looks like this:
 
 ```yaml
-# headers contains the headers for the request
+# headers contain the headers for the request
 headers:
   # Custom user-agent header
   User-Agent: Some-Random-User-Agent
@@ -117,7 +117,7 @@ cookie-reuse: true
 
 #### Request Condition
 
-Request condition allows to check for condition between multiple requests for writing complex checks and exploits involving multiple HTTP request to complete the exploit chain.
+Request condition allows checking for condition between multiple requests for writing complex checks and exploits involving multiple HTTP request to complete the exploit chain.
 
 with DSL matcher, it can be utilized by adding `req-condition: true` and numbers as suffix with respective attributes, `status_code_1`, `status_code_3`, and`body_2` for example.
 
@@ -168,7 +168,7 @@ requests:
         a=test&b=pd
 ```
 
-Requests can be fine tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers.
+Requests can be fine-tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers.
 
 RAW request format also supports [various helper functions](https://nuclei.projectdiscovery.io/templating-guide/helper-functions/) letting us do run time manipulation with input. An example of the using a helper function in the header. 
 
@@ -411,7 +411,7 @@ HTTP Smuggling is a class of Web-Attacks recently made popular by [Portswiggerâ€
 
 In the open source space, detecting http smuggling is difficult particularly due to the requests for detection being malformed by nature. Nuclei is able to reliably detect HTTP Smuggling vulnerabilities utilising the [rawhttp](https://github.com/projectdiscovery/rawhttp) engine.
 
-The most basic example of a HTTP Smuggling vulnerability is CL.TE Smuggling. An example template to detect a CE.TL HTTP Smuggling vulnerability is provided below using the `unsafe: true` attribute for rawhttp based requests.
+The most basic example of an HTTP Smuggling vulnerability is CL.TE Smuggling. An example template to detect a CE.TL HTTP Smuggling vulnerability is provided below using the `unsafe: true` attribute for rawhttp based requests.
 
 ```yaml
 id: CL.TE-http-smuggling
@@ -462,7 +462,7 @@ More examples are available in [template-examples](https://nuclei.projectdiscove
 
 Race Conditions are another class of bugs not easily automated via traditional tooling. Burp Suite introduced a Gate mechanism to Turbo Intruder where all the bytes for all the requests are sent expect the last one at once which is only sent together for all requests synchronizing the send event.
 
-We have implemented **Gate** mechanism in nuclei engine and allow them run via templates which makes the testing for this specfic bug class simple and portable.
+We have implemented **Gate** mechanism in nuclei engine and allow them run via templates which makes the testing for this specific bug class simple and portable.
 
 To enable race condition check within template, `race` attribute can be set to `true` and `race_count` defines the number of simultaneous request you want to initiate.
 
@@ -494,7 +494,7 @@ requests:
           - 200
 ```
 
-You can simply replace the `POST` request with any suspected vulnerable request and change the `race_count` as per your need and it's ready to run.
+You can simply replace the `POST` request with any suspected vulnerable request and change the `race_count` as per your need, and it's ready to run.
 
 ```bash
 nuclei -t race.yaml -target https://api.target.com

@@ -1,6 +1,6 @@
 ### Basic Network Request
 
-This template connects to a network service, sends some data and reads 4 bytes from the response. Matchers are ran to identify valid response, which in this case is `PONG`.
+This template connects to a network service, sends some data and reads 4 bytes from the response. Matchers are run to identify valid response, which in this case is `PONG`.
 
 ```yaml
 id: basic-network-request
@@ -50,7 +50,7 @@ network:
 
 ### Hex Input Request
 
-This template connects to a network service, sends some data encoded in hexadecimal to the server and reads 4 bytes from the response. Matchers are ran to identify valid response, which in this case is `PONG`. The match words here are encoded in Hexadecimal, using `encoding: hex` option of matchers.
+This template connects to a network service, sends some data encoded in hexadecimal to the server and reads 4 bytes from the response. Matchers are run to identify valid response, which in this case is `PONG`. The match words here are encoded in Hexadecimal, using `encoding: hex` option of matchers.
 
 ```yaml
 id: hex-network-request
@@ -105,7 +105,7 @@ network:
 
 ### Multi-Step Requests
 
-This last example is an RCE in proFTPd which if vulnerable, allows to place arbitrary files in any directory on the server. The detection process involves a random string on each nuclei run using `{{randstr}}`, and sending multiple lines of FTP input to the vulnerable server. At the end, a successful match is detected with the presence of `Copy successful` in the response.
+This last example is an RCE in proFTPd which, if vulnerable, allows placing arbitrary files in any directory on the server. The detection process involves a random string on each nuclei run using `{{randstr}}`, and sending multiple lines of FTP input to the vulnerable server. At the end, a successful match is detected with the presence of `Copy successful` in the response.
 
 ```yaml
 id: CVE-2015-3306

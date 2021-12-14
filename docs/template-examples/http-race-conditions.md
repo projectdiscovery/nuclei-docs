@@ -37,7 +37,7 @@ requests:
 
 ### Race condition testing with multiple requests.
 
-This template makes the defined and multiple POST requests in RAW format with `threads` sets to `5`, `threads` can be utilized in race condition templates when multiple requests needs to be sent to exploit the race condition, `threads` number should be same as the number of you are making with template and not needed if you only making single request.
+This template makes the defined and multiple POST requests in RAW format with `threads` sets to `5`, `threads` can be utilized in race condition templates when multiple requests needs to be sent to exploit the race condition, `threads` number should be same as the number of you are making with template and not needed if you're only making single request.
 
 ```yaml
 id: race-condition-testing

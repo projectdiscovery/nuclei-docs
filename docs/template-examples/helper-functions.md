@@ -1,6 +1,6 @@
 ### Helper Functions Examples
 
-Nuclei has a number of helper functions that may be used to conduct various run-time operations on the request block. Here's an example template that shows how to use all of the available helper functions.
+Nuclei has a number of helper functions that may be used to conduct various run-time operations on the request block. Here's an example template that shows how to use all the available helper functions.
 
 ```yaml
 id: helper-functions-examples

@@ -2,7 +2,7 @@
 
 **Nuclei** is based on the concepts of `YAML` based template files that define how the requests will be sent and processed. This allows easy extensibility capabilities to nuclei.
 
-The templates are written in `YAML` which specifies a simple human readable format to quickly define the execution process.
+The templates are written in `YAML` which specifies a simple human-readable format to quickly define the execution process.
 
 **Guide to write your own nuclei template -**
 
@@ -22,7 +22,7 @@ ID must not contain spaces. This is done to allow easier output parsing.
 
 ### Information
 
-Next important piece of information about a template is the **info** block. Info block provides **name**, **author**, **severity**, **description**, **reference** and **tags**. It also contain **severity** field which indicates the severity of the template, **info** block also supports dynamic fields, so one can define N number of `key: value` blocks to provide more useful information about the template. **reference** is another popular tag to define external reference links for the template.
+Next important piece of information about a template is the **info** block. Info block provides **name**, **author**, **severity**, **description**, **reference** and **tags**. It also contains **severity** field which indicates the severity of the template, **info** block also supports dynamic fields, so one can define N number of `key: value` blocks to provide more useful information about the template. **reference** is another popular tag to define external reference links for the template.
 
 Another useful tag to always add in `info` block is **tags**. This allows you to set some custom tags to a template, depending on the purpose like `cve`, `rce` etc. This allows nuclei to identify templates with your input tags and only run them.
 
@@ -38,11 +38,11 @@ info:
   tags: git,config
 ```
 
-Actual requests and corresponding matchers are placed below the info block and they perform the task of making requests to target servers and finding if the template request was successful.
+Actual requests and corresponding matchers are placed below the info block, and they perform the task of making requests to target servers and finding if the template request was successful.
 
 Each template file can contain multiple requests to be made. The template is iterated and one by one the desired requests are made to the target sites.
 
 
-The best part of this is you can simply share your crafted template with your team mates, triage/security team to replicate the issue on the other side with ease.
+The best part of this is you can simply share your crafted template with your teammates, triage/security team to replicate the issue on the other side with ease.
 
 

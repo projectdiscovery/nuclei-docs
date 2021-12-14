@@ -1,6 +1,6 @@
 ### Workflows
 
-Workflows allow users to define an execution sequence for templates. The templates will be run on the defined conditions. These are the most efficient way to use nuclei, where all the templates are configured based on needs of users. This means, you can create Technology Based / Target based workflows, like Wordpress Workflow, Jira Workflow which only run when the specific technology is detected.
+Workflows allow users to define an execution sequence for templates. The templates will be run on the defined conditions. These are the most efficient way to use nuclei, where all the templates are configured based on needs of users. This means, you can create Technology Based / Target based workflows, like WordPress Workflow, Jira Workflow which only run when the specific technology is detected.
 
 If the tech stack is known, we recommend creating your custom workflows to run your scans. This leads to much lower scan times with better results.
 
@@ -43,7 +43,7 @@ workflows:
 
 #### Conditional Workflows
 
-You can also create conditional templates which execute after matching the condition from a previous template. This is mostly useful for vulnerability detection and exploitation as well as tech based detection and exploitation. Use-cases for these kind of workflows are vast and varied.
+You can also create conditional templates which execute after matching the condition from a previous template. This is mostly useful for vulnerability detection and exploitation as well as tech based detection and exploitation. Use-cases for this kind of workflows are vast and varied.
 
 **Templates based condition check**
 

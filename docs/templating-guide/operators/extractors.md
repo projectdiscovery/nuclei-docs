@@ -61,7 +61,7 @@ With a simple [copy paste in browser](https://www.scientecheasy.com/2020/07/find
 
 #### Dynamic extractor
 
-Extractors can be used to capture Dynamic Values on runtime while writing Multi-Request templates. CSRF Tokens, Session Headers, etc can be extracted and used in requests. This feature is only available in RAW request format.
+Extractors can be used to capture Dynamic Values on runtime while writing Multi-Request templates. CSRF Tokens, Session Headers, etc. can be extracted and used in requests. This feature is only available in RAW request format.
 
 Example of defining a dynamic extractor with name `api` which will capture a regex based pattern from the request.
 
@@ -97,7 +97,7 @@ extractors:
       - '<input\sname="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})"\s/>'
 ```
 
-The above extractor with name `csrf_token` will hold the value extracted (by `([[:alnum:]]{16}))` as `abcdefgh12345678`. 
+The above extractor with name `csrf_token` will hold the value extracted by `([[:alnum:]]{16})` as `abcdefgh12345678`. 
 
 If no group option is provided with this regex, the above extractor with name `csrf_html_tag` will hold the full match (by `<input name="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})" />`) as `<input name="csrf_token" type="hidden" value="abcdefgh12345678" />`.
 

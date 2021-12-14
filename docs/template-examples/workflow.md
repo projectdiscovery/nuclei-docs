@@ -16,7 +16,7 @@ workflows:
 
 ### Basic conditional workflows
 
-A condition based workflow, which first tries to detect if springboot is running on a target. If springboot is found, a list of exploits for it are ran. 
+A condition based workflow, which first tries to detect if springboot is running on a target. If springboot is found, a list of exploits executed against it. 
 
 ```yaml
 id: springboot-workflow
@@ -37,7 +37,7 @@ workflows:
 
 ### Multi condition workflows
 
-This template demostrates nested workflows with nuclei, where there's multiple levels of chaining of templates.
+This template demonstrates nested workflows with nuclei, where there's multiple levels of chaining of templates.
 
 ```yaml
 id: springboot-workflow
@@ -61,7 +61,7 @@ workflows:
 
 ### Conditional workflows with matcher
 
-This template detects if wordpress is running on an input host, and if found a list of exploits and cves for wordpress are ran
+This template detects if WordPress is running on an input host, and if found a set of targeted exploits and CVEs are executed against it.
 
 ```yaml
 id: workflow-example

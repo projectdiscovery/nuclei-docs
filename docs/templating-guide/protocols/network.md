@@ -13,7 +13,7 @@ network:
 
 First thing in the request is **inputs**. Inputs are the data that will be sent to the server, and optionally any data to read from the server.
 
-At it's most simple, just specify a string and it will be sent across the network socket.
+At it's most simple, just specify a string, and it will be sent across the network socket.
 
 ```yaml
 # inputs is the list of inputs to send to the server
@@ -80,7 +80,7 @@ host:
   - "tls://{{Hostname}}"
 ```
 
-If a port is specified in the host, the user supplied port is ignored and the template port takes presedence.
+If a port is specified in the host, the user supplied port is ignored and the template port takes precedence.
 
 #### Matchers / Extractor Parts
 
@@ -90,7 +90,7 @@ Valid `part` values supported by **Network** protocol for Matchers / Extractor a
 |------------------|-------------------------------------|
 | request          | Network Request                     |
 | data             | Final Data Read From Network Socket |
-| raw / body / all | All Data recieved from Socket       |
+| raw / body / all | All Data received from Socket       |
 
 
 #### **Example Network Template**

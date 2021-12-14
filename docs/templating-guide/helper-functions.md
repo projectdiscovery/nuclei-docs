@@ -42,7 +42,7 @@ Here is the list of all supported helper functions can be used in the RAW reques
 
 #### Deserialization helper functions
 
-Nuclei allows payload generation for a few commom gadget from [ysoserial](https://github.com/frohoff/ysoserial).
+Nuclei allows payload generation for a few common gadget from [ysoserial](https://github.com/frohoff/ysoserial).
 
 **Supported Payload:**
 

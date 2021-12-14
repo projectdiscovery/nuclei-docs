@@ -1,6 +1,6 @@
 ### Basic Template
 
-This template requests `/` path of URL and match string in the resposne.
+This template requests `/` path of URL and match string in the response.
 
 
 ```yaml
