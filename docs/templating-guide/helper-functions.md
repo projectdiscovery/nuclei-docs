@@ -16,6 +16,7 @@ Here is the list of all supported helper functions can be used in the RAW reques
 | zlib_decode(input string) string | Decompresses the input using Zlib | `zlib_decode(hex_decode("789cf248cdc9c907040000ffff058c01f5"))` // Hello | 
 | date(input string) string | Returns a formatted date string | `date("%Y-%M-%D")` // 2022-05-01 |
 | time(input string) string | Returns a formatted time string | `time("%H-%M")` // 22-12 |
+| timetostring(input int) string | Returns a formatted unix time string | `timetostring(1647861438)` // 2022-03-21 16:47:18 +0530 IST | 
 | hex_decode(input interface{}) []byte                                  | Hex decodes the given input                                                                                               | `hex_decode("6161")` // aa                                                                               |
 | hex_encode(input interface{}) string                                  | Hex encodes the given input                                                                                               | `hex_encode("aa")` // 6161                                                                               |
 | html_escape(input interface{}) string                                 | HTML escapes the given input                                                                                              | `html_escape("<body>test</body>")` // &lt;body&gt;test&lt;/body&gt;                                      |
