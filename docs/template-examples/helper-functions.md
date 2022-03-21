@@ -69,4 +69,10 @@ requests:
         52: {{url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1")}}
         53: {{url_encode("https://projectdiscovery.io/test?a=1")}}
         54: {{wait_for(1)}}
+        55: {{gzip_decode(hex_decode("1f8b08000000000000fff248cdc9c907040000ffff8289d1f705000000"))}}
+        56: {{zlib("Hello")}}
+        57: {{zlib_decode(hex_decode("789cf248cdc9c907040000ffff058c01f5"))}}
+        58: {{date("%Y-%M-%D")}}
+        59: {{time("%H-%M")}}
+        60: {{timetostring(unixtime())}}
 ```
