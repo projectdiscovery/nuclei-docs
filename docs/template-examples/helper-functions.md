@@ -75,4 +75,5 @@ requests:
         58: {{date("%Y-%M-%D")}}
         59: {{time("%H-%M")}}
         60: {{timetostring(unixtime())}}
+        61: {{compare_versions('v1.0.0', '>v0.0.1,<v1.0.1')}}
 ```
