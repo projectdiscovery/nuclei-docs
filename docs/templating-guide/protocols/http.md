@@ -572,3 +572,51 @@ requests:
     threads: 5
     race: true
 ```
+
+**Requests Annotation**
+
+The recent nuclei version added the capability to perform per request properties/behavior override via request inline annotations. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:
+
+- `@Host:` which overrides the real target of the request (usually the host/ip provided as input). It supports syntax with ip/domain, port, and scheme, for example: `domain.tld`, `domain.tld:port`, `http://domain.tld:port`
+
+The following example, shows the annotations within a request:
+
+```yaml
+- |
+  @Host: https://projectdiscovery.io:443
+  POST / HTTP/1.1
+  Pragma: no-cache
+  Host: {{Hostname}}
+  Cache-Control: no-cache, no-transform
+  User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+```
+This is particularly useful, for example, in the case of templates with multiple requests, where one request after the initial one needs to be performed to a specific host (for example, to check an API validity):
+
+```yaml
+requests:
+  - raw:
+      # this request will be sent to {{Hostname}} to get the token
+      - |
+        GET /getkey HTTP/1.1
+        Host: {{Hostname}}
+        
+      # This request will be sent instead to https://api.target.com:443 to verify the token validity
+      - |
+        @Host: https://api.target.com:443
+        GET /api/key={{token} HTTP/1.1
+        Host: api.target.com:443
+
+    extractors:
+      - type: regex
+        name: token
+        part: body
+        regex:
+          # random extractor of strings between prefix and suffix
+          - 'prefix(.*)suffix'
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - valid token
+```
