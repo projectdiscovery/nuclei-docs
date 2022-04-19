@@ -271,11 +271,11 @@ nuclei -w workflows/wordpress-workflow.yaml -severity critical,high -list http_u
 
 Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
 
-| Flag                   | Description                                                          |
-| ---------------------- | ---------------------------------------------------------------------|
-| rate-limit             | Control the total number of request to send per seconds              |
-| bulk-size              | Control the number of hosts to process in parallel for each template |
-| c                      | Control the number of templates to process in parallel               |
+| Flag       | Description                                                          |
+|------------|----------------------------------------------------------------------|
+| rate-limit | Control the total number of request to send per seconds              |
+| bulk-size  | Control the number of hosts to process in parallel for each template |
+| c          | Control the number of templates to process in parallel               |
 
     
 

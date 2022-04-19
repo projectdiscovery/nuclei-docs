@@ -57,13 +57,13 @@ As default the `max-size` value is 5 MB (5242880), Files larger than the `max-si
 **File** protocol supports 2 types of Matchers -
 
 | Matcher Type | Part Matched |
-| ------------ | ------------ |
+|--------------|--------------|
 | word         | all          |
 | regex        | all          |
 
 
 | Extractors Type | Part Matched |
-| --------------- | ------------ |
+|-----------------|--------------|
 | word            | all          |
 | regex           | all          |
 

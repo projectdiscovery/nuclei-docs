@@ -19,7 +19,7 @@ An example of nuclei request with `{{interactsh-url}}` placeholders is provided 
 Interactsh interactions can be used with `word`, `regex` or `dsl` matcher/extractor using following parts.
 
 | part                |
-| ------------------- |
+|---------------------|
 | interactsh_protocol |
 | interactsh_request  |
 | interactsh_response |
@@ -27,7 +27,6 @@ Interactsh interactions can be used with `word`, `regex` or `dsl` matcher/extrac
 
 !!! abstract "interactsh_protocol"
     Value can be dns, http or smtp. This is the standard matcher for every interactsh based template with dns often as the common value as it is very non-intrusive in nature.
-
 
 !!! abstract "interactsh_request"
     The request that the interact.sh server received.

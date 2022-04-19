@@ -320,11 +320,11 @@ Selectors are how nuclei headless engine identifies what element to execute an a
 
 Valid `part` values supported by **Headless** protocol for Matchers / Extractor are - 
     
-| Value            | Description                         |
-|------------------|-------------------------------------|
-| request          | Headless Request                     |
-| `<out_names>`    | Action names with stored values |
-| raw / body / data | Final DOM response from browser     |
+| Value             | Description                     |
+|-------------------|---------------------------------|
+| request           | Headless Request                |
+| `<out_names>`     | Action names with stored values |
+| raw / body / data | Final DOM response from browser |
 
 
 #### **Example Headless Template**
