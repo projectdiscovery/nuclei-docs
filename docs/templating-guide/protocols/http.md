@@ -575,11 +575,11 @@ requests:
 
 **Requests Annotation**
 
-The recent nuclei version added the capability to perform per request properties/behavior override via request inline annotations. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:
+Request inline annotations allow performing per request properties/behavior override. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:
 
 - `@Host:` which overrides the real target of the request (usually the host/ip provided as input). It supports syntax with ip/domain, port, and scheme, for example: `domain.tld`, `domain.tld:port`, `http://domain.tld:port`
 
-The following example, shows the annotations within a request:
+The following example shows the annotations within a request:
 
 ```yaml
 - |
