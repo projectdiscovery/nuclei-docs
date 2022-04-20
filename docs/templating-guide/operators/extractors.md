@@ -10,6 +10,7 @@ Multiple extractors can be specified in a request. As of now we support two type
 2. **kval** - Extract `key: value`/`key=value` formatted data from Response Header/Cookie
 3. **json** - Extract data from JSON based response in JQ like snytax.
 4. **xpath** - Extract xpath based data from HTML Response
+4. **dsl** - Extract data from the response based on a DSL expressions.
 
 Example extractor for HTTP Response body using **regex** - 
 
@@ -58,6 +59,16 @@ A **xpath** extractor example to extract value of `href` attribute from HTML res
 ```
 
 With a simple [copy paste in browser](https://www.scientecheasy.com/2020/07/find-xpath-chrome.html/), we can get the **xpath** value form any web page content.
+
+A **dsl** extractor example to extract the effective `body` length through the `len` helper function from HTTP Response.
+
+
+```yaml
+extractors:
+      - type: dsl  # type of the extractor
+        dsl:
+          - "len(body)"  # dsl expression value to extract from response
+```
 
 #### Dynamic extractor
 
