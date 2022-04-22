@@ -12,6 +12,8 @@ Multiple extractors can be specified in a request. As of now we support two type
 4. **xpath** - Extract xpath based data from HTML Response
 4. **dsl** - Extract data from the response based on a DSL expressions.
 
+#### Regex Extractor
+
 Example extractor for HTTP Response body using **regex** - 
 
 ```yaml
@@ -21,6 +23,8 @@ extractors:
     regex:
       - "(A3T[A-Z0-9]|AKIA|AGPA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}"  # regex to use for extraction.
 ```
+
+#### Kval Extractor
 
 A **kval** extractor example to extract `content-type` header from HTTP Response.
 
@@ -33,6 +37,9 @@ extractors:
 ```
 
 Note that `content-type` has been replaced with `content_type` because **kval** extractor does not accept dash (`-`) as input and must be substituted with underscore (`_`).
+
+#### JSON Extractor
+
 
 A **json** extractor example to extract value of `id` object from JSON block.
 
@@ -47,6 +54,8 @@ A **json** extractor example to extract value of `id` object from JSON block.
 
 For more details about JQ - https://github.com/stedolan/jq
 
+#### Xpath Extractor
+
 A **xpath** extractor example to extract value of `href` attribute from HTML response. 
 
 
@@ -60,6 +69,8 @@ A **xpath** extractor example to extract value of `href` attribute from HTML res
 
 With a simple [copy paste in browser](https://www.scientecheasy.com/2020/07/find-xpath-chrome.html/), we can get the **xpath** value form any web page content.
 
+#### DSL Extractor
+
 A **dsl** extractor example to extract the effective `body` length through the `len` helper function from HTTP Response.
 
 
@@ -70,7 +81,7 @@ extractors:
           - "len(body)"  # dsl expression value to extract from response
 ```
 
-#### Dynamic extractor
+#### Dynamic Extractor
 
 Extractors can be used to capture Dynamic Values on runtime while writing Multi-Request templates. CSRF Tokens, Session Headers, etc. can be extracted and used in requests. This feature is only available in RAW request format.
 
