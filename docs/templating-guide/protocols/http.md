@@ -326,8 +326,8 @@ An example configuring showing pipelining attributes of nuclei.
 ```yaml
     unsafe: true
     pipeline: true
-    pipeline-max-connections: 40
-    pipeline-max-workers: 25000
+    pipeline-concurrent-connections: 40
+    pipeline-requests-per-connection: 25000
 ```
 
 
@@ -353,8 +353,8 @@ requests:
 
     unsafe: true
     pipeline: true
-    pipeline-max-connections: 40
-    pipeline-max-workers: 25000
+    pipeline-concurrent-connections: 40
+    pipeline-requests-per-connection: 25000
 
     matchers:
       - type: status
