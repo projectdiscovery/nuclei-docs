@@ -14,7 +14,7 @@ info:
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}/"
+      - "{{BaseURL}}"
     matchers:
       - type: word
         words:
@@ -79,7 +79,7 @@ info:
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}/"
+      - "{{BaseURL}}"
 
     matchers:
       - type: word
@@ -110,7 +110,7 @@ info:
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}/"
+      - "{{BaseURL}}"
 
     matchers-condition: and
     matchers:
