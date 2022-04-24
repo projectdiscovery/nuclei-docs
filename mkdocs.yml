@@ -133,10 +133,6 @@ nav:
       - Workflow: template-examples/workflow.md
       - Helpers: template-examples/helper-functions.md
 
-  - Releases:
-      - Nuclei: releases/nuclei-changelog.md
-      - Templates: releases/templates-changelog.md
-
   - FAQ:
       - Nuclei FAQ: faq/nuclei.md
       - Templates FAQ: faq/templates.md
