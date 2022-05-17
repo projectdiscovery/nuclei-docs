@@ -578,6 +578,7 @@ requests:
 Request inline annotations allow performing per request properties/behavior override. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:
 
 - `@Host:` which overrides the real target of the request (usually the host/ip provided as input). It supports syntax with ip/domain, port, and scheme, for example: `domain.tld`, `domain.tld:port`, `http://domain.tld:port`
+- `@tls-sni:` which overrides the SNI Name of the TLS request (usually the hostname provided as input). It supports any literals, the speciale value `request.host` use the value of the `Host` header.
 
 The following example shows the annotations within a request:
 
