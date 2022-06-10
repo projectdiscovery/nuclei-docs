@@ -72,8 +72,12 @@ requests:
         55: {{gzip_decode(hex_decode("1f8b08000000000000fff248cdc9c907040000ffff8289d1f705000000"))}}
         56: {{zlib("Hello")}}
         57: {{zlib_decode(hex_decode("789cf248cdc9c907040000ffff058c01f5"))}}
-        58: {{date("%Y-%M-%D")}}
-        59: {{time("%H-%M")}}
-        60: {{timetostring(unixtime())}}
-        61: {{compare_versions('v1.0.0', '>v0.0.1', '<v1.0.1')}}
+        58: {{compare_versions('v1.0.0', '>v0.0.1', '<v1.0.1')}}
+        59: {{dec_to_hex(11111)}}
+        60: {{join("_", 123, "hello", "world")}}
+        61: {{hmac("sha1", "test", "scrt")}}
+        62: {{hmac("sha256", "test", "scrt")}}
+        63: {{date_time("%Y-%M-%D")}}
+        64: {{date_time("%Y-%M-%D", unix_time())}}
+        65: {{date_time("%H:%m")}}
 ```
