@@ -51,8 +51,7 @@ Here is the list of all supported helper functions can be used in the RAW reques
 | wait_for(seconds uint)                                       | Pauses the execution for the given amount of seconds         | `wait_for(10)`                                               | `true`                                                       |
 | join(separator string, elements ...interface{}) string)      | Pauses the execution for the given amount of seconds         | `join("_", 123, "hello", "world")	`                       | `123_hello_world`                                            |
 | hmac(algorithm, data, secret)                                | hmac function that accepts a hashing function type with data and secret | `hmac("sha1", "test", "scrt")`                               | `8856b111056d946d5c6c92a21b43c233596623c6`                   |
-| date_time(dateTimeFormat)                                    | Returns date or time in go style date time formatting        | `date_time("%Y-%M-%D %H:%m")`                                |                                                              |
-
+| date_time(dateTimeFormat)                                    | Returns date or time in go style date time formatting        | `date_time("%Y-%M-%D %H:%m")`                                | `2022-06-10 14:18`                                           |
 #### Deserialization helper functions
 
 Nuclei allows payload generation for a few common gadget from [ysoserial](https://github.com/frohoff/ysoserial).
