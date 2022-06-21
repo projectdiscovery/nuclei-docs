@@ -431,10 +431,16 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
     <td>GitLab</td>
     <td>Jira</td>
     <td>Markdown</td>
+    <td>Sarif</td>
+    <td>Elasticsearch</td>
 
   </tr>
   <tr>
     <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
     <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
     </td>
     <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
@@ -462,6 +468,19 @@ github:
   token: "$token"
   project-name: "testing-project"
   issue-label: "Nuclei"
+```
+
+To create results on Elasticsearch, create a config file with the following content and replace the appropriate values:-
+
+```yaml
+# elasticsearch contains configuration options for elasticsearch exporter
+elasticsearch:
+  # IP for elasticsearch instance
+  ip: 127.0.0.1
+  # Port is the port of elasticsearch instance
+  port: 9200
+  # IndexName is the name of the elasticsearch index
+  index-name: nuclei
 ```
 
 **Running nuclei with reporting module:-**
@@ -493,6 +512,16 @@ Including request/response in the markdown report is optional, and included when
 
 ```bash
 nuclei -l urls.txt -t cves/ -irr -markdown-export reports
+```
+
+**<ins>Sarif Export</ins>**
+
+Nuclei supports Sarif export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store Sarif formatted report.
+
+The request-responses are contained as markdown formatted data in Sarif response section.
+
+```bash
+nuclei -l urls.txt -t cves/ -sarif-export report.sarif
 ```
 
 ## Scan **Metrics**
