@@ -431,7 +431,7 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
     <td>GitLab</td>
     <td>Jira</td>
     <td>Markdown</td>
-    <td>Sarif</td>
+    <td>SARIF</td>
     <td>Elasticsearch</td>
 
   </tr>
@@ -470,7 +470,7 @@ github:
   issue-label: "Nuclei"
 ```
 
-To create results on Elasticsearch, create a config file with the following content and replace the appropriate values:-
+To store results in Elasticsearch, create a config file with the following content and replace the appropriate values:-
 
 ```yaml
 # elasticsearch contains configuration options for elasticsearch exporter
@@ -514,11 +514,11 @@ Including request/response in the markdown report is optional, and included when
 nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 ```
 
-**<ins>Sarif Export</ins>**
+**<ins>SARIF Export</ins>**
 
 Nuclei supports Sarif export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store Sarif formatted report.
 
-The request-responses are contained as markdown formatted data in Sarif response section.
+The request-response pairs are formatted using markdown syntax and are stored in SARIF response section.
 
 ```bash
 nuclei -l urls.txt -t cves/ -sarif-export report.sarif
