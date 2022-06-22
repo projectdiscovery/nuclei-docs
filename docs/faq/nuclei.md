@@ -58,7 +58,7 @@
 
 	!!! check "HTTP Traffic"
 
-		Nuclei usally makes fewer HTTP requests than the number of templates selected for a scan due to its intelligent request reduction. While some templates contain multiple requests, this rule generally holds true across most scan configurations.
+		Nuclei usually makes fewer HTTP requests than the number of templates selected for a scan due to its intelligent request reduction. While some templates contain multiple requests, this rule generally holds true across most scan configurations.
 
 	!!! check "Safe Templates"
 
