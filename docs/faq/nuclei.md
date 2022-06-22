@@ -29,7 +29,7 @@
 
 ??? tip "How can I support/contribute to this project? 💙"
 
-	To keep us motivated to work on this project, we request you to write/share new nuclei templates with the community at [template project](https://github.com/projectdiscovery/nuclei-templates) and help us to maintain this public and ready to use, up-to-date nuclei templates.
+	To helo keep project momentum, we request everyone to write and share new templates with the community in the [template project](https://github.com/projectdiscovery/nuclei-templates). Please help us maintain this public, ready to use, and up-to-date nuclei template repository.
 
 	If you found an interesting/unique security issue using nuclei and want to share the process walk-through in the form of a blog, we are happy to publish your guest post on the [ProjectDiscovery blog](https://blog.projectdiscovery.io).
 
@@ -62,7 +62,7 @@
 
 	!!! check "Safe Templates"
 
-		The nuclei templates project houses a variety of templates which include fuzzing and templates which may result in a DoS against the target system. To ensure that no one accidentally runs these templates, they are tagged and nuclei excludes them from the default scan. These templates can be only executed when the user explicitly instructs nuclei to run them using the `-itags` option.
+		The nuclei templates project houses a variety of templates which perform fuzzing and other actions which may result in a DoS against the target system (see [the list here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)). To ensure  these templates are not accidentally run, they are tagged and excluded them from the default scan. These templates can be only executed when explicitly invoked using the `-itags` option.
 
 ??? info "What is nuclei's license?"
 

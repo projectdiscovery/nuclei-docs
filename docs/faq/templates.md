@@ -54,7 +54,7 @@
 
 ??? warning "I'm not able to run all templates!"
 
-	Nuclei respects the default list of templates that are excluded from default run. These are listed [here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore), **This is to ensure that some templates are not executed when all templates are run.** This also helps ensure that no one accidentally runs unsafe scans. We suggest only running them for specific targets in a scan.
+	The nuclei templates project houses a variety of templates which perform fuzzing and other actions which may result in a DoS against the target system (see [the list here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)). To ensure  these templates are not accidentally run, they are tagged and excluded them from the default scan. These templates can be only executed when explicitly invoked using the `-itags` option.
 
 ??? warning "Templates exist on GitHub but are not running with nuclei?"
 
