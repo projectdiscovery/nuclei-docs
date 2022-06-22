@@ -25,25 +25,25 @@
 
 ??? info "How well-maintained is this project?"
 
-	The Nuclei project is developed and maintained by [ProjectDiscovery](https://projectdiscovery.io/#/) team and is in active development (we generally release every other week).
+	The nuclei project is developed and maintained by [ProjectDiscovery](https://projectdiscovery.io/#/) team and is in active development (we generally release every other week).
 
 ??? tip "How can I support/contribute to this project? 💙"
 
 	To keep us motivated to work on this project, we request you to write/share new nuclei templates with the community at [template project](https://github.com/projectdiscovery/nuclei-templates) and help us to maintain this public and ready to use, up-to-date nuclei templates.
 
-	If you found an interesting/unique security issue using nuclei and want to share the process walk-through with everyone in the form of a blog, we are happy to publish your guest blog at https://blog.projectdiscovery.io.
+	If you found an interesting/unique security issue using nuclei and want to share the process walk-through in the form of a blog, we are happy to publish your guest post on the [ProjectDiscovery blog](https://blog.projectdiscovery.io).
 
 ??? warning "I found results with nuclei. When should I report it?"
 
-	**Wait a minute** -- after nuclei detected a security issue, it's always advised to have a second look before reporting it. Here's a tip to confirm/validate the found matches.
+	**Wait a minute** -- after nuclei detected a security issue, it's always advised to have a second look before reporting it. Here's a tip to confirm/validate the issues.
 
 	??? tip "How do I validate nuclei results?"
 
-		Once nuclei finds a result, and you have vulnerable ==URL== and ==template==, rerun the template with ==`-debug`== flag to inspect the vulnerable response against expected matcher defined in the template. In this way, you can confirm the identified vulnerability.
+		Once nuclei finds a result, and you have vulnerable ==target== and ==template==, rerun the template with ==`-debug`== flag to inspect the output against the expected matcher defined in the template. In this way, you can confirm the identified vulnerability.
 
 ??? warning "How much traffic does nuclei generate?"
 	
-	As default nuclei makes **1234** HTTP requests in total against single target upon running **all nuclei-templates** directory. This includes over 3500 nuclei templates from the [v9.0.2](https://github.com/projectdiscovery/nuclei-templates/releases/tag/v9.0.2) release.
+	As default nuclei will make several thousand requests (both HTTP and other services) against a single target when running **all nuclei-templates**. This stems from over 3500 nuclei templates in the [[template releases](https://github.com/projectdiscovery/nuclei-templates/releases/), with more added daily.
 
 	!!! info ""
 		As default, few templates listed [here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore) are excluded from default scans.
@@ -62,7 +62,7 @@
 
 	!!! check "Safe Templates"
 
-		The nuclei templates project houses a variety of templates which include fuzzing and templates which may result in a DOS against the target system. To ensure that no one accidentally runs these templates, they are tagged and nuclei excludes them from the default nuclei scan. These templates can be only executed when the user explicitly instructs nuclei to run them using the `itag` option.
+		The nuclei templates project houses a variety of templates which include fuzzing and templates which may result in a DoS against the target system. To ensure that no one accidentally runs these templates, they are tagged and nuclei excludes them from the default scan. These templates can be only executed when the user explicitly instructs nuclei to run them using the `-itags` option.
 
 ??? info "What is nuclei's license?"
 
@@ -71,4 +71,4 @@
 
 ??? info "I have more questions! 🙋"
 	
-	Please join our [Discord server](https://discord.gg/projectdiscovery), or we are active on [Twitter](http://twitter.com/pdnuclei) as well.
+	Please join our [Discord server](https://discord.gg/projectdiscovery), or contact us via [Twitter](http://twitter.com/pdnuclei).

@@ -1,6 +1,6 @@
 ??? info "What are nuclei templates?"
 
-	Nuclei [templates](http://github.com/projectdiscovery/nuclei-templates) are the core of the nuclei project. The template contains the actual logic to execute for detecting various vulnerabilities and checks. The template project consists of **several thousand** ready-to-use **[community-contributed](https://github.com/projectdiscovery/nuclei-templates/graphs/contributors)** vulnerability templates.
+	Nuclei [templates](http://github.com/projectdiscovery/nuclei-templates) are the core of the nuclei project. The template contains the actual logic to execute for detecting various vulnerability detection templates. The project consists of **several thousand** ready-to-use **[community-contributed](https://github.com/projectdiscovery/nuclei-templates/graphs/contributors)** vulnerability templates.
 
 ??? info "How can I write nuclei templates?"
 
@@ -32,29 +32,29 @@
 
 ??? info "I want to contribute nuclei templates! 😁"
 
-	You are always welcome to share your nuclei template with the community. You can either open a [GitHub issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=nuclei-template&template=submit-template.md&title=%5Bnuclei-template%5D+template-name) with the template details or open a Github [pull request](https://github.com/projectdiscovery/nuclei-templates/pulls) with your nuclei templates. If you don't have a GitHub account, you can also make use of the [discord server](https://discord.gg/projectdiscovery) to share the template with us.
+	You are always welcome to share your nuclei templates with the community. You can either open a [GitHub issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=nuclei-template&template=submit-template.md&title=%5Bnuclei-template%5D+template-name) with the template details or open a GitHub [pull request](https://github.com/projectdiscovery/nuclei-templates/pulls) with your nuclei templates. If you don't have a GitHub account, you can also make use of the [discord server](https://discord.gg/projectdiscovery) to share the template with us.
 
 
 ??? warning "I'm getting false-positive results!"
-	Nuclei templates is a **community-contributed project**. We manually review templates before merging them into the  project. Still, there is a possibility that some templates with weak matchers will slip through the verification. This could produce false-positive results. **Templates are only as good as their matchers.**
+	The nuclei template project is a **community-contributed project**. The ProjectDiscovery team manually reviews templates before merging them into the project. Still, there is a possibility that some templates with weak matchers will slip through the verification. This could produce false-positive results. **Templates are only as good as their matchers.**
 
-	If you identified templates producing false positive/negative results, here are few steps that you can follow to fix the templates quickly.
+	If you identified templates producing false positive/negative results, here are few steps that you can follow to fix them quickly.
 
-	??? info "I found a template producing false +ve/-ve result but I'm not sure if this is accurate."
+	??? info "I found a template producing false positive or negative results, but I'm not sure if this is accurate."
 
 		DM us on [twitter](https://twitter.com/pdnuclei) or [discord](https://discord.gg/projectdiscovery) to confirm the validity of the template.
 
-	??? info "I found a template producing false +ve/-ve result and I don't know how to fix it."
+	??? info "I found a template producing false positive or negative result and I don't know how to fix it."
 
 		Please open a GitHub [issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=false-positive&template=false-positive.md&title=%5Bfalse-positive%5D+template-name+) with details, and we will quickly address the problem and update the template.
 
-	??? info "I found a template producing a false +ve/-ve result and I know how to fix it."
+	??? info "I found a template producing a false positive or negative result and I know how to fix it."
 
 		Please open a GitHub [pull request](https://github.com/projectdiscovery/nuclei-templates/pulls) with fix.
 
 ??? warning "I'm not able to run all templates!"
 
-	Nuclei respects the default list of templates that are excluded from default run. These are listed [here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore), **This is to ensure that some templates are not run along with all templates.** We also want to make sure that no accidentally runs unsafe scans. We suggest only running them for a specific use in a scan.
+	Nuclei respects the default list of templates that are excluded from default run. These are listed [here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore), **This is to ensure that some templates are not executed when all templates are run.** This also helps ensure that no one accidentally runs unsafe scans. We suggest only running them for specific targets in a scan.
 
 ??? warning "Templates exist on GitHub but are not running with nuclei?"
 
