@@ -516,9 +516,9 @@ nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 
 **<ins>SARIF Export</ins>**
 
-Nuclei supports Sarif export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store Sarif formatted report.
+Nuclei supports SARIF export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store SARIF formatted report.
 
-The request-response pairs are formatted using markdown syntax and are stored in SARIF response section.
+The request-response pairs are formatted using markdown syntax and are stored in the SARIF response section.
 
 ```bash
 nuclei -l urls.txt -t cves/ -sarif-export report.sarif
