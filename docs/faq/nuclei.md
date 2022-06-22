@@ -29,7 +29,7 @@
 
 ??? tip "How can I support/contribute to this project? 💙"
 
-	To helo keep project momentum, we request everyone to write and share new templates with the community in the [template project](https://github.com/projectdiscovery/nuclei-templates). Please help us maintain this public, ready to use, and up-to-date nuclei template repository.
+	To help keep project momentum, we request everyone to write and share new templates with the community in the [template project](https://github.com/projectdiscovery/nuclei-templates). Please help us maintain this public, ready to use, and up-to-date nuclei template repository.
 
 	If you found an interesting/unique security issue using nuclei and want to share the process walk-through in the form of a blog, we are happy to publish your guest post on the [ProjectDiscovery blog](https://blog.projectdiscovery.io).
 
