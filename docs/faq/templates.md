@@ -1,6 +1,6 @@
 ??? info "What are nuclei templates?"
 
-	Nuclei [templates](http://github.com/projectdiscovery/nuclei-templates) are the core of the nuclei project. The template contains the actual logic to execute for detecting various vulnerability detection templates. The project consists of **several thousand** ready-to-use **[community-contributed](https://github.com/projectdiscovery/nuclei-templates/graphs/contributors)** vulnerability templates.
+	Nuclei [templates](http://github.com/projectdiscovery/nuclei-templates) are the core of the nuclei project. The templates contain the actual logic that is executed in order to detect various vulnerabilities. The project consists of **several thousand** ready-to-use **[community-contributed](https://github.com/projectdiscovery/nuclei-templates/graphs/contributors)** vulnerability templates.
 
 ??? info "How can I write nuclei templates?"
 
@@ -42,11 +42,11 @@
 
 	??? info "I found a template producing false positive or negative results, but I'm not sure if this is accurate."
 
-		DM us on [twitter](https://twitter.com/pdnuclei) or [discord](https://discord.gg/projectdiscovery) to confirm the validity of the template.
+		Direct message us on [Twitter](https://twitter.com/pdnuclei) or [Discord](https://discord.gg/projectdiscovery) to confirm the validity of the template.
 
 	??? info "I found a template producing false positive or negative result and I don't know how to fix it."
 
-		Please open a GitHub [issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=false-positive&template=false-positive.md&title=%5Bfalse-positive%5D+template-name+) with details, and we will quickly address the problem and update the template.
+		Please open a GitHub [issue](https://github.com/projectdiscovery/nuclei-templates/issues/new?assignees=&labels=false-positive&template=false-positive.md&title=%5Bfalse-positive%5D+template-name+) with details, and we will work to address the problem and update the template.
 
 	??? info "I found a template producing a false positive or negative result and I know how to fix it."
 
@@ -58,4 +58,4 @@
 
 ??? warning "Templates exist on GitHub but are not running with nuclei?"
 
-	When you download or update nuclei templates using the nuclei binary, it downloads all the templates from the latest **release**. All templates added after the release exist in the master branch and are added to nuclei when a new template release is created.
+	When you download or update nuclei templates using the nuclei binary, it downloads all the templates from the latest **release**. All templates added after the release exist in the [master branch](https://github.com/projectdiscovery/nuclei-templates) and are added to nuclei when a new template release is created.

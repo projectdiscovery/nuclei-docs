@@ -25,7 +25,7 @@
 
 ??? info "How well-maintained is this project?"
 
-	The nuclei project is developed and maintained by [ProjectDiscovery](https://projectdiscovery.io/#/) team and is in active development (we generally release every other week).
+	The nuclei project is actively developed and maintained by the [ProjectDiscovery](https://projectdiscovery.io/#/) team, and generally releases every 2 weeks.
 
 ??? tip "How can I support/contribute to this project? 💙"
 
@@ -43,7 +43,7 @@
 
 ??? warning "How much traffic does nuclei generate?"
 	
-	As default nuclei will make several thousand requests (both HTTP and other services) against a single target when running **all nuclei-templates**. This stems from over 3500 nuclei templates in the [[template releases](https://github.com/projectdiscovery/nuclei-templates/releases/), with more added daily.
+	By default nuclei will make several thousand requests (both HTTP protocol and other services) against a single target when running **all nuclei-templates**. This stems from over 3500 nuclei templates in the [[template releases](https://github.com/projectdiscovery/nuclei-templates/releases/), with more added daily.
 
 	!!! info ""
 		As default, few templates listed [here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore) are excluded from default scans.
