@@ -63,7 +63,10 @@
 
 Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
 
-You may still use the `update-templates` flag to update the nuclei templates at any time; automatic updates happen every 24 hours.
+Nuclei checks for new template releases upon each execution and update to the latest version automatically if updates are available. Optionally automatic update / check can be disabled using `-duc, -disable-update-check` CLI flag or flag config file.
+
+
+Similarly, nuclei engine can be also updated to latest version when available using optional `-update` flag, **disabled as default**.
 
 !!! tip
     Writing your own unique templates will always keep you one step ahead of others.
