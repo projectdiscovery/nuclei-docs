@@ -8,7 +8,7 @@ Multiple extractors can be specified in a request. As of now we support two type
 
 1. **regex** - Extract data from response based on a Regular Expression.
 2. **kval** - Extract `key: value`/`key=value` formatted data from Response Header/Cookie
-3. **json** - Extract data from JSON based response in JQ like snytax.
+3. **json** - Extract data from JSON based response in JQ like syntax.
 4. **xpath** - Extract xpath based data from HTML Response
 4. **dsl** - Extract data from the response based on a DSL expressions.
 
