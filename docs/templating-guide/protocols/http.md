@@ -579,6 +579,7 @@ Request inline annotations allow performing per request properties/behavior over
 
 - `@Host:` which overrides the real target of the request (usually the host/ip provided as input). It supports syntax with ip/domain, port, and scheme, for example: `domain.tld`, `domain.tld:port`, `http://domain.tld:port`
 - `@tls-sni:` which overrides the SNI Name of the TLS request (usually the hostname provided as input). It supports any literals, the speciale value `request.host` use the value of the `Host` header.
+- `@timeout:` which overrides the timeout for the request to a custom duration. It supports durations formatted as string. If no duration is specified, the default Timeout flag value is used.
 
 The following example shows the annotations within a request:
 
@@ -620,4 +621,16 @@ requests:
         part: body
         words:
           - valid token
+```
+
+Example of a custom `timeout` annotations - 
+
+```yaml
+- |
+  @timeout: 25s
+  POST /conf_mail.php HTTP/1.1
+  Host: {{Hostname}}
+  Content-Type: application/x-www-form-urlencoded
+  
+  mail_address=%3B{{cmd}}%3B&button=%83%81%81%5B%83%8B%91%97%90M
 ```
