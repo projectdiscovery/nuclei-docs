@@ -268,7 +268,7 @@ requests:
     payloads:
       path: helpers/wordlists/prams.txt
       header: helpers/wordlists/header.txt
-    attack: pitchfork # Defining HTTP fuzz attack type
+    attack: clusterbomb # Defining HTTP fuzz attack type
 ```
 
 #### Unsafe HTTP Requests
