@@ -180,6 +180,15 @@ RAW request format also supports [various helper functions](https://nuclei.proje
         Authorization: Basic {{base64('username:password')}} # Helper function to encode input at run time.
 ```
 
+To make a request to the URL specified as input without any additional tampering, a blank Request URI can be used as specified below which will make the request to user specified input.
+
+```yaml
+    raw:
+      - |
+        GET HTTP/1.1
+        Host: {{Hostname}}
+```
+
 
 ### HTTP Fuzzing
 
@@ -268,7 +277,7 @@ requests:
     payloads:
       path: helpers/wordlists/prams.txt
       header: helpers/wordlists/header.txt
-    attack: pitchfork # Defining HTTP fuzz attack type
+    attack: clusterbomb # Defining HTTP fuzz attack type
 ```
 
 #### Unsafe HTTP Requests
