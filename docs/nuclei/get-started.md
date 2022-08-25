@@ -262,8 +262,8 @@ nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
 
 Multiple filters can also be combined using the template condition flag (`-tc`) that allows complex expressions like the following ones:
 ```sh
-nuclei -tc "id=='CVE-2019-17270'"
-nuclei -tc "contains(tags,'cve')"
+nuclei -tc "contains(id,'xss') || contains(tags,'xss')"
+nuclei -tc "contains(tags,'cve') && contains(tags,'ssrf')"
 nuclei -tc "contains(name, 'Local File Inclusion')"
 ```
 
