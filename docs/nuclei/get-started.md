@@ -107,6 +107,7 @@ FILTERING:
    -s, -severity value[]             Templates to run based on severity. Possible values: info, low, medium, high, critical
    -es, -exclude-severity value[]    Templates to exclude based on severity. Possible values: info, low, medium, high, critical
    -a, -author string[]              execute templates that are (co-)created by the specified authors
+   -tc, -template-condition string[] templates to run based on expression condition
 
 OUTPUT:
    -o, -output string            output file to write found issues/vulnerabilities
@@ -258,6 +259,24 @@ Multiple filters works together with AND condition, below example runs all templ
 ```sh
 nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
 ```
+
+Multiple filters can also be combined using the template condition flag (`-tc`) that allows complex expressions like the following ones:
+```sh
+nuclei -tc "contains(id,'xss') || contains(tags,'xss')"
+nuclei -tc "contains(tags,'cve') && contains(tags,'ssrf')"
+nuclei -tc "contains(name, 'Local File Inclusion')"
+```
+
+The supported fields are:
+
+- `id` string
+- `name` string
+- `description` string
+- `tags` slice of strings
+- `authors` slice of strings
+- `severity` string
+
+Also, every key-value pair from the template metadata section is accessible. All fields can be combined with logical operators (`||` and `&&`) and used with DSL helper functions.
 
 Similarly, all filters are supported in workflows as well.
 
