@@ -63,10 +63,10 @@
 
 Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
 
-Nuclei checks for new template releases upon each execution and update to the latest version automatically if updates are available. Optionally automatic update / check can be disabled using `-duc, -disable-update-check` CLI flag or flag config file.
+Nuclei checks for new template releases upon each execution and automatically downloads the latest version when available. This feature can be disabled using the `-duc`, `-disable-update-check` flags via the CLI or the configuration file.
 
 
-Similarly, nuclei engine can be also updated to latest version when available using optional `-update` flag, **disabled as default**.
+The nuclei engine can also be updated to latest version by using the `-update` flag.
 
 !!! tip
     Writing your own unique templates will always keep you one step ahead of others.
@@ -107,6 +107,7 @@ FILTERING:
    -s, -severity value[]             Templates to run based on severity. Possible values: info, low, medium, high, critical
    -es, -exclude-severity value[]    Templates to exclude based on severity. Possible values: info, low, medium, high, critical
    -a, -author string[]              execute templates that are (co-)created by the specified authors
+   -tc, -template-condition string[] templates to run based on expression condition
 
 OUTPUT:
    -o, -output string            output file to write found issues/vulnerabilities
@@ -258,6 +259,24 @@ Multiple filters works together with AND condition, below example runs all templ
 ```sh
 nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
 ```
+
+Multiple filters can also be combined using the template condition flag (`-tc`) that allows complex expressions like the following ones:
+```sh
+nuclei -tc "contains(id,'xss') || contains(tags,'xss')"
+nuclei -tc "contains(tags,'cve') && contains(tags,'ssrf')"
+nuclei -tc "contains(name, 'Local File Inclusion')"
+```
+
+The supported fields are:
+
+- `id` string
+- `name` string
+- `description` string
+- `tags` slice of strings
+- `authors` slice of strings
+- `severity` string
+
+Also, every key-value pair from the template metadata section is accessible. All fields can be combined with logical operators (`||` and `&&`) and used with DSL helper functions.
 
 Similarly, all filters are supported in workflows as well.
 

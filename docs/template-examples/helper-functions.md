@@ -85,4 +85,9 @@ requests:
         68: {{wait_for(1)}}
         69: {{zlib("Hello")}}
         70: {{zlib_decode(hex_decode("789cf248cdc9c907040000ffff058c01f5"))}}
+        71: {{hex_encode(aes_gcm("AES256Key-32Characters1234567890", "exampleplaintext"))}}
+        72: {{starts_with("Hello", "He")}}
+        73: {{ends_with("Hello", "lo")}}
+        74: {{line_starts_with("Hi\nHello", "He")}}
+        75: {{line_ends_with("Hello\nHi", "lo")}}
 ```
