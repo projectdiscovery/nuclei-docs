@@ -1,6 +1,6 @@
-### Basic Headless Navigation Example
+### 기본 헤드리스 탐색 예시
 
-This template visits a URL in the headless browser and waits for it to load.
+이 템플릿은 헤드리스 브라우저의 URL을 방문하여 로드될 때까지 기다립니다.
 
 ```yaml
 id: basic-headless-request
@@ -18,9 +18,9 @@ headless:
     - action: waitload
 ```
 
-### Headless prototype pollution detection
+### 헤드리스 프로토타입 오염 감지
 
-The below template detects prototype pollution on pages with Nuclei headless capabilities. The code for detection is taken from [https://github.com/msrkp/PPScan](https://github.com/msrkp/PPScan). We make use of script injection capabilities of nuclei to provide reliable detection for prototype pollution.
+아래 템플릿은 Nuclei 헤드리스 기능이 있는 페이지에서 프로토타입 오염을 감지합니다. 탐지를 위한 코드는 [https://github.com/msrkp/PPScan](https://github.com/msrkp/PPScan)에서 가져왔습니다. 우리는 핵의 스크립트 주입 기능을 사용하여 프로토타입 오염에 대한 신뢰할 수 있는 탐지를 제공합니다.
 
 ```yaml
 id: prototype-pollution-check
@@ -121,9 +121,9 @@ headless:
           - alerts
 ```
 
-### DVWA XSS Reproduction With Headless Mode
+### 헤드리스 모드로 DVWA XSS 재생산
 
-This template logs into DVWA (Damn Vulnerable Web App) and tries to automatically reproduce a Reflected XSS, returning a match if it found that the payload was executed successfully.
+이 템플릿은 DVWA(Damn Vulnerable Web App)에 로그인하고 Reflected XSS를 자동으로 재생하려고 시도하며 페이로드가 성공적으로 실행된 경우 일치 항목을 반환합니다
 
 ```yaml
 id: dvwa-xss-verification
@@ -140,7 +140,7 @@ headless:
         action: navigate
       - action: waitload
 
-      # Set the hook to override window.data for xss detection
+      # xss 감지를 위해 window.data를 재정의하도록 후크 설정
       - action: script
         args:
           hook: true
@@ -171,7 +171,7 @@ headless:
           xpath: /html/body/div/div[3]/div/div/form/p/input
         action: text
       - args:
-          keys: "\r" # Press the enter key on the keyboard
+          keys: "\r" # 키보드의 Enter 키를 누릅니다.
         action: keyboard
       - action: waitload
       - action: script
@@ -185,9 +185,9 @@ headless:
           - "found"
 ```
 
-### DOM XSS Detection
+### DOM XSS 감지
 
-This template performs detection of DOM-XSS for `window.name` source by hooking common sinks such as `eval`, `innerHTML` and `document.write`.
+이 템플릿은 `eval`, `innerHTML` 및 `document.write`와 같은 공통 싱크를 후킹하여 `window.name` 소스에 대한 DOM-XSS 감지를 수행합니다.
 
 ```yaml
 id: window-name-domxss
