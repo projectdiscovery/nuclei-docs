@@ -1,6 +1,6 @@
-### Basic template
+### 기본 템플릿
 
-This template makes GET request to `/` path in RAW format and checking for string match against response.
+이 템플릿은 RAW 형식의 `/` 경로에 대한 GET 요청을 만들고 응답에 대한 문자열 일치를 확인합니다.
 
 
 ```yaml
@@ -27,9 +27,9 @@ requests:
           - "Test is test matcher text"
 ```
 
-### Multiple RAW request
+### 여러 RAW 요청
 
-This template makes GET and POST request sequentially in RAW format and checking for string match against response.
+이 템플릿은 RAW 형식으로 GET 및 POST 요청을 순차적으로 수행하고 응답에 대한 문자열 일치를 확인합니다.
 
 
 ```yaml
