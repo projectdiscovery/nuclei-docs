@@ -1,6 +1,6 @@
-### Basic CL.TE
+### 기본 CL.TE
 
-This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+이 템플릿은 rawhttp 라이브러리를 사용하여 정의된 잘못된 HTTP POST 요청을 만들고 응답에 대한 문자열 일치를 확인합니다.
 
 ```yaml
 id: CL.TE-http-smuggling
@@ -43,10 +43,9 @@ requests:
           - 'contains(body, "Unrecognized method GPOST")'
 ```
 
-### Basic TE.CL
+### 기본 TE.CL
 
-This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
-
+이 템플릿은 rawhttp 라이브러리를 사용하여 정의된 잘못된 HTTP POST 요청을 만들고 응답에 대한 문자열 일치를 확인합니다.
 
 ```yaml
 id: TE.CL-http-smuggling
@@ -97,8 +96,7 @@ requests:
 
 ### Frontend bypass CL.TE
 
-This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
-
+이 템플릿은 rawhttp 라이브러리를 사용하여 정의된 잘못된 HTTP POST 요청을 만들고 응답에 대한 문자열 일치를 확인합니다.
 
 ```yaml
 id: smuggling-bypass-front-end-controls-cl-te
@@ -149,9 +147,9 @@ requests:
           - 'contains(body, "/admin/delete?username=carlos")'
 ```
 
-### Differential responses based CL.TE
+### 차등 응답 기반 CL.TE
 
-This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
+이 템플릿은 rawhttp 라이브러리를 사용하여 정의된 잘못된 HTTP POST 요청을 만들고 응답에 대한 문자열 일치를 확인합니다.
 
 
 ```yaml
@@ -195,10 +193,9 @@ requests:
           - 'status_code==404'
 ```
 
-### Differential responses based TE.CL
+### 차등 응답 기반 TE.CL
 
-This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
-
+이 템플릿은 rawhttp 라이브러리를 사용하여 정의된 잘못된 HTTP POST 요청을 만들고 응답에 대한 문자열 일치를 확인합니다.
 
 ```yaml
 id: confirming-te-cl-via-differential-responses-http-smuggling
