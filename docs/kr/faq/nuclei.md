@@ -1,6 +1,6 @@
 ??? info "Nuclei는 무엇인가요?"
 
-    Nuclei는 간단한 YAML 템플릿을 기초로한 빠른 맞춤형 취약점 스캐너입니다.
+    Nuclei는 간단한 YAML 템플릿을 기초로 한 빠른 맞춤형 취약점 스캐너입니다.
 
     2개의 요소로 구성됩니다. 1) [Nuclei](http://github.com/projectdiscovery/nuclei) engine - 쉽게 읽고 쓸 수 있는 YAML 기반 형식으로 HTTP/DNS/네트워크/헤드리스/파일 프로토콜 기반 검사를 스크립팅할 수 있게 합니다. 2) Nuclei [templates](http://github.com/projectdiscovery/nuclei-templates) - 즉시 사용할 수 있는 **커뮤니티에서 기여해준** 취약점 템플릿입니다.
 

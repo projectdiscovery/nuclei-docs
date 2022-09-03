@@ -1,7 +1,6 @@
 ### 기본 템플릿
 
 입력에 대한 CNAME 레코드가 존재하는지 감지하기 위한 기본적인 DNS 요청입니다.
-Basic DNS Request to detect if a CNAME record exists for an input.
 
 ```yaml
 id: basic-dns-example
@@ -26,7 +25,7 @@ dns:
 
 ### Multiple matcher
 
-zendesk.com 또는 github.io을 가리키는 CNAME 레코드로 서브도메인을 탐지할 수 있는 여러 매치들을 보여주는 예시입니다.
+zendesk.com 또는 github.io을 가리키는 CNAME 레코드로 서브도메인을 탐지할 수 있는 여러 Matcher들을 보여주는 예시입니다.
 
 ```yaml
 id: multiple-matcher

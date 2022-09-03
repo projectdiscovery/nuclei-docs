@@ -61,21 +61,14 @@
 
 ## Nuclei **템플릿**
 
-Nuclei는 2.4.0버전부터 템플릿의 자동 업데이트/다운로드를 지원합니다. [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) 프로젝트는 지속적으로 업데이트 되는 템플릿 리스트를 제공합니다. 해당 리스트는 커뮤니티에서 기여해주고 있습니다.
+Nuclei는 2.4.0버전부터 템플릿의 자동 업데이트/다운로드를 지원합니다. [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) 프로젝트는 지속적으로 업데이트되는 템플릿 리스트를 제공합니다. 해당 리스트는 커뮤니티에서 기여해주고 있습니다.
 
-Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
+Nuclei는 실행마다 생성되는 새로운 템플릿을 체크하고 사용 가능할 때 자동으로 최신 버전을 다운로드 받습니다. 이 기능은 터미널 혹은 설정 파일에서 `-duc`, `-disable-update-check` 플래그를 사용하여 적용하지 않을 수 있습니다.
 
-Nuclei는 실행마다 생성되는 새로운 템플릿을 체크하고 사용가능할 때 자동으로 최신 버전을 다운로드 받습니다. 이 기능은 터미널 혹은 설정 파일에서 `-duc`, `-disable-update-check` 플래그를 사용하여 적용시키지 않을 수 있습니다.
+Nuclei 엔진은 `-update` 플래그를 사용하여 최신 버전으로 업데이트할 수 있습니다.
 
-Nuclei checks for new template releases upon each execution and automatically downloads the latest version when available. This feature can be disabled using the `-duc`, `-disable-update-check` flags via the CLI or the configuration file.
-
-Nuclei 엔진은 `-update` 플래그를 사용하여 최신 버전으로 업데이트 할 수 있습니다.
-
-The nuclei engine can also be updated to latest version by using the `-update` flag.
-
-!!! tip
+!!! tip 
     자신만의 독특한 템플릿을 작성하는 것은 항상 다른 이들보다 자신을 앞서게 해줄 것입니다.
-    Writing your own unique templates will always keep you one step ahead of others.
 
 ## **Nuclei** 사용법
 
@@ -84,8 +77,6 @@ nuclei -h
 ```
 
 이 명령어는 nuclei의 사용법을 보여줍니다. 아래는 지원하고 있는 기능들을 보여줍니다.
-
-This will display help for the tool. Here are all the switches it supports.
 
 ```
 Nuclei is a fast, template based vulnerability scanner focusing
@@ -216,8 +207,8 @@ STATISTICS:
    -stats                    실행 중인 스캔에 대한 통계 표시
    -sj, -stats-json          JSONL(ines) 형식으로 출력 파일에 통계 데이터 쓰기
    -si, -stats-interval int  통계 업데이트를 표시할 때까지 대기하는 시간(초) (기본 5)
-   -m, -metrics              expose nuclei metrics on a port
-   -mp, -metrics-port int    port to expose nuclei metrics on (기본 9092)
+   -m, -metrics              포트(기본 9092)에서 실행 중인 scan matrics 보기
+   -mp, -metrics-port int    nuclei metrics 포트 설정 (기본 9092)
 ```
 
 ## **Nuclei** 실행
@@ -259,50 +250,41 @@ nuclei -list http_urls.txt -w workflows/wordpress-workflow.yaml
 ### Nuclei **필터**
 
 Nuclei 엔진은 템플릿 실행을 커스텀하기 위해서 3개의 기본 필터를 제공합니다.
-Nuclei engine supports three basic filters to customize template execution.
-
 
 1. Tags (`-tags`)
 
-    템플렛에서 사용가능한 태그 속성에 기반한 필터
-    Filter based on tags field available in the template.
+    템플릿에서 사용가능한 태그 속성에 기반한 필터
 
 2. Severity (`-severity`)
 
     템플릿에서 사용가능한 심각도 속성에 기반한 필터
-    Filter based on severity field available in the template.
 
 3. Author (`-author`)
 
     템플릿에서 사용가능한 작성자 속성에 기반한 필터
-    Filter based on author field available in the template.
 
 기본적으로, 필터들은 템플릿 설치 경로에 적용되고, 수동 템플릿 경로 입력을 사용하여 커스텀할 수 있습니다.
-As default, Filters are applied on installed path of templates and can be customized with manual template path input.
 
 예를 들어, 아래의 명령은 `~/nuclei-templates/` 폴더에 설치된 템플릿들 중에서 `cve` 태그를 가진 템플릿들을 실행시킵니다.
-For example, below command will run all the templates installed at `~/nuclei-templates/` directory and has `cve` tags in it.
 
 ```sh
 nuclei -u https://example.com -tags cve
 ```
 
 그리고 다음은 `~/nuclei-templates/exposures/` 폴더의 `config` 태그를 가진 모든 사용가능한 템플릿들을 실행하는 예입니다.
-And this example will run all the templates available under `~/nuclei-templates/exposures/` directory and has `config` tag in it.
 
 ```sh
 nuclei -u https://example.com -tags config -t exposures/
 ```
 
 다수의 필터를 AND 조건으로 함께 사용이 가능합니다. 다음은 `cve` 태그를 가졌고, `critical` 또는 `high` 의 심각도를 가졌고, 작성자가 `geeknik`인 모든 템플릿을 실행하는 예입니다.
-Multiple filters works together with AND condition, below example runs all template with `cve` tags AND has `critical` OR `high` severity AND `geeknik` as author of template.
 
 ```sh
 nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
 ```
 
 다수의 필터는 템플릿 조건 플래그 (`tc`)를 이용해 조합하여 사용할 수 있습니다. 템플릿 조건 플래그으로 다음과 같은 복잡한 표현식을 사용할 수 있습니다. 
-Multiple filters can also be combined using the template condition flag (`-tc`) that allows complex expressions like the following ones:
+
 ```sh
 nuclei -tc "contains(id,'xss') || contains(tags,'xss')"
 nuclei -tc "contains(tags,'cve') && contains(tags,'ssrf')"
@@ -310,7 +292,6 @@ nuclei -tc "contains(name, 'Local File Inclusion')"
 ```
 
 필터링을 지원하는 속성 목록입니다.
-The supported fields are:
 
 - `id` string
 - `name` string
@@ -321,11 +302,8 @@ The supported fields are:
 
 
 또한, 템플릿의 메타데이터 영역의 키-값으로 구성된 모든 쌍이 가능합니다. 모든 속성들은 논리 연산자(`||` 와 `&&`) 를 통해 조합될 수 있고, DSL helper 함수들과 함께 사용될 수 있습니다.
-Also, every key-value pair from the template metadata section is accessible. All fields can be combined with logical operators (`||` and `&&`) and used with DSL helper functions.
 
 모든 필터들은 workflows 에서도 마찬가지로 지원됩니다.
-Similarly, all filters are supported in workflows as well.
-
 
 ```sh
 nuclei -w workflows/wordpress-workflow.yaml -severity critical,high -list http_urls.txt
@@ -333,34 +311,27 @@ nuclei -w workflows/wordpress-workflow.yaml -severity critical,high -list http_u
 
 !!! info "Workflows"
     Workflows에서는 Workflows를 통해 실행되는 템플릿, 서브템플릿에 Nuclei 필터가 적용됩니다.
-    In Workflows, Nuclei filters are applied on templates or sub-templates running via workflows, not on the workflows itself.
 
 ### 속도 **제한**
 
 Nuclei는 다양한 요인으로 다중 속도 제한 제어를 합니다. 요인으로는 병렬로 실행할 템플릿 수, 각 템플릿에 대해 병렬로 검색할 호스트 수, Nuclei를 이용하여 생성하거나 제한하고자 한 초당 총 요청 수 등이 있습니다.아래는 각 플래그에 대한 설명입니다.
 
-Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.
 
 | Flag       | Description                                                          |
 |------------|----------------------------------------------------------------------|
-| rate-limit | Control the total number of request to send per seconds 초당 총 요청의 수를 제어합니다.             |
-| bulk-size  | Control the number of hosts to process in parallel for each template 각 템플릿마다 동시에 진행할 호스트의 수를 제어합니다. |
-| c          | Control the number of templates to process in parallel 동시에 진행할 템플릿의 수를 제어합니다.              |
+| rate-limit | 초당 총 요청의 수를 제어합니다.             |
+| bulk-size  | 각 템플릿마다 동시에 진행할 호스트의 수를 제어합니다. |
+| c          | 동시에 진행할 템플릿의 수를 제어합니다.              |
 
     
 Nuclei의 속도 제한과 정확도를 이 플래그를 이용하여 자유롭게 조정하세요!
-Feel free to play with these flags to tune your nuclei scan speed and accuracy.
 
 !!! tip
     `rate-limit` 플래그는 다른 두 플래그보다 우선합니다. 초당 요청의 수는 `c` 와 `bulk-size` 플래그 값에 상관없이 `rate-limit` 값을 초과할 수 없습니다.
-    `rate-limit` flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for `rate-limit` flag regardless the value of `c` and `bulk-size` flag.
 
 ### Traffic **Tagging**
 
 많은 버그 바운티 플랫폼과 프로그램들은 식별을 위해 여러분들이 생성한 HTTP 트래픽을 요구합니다. 이는 `$HOME/.config/nuclei/config.yaml` 의 설정 파일을 이용하거나 `-H / header` CLI 플래그를 이용하면 됩니다. 
-
-Many BugBounty platform/programs requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at `$HOME/.config/nuclei/config.yaml` or CLI flag `-H / header`
-
 
 !!! info "설정 파일을 이용한 사용자 정의 헤더 설정"
 
@@ -383,29 +354,21 @@ Many BugBounty platform/programs requires you to identify the HTTP traffic you m
 
 Nuclei는 실행에 포함할 템플릿을 제외/방지 하는 다양한 방법을 제공합니다. 스캔으로 인한 예측되지 않은 퍼즈를 피하고, 대량 스캔에서 일부 제외를 위해 실행되지 않아야 하는 태그들과 템플릿들을 Nuclei에서는 기본적으로 제외합니다. 기본 제외 목록은 아래의 링크를 통해 확인 가능합니다. 이 파일은 설정 파일 혹은 플래그들을 통해 쉽게 고칠 수 있습니다.
 
-Nuclei supports a variety of methods for excluding / blocking templates from execution. By default, **nuclei** excludes the tags/templates listed below from execution to avoid unexpected fuzz based scans and some that are not supposed to run for mass scan, and these can be easily overwritten with nuclei configuration file / flags.
-
-- Default [Template ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore) list.
-
+- 기본 제외 목록: [Template ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)
 
 !!! danger ""
 
     **nuclei-ignore** 파일은 사용자가 업데이트/편집/제거할 수 없습니다. 이를 덮어쓰기 위해서는 [nuclei configuration](https://nuclei.projectdiscovery.io/nuclei/get-started/#nuclei-config) 파일을 이용합니다.
-    **nuclei-ignore** file is not supposed to be updated / edited / removed by user, to overwrite default ignore list, utilize [nuclei configuration](https://nuclei.projectdiscovery.io/nuclei/get-started/#nuclei-config) file. 
 
 Nuclei는 두 가지 방법을 통해 스캔에서 제외할 템플릿을 조정할 수 있습니다.
-Nuclei engine supports two ways to manually exclude templates from scan,
 
 1. Exclude Templates (`-exclude-templates/exclude`) 템플릿 제외하기 (`-exclude-templates/exclude`)
 
     **exclude-templates** 플래그는 하나 혹은 다수의 템플릿 그리고 디렉토리를 제외할 수 있습니다. 복수의 `-exclude-templates` 플래그를 통해 여러 값을 제공합니다.
-    **exclude-templates** flag is used to exclude single or multiple templates and directory, multiple `-exclude-templates` flag can be used to provide multiple values.
-
 
 2. Exclude Tags (`-exclude-tags/etags`) 태그 제외하기 (`-exclude-tags/etags`)
 
     **exclude-tags** 플래그는 정의된 태그들을 기반으로 템플릿을 제외합니다. 하나 혹은 다수의 태그를 사용해 제외할 수 있습니다.
-    **exclude-tags** flag is used to exclude templates based in defined tags, single or multiple can be used to exclude templates.
 
 
 !!! info "하나의 템플릿을 제외하는 예"
@@ -433,7 +396,6 @@ Nuclei engine supports two ways to manually exclude templates from scan,
     ```
 
 [nuclei-ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)를 쉽게 설정하기 위해 Nuclei는 **include-tags** / **include-templates** 플래그를 지원합니다.
-To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore), Nuclei engine supports **include-tags** / **include-templates** flag.
 
 !!! info "제외된 태그들을 실행하는 예"
 
@@ -442,23 +404,18 @@ To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-t
     ```
 
 모든 검색에 대해 이러한 태그를 포함하도록 nuclei 설정 파일을 업데이트할 수 있습니다.
-We can update the nuclei configuration file to include these tags for all scans.
 
 ## Nuclei **설정**
 
 !!! abstract ""
 
     [v.2.3.2](https://blog.projectdiscovery.io/nuclei-v2-3-0-release/) 버전의 nuclei부터 깔끔한 CLI 환경과 포맷팅된 길거나 짧은 형식의 플래그들을 사용하기 위해서 [goflags](https://github.com/projectdiscovery/goflags)를 사용합니다.
-    Since release of [v.2.3.2](https://blog.projectdiscovery.io/nuclei-v2-3-0-release/) nuclei uses [goflags](https://github.com/projectdiscovery/goflags) for clean CLI experience and long/short formatted flags.
 
     자동 생성 설정 파일을 생성하는 [goflags](https://github.com/projectdiscovery/goflags)는 사용 가능한 모든 CLI플래그를 설정 파일로 커버합니다. 기본적으로 로드되는 반복적인 CLI 플래그를 피하기 위해서 모든 CLI 플래그들을 설정 파일에 정의할 수 있습니다.
-    [goflags](https://github.com/projectdiscovery/goflags) comes with auto-generated config file support that coverts all available CLI flags into config file, basically you can define all CLI flags into config file to avoid repetitive CLI flags that loads as default for every scan of nuclei.
 
     Nuclei 설정 파일의 기본 경로는 `$HOME/.config/nuclei/config.yaml` 입니다. 기본적으로 실행할 플래그를 설정하거나 주석 해제합니다.
-    Default path of nuclei config file is `$HOME/.config/nuclei/config.yaml`, uncomment and configure the flags you wish to run as default.
 
 아래는 설정 파일의 예시입니다.
-Here is an example config file:-
 
 ```yaml
 # Headers to include with all HTTP request
@@ -498,7 +455,6 @@ concurrency: 50
 ```
 
 일단 설정이 되면, 설정 파일을 기본적으로 사용합니다. `-config` 플래그를 통해 사용자 정의 설정 파일을 추가적으로 제공할 수 있습니다.
-Once configured, **config file be used as default**, additionally custom config file can be also provided using `-config` flag.
 
 !!! info "사용자 정의 파일로 nuclei 실행하기"
 
@@ -509,7 +465,6 @@ Once configured, **config file be used as default**, additionally custom config 
 ## Nuclei **신고**
 
 Nuclei는 GitHub, GitLab, Jira integration 을 지원하는 [v2.3.0](https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021) 버전과 함께 신고 모듈을 제공합니다. 이는 발견된 결과에 따라 지원되는 플랫폼에서 자동으로 신고 내역을 생성할 수 있게 해줍니다.
-Nuclei comes with reporting module support with the release of [v2.3.0](https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021) supporting GitHub, GitLab, and Jira integration, this allows nuclei engine to create automatic tickets on the supported platform based on found results.
 
 <table>
   <tr>
@@ -541,11 +496,8 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
 
 
 `-rc, -report-config` 플래그는 통합을 위해 플랫폼의 세부 정보를 읽기 위해 설정 파일을 제공할 수 있습니다. 지원되는 모든 플랫폼에 대한 [예시 파일](https://github.com/projectdiscovery/nuclei/blob/master/v2/cmd/nuclei/issue-tracker-config.yaml) 입니다.
-`-rc, -report-config` flag can be used to provide a config file to read configuration details of the platform to integrate. Here is an [example config file](https://github.com/projectdiscovery/nuclei/blob/master/v2/cmd/nuclei/issue-tracker-config.yaml) for all supported platforms.
-
 
 예를 들어, Github 에서 신고 내역을 생성하기 위해 다음의 내용을 담은 설정 파일을 생성하고 적절한 값들을 바꾸어 봅니다.
-For example, to create tickets on GitHub, create a config file with the following content and replace the appropriate values:-
 
 ```yaml
 # GitHub contains configuration options for GitHub issue tracker
@@ -559,7 +511,6 @@ github:
 ```
 
 Elasticsearch의 결과들을 저장하기 위해 다음의 내용을 담은 설정 파일을 생성하고 적절한 값들을 바꾸어 봅니다.
-To store results in Elasticsearch, create a config file with the following content and replace the appropriate values:-
 
 ```yaml
 # elasticsearch contains configuration options for elasticsearch exporter
@@ -572,25 +523,22 @@ elasticsearch:
   index-name: nuclei
 ```
 
-**신고 모듈과 함께 Nuclei 실행하기:-**
+**신고 모듈과 함께 Nuclei 실행하기**
 
 ```bash
 nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml
 ```
 
 비슷하게 다른 플랫폼들도 설정할 수 있습니다. 신고 모듈은 중복되는 신고 내역을 생성하지 않기 위해서 기본적인 필터링과 중복 체크를 지원합니다.
-Similarly, other platforms can be configured. Reporting module also supports basic filtering and duplicate checks to avoid duplicate ticket creation.
 
 ```yaml
 allow-list:
   severity: high,critical
 ```
 
-위는 심각도가 **high** 이고 **critical**로 식별되는 이슈들에 대해서만 신고 내역을 생성합니다. 비슷하게도 `deny-list` 설정은 특정 심각도의 이슈들을 제외할 수 있습니다.
-This will ensure to only creating tickets for issues identified with **high** and **critical** severity; similarly, `deny-list` can be used to exclude issues with a specific severity.
+위는 심각도가 **high** 이고 **critical** 로 식별되는 이슈들에 대해서만 신고 내역을 생성합니다. 비슷하게도 `deny-list` 설정은 특정 심각도의 이슈들을 제외할 수 있습니다.
 
-같은 에셋에 대해 주기적인 스캔을 실행한다면, 신고 모듈이 비교하고 **유니크한 이슈들에 대한 신고 내역을 생성**하는 주어진 디렉토리에서의 유효한 발견에 대해서 로컬 복사본을 생성하는 `-rdb, -report-db` 플래그를 고려해볼 수 있습니다.
-If you are running periodic scans on the same assets, you might want to consider `-rdb, -report-db` flag that creates a local copy of the valid findings in the given directory utilized by reporting module to compare and **create tickets for unique issues only**.
+같은 에셋에 대해 주기적인 스캔을 실행한다면, 신고 모듈이 비교하고 **유니크한 이슈들에 대한 신고 내역을 생성** 하는 주어진 디렉토리에서의 유효한 발견에 대해서 로컬 복사본을 생성하는 `-rdb, -report-db` 플래그를 고려해볼 수 있습니다.
 
 ```bash
 nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
@@ -599,10 +547,8 @@ nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml -rdb prod
 **<ins>Markdown 추출</ins>**
 
 Nuclei는 `-me, -markdown-export` 플래그를 통해 유효한 발견들을 마크다운 형식으로 추출하는 것을 지원합니다. 이 플래그는 마크다운 형식의 결과를 저장하기 위해 입력으로 디렉토리를 사용합니다.
-Nuclei supports markdown export of valid findings with `-me, -markdown-export` flag, this flag takes directory as input to store markdown formatted reports.
 
 마크다운 형식의 결과에서 요청/응답을 포함하는 것은 선택 사항입니다. 혹은 `-irr, -include-rr` 플래그가 `-me`와 함께 사용될 때 포함됩니다.
-Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-me`.
 
 ```bash
 nuclei -l urls.txt -t cves/ -irr -markdown-export reports
@@ -611,10 +557,8 @@ nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 **<ins>SARIF 추출</ins>**
 
 Nuclei는 `-se, -sarif-export` 플래그를 통해 유효한 발견들을 SARIF 형식으로 추출하는 것을 지원합니다. 이 플래그는 SARIF 형식의 결과를 저장하기 위해 입력으로 파일을 사용합니다.
-Nuclei supports SARIF export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store SARIF formatted report.
 
 요청-응답 정보는 마크다운 문법 형식이고, SARIF의 응답 영역에 저장됩니다.
-The request-response pairs are formatted using markdown syntax and are stored in the SARIF response section.
 
 ```bash
 nuclei -l urls.txt -t cves/ -sarif-export report.sarif
@@ -623,14 +567,10 @@ nuclei -l urls.txt -t cves/ -sarif-export report.sarif
 ## Scan **Metrics**
 
 Nuclei는 **localhost:9092/metrics** 에 접속 가능하며 `-metrics` 플래그를 사용하면 로컬 포트 `9092`에서 실행 중인 scan metrics를 볼 수 있습니다. 기본 포트는 `-metrics-port` 플래그를 사용하여 설정 할 수 있습니다.
-Nuclei expose running scan metrics on a local port `9092` when `-metrics` flag is used and can be accessed at **localhost:9092/metrics** , default port to expose scan information is configurable using `-metrics-port` flag.
-
 
 `nuclei -t cves/ -l urls.txt -metrics` 로 nuclei가 실행된 동안 `metrics`로 응답을 요청한 예시입니다.
-Here is an example to query `metrics` while running nuclei as following `nuclei -t cves/ -l urls.txt -metrics`
 
 ```bash
-
 curl -s localhost:9092/metrics | jq .
 ```
 
@@ -652,7 +592,6 @@ curl -s localhost:9092/metrics | jq .
 ## Passive Scan
 
 Nuclei는 파일 지원을 통해 HTTP 기반 템플릿에 대한 수동 모드 스캔을 지원합니다. 이 기능을 통해 다른 도구에서 수집된 로컬에 저장된 HTTP 응답 데이터에 대해 HTTP 기반 템플릿을 실행할 수 있습니다.
-Nuclei engine supports passive mode scanning for HTTP based template utilizing file support, with this support we can run HTTP based templates against locally stored HTTP response data collected from any other tool.
 
 ```sh
 nuclei -passive -target http_data
@@ -661,7 +600,6 @@ nuclei -passive -target http_data
 !!! info ""
 
     수동모드는 `{{BasedURL}}` 혹은 `{{BasedURL/}}`을 기본 경로로 가지는 템플릿들에 대해 제한됩니다.
-    Passive mode support is limited for templates having `{{BasedURL}}` or `{{BasedURL/}}` as base path.
     
 ## **기여**
 
