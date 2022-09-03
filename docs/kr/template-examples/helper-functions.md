@@ -1,6 +1,6 @@
-### Helper Functions Examples
+### 함수 도우미 예시
 
-Nuclei has a number of helper functions that may be used to conduct various run-time operations on the request block. Here's an example template that shows how to use all the available helper functions.
+Nuclei에는 요청 블록에서 다양한 런타임 작업을 수행하는 데 사용할 수 있는 여러 도우미 기능이 있습니다. 다음은 사용 가능한 모든 도우미 기능을 사용하는 방법을 보여주는 예제 템플릿입니다.
 
 ```yaml
 id: helper-functions-examples
