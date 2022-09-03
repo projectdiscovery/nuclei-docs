@@ -1,27 +1,27 @@
 ### Network Requests
 
-Nuclei can act as an automatable **Netcat**, allowing users to send bytes across the wire and receive them, while providing matching and extracting capabilities on the response.
+Nuclei는 자동화 가능한 **Netcat** 역할을 하여 사용자가 바이트를 유선으로 보내고 받을 수 있으며 응답에 대한 일치 및 추출 기능을 제공합니다.
 
-Network Requests start with a **network** block which specifies the start of the requests for the template.
+네트워크 요청은 템플릿에 대한 요청의 시작을 지정하는 **network** 블록으로 시작합니다.
 
 ```yaml
-# Start the requests for the template right here
+# 템플릿 요청을 바로 여기에서 시작하세요.
 network:
 ```
 
 #### Inputs
 
-First thing in the request is **inputs**. Inputs are the data that will be sent to the server, and optionally any data to read from the server.
+요청의 첫 번째 항목은 **inputs**입니다. 입력은 서버로 보낼 데이터이며 선택적으로 서버에서 읽을 데이터입니다.
 
-At it's most simple, just specify a string, and it will be sent across the network socket.
+가장 간단합니다. 문자열을 지정하면 네트워크 소켓을 통해 전송됩니다.
 
 ```yaml
-# inputs is the list of inputs to send to the server
+# inputs은 서버에 보낼 입력 목록입니다.
 inputs: 
   - data: "TEST\r\n"
 ```
 
-You can also send hex encoded text that will be first decoded and the raw bytes will be sent to the server.
+또한 먼저 디코딩되고 Raw 바이트가 서버로 전송될 16진수로 인코딩된 텍스트를 보낼 수 있습니다.
 
 ```yaml
 inputs:
@@ -30,21 +30,21 @@ inputs:
   - data: "\r\n"
 ```
 
-Helper function expressions can also be defined in input and will be first evaluated and then sent to the server. The last Hex Encoded example can be sent with helper functions this way - 
+도우미 함수 표현식은 입력에서도 정의할 수 있으며 먼저 평가된 다음 서버로 전송됩니다. 마지막 Hex Encoded 예제는 이런 식으로 도우미 함수와 함께 보낼 수 있습니다.
 
 ```yaml
 inputs:
   - data: 'hex_decode("50494e47")\r\n'
 ```
 
-One last thing that can be done with inputs is reading data from the socket. Specifying `read-size` with a non-zero value will do the trick. You can also assign the read data some name, so matching can be done on that part.
+입력으로 수행할 수 있는 마지막 작업은 소켓에서 데이터를 읽는 것입니다. 0이 아닌 값으로 `read-size`를 지정하면 트릭이 수행됩니다. 읽은 데이터에 이름을 지정하여 해당 부분에서 일치를 수행할 수도 있습니다.
 
 ```yaml
 inputs:
   - read-size: 8
 ```
 
-Example with reading a number of bytes, and only matching on them.
+여러 바이트를 읽고 일치하는 경우의 예입니다.
 
 ```yaml
 inputs:
@@ -58,33 +58,33 @@ matchers:
       - "CAFEBABE"
 ```
 
-Multiple steps can be chained together in sequence to do network reading / writing.
+여러 단계를 순서대로 연결하여 네트워크 읽기/쓰기를 수행할 수 있습니다.
 
 #### Host
 
-The next part of the requests is the **host** to connect to. Dynamic variables can be placed in the path to modify its value on runtime. Variables start with `{{` and end with `}}` and are case-sensitive.
+요청의 다음 부분은 연결할 **host**입니다. 동적 변수를 경로에 배치하여 런타임에 값을 수정할 수 있습니다. 변수는 `{{`로 시작하고 `}}`로 끝나며 대소문자를 구분합니다.
 
-1. **Hostname** - variable is replaced by the hostname provided on command line.
+1. **Hostname** - 변수는 명령줄에 제공된 호스트 이름으로 대체됩니다.
 
-An example name value:
+예제 이름 값:
 
 ```yaml
 host: 
   - "{{Hostname}}"
 ```
 
-Nuclei can also do TLS connection to the target server. Just add `tls://` as prefix before the **Hostname** and you're good to go.
+Nuclei는 또한 대상 서버에 TLS 연결을 수행할 수 있습니다. **Hostname** 앞에 접두사로 `tls://`를 추가하기만 하면 됩니다.
 
 ```yaml
 host:
   - "tls://{{Hostname}}"
 ```
 
-If a port is specified in the host, the user supplied port is ignored and the template port takes precedence.
+호스트에 포트가 지정되면 사용자가 제공한 포트는 무시되고 템플릿 포트가 우선합니다.
 
 #### Matchers / Extractor Parts
 
-Valid `part` values supported by **Network** protocol for Matchers / Extractor are - 
+Matchers/Extractor용 **Network** 프로토콜에서 지원하는 유효한 `part` 값은 다음과 같습니다. 
     
 | Value            | Description                         |
 |------------------|-------------------------------------|
@@ -95,7 +95,7 @@ Valid `part` values supported by **Network** protocol for Matchers / Extractor a
 
 #### **Example Network Template**
 
-The final example template file for a `hex` encoded input to detect MongoDB running on servers with working matchers is provided below.
+작동하는 matchers가 있는 서버에서 실행되는 MongoDB를 감지하기 위한 '16진수'로 인코딩된 입력에 대한 최종 예제 템플릿 파일은 아래에 제공됩니다.
 
 ```yaml
 id: input-expressions-mongodb-detect
@@ -119,4 +119,4 @@ network:
           - "localTime"
 ```
 
-More complete examples are provided [here](../../template-examples/network.md)
+더 완전한 예가 제공됩니다. [here](../../template-examples/network.md)
