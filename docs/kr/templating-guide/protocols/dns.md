@@ -1,70 +1,70 @@
 ### DNS Requests
 
-DNS protocol can be modelled in nuclei with ease. Fully Customizable DNS requests can be sent by nuclei to nameservers and matching/extracting can be performed on their response.
+DNS protocol은 nuclei에서 쉽게 모델링할 수 있습니다. 완전히 사용자 정의 가능한 DNS 요청은 nuclei에 의해 네임서버로 전송될 수 있으며 응답에 대해 일치/추출이 수행될 수 있습니다.
 
-DNS Requests start with a **dns** block which specifies the start of the requests for the template.
+DNS 요청은 템플릿에 대한 요청의 시작을 지정하는 **dns** 블록으로 시작합니다.
 
 ```yaml
-# Start the requests for the template right here
+# 템플릿 요청을 바로 여기에서 시작하세요.
 dns:
 ```
 
 #### Type
 
-First thing in the request is **type**. Request type can be **A**, **NS**, **CNAME**, **SOA**, **PTR**, **MX**, **TXT**, **AAAA**.
+요청사항의 첫 번째는 **type**입니다. 요청 유형은 **A**, **NS**, **CNAME**, **SOA**, **PTR**, **MX**, **TXT**, **AAAA**입니다.
 
 ```yaml
-# type is the type for the dns request
+# type은 DNS 요청에 대한 유형입니다.
 type: A
 ```
 
 #### Name
 
-The next part of the requests is the DNS **name** to resolve. Dynamic variables can be placed in the path to modify its value on runtime. Variables start with `{{` and end with `}}` and are case-sensitive.
+요청의 다음 부분은 해결할 DNS **name**입니다. 동적 변수를 경로에 배치하여 런타임에 값을 수정할 수 있습니다. 변수는 '{{'로 시작하고 '}}'로 끝나며 대소문자를 구분합니다.
 
-1. **FQDN** - variable is replaced by the hostname/FQDN of the target on runtime.
+1. **FQDN** - 변수는 런타임 시 대상의 호스트 이름/FQDN으로 대체됩니다.
 
-An example name value:
+예제 이름 값:
 
 ```yaml
 name: {{FQDN}}.com
-# This value will be replaced on execution with the FQDN.
-# If FQDN is https://this.is.an.example then the
-# name will get replaced to the following: this.is.an.example.com
+# 이 값은 실행 시 FQDN으로 대체됩니다.
+# FQDN이 https://this.is.an.example이면
+# name은 다음으로 대체됩니다: this.is.an.example.com
 ```
 
-As of now the tool supports only one name per request.
+현재 이 도구는 요청당 하나의 이름만 지원합니다.
 
 #### Class
 
-Class type can be **INET**, **CSNET**, **CHAOS**, **HESIOD**, **NONE** and **ANY**. Usually it's enough to just leave it as **INET**.
+클래스 유형은 **INET**, **CSNET**, **CHAOS**, **HESIOD**, **NONE** 및 **ANY**일 수 있습니다. 일반적으로 **INET**으로 두는 것으로 충분합니다.
 
 ```yaml
-# method is the class for the dns request
+# 메소드는 dns 요청에 대한 클래스입니다.
 class: inet
 ```
 
 #### Recursion
 
-Recursion is a boolean value, and determines if the resolver should only return cached results, or traverse the whole dns root tree to retrieve fresh results. Generally it's better to leave it as **true**.
+재귀는 부울 값이며 해석기가 캐시된 결과만 반환해야 하는지 아니면 전체 DNS 루트 트리를 탐색하여 새로운 결과를 검색해야 하는지를 결정합니다. 일반적으로 **true**로 두는 것이 좋습니다.
 
 ```yaml
-# Recursion is a boolean determining if the request is recursive
+# 재귀는 요청이 재귀인지 여부를 결정하는 부울입니다.
 recursion: true
 ```
 
 #### Retries
 
-Retries is the number of attempts a dns query is retried before giving up among different resolvers. It's recommended a reasonable value, like **3**.
+Retries는 다른 확인자 간에 포기하기 전에 DNS 쿼리를 다시 시도한 횟수입니다. **3**과 같은 합리적인 값을 권장합니다.
 
 ```yaml
-# Retries is a number of retries before giving up on dns resolution
+# Retries는 dns 해결을 포기하기 전의 재시도 횟수입니다.
 retries: 3
 ```
 
 #### Matchers / Extractor Parts
 
-Valid `part` values supported by **DNS** protocol for Matchers / Extractor are - 
+Matchers/Extractor용 **DNS** 프로토콜에서 지원하는 유효한 `part` 값은 다음과 같습니다.
 
 | Value            | Description                 |
 |------------------|-----------------------------|
@@ -79,7 +79,7 @@ Valid `part` values supported by **DNS** protocol for Matchers / Extractor are -
 
 #### **Example DNS Template**
 
-The final example template file for performing `A` query, and check if CNAME and A records are in the response is as follows:
+`A` 쿼리를 수행하고 응답에 CNAME 및 A 레코드가 있는지 확인하기 위한 최종 예제 템플릿 파일은 다음과 같습니다.
 
 ```yaml
 id: dummy-cname-a
@@ -106,4 +106,4 @@ dns:
         condition: and
 ```
 
-More complete examples are provided [here](../../template-examples/dns.md)
+더 완전한 예제는 [here](../../template-examples/dns.md)에서 제공됩니다.
