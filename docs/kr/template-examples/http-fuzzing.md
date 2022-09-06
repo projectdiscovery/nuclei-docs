@@ -1,6 +1,6 @@
 ### HTTP Intruder fuzzing
 
-This template makes a defined POST request in RAW format along with in template defined payloads running `clusterbomb` intruder and checking for string match against response.
+이 템플릿은 'clusterbomb' Intruder를 실행하고 응답에 대한 문자열 일치를 확인하는 템플릿 정의 페이로드와 함께 RAW 형식으로 정의된 POST 요청을 만듭니다.
 
 
 ```yaml
@@ -10,7 +10,7 @@ info:
   author: pdteam
   severity: info
 
-# HTTP Intruder fuzzing with in template payload support. 
+# 템플릿 페이로드 지원으로 HTTP Intruder fuzzing.
 
 requests:
 
@@ -43,9 +43,9 @@ requests:
           - "Test is test matcher text"
 ```
 
-### Fuzzing multiple requests 
+### 여러 요청 fuzzing
 
-This template makes a defined POST request in RAW format along with wordlist based payloads running `clusterbomb` intruder and checking for string match against response.
+이 템플릿은 'clusterbomb' Intruder를 실행하고 응답에 대한 문자열 일치를 확인하는 단어 목록 기반 페이로드와 함께 RAW 형식으로 정의된 POST 요청을 만듭니다.
 
 ```yaml
 id: multiple-raw-example
@@ -91,9 +91,10 @@ requests:
 ```
 
 
-### Authenticated fuzzing
+### 인증이 필요한 fuzzing
 
-This template makes a subsequent HTTP requests with defined requests maintaining sessions between each request and checking for string match against response.
+
+이 템플릿은 각 요청 간의 세션을 유지 관리하고 응답에 대한 문자열 일치를 확인하는 정의된 요청으로 후속 HTTP 요청을 만듭니다.
 
 ```yaml
 id: multiple-raw-example
@@ -116,16 +117,16 @@ requests:
 
         testing=parameter
 
-    cookie-reuse: true # Cookie-reuse maintain the session between all request like browser. 
+    cookie-reuse: true # 쿠키 재사용은 브라우저와 같은 모든 요청 간의 세션을 유지합니다.
     matchers:
       - type: word
         words:
           - "Test is test matcher text"
 ```
 
-### Dynamic variable support
+### 동적 변수 지원
 
-This template makes a subsequent HTTP requests maintaining sessions between each request, dynamically extracting data from one request and reusing them into another request using variable name and checking for string match against response.
+이 템플릿은 각 요청 간에 세션을 유지 관리하는 연속적인 HTTP 요청을 만듭니다. 요청에서 데이터를 동적으로 추출하고 변수 이름을 사용하여 다른 요청으로 재사용한 다음, 응답에 대한 문자열 일치를 확인합니다.
 
 ```yaml
 id: CVE-2020-8193
