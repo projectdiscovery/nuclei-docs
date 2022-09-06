@@ -121,9 +121,9 @@ headless:
           - alerts
 ```
 
-### 헤드리스 모드로 DVWA XSS 재생산
+### 헤드리스 모드로 DVWA XSS 재현
 
-이 템플릿은 DVWA(Damn Vulnerable Web App)에 로그인하고 Reflected XSS를 자동으로 재생하려고 시도하며 페이로드가 성공적으로 실행된 경우 일치 항목을 반환합니다
+이 템플릿은 DVWA(Damn Vulnerable Web App)에 로그인하고 Reflected XSS를 자동으로 재현하려고 시도하며 페이로드가 성공적으로 실행된 경우 일치 항목을 반환합니다.
 
 ```yaml
 id: dvwa-xss-verification

@@ -1,6 +1,6 @@
-### HTTP 침입자 fuzzing
+### HTTP Intruder fuzzing
 
-이 템플릿은 'clusterbomb' 침입자를 실행하고 응답에 대한 문자열 일치를 확인하는 템플릿 정의 페이로드와 함께 RAW 형식으로 정의된 POST 요청을 만듭니다.
+이 템플릿은 'clusterbomb' Intruder를 실행하고 응답에 대한 문자열 일치를 확인하는 템플릿 정의 페이로드와 함께 RAW 형식으로 정의된 POST 요청을 만듭니다.
 
 
 ```yaml
@@ -10,7 +10,7 @@ info:
   author: pdteam
   severity: info
 
-# 템플릿 페이로드 지원으로 HTTP 침입자 fuzzing.
+# 템플릿 페이로드 지원으로 HTTP Intruder fuzzing.
 
 requests:
 
@@ -45,7 +45,7 @@ requests:
 
 ### 여러 요청 fuzzing
 
-이 템플릿은 'clusterbomb' 침입자를 실행하고 응답에 대한 문자열 일치를 확인하는 단어 목록 기반 페이로드와 함께 RAW 형식으로 정의된 POST 요청을 만듭니다.
+이 템플릿은 'clusterbomb' Intruder를 실행하고 응답에 대한 문자열 일치를 확인하는 단어 목록 기반 페이로드와 함께 RAW 형식으로 정의된 POST 요청을 만듭니다.
 
 ```yaml
 id: multiple-raw-example
@@ -91,7 +91,7 @@ requests:
 ```
 
 
-### 인증된 fuzzing
+### 인증이 필요한 fuzzing
 
 
 이 템플릿은 각 요청 간의 세션을 유지 관리하고 응답에 대한 문자열 일치를 확인하는 정의된 요청으로 후속 HTTP 요청을 만듭니다.
@@ -117,7 +117,7 @@ requests:
 
         testing=parameter
 
-    cookie-reuse: true # Cookie-reuse maintain the session between all request like browser. 
+    cookie-reuse: true # 쿠키 재사용은 브라우저와 같은 모든 요청 간의 세션을 유지합니다.
     matchers:
       - type: word
         words:
@@ -126,7 +126,7 @@ requests:
 
 ### 동적 변수 지원
 
-이 템플릿은 각 요청 간에 세션을 유지 관리하는 후속 HTTP 요청을 만들고, 한 요청에서 데이터를 동적으로 추출하고 변수 이름을 사용하여 다른 요청으로 재사용하고 응답에 대한 문자열 일치를 확인합니다..
+이 템플릿은 각 요청 간에 세션을 유지 관리하는 연속적인 HTTP 요청을 만듭니다. 요청에서 데이터를 동적으로 추출하고 변수 이름을 사용하여 다른 요청으로 재사용한 다음, 응답에 대한 문자열 일치를 확인합니다.
 
 ```yaml
 id: CVE-2020-8193
