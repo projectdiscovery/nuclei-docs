@@ -1,8 +1,8 @@
-### Variables
+### Variables (변수)
 
-Variables can be used to declare some values which remain constant throughout the template. The value of the variable once calculated does not change. Variables can be either simple strings or DSL helper functions. If the variable is a helper function, it is enclosed in double-curly brackets `{{<expression>}}`. Variables are declared at template level.
+variable을 사용하여 템플릿 전체에서 일정하게 유지되는 일부 값을 선언할 수 있습니다. 한 번 계산된 variable의 값은 변경되지 않습니다. variable은 단순 문자열 또는 DSL helper function 일 수 있습니다. variable이 helper function인 경우, 이중 중괄호 `{{<expression>}}`로 묶입니다. variable은 템플릿 수준에서 선언됩니다.
 
-Example variables - 
+예시 variables - 
 
 ```yaml
 variables:
@@ -10,9 +10,9 @@ variables:
   a2: "{{to_lower(rand_base(5))}}" # A DSL function variable
 ```
 
-Currently, `dns`, `http`, `headless` and `network` protocols support variables.
+현재 `dns`, `http`, `headless` 및 `network` 프로토콜은 variable을 지원합니다. 
 
-Example of templates with variables - 
+variable을 사용한 템플릿 예시 -
 
 ```yaml
 # Variable example using HTTP requests
