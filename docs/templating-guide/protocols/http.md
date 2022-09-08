@@ -423,13 +423,13 @@ In the open source space, detecting http smuggling is difficult particularly due
 The most basic example of an HTTP Smuggling vulnerability is CL.TE Smuggling. An example template to detect a CE.TL HTTP Smuggling vulnerability is provided below using the `unsafe: true` attribute for rawhttp based requests.
 
 ```yaml
-id: CL.TE-http-smuggling
+id: CL-TE-http-smuggling
 
 info:
   name: HTTP request smuggling, basic CL.TE vulnerability
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
+  reference: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
 requests:
   - raw:
