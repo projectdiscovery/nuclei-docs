@@ -422,13 +422,13 @@ HTTP Smuggling은 최근 [Portswigger's Research](https://portswigger.net/resear
 HTTP Smuggling 취약점의 가장 기본적인 예는 CL.TE Smuggling입니다. rawhttp 기반 요청에 대해 `unsafe: true` 속성을 사용하여 CE.TL HTTP Smuggling 취약점을 감지하는 예제 템플릿이 아래에 제공됩니다.
 
 ```yaml
-id: CL.TE-http-smuggling
+id: CL-TE-http-smuggling
 
 info:
   name: HTTP request smuggling, basic CL.TE vulnerability
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
+  reference: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
 requests:
   - raw:

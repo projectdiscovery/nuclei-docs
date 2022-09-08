@@ -3,13 +3,13 @@
 This template makes a defined malformed HTTP POST requests using rawhttp library and checking for string match against response.
 
 ```yaml
-id: CL.TE-http-smuggling
+id: CL-TE-http-smuggling
 
 info:
   name: HTTP request smuggling, basic CL.TE vulnerability
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
+  reference: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
 requests:
   - raw:
@@ -49,13 +49,13 @@ This template makes a defined malformed HTTP POST requests using rawhttp library
 
 
 ```yaml
-id: TE.CL-http-smuggling
+id: TE-CL-http-smuggling
 
 info:
   name: HTTP request smuggling, basic TE.CL vulnerability
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/lab-basic-te-cl
+  reference: https://portswigger.net/web-security/request-smuggling/lab-basic-te-cl
 
 requests:
   - raw:
@@ -107,7 +107,7 @@ info:
   name: HTTP request smuggling to bypass front-end security controls, CL.TE vulnerability
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te
+  reference: https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te
 
 requests:
   - raw:
@@ -161,7 +161,7 @@ info:
   name: HTTP request smuggling, confirming a CL.TE vulnerability via differential responses
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses
+  reference: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses
 
 requests:
   - raw:
@@ -207,7 +207,7 @@ info:
   name: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
   author: pdteam
   severity: info
-  lab: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses
+  reference: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses
 
 requests:
   - raw:
