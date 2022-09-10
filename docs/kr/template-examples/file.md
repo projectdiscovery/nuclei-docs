@@ -1,6 +1,6 @@
-### Basic File Template
+### 기본 파일 템플릿
 
-This template checks for a pattern in provided files.
+제공된 파일에서 패턴 체크를 하는 템플릿입니다.
 
 ```yaml
 id: ssh-public-key
@@ -21,9 +21,9 @@ file:
           - "ssh-rsa"
 ```
 
-### Extension Denylist with No-Recursive
+### 비재귀, 제외 목록 확장
 
-The below template is same as last one, but it makes use of an extension denylist along with the no-recursive option.
+아래의 템플릿은 위의 템플릿과 동일합니다. 하지만, 비재귀 옵션과 함께 제외 목록을 사용하고 있습니다.
 
 ```yaml
 id: ssh-private-key
