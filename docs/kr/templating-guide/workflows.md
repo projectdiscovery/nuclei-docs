@@ -1,10 +1,10 @@
-### Workflows
+### Workflows (작업흐름)
 
-Workflows allow users to define an execution sequence for templates. The templates will be run on the defined conditions. These are the most efficient way to use nuclei, where all the templates are configured based on needs of users. This means, you can create Technology Based / Target based workflows, like WordPress Workflow, Jira Workflow which only run when the specific technology is detected.
+workflow를 통해 사용자는 템플릿의 실행 순서를 정의할 수 있습니다. 템플릿은 정의된 조건에서 실행됩니다. 모든 템플릿을 사용자의 요구에 따라 구성하는 방법이 nuclei를 사용하는 가장 효율적인 방법입니다. 즉, 특정 기술이 감지될 때만 실행되는 WordPress Workflow, Jira Workflow와 같은 기술 기반/대상 기반 workflow를 만들 수 있습니다.
 
-If the tech stack is known, we recommend creating your custom workflows to run your scans. This leads to much lower scan times with better results.
+기술 스택이 알려진 경우 스캔을 실행하기 위한 사용자 지정 workflow를 만드는 것이 좋습니다. 이 방법을 통해 더 나은 결과와 훨씬 적은 스캔 시간을 얻을 수 있습니다.
 
-Workflows can be defined with `workflows` attribute, following the `template` / `subtemplates` and `tags` to execute.
+workflow는 실행할 `template` / `subtemplates` 및 `tags`를 따라 `workflows` 속성으로 정의할 수 있습니다.
 
 ```yaml
 workflows:
@@ -13,14 +13,15 @@ workflows:
 
 **Type of workflows**
 
-1. Generic workflows
-2. Conditional workflows
+1. Generic workflows (일반 작업흐름)
+2. Conditional workflows (조건부 작업흐름)
 
-#### Generic Workflows
+#### Generic Workflows (일반 작업흐름)
 
-In generic workflow one can define single or multiple template to be executed from a single workflow file. It supports both files and directories as input.
+generic workflow에서는 단일 workflow 파일에서 실행할 단일 또는 여러 템플릿을 정의할 수 있습니다. 파일과 디렉토리를 모두 입력으로 지원합니다.
 
-A workflow that runs all config related templates on the list of give URLs.
+
+주어진 URL 목록에서 모든 구성 관련 템플릿을 실행하는 workflow.
 
 ```yaml
 workflows:
@@ -31,7 +32,7 @@ workflows:
   - tags: xss,ssrf,cve,lfi
 ```
 
-A workflow that runs specific list of checks defined for your project.
+프로젝트에 대해 정의된 특정 검사 목록을 실행하는 workflow.
 
 ```yaml
 workflows:
@@ -41,13 +42,15 @@ workflows:
   - tags: exposures
 ```
 
-#### Conditional Workflows
+#### Conditional Workflows (조건부 작업흐름)
 
-You can also create conditional templates which execute after matching the condition from a previous template. This is mostly useful for vulnerability detection and exploitation as well as tech based detection and exploitation. Use-cases for this kind of workflows are vast and varied.
+이전 템플릿의 조건을 일치시킨 후 실행되는 조건 템플릿을 생성할 수 있습니다. 취약점 탐지 및 exploitation뿐만 아니라 기술 기반 탐지 및 exploitation에도 유용합니다. 이러한 종류의 workflow에 대한 사용 사례는 방대하고 다양합니다.
 
-**Templates based condition check**
 
-A workflow that executes subtemplates when base template gets matched.
+**템플릿 기반 조건 체크**
+
+기본 템플릿이 일치할 때 하위 템플릿을 실행하는 workflow.
+
 
 ```yaml
 workflows:
@@ -57,9 +60,9 @@ workflows:
       - template: exploits/jira/
 ```
 
-**Matcher Name based condition check**
+**matcher 이름 기반 조건 체크**
 
-A workflow that executes subtemplates when a matcher of base template is found in result.
+결과에서 기본 템플릿의 matcher가 발견되면 하위 템플릿을 실행하는 workflow.
 
 ```yaml
 workflows:
@@ -75,11 +78,12 @@ workflows:
           - template: exploits/jboss-exp2.yaml
 ```
 
-In similar manner, one can create as many and as nested checks for workflows as needed.
+비슷한 방식으로 필요한 만큼 workflow에 대한 중첩 검사를 만들 수 있습니다.
 
-**Subtemplate and matcher name based multi level conditional check**
 
-A workflow showcasing chain of template executions that run only if the previous templates get matched.
+**하위 템플릿과 matcher 이름 기반 다중 레벨 조건 체크**
+
+이전 템플릿이 일치하는 경우에만 실행되는 템플릿 실행 체인을 보여주는 workflow.
 
 
 ```yaml
@@ -95,6 +99,6 @@ workflows:
                   - template: cves/xx-xx-xx.yaml
 ```
 
-Conditional workflows are great examples of performing checks and vulnerability detection in most efficient manner instead of spraying all the templates on all the targets and generally come with good ROI on your time and is gentle for the targets as well.
+conditional workflows는 모든 대상에 모든 템플릿을 적용하는 대신 가장 효율적인 방식으로 검사 및 취약성 탐지를 수행하는 좋은 예이며 일반적으로 시간에 대한 ROI가 우수하고 대상에도 적합합니다.
 
-More complete workflow examples are provided [here](../template-examples/workflow.md)
+더 완전한 workflow 예제들은 [here](../template-examples/workflow.md)에서 제공됩니다.
