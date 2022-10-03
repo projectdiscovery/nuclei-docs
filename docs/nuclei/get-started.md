@@ -59,6 +59,23 @@
         - Download the latest binary for your OS.
         - Unzip the ready to run binary.
 
+=== "Helm"
+
+    ```
+    git clone https://github.com/projectdiscovery/nuclei.git
+    cd nuclei/helm
+    helm upgrade --install nuclei . -f values.yaml 
+    ```
+
+    !!! tip
+        This Helm chart creates two primary resources (intended to be configured via `values.yaml`):
+
+	    - A Kubernetes CronJob to run Nuclei on a defined schedule
+
+	    - An [Interactsh](https://github.com/projectdiscovery/interactsh) service for Nuclei to use
+
+
+
 ## Nuclei **Templates**
 
 Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
