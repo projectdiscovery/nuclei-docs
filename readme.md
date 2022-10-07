@@ -5,6 +5,6 @@ Github project for Nuclei documentation website https://nuclei.projectdiscovery.
 
 ```bash
 git clone https://github.com/projectdiscovery/nuclei-docs; cd nuclei-docs; \
-docker run --rm -it -p 1111:1111 -v ${PWD}:/docs titom73/mkdocs
+docker run --rm -it -p 8000:8000 -v ${PWD}:/docs titom73/mkdocs
 ```
 
