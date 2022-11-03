@@ -80,7 +80,9 @@
 
 Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
 
-Nuclei checks for new template releases upon each execution and automatically downloads the latest version when available. This feature can be disabled using the `-duc`, `-disable-update-check` flags via the CLI or the configuration file.
+Nuclei also support for update/download custom template repositories. You can pass the file/list of github repositories by using `-gtr`/`-github-template-repo` flag. This will download the repositories under `nuclei-templates/github` directory. To update the repo you can pass the `-update-templates` with `-gtr` flag.
+
+Nuclei checks for new community template releases upon each execution and automatically downloads the latest version when available. This feature can be disabled using the `-duc`, `-disable-update-check` flags via the CLI or the configuration file.
 
 
 The nuclei engine can also be updated to latest version by using the `-update` flag.
@@ -191,10 +193,12 @@ DEBUG:
    -tv, -templates-version    shows the version of the installed nuclei-templates
 
 UPDATE:
-   -update                        update nuclei engine to the latest released version
-   -ut, -update-templates         update nuclei-templates to latest released version
-   -ud, -update-directory string  overwrite the default directory to install nuclei-templates
-   -duc, -disable-update-check    disable automatic nuclei/templates update check
+   -un, -update                          update nuclei engine to the latest released version
+   -ut, -update-templates                update nuclei-templates to latest released version
+   -ud, -update-template-dir string      custom directory to install / update nuclei-templates
+   -gt, -github-token string             github token to download public/private templates (GITHUB_TOKEN)
+   -gtr, -github-template-repo string[]  github template repository to download / update (GITHUB_TEMPLATE_REPO)
+   -duc, -disable-update-check           disable automatic nuclei/templates update check
 
 STATISTICS:
    -stats                    display statistics about the running scan
@@ -220,6 +224,11 @@ Custom template directory or multiple template directory can be executed as foll
 
 ```sh
 nuclei -u https://example.com -t cves/ -t exposures/
+```
+
+Custom template github repos are downloaded under `github` directory. Custom repo templates can be passed as follows
+```sh
+nuclei -u https://example.com -t github/private-repo
 ```
 
 Similarly, Templates can be executed against list of URLs.
