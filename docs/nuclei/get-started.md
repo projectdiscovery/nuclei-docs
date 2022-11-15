@@ -432,7 +432,7 @@ UNCOVER:
    -ul, -uncover-limit int        uncover results to return (default 100)
    -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
 ```
-You have set the API key of engine you are using as environment variable in your shell.
+You have set the API key of the engine you are using as an environment variable in your shell.
 ```
 export SHODAN_API_KEY=xxx
 export CENSYS_API_ID=xxx
