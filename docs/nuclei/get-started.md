@@ -159,6 +159,14 @@ INTERACTSH:
    -interactions-cooldown-period int    extra time for interaction polling before exiting (default 5)
    -ni, -no-interactsh                  disable interactsh server for OAST testing, exclude OAST based templates
 
+UNCOVER:
+   -uc, -uncover                  enable uncover engine
+   -uq, -uncover-query string[]   uncover search query
+   -ue, -uncover-engine string[]  uncover search engine (shodan,shodan-idb,fofa,censys,quake,hunter,zoomeye) (default shodan)
+   -uf, -uncover-field string     uncover fields to return (ip,port,host) (default "ip:port")
+   -ul, -uncover-limit int        uncover results to return (default 100)
+   -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
+
 RATE-LIMIT:
    -rl, -rate-limit int          maximum number of requests to send per second (default 150)
    -rlm, -rate-limit-minute int  maximum number of requests to send per minute
@@ -408,6 +416,54 @@ To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-t
     ```
     nuclei -l urls.txt -include-tags iot,misc,fuzz
     ```
+### Uncover **Integration**
+
+Nuclei supports integration with [uncover](https://github.com/projectdiscovery/uncover) to executes template against hosts returned by uncover for the given query.
+
+Here are uncover options to use -
+```console
+nuclei -h uncover
+
+UNCOVER:
+   -uc, -uncover                  enable uncover engine
+   -uq, -uncover-query string[]   uncover search query
+   -ue, -uncover-engine string[]  uncover search engine (shodan,shodan-idb,fofa,censys,quake,hunter,zoomeye) (default shodan)
+   -uf, -uncover-field string     uncover fields to return (ip,port,host) (default "ip:port")
+   -ul, -uncover-limit int        uncover results to return (default 100)
+   -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
+```
+You have set the API key of engine you are using as environment variable in your shell.
+```
+export SHODAN_API_KEY=xxx
+export CENSYS_API_ID=xxx
+export CENSYS_API_SECRET=xxx
+export FOFA_EMAIL=xxx
+export FOFA_KEY=xxx
+export QUAKE_TOKEN=xxx
+export HUNTER_API_KEY=xxx
+export ZOOMEYE_API_KEY=xxx
+```
+Required API keys can be obtained by signing up on following platform [Shodan](https://account.shodan.io/register), [Censys](https://censys.io/register), [Fofa](https://fofa.info/toLogin), [Quake](https://quake.360.net/quake/#/index), [Hunter](https://user.skyeye.qianxin.com/user/register?next=https%3A//hunter.qianxin.com/api/uLogin&fromLogin=1) and [ZoomEye](https://www.zoomeye.org/login) .
+
+Example of template execution using a search query.
+```
+export SHODAN_API_KEY=xxx
+nuclei -id 'CVE-2021-26855' -uq 'vuln:CVE-2021-26855' -ue shodan
+```
+It can also read queries from templates metadata and execute template against hosts returned by uncover for that query.
+
+Example of template execution using template-defined search queries.
+
+Template snippet of [CVE-2021-26855](https://github.com/projectdiscovery/nuclei-templates/blob/master/cves/2021/CVE-2021-26855.yaml)
+
+```yaml
+  metadata:
+    shodan-query: 'vuln:CVE-2021-26855'
+```
+```console
+nuclei -t cves/2021/CVE-2021-26855.yaml -uncover
+nuclei -tags cve -uncover
+```
 
 We can update the nuclei configuration file to include these tags for all scans.
 
