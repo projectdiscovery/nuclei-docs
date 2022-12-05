@@ -103,9 +103,10 @@ nav:
       - HTTP: 
           - Base requests: templating-guide/protocols/http.md
           - Raw requests: templating-guide/protocols/http#raw-http-requests
-          - HTTP fuzzing: templating-guide/protocols/http#http-fuzzing
+          - HTTP payloads: templating-guide/protocols/http#http-payloads
+          - HTTP Fuzzing: templating-guide/protocols/http-fuzzing.md
           - Unsafe HTTP requests: templating-guide/protocols/http#unsafe-http-requests
-          - Advance Fuzzing: templating-guide/protocols/http#advance-fuzzing
+          - Advance Requests: templating-guide/protocols/http#advance-requests
       - Headless: templating-guide/protocols/headless.md
       - Network: templating-guide/protocols/network.md
       - DNS: templating-guide/protocols/dns.md
@@ -123,8 +124,9 @@ nav:
       - HTTP:
           - Base HTTP: template-examples/http.md
           - Raw HTTP: template-examples/http-raw.md
+          - HTTP Fuzzing: template-examples/http-fuzzing.md
           - Unsafe HTTP: template-examples/http-smuggling.md
-          - HTTP Payloads: template-examples/http-fuzzing.md
+          - HTTP Payloads: template-examples/http-payloads.md
           - Race Condition: template-examples/http-race-conditions.md
 
       - DNS: template-examples/dns.md

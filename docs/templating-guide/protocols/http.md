@@ -190,10 +190,10 @@ To make a request to the URL specified as input without any additional tampering
 ```
 
 
-### HTTP Fuzzing
+### HTTP Payloads
 
 !!! info
-    Nuclei engine supports fuzzing module that allow to run various type of payloads in multiple format, It's possible to define placeholders with simple keywords (or using brackets `{{helper_function(variable)}}` in case mutator functions are needed), and perform **batteringram**, **pitchfork** and **clusterbomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
+    Nuclei engine supports payloads module that allow to run various type of payloads in multiple format, It's possible to define placeholders with simple keywords (or using brackets `{{helper_function(variable)}}` in case mutator functions are needed), and perform **batteringram**, **pitchfork** and **clusterbomb** attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.
 
     Payloads are defined using variable name and can be referenced in the request in between `§ §` or `{{ }}` marker.
 
@@ -318,9 +318,9 @@ requests:
 ```
 
 
-### Advance Fuzzing
+### Advance Requests
 
-We’ve enriched nuclei to allow advanced fuzzing of web servers. Users can now use multiple options to tune HTTP fuzzing workflows.
+We’ve enriched nuclei to allow advanced scanning of web servers. Users can now use multiple options to tune HTTP request workflows.
 
 #### Pipelining
 
@@ -582,7 +582,7 @@ requests:
     race: true
 ```
 
-**Requests Annotation**
+### Requests Annotation
 
 Request inline annotations allow performing per request properties/behavior override. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:
 

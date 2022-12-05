@@ -28,21 +28,18 @@ extractors:
 
 A **kval** extractor example to extract `content-type` header from HTTP Response.
 
-
 ```yaml
 extractors:
-      - type: kval  # type of the extractor
-        kval:
-          - content_type  # header/cookie value to extract from response
+  - type: kval # type of the extractor
+    kval:
+      - content_type # header/cookie value to extract from response
 ```
 
 Note that `content-type` has been replaced with `content_type` because **kval** extractor does not accept dash (`-`) as input and must be substituted with underscore (`_`).
 
 #### JSON Extractor
 
-
 A **json** extractor example to extract value of `id` object from JSON block.
-
 
 ```yaml
       - type: json # type of the extractor
@@ -58,13 +55,12 @@ For more details about JQ - https://github.com/stedolan/jq
 
 A **xpath** extractor example to extract value of `href` attribute from HTML response. 
 
-
 ```yaml
-    extractors:
-      - type: xpath # type of the extractor
-        attribute: href # attribute value to extract (optional)
-        xpath:
-          - "/html/body/div/p[2]/a"  # xpath value for extraction
+extractors:
+  - type: xpath # type of the extractor
+    attribute: href # attribute value to extract (optional)
+    xpath:
+      - '/html/body/div/p[2]/a' # xpath value for extraction
 ```
 
 With a simple [copy paste in browser](https://www.scientecheasy.com/2020/07/find-xpath-chrome.html/), we can get the **xpath** value form any web page content.
@@ -73,12 +69,11 @@ With a simple [copy paste in browser](https://www.scientecheasy.com/2020/07/find
 
 A **dsl** extractor example to extract the effective `body` length through the `len` helper function from HTTP Response.
 
-
 ```yaml
 extractors:
-      - type: dsl  # type of the extractor
-        dsl:
-          - "len(body)"  # dsl expression value to extract from response
+  - type: dsl  # type of the extractor
+    dsl:
+      - len(body) # dsl expression value to extract from response
 ```
 
 #### Dynamic Extractor
@@ -100,8 +95,6 @@ Example of defining a dynamic extractor with name `api` which will capture a reg
 The extracted value is stored in the variable **api**, which can be utilised in any section of the subsequent requests.
 
 If you want to use extractor as a dynamic variable, you must use `internal: true` to avoid printing extracted values in the terminal.
-
-
 
 An optional regex **match-group** can also be specified for the regex for more complex matches.
 
