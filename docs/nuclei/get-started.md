@@ -107,9 +107,11 @@ Usage:
 
 Flags:
 TARGET:
-   -u, -target string[]  target URLs/hosts to scan
-   -l, -list string      path to file containing a list of target URLs/hosts to scan (one per line)
-   -resume string        Resume scan using resume.cfg (clustering will be disabled)
+   -u, -target string[]       target URLs/hosts to scan
+   -l, -list string           path to file containing a list of target URLs/hosts to scan (one per line)
+   -resume string             resume scan using resume.cfg (clustering will be disabled)
+   -sa, -scan-all-ips         scan all the IP's associated with dns record
+   -iv, -ip-version string[]  IP version to scan of hostname (4,6) - (default 4)
 
 TEMPLATES:
    -nt, -new-templates                    run only new templates added in latest nuclei-templates release
@@ -120,7 +122,8 @@ TEMPLATES:
    -w, -workflows string[]                list of workflow or workflow directory to run (comma-separated, file)
    -wu, -workflow-url string[]            list of workflow urls to run (comma-separated, file)
    -validate                              validate the passed templates to nuclei
-   -nss, -no-strict-syntax                Disable strict syntax check on templates
+   -nss, -no-strict-syntax                disable strict syntax check on templates
+   -td, -template-display                 displays the templates content
    -tl                                    list all available templates
 
 FILTERING:
@@ -135,8 +138,8 @@ FILTERING:
    -em, -exclude-matchers string[]    template matchers to exclude in result
    -s, -severity value[]              templates to run based on severity. Possible values: info, low, medium, high, critical, unknown
    -es, -exclude-severity value[]     templates to exclude based on severity. Possible values: info, low, medium, high, critical, unknown
-   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, headless, network, workflow, ssl, websocket, whois
-   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, headless, network, workflow, ssl, websocket, whois
+   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, , headless, network, workflow, ssl, websocket, whois
+   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, , headless, network, workflow, ssl, websocket, whois
    -tc, -template-condition string[]  templates to run based on expression condition
 
 OUTPUT:
@@ -148,7 +151,7 @@ OUTPUT:
    -json                         write output in JSONL(ines) format
    -irr, -include-rr             include request/response pairs in the JSONL output (for findings only)
    -nm, -no-meta                 disable printing result metadata in cli output
-   -nts, -no-timestamp           disable printing timestamp in cli output
+   -ts, -timestamp               enables printing timestamp in cli output
    -rdb, -report-db string       nuclei reporting database (always use this to persist report data)
    -ms, -matcher-status          display match failure status
    -me, -markdown-export string  directory to export results in markdown format
@@ -166,7 +169,7 @@ CONFIGURATIONS:
    -r, -resolvers string          file containing resolver list for nuclei
    -sr, -system-resolvers         use system DNS resolving as error fallback
    -passive                       enable passive HTTP response processing mode
-   -force-http2                   force http2 on requests
+   -fh2, -force-http2             force http2 connection on requests
    -ev, -env-vars                 enable environment variables to be used in template
    -cc, -client-cert string       client certificate file (PEM-encoded) used for authenticating against scanned hosts
    -ck, -client-key string        client key file (PEM-encoded) used for authenticating against scanned hosts
@@ -178,9 +181,9 @@ CONFIGURATIONS:
    -i, -interface string          network interface to use for network scan
    -at, -attack-type string       type of payload combinations to perform (batteringram,pitchfork,clusterbomb)
    -sip, -source-ip string        source ip address to use for network scan
-   -config-directory string       Override the default config path ($home/.config)
+   -config-directory string       override the default config path ($home/.config)
    -rsr, -response-size-read int  max response size to read in bytes (default 10485760)
-   -rss, -response-size-save int  max response size to save in bytes (default 10485760)
+   -rss, -response-size-save int  max response size to read in bytes (default 1048576)
 
 INTERACTSH:
    -iserver, -interactsh-server string  interactsh server url for self-hosted instance (default: oast.pro,oast.live,oast.site,oast.online,oast.fun,oast.me)
@@ -194,7 +197,7 @@ INTERACTSH:
 UNCOVER:
    -uc, -uncover                  enable uncover engine
    -uq, -uncover-query string[]   uncover search query
-   -ue, -uncover-engine string[]  uncover search engine (shodan,shodan-idb,fofa,censys,quake,hunter,zoomeye) (default shodan)
+   -ue, -uncover-engine string[]  uncover search engine (shodan,shodan-idb,fofa,censys,quake,hunter,zoomeye,netlas) (default shodan)
    -uf, -uncover-field string     uncover fields to return (ip,port,host) (default "ip:port")
    -ul, -uncover-limit int        uncover results to return (default 100)
    -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
@@ -210,20 +213,21 @@ RATE-LIMIT:
 OPTIMIZATIONS:
    -timeout int                        time to wait in seconds before timeout (default 10)
    -retries int                        number of times to retry a failed request (default 1)
-   -ldp, -leave-default-ports          leave default HTTP/HTTPS ports (eg. host:80,host:443
+   -ldp, -leave-default-ports          leave default HTTP/HTTPS ports (eg. host:80,host:443)
    -mhe, -max-host-error int           max errors for a host before skipping from scan (default 30)
    -project                            use a project folder to avoid sending same request multiple times
    -project-path string                set a specific project path
    -spm, -stop-at-first-match          stop processing HTTP requests after the first match (may break template/workflow logic)
    -stream                             stream mode - start elaborating without sorting the input
    -irt, -input-read-timeout duration  timeout on input read (default 3m0s)
-   -no-stdin                           Disable Stdin processing
+   -nh, -no-httpx                      disable httpx probing for non-url input
+   -no-stdin                           disable stdin processing
 
 HEADLESS:
-   -headless                    enable templates that require headless browser support (root user on linux will disable sandbox)
+   -headless                    enable templates that require headless browser support (root user on Linux will disable sandbox)
    -page-timeout int            seconds to wait for each page in headless mode (default 20)
    -sb, -show-browser           show the browser on the screen when running templates with headless mode
-   -sc, -system-chrome          Use local installed chrome browser instead of nuclei installed
+   -sc, -system-chrome          use local installed Chrome browser instead of nuclei installed
    -lha, -list-headless-action  list available headless actions
 
 DEBUG:
@@ -240,17 +244,16 @@ DEBUG:
    -v, -verbose              show verbose output
    -profile-mem string       optional nuclei memory profile dump file
    -vv                       display templates loaded for scan
+   -svd, -show-var-dump      show variables dump for debugging
    -ep, -enable-pprof        enable pprof debugging server
    -tv, -templates-version   shows the version of the installed nuclei-templates
    -hc, -health-check        run diagnostic check up
 
 UPDATE:
-   -un, -update                          update nuclei engine to the latest released version
-   -ut, -update-templates                update nuclei-templates to latest released version
-   -ud, -update-template-dir string      custom directory to install / update nuclei-templates
-   -gt, -github-token string             github token to download public/private templates (GITHUB_TOKEN)
-   -gtr, -github-template-repo string[]  github template repository to download / update (GITHUB_TEMPLATE_REPO)
-   -duc, -disable-update-check           disable automatic nuclei/templates update check
+   -un, -update                      update nuclei engine to the latest released version
+   -ut, -update-templates            update nuclei-templates to latest released version
+   -ud, -update-template-dir string  custom directory to install / update nuclei-templates
+   -duc, -disable-update-check       disable automatic nuclei/templates update check
 
 STATISTICS:
    -stats                    display statistics about the running scan
