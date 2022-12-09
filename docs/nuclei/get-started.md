@@ -642,7 +642,7 @@ To forward results to Splunk HEC, create a config file with the following conten
 # splunkhec contains configuration options for splunkhec exporter
 splunkhec:
   # Hostname for splunkhec instance
-  host: <HEC domain>
+  host: "$hec_host"
   # Port is the port of splunkhec instance
   port: 8088
   # IndexName is the name of the splunkhec index
@@ -651,8 +651,8 @@ splunkhec:
   ssl: true
   # SSLVerification disables SSL verification for splunkhec
   ssl-verification: true
-  # Username for the splunkhec instance
-  token: <HEC Token>  
+  # HEC Token for the splunkhec instance
+  token: "$hec_token"  
 ```
 
 **Running nuclei with reporting module:-**
