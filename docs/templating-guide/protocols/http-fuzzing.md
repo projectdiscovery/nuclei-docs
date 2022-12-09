@@ -6,7 +6,7 @@ Nuclei supports fuzzing of HTTP requests based on rules defined in the `fuzzing`
 
 Part specifies what part of the request should be fuzzed based on the specified rules. Available options for this parameter are - 
 
-1. **query** - fuzz query parameters for URL
+1. **query** (`default`) - fuzz query parameters for URL
 
 ```yaml
 fuzzing:
@@ -19,7 +19,7 @@ Support will be added for `path`,`header`,`body`,`cookie`, etc parts soon.
 
 Type specifies the type of replacement to perform for the fuzzing rule value. Available options for this parameter are - 
 
-1. **replace** - replace the value with payload
+1. **replace** (`default`) - replace the value with payload
 2. **prefix** - prefix the value with payload
 3. **postfix** - postfix the value with payload
 4. **infix** - infix the value with payload (place in between)
@@ -34,8 +34,8 @@ fuzzing:
 
 Mode specifies the mode in which to perform the replacements. Available modes are - 
 
-1. **single** - replace one value at a time
-2. **multiple** - replace all values at once
+1. **multiple** (`default`) - replace one value at a time
+2. **single** - replace all values at once
 
 ```yaml
 fuzzing:
@@ -43,6 +43,8 @@ fuzzing:
     type: postfix
     mode: multiple # Fuzz query postfixing payloads to all parameters at once
 ```
+
+> **Note**: default values are set/used when other options are not defined.
 
 #### Filters
 
