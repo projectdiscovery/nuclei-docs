@@ -584,10 +584,12 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
     <td>Markdown</td>
     <td>SARIF</td>
     <td>Elasticsearch</td>
-
+    <td>Splunk HEC</td>
   </tr>
   <tr>
     <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
     <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
     </td>
     <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
@@ -632,6 +634,25 @@ elasticsearch:
   port: 9200
   # IndexName is the name of the elasticsearch index
   index-name: nuclei
+```
+
+To forward results to Splunk HEC, create a config file with the following content and replace the appropriate values:-
+
+```yaml
+# splunkhec contains configuration options for splunkhec exporter
+splunkhec:
+  # Hostname for splunkhec instance
+  host: "$hec_host"
+  # Port is the port of splunkhec instance
+  port: 8088
+  # IndexName is the name of the splunkhec index
+  index-name: nuclei
+  # SSL enables ssl for splunkhec connection
+  ssl: true
+  # SSLVerification disables SSL verification for splunkhec
+  ssl-verification: true
+  # HEC Token for the splunkhec instance
+  token: "$hec_token"  
 ```
 
 **Running nuclei with reporting module:-**
