@@ -518,7 +518,7 @@ We can update the nuclei configuration file to include these tags for all scans.
 
 ## **Mass Scanning** using Nuclei
 
-Nuclei is optimized for scanning quickly by fully utilizing resources. However, when scanning **thousands**, if not **millions, of targets**, scanning using default parameter values is bound to cause some performance issues ex: low RPS, Slow Scans, Process Killed, High RAM consumption, etc. this is due to limited resources and network I/O. Hence following parameters need to be tuned based on system configuration and targets. 
+Nuclei fully utilises resources to optimise scanning speed. However, when scanning **thousands**, if not **millions, of targets**, scanning using default parameter values is bound to cause some performance issues ex: low RPS, Slow Scans, Process Killed, High RAM consumption, etc. this is due to limited resources and network I/O. Hence following parameters need to be tuned based on system configuration and targets. 
 
 | Flag          | Short |  Description                                                         |
 |---------------|-------|----------------------------------------------------------------------|
@@ -529,19 +529,15 @@ Nuclei is optimized for scanning quickly by fully utilizing resources. However, 
 
 !!! info "Note"
 
-These are common parameters that need to be tuned . apart from these `-rate-limit`,`-retries`,`-timeout`,`-max-host-error` also need to be tuned based on target that are being scanned.
-If target is not rate-limited `-rate-limit` should be avoided to improve performance.
+These are common parameters that need to be tuned . apart from these `-rate-limit`,`-retries`,`-timeout`,`-max-host-error` also need to be tuned based on targets that are being scanned
 
-
-!!! scan-strategy
+### Which Scan Strategy to Use?
 
 **scan-strategy** option can have three possible values
 
 - `host-spray`     : All templates are iterated over each target.
 - `template-spray` : Each template is iterated over all targets.
 - `auto`(Default)  : Placeholder of `template-spray` for now.
-
-### Which Scan Strategy to Use?
 
 User should select **Scan Strategy** based on number of targets and Each strategy has its own pros & cons.
 
@@ -552,10 +548,18 @@ User should select **Scan Strategy** based on number of targets and Each strateg
 
 Whatever the `scan-strategy` is `-concurrency` and `-bulk-size` are crucial for tuning any type of scan. While tuning these parameters following points should be noted.
 
-- `-concurrency` > `-bulk-size` : Concurrency Should always be greater than bulk size
-- `-concurrency` x `-bulk-size` : should be less than or equal to 2500 (depending on system config)
+**If `scan-strategy` is template-spray**
 
-As a general rule of thumb one can use `-concurrency 2000` and `-bulk-size 10`.
+  - `-concurrency` < `bulk-size` (Ex: `-concurrency 10 -bulk-size 200`)
+
+**If `scan-strategy` is host-spray**
+
+  - `-concurrency` > `bulk-size` (Ex: `-concurrency 200 -bulk-size 10`) 
+
+
+!!! Tip
+
+`-concurrency` x `-bulk-size` <= 2500 (depending on system config)
 
 ### Stream
 
