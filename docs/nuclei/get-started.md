@@ -138,8 +138,8 @@ FILTERING:
    -em, -exclude-matchers string[]    template matchers to exclude in result
    -s, -severity value[]              templates to run based on severity. Possible values: info, low, medium, high, critical, unknown
    -es, -exclude-severity value[]     templates to exclude based on severity. Possible values: info, low, medium, high, critical, unknown
-   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, , headless, network, workflow, ssl, websocket, whois
-   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, , headless, network, workflow, ssl, websocket, whois
+   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, headless, network, workflow, ssl, websocket, whois
+   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, headless, network, workflow, ssl, websocket, whois
    -tc, -template-condition string[]  templates to run based on expression condition
 
 OUTPUT:
@@ -168,6 +168,7 @@ CONFIGURATIONS:
    -V, -var value                 custom vars in key=value format
    -r, -resolvers string          file containing resolver list for nuclei
    -sr, -system-resolvers         use system DNS resolving as error fallback
+   -dc, -disable-clustering       disable clustering of requests
    -passive                       enable passive HTTP response processing mode
    -fh2, -force-http2             force http2 connection on requests
    -ev, -env-vars                 enable environment variables to be used in template
@@ -216,9 +217,10 @@ OPTIMIZATIONS:
    -ldp, -leave-default-ports          leave default HTTP/HTTPS ports (eg. host:80,host:443)
    -mhe, -max-host-error int           max errors for a host before skipping from scan (default 30)
    -project                            use a project folder to avoid sending same request multiple times
-   -project-path string                set a specific project path
+   -project-path string                set a specific project path 
    -spm, -stop-at-first-match          stop processing HTTP requests after the first match (may break template/workflow logic)
    -stream                             stream mode - start elaborating without sorting the input
+   -ss, -scan-strategy value           strategy to use while scanning(auto/host-spray/template-spray) (default 0)
    -irt, -input-read-timeout duration  timeout on input read (default 3m0s)
    -nh, -no-httpx                      disable httpx probing for non-url input
    -no-stdin                           disable stdin processing
@@ -514,6 +516,57 @@ nuclei -tags cve -uncover
 
 We can update the nuclei configuration file to include these tags for all scans.
 
+## **Mass Scanning** using Nuclei
+
+Nuclei fully utilises resources to optimise scanning speed. However, when scanning **thousands**, if not **millions, of targets**, scanning using default parameter values is bound to cause some performance issues ex: low RPS, Slow Scans, Process Killed, High RAM consumption, etc. this is due to limited resources and network I/O. Hence following parameters need to be tuned based on system configuration and targets. 
+
+| Flag          | Short |  Description                                                         |
+|---------------|-------|----------------------------------------------------------------------|
+| scan-strategy |  -ss  | Scan Strategy to Use (auto/host-spray/template-spray)                |
+| bulk-size     |  -bs  | Max Number of targets to scan in parallel                            |
+| concurrency   |  -c   | Max Number of templates to use in parallel while scanning            |
+| stream        |   -   | stream mode - start elaborating without sorting the input            |
+
+!!! info "Note"
+
+These are common parameters that need to be tuned . apart from these `-rate-limit`,`-retries`,`-timeout`,`-max-host-error` also need to be tuned based on targets that are being scanned
+
+### Which Scan Strategy to Use?
+
+**scan-strategy** option can have three possible values
+
+- `host-spray`     : All templates are iterated over each target.
+- `template-spray` : Each template is iterated over all targets.
+- `auto`(Default)  : Placeholder of `template-spray` for now.
+
+User should select **Scan Strategy** based on number of targets and Each strategy has its own pros & cons.
+
+ - When targets < 1000 . `template-spray` should be used . this strategy is slightly faster than `host-spray` but uses more RAM and doesnot optimally reuse connections.
+ - When targets > 1000 . `host-spray` should be used . this strategy uses less RAM than `template-spray` and reuses HTTP connections along with some minor improvements and these are crucial when mass scanning.
+
+### Concurrency & Bulk-Size
+
+Whatever the `scan-strategy` is `-concurrency` and `-bulk-size` are crucial for tuning any type of scan. While tuning these parameters following points should be noted.
+
+**If `scan-strategy` is template-spray**
+
+  - `-concurrency` < `bulk-size` (Ex: `-concurrency 10 -bulk-size 200`)
+
+**If `scan-strategy` is host-spray**
+
+  - `-concurrency` > `bulk-size` (Ex: `-concurrency 200 -bulk-size 10`) 
+
+
+!!! Tip
+
+`-concurrency` x `-bulk-size` <= 2500 (depending on system config)
+
+### Stream
+
+This option should only be enabled if targets > 10k . This skips any type of sorting or preprocessing on target list.
+
+
+
 ## Nuclei **Config**
 
 !!! abstract ""
@@ -690,11 +743,22 @@ nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 
 Nuclei supports SARIF export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store SARIF formatted report.
 
-The request-response pairs are formatted using markdown syntax and are stored in the SARIF response section.
-
 ```bash
 nuclei -l urls.txt -t cves/ -sarif-export report.sarif
 ```
+
+It is also possible to visualize Nuclei results using **sarif** file.
+
+1. By Uploading SARIF File to [SARIF Viewer](https://microsoft.github.io/sarif-web-component/)
+
+2. By Uploading SARIF File to Github Actions
+
+more info [here](https://github.com/projectdiscovery/nuclei/pull/2925).
+
+!!! info "Note"
+
+These are **not official** viewers of Nuclei and `Nuclei` has no liability towards any of these options to visualize **Nuclei** results. These are just some publicly available options to visualize SARIF File.
+
 
 ## Scan **Metrics**
 
