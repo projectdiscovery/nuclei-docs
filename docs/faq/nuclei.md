@@ -72,3 +72,24 @@
 ??? info "I have more questions! 🙋"
 	
 	Please join our [Discord server](https://discord.gg/projectdiscovery), or contact us via [Twitter](http://twitter.com/pdnuclei).
+
+
+??? warning "Problem related to dependencies for using nuclei on Ubuntu AMD64 and Docker"
+
+	If you are using nuclei on a machine running Ubuntu AMD64 or in a Docker environment, you may encounter issues with headless browsers. To avoid these issues, you can follow these steps to install the necessary dependencies:
+
+	```sh
+	sudo apt update
+	sudo snap refresh
+	sudo apt install zip curl wget git
+	sudo snap install golang --classic
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+	sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+	sudo apt update 
+	sudo apt install google-chrome-stable
+	```
+
+	> To install nuclei, run the following command:
+	```
+	go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+	```
