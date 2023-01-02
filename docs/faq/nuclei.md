@@ -89,6 +89,18 @@
 	sudo apt install google-chrome-stable
 	```
 
+	Run the following command to install the necessary dependencies:
+
+	```
+	sudo apt-get install libnss3 libgconf-2-4
+	```
+
+	If you encounter an error similar to "libnss3.so: cannot open shared object file: No such file or directory," try running the following command:
+
+	```
+	sudo apt-get install libnss3-dev
+	```
+
 	Error type examples:
 	```
 	Error:      	Expected nil, but got: &errors.errorString{s:"[launcher] Failed to launch the browser, the doc might help https://go-rod.github.io/#/compatibility?id=os: /root/.cache/rod/browser/chromium-1018003/chrome-linux/chrome: error while loading shared libraries: libnss3.so: cannot open shared object file: No such file or directory\n"}
