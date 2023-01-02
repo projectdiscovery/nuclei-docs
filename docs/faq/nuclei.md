@@ -74,10 +74,18 @@
 	Please join our [Discord server](https://discord.gg/projectdiscovery), or contact us via [Twitter](http://twitter.com/pdnuclei).
 
 
-??? warning "Problem related to dependencies for using nuclei on Ubuntu AMD64 and Docker"
+??? warning "Missing dependencies in headless mode on Linux"
 
-	If you are using nuclei on a machine running Ubuntu AMD64 or in a Docker environment, you may encounter issues with headless browsers not being able to run due to missing dependencies related to specific OS-shared libraries. To fix these errors, you can pre-install the browser for the distribution or install the necessary dependencies by following these steps:
+	Headless mode on machines based on Linux (OS or containers, eg. Docker) might face runtime errors due to missing dependencies related to specific OS-shared libraries used by chrome binary.
+    Usually, these errors can be fixed by pre-installing the browser on the specific distribution. Here is a list of the steps needed for the most common distributions.
+	Ubuntu
 
+	With snap:
+	```sh
+	sudo snap install chromium
+	```
+
+	Without snap:
 	```sh
 	sudo apt update
 	sudo snap refresh
@@ -89,13 +97,12 @@
 	sudo apt install google-chrome-stable
 	```
 
-	Run the following command to install the necessary dependencies:
-
+	In case you are unable to install the browser, or want to install only the minimum required dependencies, run the following command:
 	```
 	sudo apt-get install libnss3 libgconf-2-4
 	```
 
-	If you encounter an error similar to "libnss3.so: cannot open shared object file: No such file or directory," try running the following command:
+	If you encounter an error similar to "libnss3.so: cannot open shared object file: No such file or directory," try running the following command to install the dev version:
 
 	```
 	sudo apt-get install libnss3-dev
