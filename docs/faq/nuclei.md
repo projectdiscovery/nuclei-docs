@@ -72,3 +72,51 @@
 ??? info "I have more questions! 🙋"
 	
 	Please join our [Discord server](https://discord.gg/projectdiscovery), or contact us via [Twitter](http://twitter.com/pdnuclei).
+
+
+??? warning "Missing dependencies in headless mode on Linux"
+
+	Headless mode on machines based on Linux (OS or containers, eg. Docker) might face runtime errors due to missing dependencies related to specific OS-shared libraries used by chrome binary.
+    Usually, these errors can be fixed by pre-installing the browser on the specific distribution. Here is a list of the steps needed for the most common distributions.
+	Ubuntu
+
+	With snap:
+	```sh
+	sudo snap install chromium
+	```
+
+	Without snap:
+	```sh
+	sudo apt update
+	sudo snap refresh
+	sudo apt install zip curl wget git
+	sudo snap install golang --classic
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+	sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+	sudo apt update 
+	sudo apt install google-chrome-stable
+	```
+
+	In case you are unable to install the browser, or want to install only the minimum required dependencies, run the following command:
+	```
+	sudo apt-get install libnss3 libgconf-2-4
+	```
+
+	If you encounter an error similar to "libnss3.so: cannot open shared object file: No such file or directory," try running the following command to install the dev version:
+
+	```
+	sudo apt-get install libnss3-dev
+	```
+
+	Error type examples:
+	```
+	Error:      	Expected nil, but got: &errors.errorString{s:"[launcher] Failed to launch the browser, the doc might help https://go-rod.github.io/#/compatibility?id=os: /root/.cache/rod/browser/chromium-1018003/chrome-linux/chrome: error while loading shared libraries: libnss3.so: cannot open shared object file: No such file or directory\n"}
+	```
+	```
+	could not create browser
+	```
+	```
+	Command '/usr/bin/chromium-browser' requires the chromium snap to be installed.
+	Please install it with:
+	snap install chromium
+	```
