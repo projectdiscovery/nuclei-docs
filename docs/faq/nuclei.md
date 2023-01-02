@@ -88,8 +88,3 @@
 	sudo apt update 
 	sudo apt install google-chrome-stable
 	```
-
-	> To install nuclei, run the following command:
-	```
-	go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
-	```
