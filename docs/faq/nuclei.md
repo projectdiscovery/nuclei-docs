@@ -76,7 +76,7 @@
 
 ??? warning "Problem related to dependencies for using nuclei on Ubuntu AMD64 and Docker"
 
-	If you are using nuclei on a machine running Ubuntu AMD64 or in a Docker environment, you may encounter issues with headless browsers. To avoid these issues, you can follow these steps to install the necessary dependencies:
+	If you are using nuclei on a machine running Ubuntu AMD64 or in a Docker environment, you may encounter issues with headless browsers not being able to run due to missing dependencies related to specific OS-shared libraries. To fix these errors, you can pre-install the browser for the distribution or install the necessary dependencies by following these steps:
 
 	```sh
 	sudo apt update
@@ -87,4 +87,17 @@
 	sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 	sudo apt update 
 	sudo apt install google-chrome-stable
+	```
+
+	Error type examples:
+	```
+	Error:      	Expected nil, but got: &errors.errorString{s:"[launcher] Failed to launch the browser, the doc might help https://go-rod.github.io/#/compatibility?id=os: /root/.cache/rod/browser/chromium-1018003/chrome-linux/chrome: error while loading shared libraries: libnss3.so: cannot open shared object file: No such file or directory\n"}
+	```
+	```
+	could not create browser
+	```
+	```
+	Command '/usr/bin/chromium-browser' requires the chromium snap to be installed.
+	Please install it with:
+	snap install chromium
 	```
