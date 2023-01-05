@@ -300,10 +300,10 @@ nuclei -tc "contains(name, 'Local File Inclusion')"
 - `authors` slice of strings
 - `severity` string
 - `protocol` string
-- `http_methods` slice of strings
-- `bodies` string (containing all request bodies if any)
-- `matcher_types` slice of string
-- `extractor_types` slice of string
+- `http_method` slice of strings
+- `body` string (containing all request bodies if any)
+- `matcher_type` slice of string
+- `extractor_type` slice of string
 - `description` string
 
 또한, 템플릿의 메타데이터 영역의 키-값으로 구성된 모든 쌍이 가능합니다. 모든 속성들은 논리 연산자(`||` 와 `&&`) 를 통해 조합될 수 있고, DSL helper 함수들과 함께 사용될 수 있습니다.
