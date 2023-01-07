@@ -358,6 +358,12 @@ The supported fields are:
 - `tags` slice of strings
 - `authors` slice of strings
 - `severity` string
+- `protocol` string
+- `http_method` slice of strings
+- `body` string (containing all request bodies if any)
+- `matcher_type` slice of string
+- `extractor_type` slice of string
+- `description` string
 
 Also, every key-value pair from the template metadata section is accessible. All fields can be combined with logical operators (`||` and `&&`) and used with DSL helper functions.
 
