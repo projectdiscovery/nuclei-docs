@@ -117,18 +117,24 @@ cookie-reuse: true
 
 #### Request Condition
 
-Request condition allows checking for condition between multiple requests for writing complex checks and exploits involving multiple HTTP request to complete the exploit chain.
+Request condition allows checking for the condition between multiple requests for writing complex checks and exploits involving various HTTP requests to complete the exploit chain.
 
-with DSL matcher, it can be utilized by adding `req-condition: true` and numbers as suffix with respective attributes, `status_code_1`, `status_code_3`, and`body_2` for example.
+The functionality will be automatically enabled if DSL matchers/extractors contain numbers as a suffix with respective attributes.
 
+For example, the attribute `status_code` will point to the effective status code of the current request/response pair in elaboration. Previous responses status codes are accessible by suffixing the attribute name with `_n`, where n is the n-th ordered request 1-based. So if the template has four requests and we are currently at number 3:
+- `status_code`: will refer to the response code of request number 3
+- `status_code_1` and `status_code_2` will refer to the response codes of the sequential responses number one and two 
+
+For example with `status_code_1`, `status_code_3`, and`body_2`:
 
 ```yaml
-    req-condition: true
     matchers:
       - type: dsl
         dsl:
           - "status_code_1 == 404 && status_code_2 == 200 && contains((body_2), 'secret_string')"
 ```
+
+Note: request conditions might require more memory as all attributes of previous responses are kept in memory
 
 #### **Example HTTP Template**
 
