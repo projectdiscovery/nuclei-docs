@@ -57,6 +57,7 @@
 | line_starts_with(str string, prefix ...string) bool                 | 문자열의 줄이 주어진 부분 문자열로 시작하는지 확인합니다.                                         | `line_starts_with("Hi\nHello", "He")`                                                   | `true` |
 | ends_with(str string, suffix ...string) bool                        | 문자열이 주어진 부분 문자열로 끝나는지 확인합니다.                                                       | `ends_with("Hello", "lo")`                                                              | `true` |
 | line_ends_with(str string, suffix ...string) bool                   | 문자열의 줄이 주어진 부분 문자열로 끝나는지 확인합니다.                                           | `line_ends_with("Hello\nHi", "lo")`                                                     | `true` |
+
 #### Deserialization helper functions
 
 Nuclei는 [ysoserial](https://github.com/frohoff/ysoserial)에서 몇몇 일반적인 gadget에 대한 페이로드 생성을 허용합니다.
