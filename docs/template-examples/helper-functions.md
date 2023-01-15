@@ -92,4 +92,5 @@ requests:
         75: {{ends_with("Hello", "lo")}}
         76: {{line_starts_with("Hi\nHello", "He")}}
         77: {{line_ends_with("Hello\nHi", "lo")}}
+        78: {{ip_format("169.254.169.254", 4)}}
 ```
