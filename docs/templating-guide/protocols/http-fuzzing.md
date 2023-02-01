@@ -34,8 +34,8 @@ fuzzing:
 
 Mode specifies the mode in which to perform the replacements. Available modes are - 
 
-1. **multiple** (`default`) - replace one value at a time
-2. **single** - replace all values at once
+1. **multiple** (`default`) - replace all values at once
+2. **single** - replace one value at a time
 
 ```yaml
 fuzzing:
