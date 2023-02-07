@@ -80,7 +80,7 @@
 
 Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
 
-Nuclei also support for update/download custom template repositories. You can pass the file/list of github repositories by using `-gtr`/`-github-template-repo` flag. This will download the repositories under `nuclei-templates/github` directory. To update the repo you can pass the `-update-templates` with `-gtr` flag.
+Nuclei also support for update/download custom template repositories. You can pass the file/list of Github repositories by using `-gtr`/`-github-template-repo` flag. This will download the repositories under `nuclei-templates/github` directory. To update the repo you can pass the `-update-templates` with `-gtr` flag.
 
 Nuclei checks for new community template releases upon each execution and automatically downloads the latest version when available. This feature can be disabled using the `-duc`, `-disable-update-check` flags via the CLI or the configuration file.
 
@@ -284,7 +284,8 @@ Custom template directory or multiple template directory can be executed as foll
 nuclei -u https://example.com -t cves/ -t exposures/
 ```
 
-Custom template github repos are downloaded under `github` directory. Custom repo templates can be passed as follows
+Custom template Github repos are downloaded under `github` directory. Custom repo templates can be passed as follows
+
 ```sh
 nuclei -u https://example.com -t github/private-repo
 ```
@@ -345,6 +346,7 @@ nuclei -u https://example.com -tags cve -severity critical,high -author geeknik
 ```
 
 Multiple filters can also be combined using the template condition flag (`-tc`) that allows complex expressions like the following ones:
+
 ```sh
 nuclei -tc "contains(id,'xss') || contains(tags,'xss')"
 nuclei -tc "contains(tags,'cve') && contains(tags,'ssrf')"
@@ -516,6 +518,7 @@ Template snippet of [CVE-2021-26855](https://github.com/projectdiscovery/nuclei-
   metadata:
     shodan-query: 'vuln:CVE-2021-26855'
 ```
+
 ```console
 nuclei -t cves/2021/CVE-2021-26855.yaml -uncover
 nuclei -tags cve -uncover
@@ -584,7 +587,7 @@ This option should only be enabled if targets > 10k . This skips any type of sor
 
     Default path of nuclei config file is `$HOME/.config/nuclei/config.yaml`, uncomment and configure the flags you wish to run as default.
 
-Here is an example config file:-
+Here is an example config file:
 
 ```yaml
 # Headers to include with all HTTP request
@@ -670,7 +673,7 @@ Nuclei comes with reporting module support with the release of [v2.3.0](https://
 
 
 
-For example, to create tickets on GitHub, create a config file with the following content and replace the appropriate values:-
+For example, to create tickets on GitHub, create a config file with the following content and replace the appropriate values:
 
 ```yaml
 # GitHub contains configuration options for GitHub issue tracker
@@ -683,7 +686,7 @@ github:
   issue-label: "Nuclei"
 ```
 
-To store results in Elasticsearch, create a config file with the following content and replace the appropriate values:-
+To store results in Elasticsearch, create a config file with the following content and replace the appropriate values:
 
 ```yaml
 # elasticsearch contains configuration options for elasticsearch exporter
@@ -696,7 +699,7 @@ elasticsearch:
   index-name: nuclei
 ```
 
-To forward results to Splunk HEC, create a config file with the following content and replace the appropriate values:-
+To forward results to Splunk HEC, create a config file with the following content and replace the appropriate values:
 
 ```yaml
 # splunkhec contains configuration options for splunkhec exporter
@@ -715,7 +718,7 @@ splunkhec:
   token: "$hec_token"  
 ```
 
-**Running nuclei with reporting module:-**
+**Running nuclei with reporting module:**
 
 ```bash
 nuclei -l urls.txt -t cves/ -rc issue-tracker.yaml
