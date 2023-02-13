@@ -1,3 +1,20 @@
+## Automate Network Vulnerability Scans with **Nuclei**
+
+Nuclei can help you ensure the security of complex networks. With vulnerability scans,
+Nuclei can identify security issues on your network. Once configured, Nuclei can
+provide detailed information on each vulnerability, including:
+
+- Severity
+- Impact
+- Recommended remediation
+
+Once you've set up templates, you can automate scans of your systems with every change
+to your network, and with every discovery of new security issues.
+
+In this Getting Started guide, we describe how you can set up Nuclei to automate
+vulnerability scans on a relatively simple network. You can then use our [Templating
+Guide](https://nuclei.projectdiscovery.io/templating-guide/) to customize Nuclei for your networks.
+
 ## **Nuclei** Features
 
 
