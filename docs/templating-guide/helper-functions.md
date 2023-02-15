@@ -209,3 +209,24 @@ variables:
   "name": "John Doe"
 }
 ```
+
+**`resolve`**
+
+Format:
+
+```yaml
+{{resolve(host,format)}}
+```
+
+Here is a list of formats available for dns type:
+
+- `4` or `a`
+- `6` or `aaaa`
+- `cname`
+- `ns`
+- `txt`
+- `srv`
+- `ptr`
+- `mx`
+- `soa`
+- `caa`
