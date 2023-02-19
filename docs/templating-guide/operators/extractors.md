@@ -4,13 +4,13 @@ Extractors can be used to extract and display in results a match from the respon
 
 #### Types
 
-Multiple extractors can be specified in a request. As of now we support two type of extractors.
+Multiple extractors can be specified in a request. As of now we support five type of extractors.
 
 1. **regex** - Extract data from response based on a Regular Expression.
 2. **kval** - Extract `key: value`/`key=value` formatted data from Response Header/Cookie
 3. **json** - Extract data from JSON based response in JQ like syntax.
 4. **xpath** - Extract xpath based data from HTML Response
-4. **dsl** - Extract data from the response based on a DSL expressions.
+5. **dsl** - Extract data from the response based on a DSL expressions.
 
 #### Regex Extractor
 
@@ -114,5 +114,5 @@ extractors:
 
 The above extractor with name `csrf_token` will hold the value extracted by `([[:alnum:]]{16})` as `abcdefgh12345678`. 
 
-If no group option is provided with this regex, the above extractor with name `csrf_html_tag` will hold the full match (by `<input name="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})" />`) as `<input name="csrf_token" type="hidden" value="abcdefgh12345678" />`.
+If no group option is provided with this regex, the above extractor with name `csrf_token` will hold the full match (by `<input name="csrf_token"\stype="hidden"\svalue="([[:alnum:]]{16})" />`) as `<input name="csrf_token" type="hidden" value="abcdefgh12345678" />`.
 

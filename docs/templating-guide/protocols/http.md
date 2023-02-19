@@ -179,7 +179,7 @@ Requests can be fine-tuned to perform the exact tasks as desired. Nuclei request
 RAW request format also supports [various helper functions](https://nuclei.projectdiscovery.io/templating-guide/helper-functions/) letting us do run time manipulation with input. An example of the using a helper function in the header. 
 
 ```yaml
-    raw:
+    - raw:
       - |
         GET /manager/html HTTP/1.1
         Host: {{Hostname}}
@@ -189,7 +189,7 @@ RAW request format also supports [various helper functions](https://nuclei.proje
 To make a request to the URL specified as input without any additional tampering, a blank Request URI can be used as specified below which will make the request to user specified input.
 
 ```yaml
-    raw:
+    - raw:
       - |
         GET HTTP/1.1
         Host: {{Hostname}}
