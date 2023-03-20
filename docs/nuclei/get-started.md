@@ -259,11 +259,11 @@ UPDATE:
    -duc, -disable-update-check       disable automatic nuclei/templates update check
 
 STATISTICS:
-   -stats                    display statistics about the running scan
-   -sj, -stats-json          write statistics data to an output file in JSONL(ines) format
-   -si, -stats-interval int  number of seconds to wait between showing a statistics update (default 5)
-   -m, -metrics              expose nuclei metrics on a port
-   -mp, -metrics-port int    port to expose nuclei metrics on (default 9092)
+   -stats                    display statistics about the running scan (deprecated)
+   -sj, -stats-json          write statistics data to an output file in JSONL(ines) format (deprecated)
+   -si, -stats-interval int  number of seconds to wait between showing a statistics update (deprecated) (default 5)
+   -m, -metrics              expose nuclei metrics on a port (deprecated)
+   -mp, -metrics-port int    port to expose nuclei metrics on (default 63636)
 ```
 
 ## Running **Nuclei**
