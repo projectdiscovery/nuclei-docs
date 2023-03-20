@@ -825,9 +825,9 @@ These are **not official** viewers of Nuclei and `Nuclei` has no liability towar
 
 ## Scan **Metrics**
 
-Nuclei expose running scan metrics on a local port `9092` when `-metrics` flag is used and can be accessed at **localhost:9092/metrics**, default port to expose scan information is configurable using `-metrics-port` flag.
+Nuclei always expose running scan metrics on a local port `63636` that can be accessed at **http://localhost:63636/metrics**, default port to expose scan information is configurable using `-metrics-port` flag.
 
-Here is an example to query `metrics` while running nuclei as following `nuclei -t cves/ -l urls.txt -metrics`
+Here is an example to query `metrics` while running nuclei as following `nuclei -t cves/ -l urls.txt`
 
 ```bash
 
