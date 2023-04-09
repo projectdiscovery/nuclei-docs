@@ -14,7 +14,7 @@ Certain pre-processors can be specified globally anywhere in the template that r
 For example:-
 
 ```yaml
-requests:
+http:
   - method: POST
     path:
       - "{{BaseURL}}/level1/application/"

@@ -13,7 +13,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         POST /coupons HTTP/1.1
@@ -47,7 +47,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:  
       - |
         POST / HTTP/1.1

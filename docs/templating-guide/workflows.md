@@ -128,7 +128,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - path:
       - "{{BaseURL}}/path1"
     extractors:
@@ -152,7 +152,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         GET /path2 HTTP/1.1

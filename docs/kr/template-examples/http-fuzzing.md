@@ -12,7 +12,7 @@ info:
 
 # 템플릿 페이로드 지원으로 HTTP Intruder fuzzing.
 
-requests:
+http:
 
   - raw:
       - |
@@ -54,7 +54,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
 
   - raw:
       - |
@@ -103,7 +103,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         GET / HTTP/1.1
@@ -137,7 +137,7 @@ info:
   severity: high
   reference: https://github.com/jas502n/CVE-2020-8193
 
-requests:
+http:
   - raw:
       - |
         POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1

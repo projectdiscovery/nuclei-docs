@@ -11,7 +11,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1
@@ -56,7 +56,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/lab-basic-te-cl
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1
@@ -107,7 +107,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1
@@ -161,7 +161,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1
@@ -206,7 +206,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1

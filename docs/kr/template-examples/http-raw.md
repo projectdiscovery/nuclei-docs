@@ -10,7 +10,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         GET / HTTP/1.1
@@ -39,7 +39,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         GET / HTTP/1.1
