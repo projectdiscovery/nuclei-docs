@@ -14,7 +14,7 @@
 예시:-
 
 ```yaml
-requests:
+http:
   - method: POST
     path:
       - "{{BaseURL}}/level1/application/"

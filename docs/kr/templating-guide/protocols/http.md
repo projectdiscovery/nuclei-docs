@@ -6,7 +6,7 @@
 
 ```yaml
 # 템플릿 요청을 바로 여기에서 시작하세요.
-requests:
+http:
 ```
 
 !!! info "Method"
@@ -24,7 +24,7 @@ method: GET
 사용법의 예:
 
 ```yaml
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/login.php"
@@ -143,7 +143,7 @@ info:
   severity: medium
   description: Searches for the pattern /.git/config on passed URLs.
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/.git/config"
@@ -158,7 +158,7 @@ requests:
 요청을 생성하는 또 다른 방법은 다음과 같은 DSL 도우미 기능을 더 유연하게 지원하고 지원하는 Raw 요청을 사용하는 것입니다(현재로서는 `{{Hostname}}`), 모든 Matcher, Extractor 기능은 위에서 설명한 것과 동일한 방식으로 RAW 요청과 함께 사용할 수 있습니다.
 
 ```yaml
-requests:
+http:
   - raw:
     - |
         POST /path2/ HTTP/1.1
@@ -267,7 +267,7 @@ Nuclei 엔진은 일반적으로 단일 매개변수를 퍼징하는 데 사용�
 fuzz에 `clusterbomb` 공격을 사용한 예.
 
 ```yaml
-requests:
+http:
   - raw:
       - |
         POST /?file={{path}} HTTP/1.1
@@ -289,7 +289,7 @@ Nuclei는 HTTP reqeust smuggling, Host header injection, 잘못된 문자가 포
 다음은 `rawhttp`를 사용한 HTTP 요청 밀수 탐지 템플릿의 예입니다.
 
 ```yaml
-requests:
+http:
   - raw:
     - |+
         POST / HTTP/1.1
@@ -348,7 +348,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |+
         GET /{{path}} HTTP/1.1
@@ -388,7 +388,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
 
   - raw:
       - |
@@ -430,7 +430,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1
@@ -483,7 +483,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         POST /coupons HTTP/1.1
@@ -529,7 +529,7 @@ info:
   author: pd-team
   severity: info
 
-requests:
+http:
   - raw:  
       - |
         POST / HTTP/1.1
@@ -602,7 +602,7 @@ requests:
 이것은 예를 들어 여러 요청이 있는 템플릿의 경우에 특히 유용합니다. 초기 요청 이후에 하나의 요청을 특정 호스트에 대해 수행해야 하는 경우(예: API 유효성 검사):
 
 ```yaml
-requests:
+http:
   - raw:
       # this request will be sent to {{Hostname}} to get the token
       - |

@@ -10,7 +10,7 @@ info:
   author: pdteam
   severity: info
 
-network:
+tcp:
   - host: 
       - "{{Hostname}}"
     inputs:
@@ -35,7 +35,7 @@ info:
   author: pdteam
   severity: info
 
-network:
+tcp:
   - host: 
       - "tls://{{Hostname}}"
     inputs:
@@ -60,7 +60,7 @@ info:
   author: pdteam
   severity: info
 
-network:
+tcp:
   - host: 
       - "{{Hostname}}"
     inputs:
@@ -90,7 +90,7 @@ info:
   severity: info
   reference: https://github.com/orleven/Tentacle
 
-network:
+tcp:
   - inputs:
       - data: "{{hex_decode('3a000000a741000000000000d40700000000000061646d696e2e24636d640000000000ffffffff130000001069736d6173746572000100000000')}}"
     host:
@@ -117,7 +117,7 @@ info:
   reference: https://github.com/t0kx/exploit-CVE-2015-3306
   tags: cve,cve2015,ftp,rce
 
-network:
+tcp:
   - inputs:
       - data: "site cpfr /proc/self/cmdline\r\n"
         read: 1024

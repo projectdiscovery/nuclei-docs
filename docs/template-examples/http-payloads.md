@@ -12,7 +12,7 @@ info:
 
 # HTTP Intruder fuzzing with in template payload support. 
 
-requests:
+http:
 
   - raw:
       - |
@@ -54,7 +54,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
 
   - raw:
       - |
@@ -102,7 +102,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         GET / HTTP/1.1
@@ -136,7 +136,7 @@ info:
   severity: high
   reference: https://github.com/jas502n/CVE-2020-8193
 
-requests:
+http:
   - raw:
       - |
         POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
