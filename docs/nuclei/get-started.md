@@ -1,12 +1,13 @@
-## Automate Network Vulnerability Scans with **Nuclei**
+## Automate Vulnerability Scans with **Nuclei**
 
-Nuclei can help you ensure the security of complex networks. With vulnerability scans,
+Nuclei can help you ensure the security of complex networks / applications. With vulnerability scans,
 Nuclei can identify security issues on your network. Once configured, Nuclei can
 provide detailed information on each vulnerability, including:
 
 - Severity
 - Impact
-- Recommended remediation
+- Description
+- Remediation
 
 Once you've set up templates, you can automate scans of your systems with every change
 to your network, and with every discovery of new security issues.
@@ -20,7 +21,7 @@ Guide](https://nuclei.projectdiscovery.io/templating-guide/) to customize Nuclei
 
 !!! example "Features."
 
-    * HTTP | DNS | TCP | FILE support
+    * **HTTP**, **DNS**, **TCP**, **SSL**, **FILE** protocol support
     * Fully configurable templates.
     * Large scale scanning.
     * Out of band based detection.
@@ -95,14 +96,67 @@ Guide](https://nuclei.projectdiscovery.io/templating-guide/) to customize Nuclei
 
 ## Nuclei **Templates**
 
-Nuclei has built-in support for automatic update/download templates since version [v2.4.0](https://github.com/projectdiscovery/nuclei/releases/tag/v2.4.0). [**Nuclei-Templates**](https://github.com/projectdiscovery/nuclei-templates) project provides a community-contributed list of ready-to-use templates that is constantly updated.
+### Public Templates
 
-Nuclei also support for update/download custom template repositories. You can pass the file/list of Github repositories by using `-gtr`/`-github-template-repo` flag. This will download the repositories under `nuclei-templates/github` directory. To update the repo you can pass the `-update-templates` with `-gtr` flag.
+Nuclei has built-in support for automatic template download/update from [**nuclei templates**](https://github.com/projectdiscovery/nuclei-templates) project which provides [community-contributed](https://github.com/projectdiscovery/nuclei-templates#-community) list of ready-to-use templates that is constantly updated.
 
-Nuclei checks for new community template releases upon each execution and automatically downloads the latest version when available. This feature can be disabled using the `-duc`, `-disable-update-check` flags via the CLI or the configuration file.
+Nuclei checks for new community template releases upon each execution and automatically downloads the latest version when available. optionally, this feature can be disabled using the `-duc` cli flag or the configuration file.
+
+### Custom Templates
+
+Users can create custom templates on a personal public / private GitHub / AWS Bucket that they wish to run / update while using nuclei from any environment without manually downloading the GitHub repository everywhere.
+
+To use this feature, users need to set the following environment variables:
+
+<details>
+<summary>For GitHub Project</summary>
+<pre>
+
+export GITHUB_TOKEN=gh_XXX
+export GITHUB_TEMPLATE_REPO=my_nuclei_template
+
+</pre>
+</details>
+
+<details>
+<summary>For AWS Bucket
+</summary>
+<pre>
+
+export AWS_ACCESS_KEY=AKIAXXXXXXXX
+export AWS_SECRET_KEY=XXXXXX
+export AWS_REGION=us-xxx-1
+export AWS_TEMPLATE_BUCKET=aws_bucket_name
+
+</pre>
+</details>
 
 
-The nuclei engine can also be updated to latest version by using the `-update` flag.
+Once the environment variables are set, following command to download the custom templates:
+
+```
+nuclei -update-templates
+```
+
+This command will clone the repository containing the custom templates to the default nuclei templates directory (`$HOME/nuclei-templates/github/`).
+
+The directory structure of the custom templates looks as follows:
+
+```bash
+tree $HOME/nuclei-templates/
+
+nuclei-templates/
+└── github/$GH_RPEO_NAME # Custom templates downloaded from public / private GitHub project
+└── s3/$BUCKET_NAME # Custom templates downloaded from public / private AWS Bucket
+```
+
+Users can then use the custom templates with the `-t` flag as follows:
+
+```
+nuclei -t github/my_custom_template -u https://example.com
+```
+
+The nuclei engine can be updated to latest version by using the `-update` flag.
 
 !!! tip
     Writing your own unique templates will always keep you one step ahead of others.
