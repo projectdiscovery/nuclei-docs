@@ -131,6 +131,20 @@ export AWS_TEMPLATE_BUCKET=aws_bucket_name
 </pre>
 </details>
 
+<details>
+<summary>For Azure Blob Storage
+</summary>
+<pre>
+
+export AZURE_TENANT_ID=00000000-0000-0000-0000-000000000000
+export AZURE_CLIENT_ID=00000000-0000-0000-0000-000000000000
+export AZURE_CLIENT_SECRET=00000000-0000-0000-0000-000000000000
+export AZURE_SERVICE_URL=https://XXXXXXXXXX.blob.core.windows.net/
+export AZURE_CONTAINER_NAME=templates
+
+</pre>
+</details>
+
 
 Once the environment variables are set, following command to download the custom templates:
 
@@ -148,6 +162,7 @@ tree $HOME/nuclei-templates/
 nuclei-templates/
 └── github/$GH_RPEO_NAME # Custom templates downloaded from public / private GitHub project
 └── s3/$BUCKET_NAME # Custom templates downloaded from public / private AWS Bucket
+└── azure/$CONTAINER_NAME # Custom templates downloaded from public / private Azure Blob Storage
 ```
 
 Users can then use the custom templates with the `-t` flag as follows:
