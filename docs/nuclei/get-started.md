@@ -119,6 +119,19 @@ export GITHUB_TEMPLATE_REPO=my_nuclei_template
 </details>
 
 <details>
+<summary>For GitLab Project</summary>
+<pre>
+
+export GITLAB_SERVER_URL=https://gitlab.com
+# The GitLab token must have the read_api and read_repository scope
+export GITLAB_TOKEN=XXXXXXXXXX
+# Comma separated list of repository IDs (not names)
+export GITLAB_REPOSITORY_IDS=12345,67890
+
+</pre>
+</details>
+
+<details>
 <summary>For AWS Bucket
 </summary>
 <pre>
@@ -160,7 +173,8 @@ The directory structure of the custom templates looks as follows:
 tree $HOME/nuclei-templates/
 
 nuclei-templates/
-└── github/$GH_RPEO_NAME # Custom templates downloaded from public / private GitHub project
+└── github/$GH_REPO_NAME # Custom templates downloaded from public / private GitHub project
+└── gitlab/$GL_REPO_NAME # Custom templates downloaded from public / private GitLab project
 └── s3/$BUCKET_NAME # Custom templates downloaded from public / private AWS Bucket
 └── azure/$CONTAINER_NAME # Custom templates downloaded from public / private Azure Blob Storage
 ```
