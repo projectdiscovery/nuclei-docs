@@ -26,7 +26,7 @@ Interactsh interactions can be used with `word`, `regex` or `dsl` matcher/extrac
 
 
 !!! abstract "interactsh_protocol"
-    Value can be dns, http or smtp. This is the standard matcher for every interactsh based template with dns often as the common value as it is very non-intrusive in nature.
+    Value can be dns, http or smtp. This is the standard matcher for every interactsh based template with DNS often as the common value as it is very non-intrusive in nature.
 
 !!! abstract "interactsh_request"
     The request that the interact.sh server received.
@@ -55,7 +55,7 @@ matchers:
         - "http"
 
     - type: regex
-      part: interactsh_request # Confirms the retrieval of etc/passwd file
+      part: interactsh_request # Confirms the retrieval of /etc/passwd file
       regex:
         - "root:[x*]:0:0:"
 ```

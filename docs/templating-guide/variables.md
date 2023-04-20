@@ -27,7 +27,7 @@ variables:
   a1: "value"
   a2: "{{base64('hello')}}"
 
-requests:
+http:
   - raw:
       - |
         GET / HTTP/1.1
@@ -56,7 +56,7 @@ variables:
   a1: "PING"
   a2: "{{base64('hello')}}"
 
-network:
+tcp:
   - host: 
       - "{{Hostname}}"
     inputs:

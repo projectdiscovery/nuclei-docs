@@ -11,7 +11,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -34,7 +34,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -76,7 +76,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -107,7 +107,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -140,7 +140,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - method: GET
 
     # Example of sending some headers to the servers
@@ -178,7 +178,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - method: POST
     path:
       - "{{BaseURL}}/admin"
@@ -203,7 +203,7 @@ info:
   author: pdteam
   severity: none
 
-requests:
+http:
   - raw:
       - |
         GET /slow HTTP/1.1

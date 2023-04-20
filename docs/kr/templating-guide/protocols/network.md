@@ -6,7 +6,7 @@ Nuclei는 자동화 가능한 **Netcat** 역할을 하여 사용자가 바이트
 
 ```yaml
 # 템플릿 요청을 바로 여기에서 시작하세요.
-network:
+tcp:
 ```
 
 #### Inputs
@@ -106,7 +106,7 @@ info:
   severity: info
   reference: https://github.com/orleven/Tentacle
 
-network:
+tcp:
   - inputs:
       - data: "{{hex_decode('3a000000a741000000000000d40700000000000061646d696e2e24636d640000000000ffffffff130000001069736d6173746572000100000000')}}"
     host:

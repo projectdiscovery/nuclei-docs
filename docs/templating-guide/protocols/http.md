@@ -5,7 +5,7 @@
 
 ```yaml
 # Start the requests for the template right here
-requests:
+http:
 ```
 
 !!! info "Method"
@@ -23,7 +23,7 @@ method: GET
 An example of the usage:
 
 ```yaml
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/login.php"
@@ -149,7 +149,7 @@ info:
   severity: medium
   description: Searches for the pattern /.git/config on passed URLs.
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/.git/config"
@@ -164,7 +164,7 @@ requests:
 Another way to create request is using raw requests which comes with more flexibility and support of DSL helper functions, like the following ones (as of now it's suggested to leave the `Host` header as in the example with the variable `{{Hostname}}`), All the Matcher, Extractor capabilities can be used with RAW requests in same the way described above. 
 
 ```yaml
-requests:
+http:
   - raw:
     - |
         POST /path2/ HTTP/1.1
@@ -179,7 +179,7 @@ Requests can be fine-tuned to perform the exact tasks as desired. Nuclei request
 RAW request format also supports [various helper functions](https://nuclei.projectdiscovery.io/templating-guide/helper-functions/) letting us do run time manipulation with input. An example of the using a helper function in the header. 
 
 ```yaml
-    raw:
+    - raw:
       - |
         GET /manager/html HTTP/1.1
         Host: {{Hostname}}
@@ -189,7 +189,7 @@ RAW request format also supports [various helper functions](https://nuclei.proje
 To make a request to the URL specified as input without any additional tampering, a blank Request URI can be used as specified below which will make the request to user specified input.
 
 ```yaml
-    raw:
+    - raw:
       - |
         GET HTTP/1.1
         Host: {{Hostname}}
@@ -273,7 +273,7 @@ Nuclei engine supports multiple attack types, including `batteringram` as defaul
 An example of the using `clusterbomb` attack to fuzz.
 
 ```yaml
-requests:
+http:
   - raw:
       - |
         POST /?file={{path}} HTTP/1.1
@@ -295,7 +295,7 @@ Nuclei supports [rawhttp](https://github.com/projectdiscovery/rawhttp) for compl
 Here is an example of HTTP request smuggling detection template using `rawhttp`. 
 
 ```yaml
-requests:
+http:
   - raw:
     - |+
         POST / HTTP/1.1
@@ -355,7 +355,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |+
         GET /{{path}} HTTP/1.1
@@ -395,7 +395,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
 
   - raw:
       - |
@@ -437,7 +437,7 @@ info:
   severity: info
   reference: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te
 
-requests:
+http:
   - raw:
     - |+
       POST / HTTP/1.1
@@ -491,7 +491,7 @@ info:
   author: pdteam
   severity: info
 
-requests:
+http:
   - raw:
       - |
         POST /coupons HTTP/1.1
@@ -537,7 +537,7 @@ info:
   author: pd-team
   severity: info
 
-requests:
+http:
   - raw:  
       - |
         POST / HTTP/1.1
@@ -610,7 +610,7 @@ The following example shows the annotations within a request:
 This is particularly useful, for example, in the case of templates with multiple requests, where one request after the initial one needs to be performed to a specific host (for example, to check an API validity):
 
 ```yaml
-requests:
+http:
   - raw:
       # this request will be sent to {{Hostname}} to get the token
       - |

@@ -138,7 +138,7 @@ variables:
   second: "{{rand_int(10000, 99999)}}"
   result: "{{to_number(first)*to_number(second)}}"
 
-requests:
+http:
     ...
     payloads:
       reflection:
@@ -163,7 +163,7 @@ info:
   author: pdteam
   severity: low
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
