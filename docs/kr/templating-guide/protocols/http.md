@@ -612,7 +612,7 @@ http:
       # This request will be sent instead to https://api.target.com:443 to verify the token validity
       - |
         @Host: https://api.target.com:443
-        GET /api/key={{token} HTTP/1.1
+        GET /api/key={{token}} HTTP/1.1
         Host: api.target.com:443
 
     extractors:
