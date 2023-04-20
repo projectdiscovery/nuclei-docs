@@ -593,7 +593,7 @@ http:
 Request inline annotations allow performing per request properties/behavior override. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:
 
 - `@Host:` which overrides the real target of the request (usually the host/ip provided as input). It supports syntax with ip/domain, port, and scheme, for example: `domain.tld`, `domain.tld:port`, `http://domain.tld:port`
-- `@tls-sni:` which overrides the SNI Name of the TLS request (usually the hostname provided as input). It supports any literals, the speciale value `request.host` use the value of the `Host` header.
+- `@tls-sni:` which overrides the SNI Name of the TLS request (usually the hostname provided as input). It supports any literals. The special value `request.host` uses the `Host` header and `interactsh-url` uses an interactsh generated URL.
 - `@timeout:` which overrides the timeout for the request to a custom duration. It supports durations formatted as string. If no duration is specified, the default Timeout flag value is used.
 
 The following example shows the annotations within a request:
@@ -643,6 +643,18 @@ Example of a custom `timeout` annotations -
 ```yaml
 - |
   @timeout: 25s
+  POST /conf_mail.php HTTP/1.1
+  Host: {{Hostname}}
+  Content-Type: application/x-www-form-urlencoded
+  
+  mail_address=%3B{{cmd}}%3B&button=%83%81%81%5B%83%8B%91%97%90M
+```
+
+Example of `sni` annotation with `interactsh-url` - 
+
+```yaml
+- |
+  @tls-sni: interactsh-url
   POST /conf_mail.php HTTP/1.1
   Host: {{Hostname}}
   Content-Type: application/x-www-form-urlencoded

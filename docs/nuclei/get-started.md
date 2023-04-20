@@ -316,6 +316,7 @@ OPTIMIZATIONS:
    -retries int                        number of times to retry a failed request (default 1)
    -ldp, -leave-default-ports          leave default HTTP/HTTPS ports (eg. host:80,host:443)
    -mhe, -max-host-error int           max errors for a host before skipping from scan (default 30)
+   -nmhe, -no-mhe                      disable skipping host from scan based on errors
    -project                            use a project folder to avoid sending same request multiple times
    -project-path string                set a specific project path 
    -spm, -stop-at-first-match          stop processing HTTP requests after the first match (may break template/workflow logic)
@@ -815,6 +816,58 @@ splunkhec:
   ssl-verification: true
   # HEC Token for the splunkhec instance
   token: "$hec_token"  
+```
+
+To forward results to Jira, create a config file with the following content and replace the appropriate values:
+
+The Jira reporting options allows for custom fields, as well as using variables from the Nuclei templates in those custom fields. 
+The supported variables currently are: `$CVSSMetrics`, `$CVEID`, `$CWEID`, `$Host`, `$Severity`, `$CVSSScore`, `$Name`
+
+In addition, Jira is strict when it comes to custom field entry. If the field is a dropdown, Jira accepts only the case sensitive specific string and the API call is slightly different. To support this, there are three types of customfields.
+`name` is the dropdown value
+`id` is the ID value of the dropdown
+`freeform` is if the customfield the entry of any value
+
+To avoid duplication, the JQL query run can be slightly modified by the config file.
+The `CLOSED_STATUS` can be changed in the Jira template file using the `status-not` variable.
+`summary ~ TEMPLATE_NAME AND summary ~ HOSTNAME AND status != CLOSED_STATUS`
+
+```yaml
+jira:
+  # cloud is the boolean which tells if Jira instance is running in the cloud or on-prem version is used
+  cloud: true
+  # update-existing is the boolean which tells if the existing, opened issue should be updated or new one should be created
+  update-existing: false
+  # URL is the jira application url
+  url: https://localhost/jira
+  # account-id is the account-id of the Jira user or username in case of on-prem Jira
+  account-id: test-account-id
+  # email is the email of the user for Jira instance
+  email: test@test.com
+  # token is the token for Jira instance or password in case of on-prem Jira
+  token: test-token
+  #project-name is the name of the project.
+  project-name: test-project-name
+  #issue-type is the name of the created issue type (case sensitive)
+  issue-type: Bug
+  # SeverityAsLabel (optional) sends the severity as the label of the created issue
+  # User custom fields for Jira Cloud instead
+  severity-as-label: true
+  # Whatever your final status is that you want to use as a closed ticket - Closed, Done, Remediated, etc
+  # When checking for duplicates, the JQL query will filter out status's that match this.
+  # If it finds a match _and_ the ticket does have this status, a new one will be created.
+  status-not: Closed
+  # Customfield supports name, id and freeform. name and id are to be used when the custom field is a dropdown.
+  # freeform can be used if the custom field is just a text entry
+  # Variables can be used to pull various pieces of data from the finding itself. 
+  # Supported variables: $CVSSMetrics, $CVEID, $CWEID, $Host, $Severity, $CVSSScore, $Name
+  custom_fields:
+    customfield_00001: 
+      name: "Nuclei"
+    customfield_00002:
+      freeform: $CVSSMetrics
+    customfield_00003:
+      freeform: $CVSSScore
 ```
 
 **Running nuclei with reporting module:**
