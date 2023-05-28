@@ -62,8 +62,7 @@ info:
     shodan-query: 'vuln:CVE-2021-26855'
 ```
 
-  !!! Note
-    While creating a template, it's important to include the following mandatory fields: 'id', 'name', and 'authors'. 
+!!! info "Note"
+    While creating a template, it's important to include the following mandatory fields: `id`, `name`, `authors` and `severity`.
     If these mandatory fields are missing, then Nuclei will not proceed with such templates.
-    Additionally, while 'severity' is optional during runtime execution, it is mandatory when validating templates.
     By following these guidelines, you can ensure that your templates are properly formatted and ready to be used with Nuclei.
