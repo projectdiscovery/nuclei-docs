@@ -114,6 +114,7 @@ nav:
       - Network: templating-guide/protocols/network.md
       - DNS: templating-guide/protocols/dns.md
       - File: templating-guide/protocols/file.md
+      - Code: templating-guide/protocols/code.md
       - Operators:
           - Matchers: templating-guide/operators/matchers.md
           - Extractors: templating-guide/operators/extractors.md
