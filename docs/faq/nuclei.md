@@ -51,7 +51,7 @@
 
 ??? warning "Is it safe to run nuclei?"
 
-	We consider two factors to say =="safe"== in context of nuclei -
+	We consider two factors in regards to calling nuclei =="safe"== -
 
 	1. The **traffic** nuclei makes against the target website.
 	2. The **impact** templates have on the target website.
@@ -62,7 +62,7 @@
 
 	!!! check "Safe Templates"
 
-		The nuclei templates project houses a variety of templates which perform fuzzing and other actions which may result in a DoS against the target system (see [the list here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)). To ensure  these templates are not accidentally run, they are tagged and excluded them from the default scan. These templates can be only executed when explicitly invoked using the `-itags` option.
+		The nuclei templates project houses a variety of templates which perform fuzzing and other actions which may result in a DoS against the target system (see [the list here](https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore)). To ensure  these templates are not accidentally run, they are tagged and excluded them from the default scan. These templates can only be executed when explicitly invoked using the `-itags` option.
 
 ??? info "What is nuclei's license?"
 
