@@ -33,7 +33,7 @@ args:
   code: alert(document.domain)
 ```
 
-Suppose you want to run a matcher on a JS object to inspect its value. This type of data extraction use cases are also supported with nuclei headless. As an example, let's say the application sets an object called `window.random-object` with a value, and you want to match on that value.
+Suppose you want to run a matcher on a JS object to inspect its value. This type of data extraction use case is also supported with nuclei headless. As an example, let's say the application sets an object called `window.random-object` with a value, and you want to match on that value.
 
 ```yaml
 - action: script
