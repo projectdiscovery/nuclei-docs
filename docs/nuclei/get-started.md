@@ -132,6 +132,16 @@ export GITLAB_REPOSITORY_IDS=12345,67890
 </details>
 
 <details>
+<summary>For Bitbucket Project</summary>
+<pre>
+
+export BITBUCKET_TOKEN=gh_XXX
+export BITBUCKET_TEMPLATE_REPO=my_nuclei_template
+
+</pre>
+</details>
+
+<details>
 <summary>For AWS Bucket
 </summary>
 <pre>
@@ -175,6 +185,7 @@ tree $HOME/nuclei-templates/
 nuclei-templates/
 └── github/$GH_REPO_NAME # Custom templates downloaded from public / private GitHub project
 └── gitlab/$GL_REPO_NAME # Custom templates downloaded from public / private GitLab project
+└── bitbucket/$BB_REPO_NAME # Custom templates downloaded from public / private Bitbucket project
 └── s3/$BUCKET_NAME # Custom templates downloaded from public / private AWS Bucket
 └── azure/$CONTAINER_NAME # Custom templates downloaded from public / private Azure Blob Storage
 ```
