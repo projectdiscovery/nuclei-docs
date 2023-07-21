@@ -921,6 +921,14 @@ Including request/response in the markdown report is optional, and included when
 nuclei -l urls.txt -t cves/ -irr -markdown-export reports
 ```
 
+Optionally, the markdown exports can be sorted by template, host, or severity by setting the enviroment variable: `MARKDOWN_EXPORT_SORT_MODE` to `template`, `host`, or `severity`.
+
+Example:
+
+```
+export MARKDOWN_EXPORT_SORT_MODE=severity
+```
+
 **<ins>SARIF Export</ins>**
 
 Nuclei supports SARIF export of valid findings with `-se, -sarif-export` flag. This flag takes a file as input to store SARIF formatted report.
