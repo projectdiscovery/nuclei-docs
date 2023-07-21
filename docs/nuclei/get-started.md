@@ -897,10 +897,16 @@ Nuclei supports markdown export of valid findings with `-me, -markdown-export` f
 
 Including request/response in the markdown report is optional, and included when `-irr, -include-rr` flag is used along with `-me`.
 
-Optionally, the markdown exports can be sorted by template, host, or severity by setting the enviroment variable: `MARKDOWN_EXPORT_SORT_MODE` to `template`, `host`, or `severity`.
-
 ```bash
 nuclei -l urls.txt -t cves/ -irr -markdown-export reports
+```
+
+Optionally, the markdown exports can be sorted by template, host, or severity by setting the enviroment variable: `MARKDOWN_EXPORT_SORT_MODE` to `template`, `host`, or `severity`.
+
+Example:
+
+```
+export MARKDOWN_EXPORT_SORT_MODE=severity
 ```
 
 **<ins>SARIF Export</ins>**
