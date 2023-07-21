@@ -1,4 +1,4 @@
-### Code Requests
+### Code Requests (beta)
 
 Nuclei enables the execution of external code on the host operating system. This feature allows security researchers, pentesters, and developers to extend the capabilities of Nuclei and perform complex actions beyond the scope of regular supported protocol-based testing.
 
@@ -6,7 +6,7 @@ By leveraging this capability, Nuclei can interact with the underlying operating
 
 However, it's important to exercise caution while utilizing this feature, as executing external code on the host operating system carries inherent risks. It is crucial to ensure that the executed code is secure, thoroughly tested, and does not pose any unintended consequences or security risks to the target system.
 
-#### Template Signing
+#### Template Signing (beta)
 
 Template signing via the private-public key mechanism is a crucial aspect of ensuring the integrity and authenticity of templates. This mechanism involves the use of asymmetric cryptography, specifically RSA and ECDSA algorithms, to create a secure and verifiable signature.
 
