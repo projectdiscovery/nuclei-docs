@@ -158,6 +158,15 @@ export AZURE_CONTAINER_NAME=templates
 </pre>
 </details>
 
+Environment variables can also be provided to disable download from default and custom template locations:
+
+```
+export DISABLE_NUCLEI_TEMPLATES_PUBLIC_DOWNLOAD=true # Disable download from the default nuclei-templates project
+export DISABLE_NUCLEI_TEMPLATES_GITHUB_DOWNLOAD=true # Disable download from public / private GitHub project(s)
+export DISABLE_NUCLEI_TEMPLATES_GITLAB_DOWNLOAD=true # Disable download from public / private GitLab project(s)
+export DISABLE_NUCLEI_TEMPLATES_AWS_DOWNLOAD=true # Disable download from public / private AWS Bucket(s)
+export DISABLE_NUCLEI_TEMPLATES_AZURE_DOWNLOAD=true # Disable download from public / private Azure Blob Storage
+```
 
 Once the environment variables are set, following command to download the custom templates:
 
@@ -238,8 +247,8 @@ FILTERING:
    -em, -exclude-matchers string[]    template matchers to exclude in result
    -s, -severity value[]              templates to run based on severity. Possible values: info, low, medium, high, critical, unknown
    -es, -exclude-severity value[]     templates to exclude based on severity. Possible values: info, low, medium, high, critical, unknown
-   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, headless, network, workflow, ssl, websocket, whois
-   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, headless, network, workflow, ssl, websocket, whois
+   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, headless, tcp, workflow, ssl, websocket, whois
+   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, headless, tcp, workflow, ssl, websocket, whois
    -tc, -template-condition string[]  templates to run based on expression condition
 
 OUTPUT:
@@ -248,43 +257,49 @@ OUTPUT:
    -srd, -store-resp-dir string  store all request/response passed through nuclei to custom directory (default "output")
    -silent                       display findings only
    -nc, -no-color                disable output content coloring (ANSI escape codes)
-   -json                         write output in JSONL(ines) format
-   -irr, -include-rr             include request/response pairs in the JSONL output (for findings only)
+   -j, -jsonl                    write output in JSONL(ines) format
+   -irr, -include-rr -omit-raw   include request/response pairs in the JSON, JSONL, and Markdown outputs (for findings only) [DEPRECATED use -omit-raw] (default true)
+   -or, -omit-raw                omit request/response pairs in the JSON, JSONL, and Markdown outputs (for findings only)
    -nm, -no-meta                 disable printing result metadata in cli output
    -ts, -timestamp               enables printing timestamp in cli output
    -rdb, -report-db string       nuclei reporting database (always use this to persist report data)
    -ms, -matcher-status          display match failure status
    -me, -markdown-export string  directory to export results in markdown format
    -se, -sarif-export string     file to export results in SARIF format
+   -je, -json-export string      file to export results in JSON format
+   -jle, -jsonl-export string    file to export results in JSONL(ine) format
 
 CONFIGURATIONS:
-   -config string                 path to the nuclei configuration file
-   -fr, -follow-redirects         enable following redirects for http templates
-   -fhr, -follow-host-redirects   follow redirects on the same host
-   -mr, -max-redirects int        max number of redirects to follow for http templates (default 10)
-   -dr, -disable-redirects        disable redirects for http templates
-   -rc, -report-config string     nuclei reporting module configuration file
-   -H, -header string[]           custom header/cookie to include in all http request in header:value format (cli, file)
-   -V, -var value                 custom vars in key=value format
-   -r, -resolvers string          file containing resolver list for nuclei
-   -sr, -system-resolvers         use system DNS resolving as error fallback
-   -dc, -disable-clustering       disable clustering of requests
-   -passive                       enable passive HTTP response processing mode
-   -fh2, -force-http2             force http2 connection on requests
-   -ev, -env-vars                 enable environment variables to be used in template
-   -cc, -client-cert string       client certificate file (PEM-encoded) used for authenticating against scanned hosts
-   -ck, -client-key string        client key file (PEM-encoded) used for authenticating against scanned hosts
-   -ca, -client-ca string         client certificate authority file (PEM-encoded) used for authenticating against scanned hosts
-   -sml, -show-match-line         show match lines for file templates, works with extractors only
-   -ztls                          use ztls library with autofallback to standard one for tls13
-   -sni string                    tls sni hostname to use (default: input domain name)
-   -sandbox                       sandbox nuclei for safe templates execution
-   -i, -interface string          network interface to use for network scan
-   -at, -attack-type string       type of payload combinations to perform (batteringram,pitchfork,clusterbomb)
-   -sip, -source-ip string        source ip address to use for network scan
-   -config-directory string       override the default config path ($home/.config)
-   -rsr, -response-size-read int  max response size to read in bytes (default 10485760)
-   -rss, -response-size-save int  max response size to read in bytes (default 1048576)
+   -config string                        path to the nuclei configuration file
+   -fr, -follow-redirects                enable following redirects for http templates
+   -fhr, -follow-host-redirects          follow redirects on the same host
+   -mr, -max-redirects int               max number of redirects to follow for http templates (default 10)
+   -dr, -disable-redirects               disable redirects for http templates
+   -rc, -report-config string            nuclei reporting module configuration file
+   -H, -header string[]                  custom header/cookie to include in all http request in header:value format (cli, file)
+   -V, -var value                        custom vars in key=value format
+   -r, -resolvers string                 file containing resolver list for nuclei
+   -sr, -system-resolvers                use system DNS resolving as error fallback
+   -dc, -disable-clustering              disable clustering of requests
+   -passive                              enable passive HTTP response processing mode
+   -fh2, -force-http2                    force http2 connection on requests
+   -ev, -env-vars                        enable environment variables to be used in template
+   -cc, -client-cert string              client certificate file (PEM-encoded) used for authenticating against scanned hosts
+   -ck, -client-key string               client key file (PEM-encoded) used for authenticating against scanned hosts
+   -ca, -client-ca string                client certificate authority file (PEM-encoded) used for authenticating against scanned hosts
+   -sml, -show-match-line                show match lines for file templates, works with extractors only
+   -ztls                                 use ztls library with autofallback to standard one for tls13 [Deprecated] autofallback to ztls is enabled by default
+   -sni string                           tls sni hostname to use (default: input domain name)
+   -lfa, -allow-local-file-access        allows file (payload) access anywhere on the system
+   -lna, -restrict-local-network-access  blocks connections to the local / private network
+   -i, -interface string                 network interface to use for network scan
+   -at, -attack-type string              type of payload combinations to perform (batteringram,pitchfork,clusterbomb)
+   -sip, -source-ip string               source ip address to use for network scan
+   -config-directory string              override the default config path ($home/.config)
+   -rsr, -response-size-read int         max response size to read in bytes (default 10485760)
+   -rss, -response-size-save int         max response size to read in bytes (default 1048576)
+   -reset                                reset removes all nuclei configuration and data files (including nuclei-templates)
+   -tlsi, -tls-impersonate               enable experimental client hello (ja3) tls randomization
 
 INTERACTSH:
    -iserver, -interactsh-server string  interactsh server url for self-hosted instance (default: oast.pro,oast.live,oast.site,oast.online,oast.fun,oast.me)
@@ -295,13 +310,17 @@ INTERACTSH:
    -interactions-cooldown-period int    extra time for interaction polling before exiting (default 5)
    -ni, -no-interactsh                  disable interactsh server for OAST testing, exclude OAST based templates
 
+FUZZING:
+   -ft, -fuzzing-type string  overrides fuzzing type set in template (replace, prefix, postfix, infix)
+   -fm, -fuzzing-mode string  overrides fuzzing mode set in template (multiple, single)
+
 UNCOVER:
    -uc, -uncover                  enable uncover engine
    -uq, -uncover-query string[]   uncover search query
-   -ue, -uncover-engine string[]  uncover search engine (shodan,shodan-idb,fofa,censys,quake,hunter,zoomeye,netlas,criminalip) (default shodan)
+   -ue, -uncover-engine string[]  uncover search engine (shodan,censys,fofa,shodan-idb,quake,hunter,zoomeye,netlas,criminalip,publicwww,hunterhow) (default shodan)
    -uf, -uncover-field string     uncover fields to return (ip,port,host) (default "ip:port")
    -ul, -uncover-limit int        uncover results to return (default 100)
-   -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
+   -ur, -uncover-ratelimit int    override ratelimit of engines with unknown ratelimit (default 60 req/min) (default 60)
 
 RATE-LIMIT:
    -rl, -rate-limit int               maximum number of requests to send per second (default 150)
@@ -316,12 +335,13 @@ OPTIMIZATIONS:
    -retries int                        number of times to retry a failed request (default 1)
    -ldp, -leave-default-ports          leave default HTTP/HTTPS ports (eg. host:80,host:443)
    -mhe, -max-host-error int           max errors for a host before skipping from scan (default 30)
+   -te, -track-error string[]          adds given error to max-host-error watchlist (standard, file)
    -nmhe, -no-mhe                      disable skipping host from scan based on errors
    -project                            use a project folder to avoid sending same request multiple times
-   -project-path string                set a specific project path 
+   -project-path string                set a specific project path
    -spm, -stop-at-first-match          stop processing HTTP requests after the first match (may break template/workflow logic)
    -stream                             stream mode - start elaborating without sorting the input
-   -ss, -scan-strategy value           strategy to use while scanning(auto/host-spray/template-spray) (default 0)
+   -ss, -scan-strategy value           strategy to use while scanning(auto/host-spray/template-spray) (default auto)
    -irt, -input-read-timeout duration  timeout on input read (default 3m0s)
    -nh, -no-httpx                      disable httpx probing for non-url input
    -no-stdin                           disable stdin processing
@@ -353,14 +373,14 @@ DEBUG:
    -hc, -health-check        run diagnostic check up
 
 UPDATE:
-   -un, -update                      update nuclei engine to the latest released version
+   -up, -update                      update nuclei engine to the latest released version
    -ut, -update-templates            update nuclei-templates to latest released version
    -ud, -update-template-dir string  custom directory to install / update nuclei-templates
    -duc, -disable-update-check       disable automatic nuclei/templates update check
 
 STATISTICS:
    -stats                    display statistics about the running scan
-   -sj, -stats-json          write statistics data to an output file in JSONL(ines) format
+   -sj, -stats-json          display statistics in JSONL(ines) format
    -si, -stats-interval int  number of seconds to wait between showing a statistics update (default 5)
    -m, -metrics              expose nuclei metrics on a port
    -mp, -metrics-port int    port to expose nuclei metrics on (default 9092)
@@ -576,7 +596,7 @@ To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-t
     ```
 ### Uncover **Integration**
 
-Nuclei supports integration with [uncover](https://github.com/projectdiscovery/uncover) to executes template against hosts returned by uncover for the given query.
+Nuclei supports integration with [uncover](https://github.com/projectdiscovery/uncover) to execute templates against hosts returned by uncover for the given query.
 
 Here are uncover options to use -
 ```console
@@ -590,7 +610,7 @@ UNCOVER:
    -ul, -uncover-limit int        uncover results to return (default 100)
    -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
 ```
-You have set the API key of the engine you are using as an environment variable in your shell.
+You have to set the API key of the engine you are using as an environment variable in your shell.
 ```
 export SHODAN_API_KEY=xxx
 export CENSYS_API_ID=xxx
@@ -601,7 +621,7 @@ export QUAKE_TOKEN=xxx
 export HUNTER_API_KEY=xxx
 export ZOOMEYE_API_KEY=xxx
 ```
-Required API keys can be obtained by signing up on following platform [Shodan](https://account.shodan.io/register), [Censys](https://censys.io/register), [Fofa](https://fofa.info/toLogin), [Quake](https://quake.360.net/quake/#/index), [Hunter](https://user.skyeye.qianxin.com/user/register?next=https%3A//hunter.qianxin.com/api/uLogin&fromLogin=1) and [ZoomEye](https://www.zoomeye.org/login) .
+Required API keys can be obtained by signing up on the following platforms [Shodan](https://account.shodan.io/register), [Censys](https://censys.io/register), [Fofa](https://fofa.info/toLogin), [Quake](https://quake.360.net/quake/#/index), [Hunter](https://user.skyeye.qianxin.com/user/register?next=https%3A//hunter.qianxin.com/api/uLogin&fromLogin=1) and [ZoomEye](https://www.zoomeye.org/login) .
 
 Example of template execution using a search query.
 ```

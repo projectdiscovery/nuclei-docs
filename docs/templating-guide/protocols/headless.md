@@ -11,7 +11,7 @@ headless:
 
 Action is a single piece of Task for the Nuclei Headless Engine. Each action manipulates the browser state in some way, and finally leads to the state that we are interested in capturing.
 
-Nuclei supports a variety of actions. A list of these Actions along with their arguments are given below - 
+Nuclei supports a variety of actions. A list of these Actions along with their arguments is given below - 
 
 #### navigate
 
@@ -25,7 +25,7 @@ args:
 
 ##### script
 
-Script runs a JS code on the current browser page. At the simplest level, you can just provide a `code` argument with the JS snippet you want to execute, and it will be run on the page. 
+Script runs JS code on the current browser page. At the simplest level, you can just provide a `code` argument with the JS snippet you want to execute, and it will be run on the page. 
 
 ```yaml
 action: script
@@ -33,7 +33,7 @@ args:
   code: alert(document.domain)
 ```
 
-Suppose you want to run a matcher on a JS object to inspect its value. This type of data extraction use cases are also supported with nuclei headless. As an example, let's say the application sets an object called `window.random-object` with a value, and you want to match on that value.
+Suppose you want to run a matcher on a JS object to inspect its value. This type of data extraction use case is also supported with nuclei headless. As an example, let's say the application sets an object called `window.random-object` with a value, and you want to match on that value.
 
 ```yaml
 - action: script
@@ -59,7 +59,7 @@ The example provided hooks `window.alert` so that the alerts that are generated 
     hook: true
 ```
 
-This is one use case, there are many more use cases of function hooking such as DOM XSS Detection and Javascript-Injection based testing techniques. Further examples are provided on examples page. 
+This is one use case, there are many more use cases of function hooking such as DOM XSS Detection and Javascript-Injection based testing techniques. Further examples are provided on the examples page. 
 
 ##### click
 
@@ -99,7 +99,7 @@ args:
 
 ##### screenshot
 
-Screenshots takes the screenshots of a page and writes it to disk. It supports both full page and normal screenshots.
+Screenshot takes the screenshot of a page and writes it to disk. It supports both full page and normal screenshots.
 
 ```yaml
 action: screenshot
@@ -107,7 +107,7 @@ args:
   to: /root/test/screenshot-web
 ```
 
-If you require full page screenshot, it can be achieved with `fullpage: true` option in the args.
+If you require a full page screenshot, it can be achieved with `fullpage: true` option in the args.
 
 ```yaml
 action: screenshot
@@ -156,7 +156,7 @@ args:
 
 ##### waitload
 
-WaitLoads waits for a page to finish loading and get in Idle state.
+WaitLoad waits for a page to finish loading and get in Idle state.
 
 ```yaml
 action: waitload
@@ -295,7 +295,7 @@ action: debug
 
 ##### sleep
 
-Sleeps makes the browser wait for a specified duration in seconds. This is also useful for debugging purposes.
+Sleep makes the browser wait for a specified duration in seconds. This is also useful for debugging purposes.
 
 ```yaml
 action: sleep
