@@ -576,7 +576,7 @@ To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-t
     ```
 ### Uncover **Integration**
 
-Nuclei supports integration with [uncover](https://github.com/projectdiscovery/uncover) to executes template against hosts returned by uncover for the given query.
+Nuclei supports integration with [uncover](https://github.com/projectdiscovery/uncover) to execute templates against hosts returned by uncover for the given query.
 
 Here are uncover options to use -
 ```console
@@ -590,7 +590,7 @@ UNCOVER:
    -ul, -uncover-limit int        uncover results to return (default 100)
    -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)
 ```
-You have set the API key of the engine you are using as an environment variable in your shell.
+You have to set the API key of the engine you are using as an environment variable in your shell.
 ```
 export SHODAN_API_KEY=xxx
 export CENSYS_API_ID=xxx
@@ -601,7 +601,7 @@ export QUAKE_TOKEN=xxx
 export HUNTER_API_KEY=xxx
 export ZOOMEYE_API_KEY=xxx
 ```
-Required API keys can be obtained by signing up on following platform [Shodan](https://account.shodan.io/register), [Censys](https://censys.io/register), [Fofa](https://fofa.info/toLogin), [Quake](https://quake.360.net/quake/#/index), [Hunter](https://user.skyeye.qianxin.com/user/register?next=https%3A//hunter.qianxin.com/api/uLogin&fromLogin=1) and [ZoomEye](https://www.zoomeye.org/login) .
+Required API keys can be obtained by signing up on the following platforms [Shodan](https://account.shodan.io/register), [Censys](https://censys.io/register), [Fofa](https://fofa.info/toLogin), [Quake](https://quake.360.net/quake/#/index), [Hunter](https://user.skyeye.qianxin.com/user/register?next=https%3A//hunter.qianxin.com/api/uLogin&fromLogin=1) and [ZoomEye](https://www.zoomeye.org/login) .
 
 Example of template execution using a search query.
 ```
