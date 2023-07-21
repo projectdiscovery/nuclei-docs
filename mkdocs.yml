@@ -123,6 +123,7 @@ nav:
       - Variables: templating-guide/variables.md
       - Preprocessors: templating-guide/preprocessors.md
       - Workflows: templating-guide/workflows.md
+      - Multi Protocol Execution: templating-guide/multiprotocol.md
 
   - Template Examples:
       - HTTP:
