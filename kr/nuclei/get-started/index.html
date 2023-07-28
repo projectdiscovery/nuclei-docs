@@ -1,0 +1,1744 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <!-- Snitcher analytics code -->
+    <script>
+        !function(s,n,i,t,c,h){s.SnitchObject=i;s[i]||(s[i]=function(){
+        (s[i].q=s[i].q||[]).push(arguments)});s[i].l=+new Date;c=n.createElement(t);
+        h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8419641.js';
+        h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
+
+        snid('verify', '8419641');
+    </script>
+
+    <!-- clearbitscripts analytics code -->
+    <script async src="https://tag.clearbitscripts.com/v1/pk_dba61775644268d3609bf7dd90c0642b/tags.js"></script>
+    
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.">
+      
+      
+        <link rel="canonical" href="https://nuclei.projectdiscovery.io/kr/nuclei/get-started/">
+      
+      
+      <link rel="shortcut icon" href="../../../static/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Get started - Nuclei - Community Powered Vulnerability Scanner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.18dbb20c.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.0ec9b792.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-165996103-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nuclei" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-header-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../../static/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Nuclei - Community Powered Vulnerability Scanner
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Get started
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../nuclei/get-started/" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../templating-guide/" class="md-tabs__link">
+          Templating Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../template-examples/http/" class="md-tabs__link">
+          Template Examples
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../faq/nuclei/" class="md-tabs__link">
+          FAQ
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../../static/logo.png" alt="logo">
+
+    </a>
+    Nuclei - Community Powered Vulnerability Scanner
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/#nuclei-features" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/#code-contribution" title="Contribution" class="md-nav__link">
+      Contribution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/#license" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Templating Guide
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Templating Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Templating Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/#template-details" title="Template Details" class="md-nav__link">
+      Template Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/http#raw-http-requests" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/http#http-payloads" title="HTTP payloads" class="md-nav__link">
+      HTTP payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/http#unsafe-http-requests" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/http#advance-requests" title="Advance HTTP" class="md-nav__link">
+      Advance HTTP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/protocols/code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9">
+    
+    <label class="md-nav__link" for="nav-3-9">
+      Operators
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Operators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Operators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/operators/matchers/" title="Matchers" class="md-nav__link">
+      Matchers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/operators/extractors/" title="Extractors" class="md-nav__link">
+      Extractors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/interactsh/" title="OOB Testing" class="md-nav__link">
+      OOB Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/helper-functions/" title="Helper Functions" class="md-nav__link">
+      Helper Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/variables/" title="Variables" class="md-nav__link">
+      Variables
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/preprocessors/" title="Preprocessors" class="md-nav__link">
+      Preprocessors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../templating-guide/multiprotocol/" title="Multi Protocol Execution" class="md-nav__link">
+      Multi Protocol Execution
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Template Examples
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Template Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Template Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-raw/" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-smuggling/" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-payloads/" title="HTTP Payloads" class="md-nav__link">
+      HTTP Payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-race-conditions/" title="Race Condition" class="md-nav__link">
+      Race Condition
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/helper-functions/" title="Helpers" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      FAQ
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        FAQ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../faq/nuclei/" title="Nuclei FAQ" class="md-nav__link">
+      Nuclei FAQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../faq/templates/" title="Templates FAQ" class="md-nav__link">
+      Templates FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei" class="md-nav__link">
+    Nuclei 기능
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei_1" class="md-nav__link">
+    Nuclei 설치
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei_2" class="md-nav__link">
+    Nuclei 템플릿
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei_3" class="md-nav__link">
+    Nuclei 사용법
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei_4" class="md-nav__link">
+    Nuclei 실행
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuclei 실행">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuclei_5" class="md-nav__link">
+    Nuclei 필터
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    속도 제한
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traffic-tagging" class="md-nav__link">
+    Traffic Tagging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    템플릿 제외
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei_6" class="md-nav__link">
+    Nuclei 설정
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei_7" class="md-nav__link">
+    Nuclei 신고
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scan-metrics" class="md-nav__link">
+    Scan Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passive-scan" class="md-nav__link">
+    Passive Scan
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    기여
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/projectdiscovery/nuclei-docs/edit/main/docs/kr/nuclei/get-started.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Get started</h1>
+                
+                <h2 id="nuclei"><strong>Nuclei</strong> 기능<a class="headerlink" href="#nuclei" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Features.</p>
+<ul>
+<li>HTTP | DNS | TCP | FILE 지원</li>
+<li>수정 가능한 템플릿</li>
+<li>대규모 스캐닝</li>
+<li>대역 외 기반 탐지</li>
+<li>본인만의 템플릿을 쉽게 작성가능</li>
+</ul>
+</div>
+<h2 id="nuclei_1"><strong>Nuclei</strong> 설치<a class="headerlink" href="#nuclei_1" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Go</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nuclei를 성공적으로 설치하기 위해서는 최신 버전의 <strong>Go</strong> 가 필요합니다.</p>
+</div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Brew</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>brew install nuclei
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>macOS</strong> (or Linux) 를 지원합니다.</p>
+</div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Docker</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>docker pull projectdiscovery/nuclei:latest
+</code></pre></div>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Github</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>git clone https://github.com/projectdiscovery/nuclei.git; \
+cd nuclei/v2/cmd/nuclei; \
+go build; \
+mv nuclei /usr/local/bin/; \
+nuclei -version;
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nuclei를 성공적으로 설치하기 위해서는 최신 버전의 <strong>Go</strong> 가 필요합니다.</p>
+</div>
+</div>
+<input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><label for="__tabbed_1_5">Binary</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>https://github.com/projectdiscovery/nuclei/releases
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>OS에 따라 최신 버전의 실행파일을 다운로드 합니다.</li>
+<li>실행하기 위해서 압축을 해제합니다.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="nuclei_2">Nuclei <strong>템플릿</strong><a class="headerlink" href="#nuclei_2" title="Permanent link">&para;</a></h2>
+<p>Nuclei는 2.4.0버전부터 템플릿의 자동 업데이트/다운로드를 지원합니다. <a href="https://github.com/projectdiscovery/nuclei-templates"><strong>Nuclei-Templates</strong></a> 프로젝트는 지속적으로 업데이트되는 템플릿 리스트를 제공합니다. 해당 리스트는 커뮤니티에서 기여해주고 있습니다.</p>
+<p>Nuclei는 실행마다 생성되는 새로운 템플릿을 체크하고 사용 가능할 때 자동으로 최신 버전을 다운로드 받습니다. 이 기능은 터미널 혹은 설정 파일에서 <code>-duc</code>, <code>-disable-update-check</code> 플래그를 사용하여 적용하지 않을 수 있습니다.</p>
+<p>Nuclei 엔진은 <code>-update</code> 플래그를 사용하여 최신 버전으로 업데이트할 수 있습니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>자신만의 독특한 템플릿을 작성하는 것은 항상 다른 이들보다 자신을 앞서게 해줄 것입니다.</p>
+</div>
+<h2 id="nuclei_3"><strong>Nuclei</strong> 사용법<a class="headerlink" href="#nuclei_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>nuclei -h
+</code></pre></div>
+<p>이 명령어는 nuclei의 사용법을 보여줍니다. 아래는 지원하고 있는 기능들을 보여줍니다.</p>
+<div class="highlight"><pre><span></span><code>Nuclei is a fast, template based vulnerability scanner focusing
+on extensive configurability, massive extensibility and ease of use.
+
+Usage:
+  nuclei [flags]
+
+Flags:
+TARGET:
+   -u, -target string[]  스캔할 URLs/hosts 대상
+   -l, -list string      스캔할 URLs/hosts 대상 목록이 포함된 파일 경로(줄당 하나씩)
+   -resume string        resume.cfg를 사용한 스캔 재개(클러스터링이 비활성화됨)
+
+TEMPLATES:
+   -nt, -new-templates          nuclei-templates에 가장 최근에 추가된 새 템플릿만 실행
+   -as, -automatic-scan         태그 매핑에 대한 wappalyzer 기술 탐지를 사용한 자동 웹 스캔
+   -t, -templates string[]      실행할 템플릿 또는 템플릿 디렉터리 목록(쉼표로 구분된 파일)
+   -tu, -template-url string[]  실행할 템플릿 URL 목록(쉼표로 구분된 파일)
+   -w, -workflows string[]      실행할 워크플로 또는 워크플로 디렉터리 목록(쉼표로 구분된 파일)
+   -wu, -workflow-url string[]  실행할 워크플로 URL 목록(쉼표로 구분된 파일)
+   -validate                    nuclei로 전달된 템플릿 검증
+   -tl                          사용 가능한 모든 템플릿 목록
+
+FILTERING:
+   -a, -author string[]              작성자를 기준으로 실행할 템플릿(쉼표로 구분된 파일)
+   -tags string[]                    태그를 기준으로 실행할 템플릿(쉼표로 구분된 파일)
+   -etags, -exclude-tags string[]    태그를 기준으로 제외할 템플릿(쉼표로 구분된 파일)
+   -itags, -include-tags string[]    태그가 기본 또는 구성에 의해 제외된 경우에도 실행됨
+   -id, -template-id string[]        템플릿 ID들을 기준으로 실행할 템플릿(쉼표로 구분된 파일)
+   -eid, -exclude-id string[]        템플릿 ID들을 기준으로 제외할 템플릿(쉼표로 구분된 파일)
+   -it, -include-templates string[]  템플릿이 기본 또는 구성에 의해 제외된 경우에도 실행됨
+   -et, -exclude-templates string[]  제외할 템플릿 또는 템플릿 디렉터리(파일로 구분됨, 파일)
+   -s, -severity value[]             심각도를 기준으로 실행할 템플릿. 가능한 값: info, low, medium, high, critical, unknown
+   -es, -exclude-severity value[]    심각도를 기준으로 제외할 템플릿. 가능한 값: info, low, medium, high, critical, unknown
+   -pt, -type value[]                프로토콜 유형을 기준으로 실행할 템플릿. 가능한 값: dns, file, http, headless, network, workflow, ssl, websocket, whois
+   -ept, -exclude-type value[]       프로토콜 유형에 따라 제외할 템플릿. 가능한 값: dns, file, http, headless, network, workflow, ssl, websocket, whois
+
+OUTPUT:
+   -o, -output string            발견된 문제/취약점를 쓰기 위한 출력 파일
+   -sresp, -store-resp           nuclei을 통해 전달된 모든 요청/응답을 출력 디렉터리에 저장
+   -srd, -store-resp-dir string  nuclei을 통해 전달된 모든 요청/응답을 사용자 지정 디렉터리에 저장(기본 &quot;output&quot;)
+   -silent                       결과만 표시
+   -nc, -no-color                출력 내용 색상 비활성화 (ANSI escape codes)
+   -json                         JSONL(ines) 형식으로 출력
+   -irr, -include-rr             JSONL 출력에 요청/응답 쌍 포함(결과만)
+   -nm, -no-meta                 cli 출력에서 결과 메타데이터 출력 비활성화
+   -nts, -no-timestamp           cli 출력에서 결과 타임스탬프 출력 비활성화
+   -rdb, -report-db string       nuclei 보고 데이터베이스(보고서 데이터를 유지하려면 항상 이것을 사용)
+   -ms, -matcher-status          매치 실패 상태 표시
+   -me, -markdown-export string  마크다운 형식으로 결과를 내보낼 디렉터리
+   -se, -sarif-export string     결과를 SARIF 형식으로 내보내는 파일
+
+CONFIGURATIONS:
+   -config string              nuclei 환경 설정 파일 경로
+   -fr, -follow-redirects      http 템플릿에 following redirects 활성화
+   -mr, -max-redirects int     http 템플릿에 따라야 할 최대 리디렉션 수(기본값 10)
+   -dr, -disable-redirects     http 템플릿에 대한 리디렉션 비활성화
+   -rc, -report-config string  nuclei 보고 모듈 환경 설정 파일
+   -H, -header string[]        헤더:값 형식의 모든 http 요청에 포함할 사용자 정의 헤더/쿠키(cli, file)
+   -V, -var value              키=값 형식의 사용자 정의 변수
+   -r, -resolvers string       nuclei에 대한 리졸버 목록이 포함된 파일
+   -sr, -system-resolvers      에러 fallback으로 시스템 DNS 리졸빙 사용
+   -passive                    수동 HTTP 응답 처리 모드 활성화
+   -ev, -env-vars              템플릿에서 환경 변수를 사용할 수 있도록 설정
+   -cc, -client-cert string    스캔된 호스트에 인증하는 데 사용되는 클라이언트 인증서 파일(PEM-encoded)
+   -ck, -client-key string     스캔된 호스트에 인증하는 데 사용되는 클라이언트 key 파일(PEM-encoded)
+   -ca, -client-ca string      스캔된 호스트에 인증하는 데 사용되는 클라이언트 인증 기관 파일(PEM-encoded)
+   -sml, -show-match-line      파일 템플릿에 대해 일치하는 줄 표시, extractors에서만 작동
+   -ztls                       tls13의 표준으로 autofallback과 함께 ztls 라이브러리 사용
+   -sni string                 사용할 tls sni 호스트 이름(기본: 입력한 도메인 이름)
+
+INTERACTSH:
+   -iserver, -interactsh-server string  자체 호스팅된 인스턴스에 대한 interactsh 서버 URL (기본: oast.pro,oast.live,oast.site,oast.online,oast.fun,oast.me)
+   -itoken, -interactsh-token string    자체 호스팅된 interactsh 서버에 대한 인증 토큰
+   -interactions-cache-size int         상호 작용 캐시에 유지할 요청 수 (기본 5000)
+   -interactions-eviction int           캐시에서 요청을 제거하기 전에 대기할 시간(초) (기본 60)
+   -interactions-poll-duration int      각 상호 작용 폴링 요청 전에 대기할 시간(초) (기본 5)
+   -interactions-cooldown-period int    종료 전 상호작용 폴링을 위한 추가 시간 (기본 5)
+   -ni, -no-interactsh                  OAST 테스트를 위해 interactsh 서버 비활성화, OAST 기반 템플릿 제외
+
+RATE-LIMIT:
+   -rl, -rate-limit int            초당 보낼 최대 요청 수 (기본 150)
+   -rlm, -rate-limit-minute int    분당 보낼 최대 요청 수
+   -bs, -bulk-size int             템플릿당 병렬로 분석할 최대 호스트 수 (기본 25)
+   -c, -concurrency int            병렬로 실행할 최대 템플릿 수 (기본 25)
+   -hbs, -headless-bulk-size int   템플릿당 병렬로 분석할 최대 headless 호스트 수 (기본 10)
+   -hc, -headless-concurrency int  병렬로 실행할 최대 headless 템플릿 수 (기본 10)
+
+OPTIMIZATIONS:
+   -timeout int                타임아웃 전 대기 시간(초) (기본 5)
+   -retries int                실패한 요청을 재시도하는 횟수 (기본 1)
+   -ldp, -leave-default-ports  leave default HTTP/HTTPS ports (eg. host:80,host:443
+   -mhe, -max-host-error int   스캔을 건너뛰기 전에 호스트에 대한 최대 오류 수 (기본 30)
+   -nmhe, -no-mhe              disable skipping host from scan based on errors
+   -project                    프로젝트 폴더를 사용하여 동일한 요청을 여러 번 보내지 않음
+   -project-path string        특정 프로젝트 경로 설정
+   -spm, -stop-at-first-path   첫 번째 일치 후 HTTP 요청 처리 중지 (template/workflow 로직이 중단될 수 있음)
+   -stream                     stream 모드 - 입력을 정렬하지 않고 elaborating 시작
+
+HEADLESS:
+   -headless            헤드리스 브라우저 지원이 필요한 템플릿 활성화(root user on linux will disable sandbox)
+   -page-timeout int    헤드리스 모드에서 각 페이지를 기다리는 시간(초)(기본 20)
+   -sb, -show-browser   헤드리스 모드로 템플릿을 실행할 때 화면에 브라우저 표시
+   -sc, -system-chrome  설치된 nuclei 대신 로컬에 설치된 chrome 브라우저 사용
+
+DEBUG:
+   -debug                    모든 요청 및 응답 표시
+   -dreq, -debug-req         보낸 모든 요청 표시
+   -dresp, -debug-resp       받은 모든 응답 표시
+   -p, -proxy string[]       사용할 http/socks5 프록시 목록(쉼표로 구분하거나 파일 입력)
+   -pi, -proxy-internal      모든 내부 요청을 프록시
+   -tlog, -trace-log string  보낸 요청 추적 로그를 기록할 파일
+   -elog, -error-log string  보낸 요청 오류 로그를 기록할 파일
+   -version                  nuclei 버전 출력
+   -hm, -hang-monitor        nuclei hang monitoring 활성화
+   -v, -verbose              상세 출력 표시
+   -vv                       스캔을 위해 로드된 디스플레이 템플릿 표시
+   -ep, -enable-pprof        pprof debugging server 활성화
+   -tv, -templates-version   설치된 nuclei-templates 버전 출력
+
+UPDATE:
+   -update                        최신 릴리스 버전으로 nuclei 엔진 업데이트
+   -ut, -update-templates         최신 릴리스 버전으로 nuclei-templates 엔진 업데이트
+   -ud, -update-directory string  nuclei-templates를 설치할 기본 디렉터리를 덮어씀
+   -duc, -disable-update-check    자동 nuclei/templates 업데이트 확인 비활성화
+
+STATISTICS:
+   -stats                    실행 중인 스캔에 대한 통계 표시
+   -sj, -stats-json          JSONL(ines) 형식으로 출력 파일에 통계 데이터 쓰기
+   -si, -stats-interval int  통계 업데이트를 표시할 때까지 대기하는 시간(초) (기본 5)
+   -m, -metrics              포트(기본 9092)에서 실행 중인 scan matrics 보기
+   -mp, -metrics-port int    nuclei metrics 포트 설정 (기본 9092)
+</code></pre></div>
+<h2 id="nuclei_4"><strong>Nuclei</strong> 실행<a class="headerlink" href="#nuclei_4" title="Permanent link">&para;</a></h2>
+<p>Nuclei 템플릿은 크게 두 가지 방법으로 실행 될 수 있습니다.</p>
+<p>1) <strong>Templates</strong> (<code>-t/templates</code>)</p>
+<p>기본적으로, 모든 템플릿 (nuclei-ignore 리스트를 제외한) 들은 기본 템플릿 설치 경로에서 실행됩니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com
+</code></pre></div>
+<p>별도의 템플릿 폴더 혹은 다수의 템플릿 폴더는 다음과 같이 실행될 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-t<span class="w"> </span>exposures/
+</code></pre></div>
+<p>URL 리스트에 대해서도 템플릿들은 실행될 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-list<span class="w"> </span>http_urls.txt
+</code></pre></div>
+<p>2) <strong>Workflows</strong> (<code>-w/workflows</code>)</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-w<span class="w"> </span>workflows/
+</code></pre></div>
+<p>URL 리스트에 대해서도 Workflows들은 실행될 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-list<span class="w"> </span>http_urls.txt<span class="w"> </span>-w<span class="w"> </span>workflows/wordpress-workflow.yaml
+</code></pre></div>
+<h3 id="nuclei_5">Nuclei <strong>필터</strong><a class="headerlink" href="#nuclei_5" title="Permanent link">&para;</a></h3>
+<p>Nuclei 엔진은 템플릿 실행을 커스텀하기 위해서 3개의 기본 필터를 제공합니다.</p>
+<ol>
+<li>
+<p>Tags (<code>-tags</code>)</p>
+<p>템플릿에서 사용가능한 태그 속성에 기반한 필터</p>
+</li>
+<li>
+<p>Severity (<code>-severity</code>)</p>
+<p>템플릿에서 사용가능한 심각도 속성에 기반한 필터</p>
+</li>
+<li>
+<p>Author (<code>-author</code>)</p>
+<p>템플릿에서 사용가능한 작성자 속성에 기반한 필터</p>
+</li>
+</ol>
+<p>기본적으로, 필터들은 템플릿 설치 경로에 적용되고, 수동 템플릿 경로 입력을 사용하여 커스텀할 수 있습니다.</p>
+<p>예를 들어, 아래의 명령은 <code>~/nuclei-templates/</code> 폴더에 설치된 템플릿들 중에서 <code>cve</code> 태그를 가진 템플릿들을 실행시킵니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-tags<span class="w"> </span>cve
+</code></pre></div>
+<p>그리고 다음은 <code>~/nuclei-templates/exposures/</code> 폴더의 <code>config</code> 태그를 가진 모든 사용가능한 템플릿들을 실행하는 예입니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-tags<span class="w"> </span>config<span class="w"> </span>-t<span class="w"> </span>exposures/
+</code></pre></div>
+<p>다수의 필터를 AND 조건으로 함께 사용이 가능합니다. 다음은 <code>cve</code> 태그를 가졌고, <code>critical</code> 또는 <code>high</code> 의 심각도를 가졌고, 작성자가 <code>geeknik</code>인 모든 템플릿을 실행하는 예입니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-tags<span class="w"> </span>cve<span class="w"> </span>-severity<span class="w"> </span>critical,high<span class="w"> </span>-author<span class="w"> </span>geeknik
+</code></pre></div>
+<p>다수의 필터는 템플릿 조건 플래그 (<code>tc</code>)를 이용해 조합하여 사용할 수 있습니다. 템플릿 조건 플래그으로 다음과 같은 복잡한 표현식을 사용할 수 있습니다. </p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-tc<span class="w"> </span><span class="s2">&quot;contains(id,&#39;xss&#39;) || contains(tags,&#39;xss&#39;)&quot;</span>
+nuclei<span class="w"> </span>-tc<span class="w"> </span><span class="s2">&quot;contains(tags,&#39;cve&#39;) &amp;&amp; contains(tags,&#39;ssrf&#39;)&quot;</span>
+nuclei<span class="w"> </span>-tc<span class="w"> </span><span class="s2">&quot;contains(name, &#39;Local File Inclusion&#39;)&quot;</span>
+</code></pre></div>
+<p>필터링을 지원하는 속성 목록입니다.</p>
+<ul>
+<li><code>id</code> string</li>
+<li><code>name</code> string</li>
+<li><code>description</code> string</li>
+<li><code>tags</code> slice of strings</li>
+<li><code>authors</code> slice of strings</li>
+<li><code>severity</code> string</li>
+<li><code>protocol</code> string</li>
+<li><code>http_method</code> slice of strings</li>
+<li><code>body</code> string (containing all request bodies if any)</li>
+<li><code>matcher_type</code> slice of string</li>
+<li><code>extractor_type</code> slice of string</li>
+<li><code>description</code> string</li>
+</ul>
+<p>또한, 템플릿의 메타데이터 영역의 키-값으로 구성된 모든 쌍이 가능합니다. 모든 속성들은 논리 연산자(<code>||</code> 와 <code>&amp;&amp;</code>) 를 통해 조합될 수 있고, DSL helper 함수들과 함께 사용될 수 있습니다.</p>
+<p>모든 필터들은 workflows 에서도 마찬가지로 지원됩니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-w<span class="w"> </span>workflows/wordpress-workflow.yaml<span class="w"> </span>-severity<span class="w"> </span>critical,high<span class="w"> </span>-list<span class="w"> </span>http_urls.txt
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Workflows</p>
+<p>Workflows에서는 Workflows를 통해 실행되는 템플릿, 서브템플릿에 Nuclei 필터가 적용됩니다.</p>
+</div>
+<h3 id="_1">속도 <strong>제한</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>Nuclei는 다양한 요인으로 다중 속도 제한 제어를 합니다. 요인으로는 병렬로 실행할 템플릿 수, 각 템플릿에 대해 병렬로 검색할 호스트 수, Nuclei를 이용하여 생성하거나 제한하고자 한 초당 총 요청 수 등이 있습니다.아래는 각 플래그에 대한 설명입니다.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rate-limit</td>
+<td>초당 총 요청의 수를 제어합니다.</td>
+</tr>
+<tr>
+<td>bulk-size</td>
+<td>각 템플릿마다 동시에 진행할 호스트의 수를 제어합니다.</td>
+</tr>
+<tr>
+<td>c</td>
+<td>동시에 진행할 템플릿의 수를 제어합니다.</td>
+</tr>
+</tbody>
+</table>
+<p>Nuclei의 속도 제한과 정확도를 이 플래그를 이용하여 자유롭게 조정하세요!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>rate-limit</code> 플래그는 다른 두 플래그보다 우선합니다. 초당 요청의 수는 <code>c</code> 와 <code>bulk-size</code> 플래그 값에 상관없이 <code>rate-limit</code> 값을 초과할 수 없습니다.</p>
+</div>
+<h3 id="traffic-tagging">Traffic <strong>Tagging</strong><a class="headerlink" href="#traffic-tagging" title="Permanent link">&para;</a></h3>
+<p>많은 버그 바운티 플랫폼과 프로그램들은 식별을 위해 여러분들이 생성한 HTTP 트래픽을 요구합니다. 이는 <code>$HOME/.config/nuclei/config.yaml</code> 의 설정 파일을 이용하거나 <code>-H / header</code> CLI 플래그를 이용하면 됩니다. </p>
+<div class="admonition info">
+<p class="admonition-title">설정 파일을 이용한 사용자 정의 헤더 설정</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Headers to include with each request.</span>
+<span class="nt">header</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;X-BugBounty-Hacker:</span><span class="nv"> </span><span class="s">h1/geekboy&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;User-Agent:</span><span class="nv"> </span><span class="s">Mozilla/5.0</span><span class="nv"> </span><span class="s">(Windows</span><span class="nv"> </span><span class="s">NT</span><span class="nv"> </span><span class="s">10.0;</span><span class="nv"> </span><span class="s">WOW64)</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">nuclei&#39;</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">CLI 플래그를 이용한 사용자 정의 헤더 설정</p>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">nuclei -header &#39;User-Agent</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mozilla/5.0 (Windows NT 10.0; WOW64) / nuclei&#39; -list urls.txt -tags cves</span>
+</code></pre></div>
+</div>
+<h3 id="_2">템플릿 <strong>제외</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Nuclei는 실행에 포함할 템플릿을 제외/방지 하는 다양한 방법을 제공합니다. 스캔으로 인한 예측되지 않은 퍼즈를 피하고, 대량 스캔에서 일부 제외를 위해 실행되지 않아야 하는 태그들과 템플릿들을 Nuclei에서는 기본적으로 제외합니다. 기본 제외 목록은 아래의 링크를 통해 확인 가능합니다. 이 파일은 설정 파일 혹은 플래그들을 통해 쉽게 고칠 수 있습니다.</p>
+<ul>
+<li>기본 제외 목록: <a href="https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore">Template ignore</a></li>
+</ul>
+<div class="admonition danger">
+<p><strong>nuclei-ignore</strong> 파일은 사용자가 업데이트/편집/제거할 수 없습니다. 이를 덮어쓰기 위해서는 <a href="https://nuclei.projectdiscovery.io/nuclei/get-started/#nuclei-config">nuclei configuration</a> 파일을 이용합니다.</p>
+</div>
+<p>Nuclei는 두 가지 방법을 통해 스캔에서 제외할 템플릿을 조정할 수 있습니다.</p>
+<ol>
+<li>
+<p>Exclude Templates (<code>-exclude-templates/exclude</code>) 템플릿 제외하기 (<code>-exclude-templates/exclude</code>)</p>
+<p><strong>exclude-templates</strong> 플래그는 하나 혹은 다수의 템플릿 그리고 디렉토리를 제외할 수 있습니다. 복수의 <code>-exclude-templates</code> 플래그를 통해 여러 값을 제공합니다.</p>
+</li>
+<li>
+<p>Exclude Tags (<code>-exclude-tags/etags</code>) 태그 제외하기 (<code>-exclude-tags/etags</code>)</p>
+<p><strong>exclude-tags</strong> 플래그는 정의된 태그들을 기반으로 템플릿을 제외합니다. 하나 혹은 다수의 태그를 사용해 제외할 수 있습니다.</p>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">하나의 템플릿을 제외하는 예</p>
+<div class="highlight"><pre><span></span><code>nuclei -list urls.txt -t cves/ -exclude-templates cves/2020/CVE-2020-XXXX.yaml
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">다수의 템플릿을 제외하는 예</p>
+<div class="highlight"><pre><span></span><code>nuclei -list urls.txt -exclude-templates exposed-panels/ -exclude-templates technologies/
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">하나의 태그로 템플릿을 제외하는 예</p>
+<div class="highlight"><pre><span></span><code>nuclei -l urls.txt -t cves/ -etags xss
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">다수의 태그를 이용해 템플릿을 제외하는 예</p>
+<div class="highlight"><pre><span></span><code>nuclei -l urls.txt -t cves/ -etags sqli,rce
+</code></pre></div>
+</div>
+<p><a href="https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore">nuclei-ignore</a>를 쉽게 설정하기 위해 Nuclei는 <strong>include-tags</strong> / <strong>include-templates</strong> 플래그를 지원합니다.</p>
+<div class="admonition info">
+<p class="admonition-title">제외된 태그들을 실행하는 예</p>
+<div class="highlight"><pre><span></span><code>nuclei -l urls.txt -include-tags iot,misc,fuzz
+</code></pre></div>
+</div>
+<p>모든 검색에 대해 이러한 태그를 포함하도록 nuclei 설정 파일을 업데이트할 수 있습니다.</p>
+<h2 id="nuclei_6">Nuclei <strong>설정</strong><a class="headerlink" href="#nuclei_6" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p><a href="https://blog.projectdiscovery.io/nuclei-v2-3-0-release/">v.2.3.2</a> 버전의 nuclei부터 깔끔한 CLI 환경과 포맷팅된 길거나 짧은 형식의 플래그들을 사용하기 위해서 <a href="https://github.com/projectdiscovery/goflags">goflags</a>를 사용합니다.</p>
+<p>자동 생성 설정 파일을 생성하는 <a href="https://github.com/projectdiscovery/goflags">goflags</a>는 사용 가능한 모든 CLI플래그를 설정 파일로 커버합니다. 기본적으로 로드되는 반복적인 CLI 플래그를 피하기 위해서 모든 CLI 플래그들을 설정 파일에 정의할 수 있습니다.</p>
+<p>Nuclei 설정 파일의 기본 경로는 <code>$HOME/.config/nuclei/config.yaml</code> 입니다. 기본적으로 실행할 플래그를 설정하거나 주석 해제합니다.</p>
+</div>
+<p>아래는 설정 파일의 예시입니다.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Headers to include with all HTTP request</span>
+<span class="nt">header</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;X-BugBounty-Hacker:</span><span class="nv"> </span><span class="s">h1/geekboy&#39;</span>
+
+<span class="c1"># Directory based template execution</span>
+<span class="nt">templates</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cves/</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vulnerabilities/</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">misconfiguration/</span>
+
+<span class="c1"># Tags based template execution</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposures,cve</span>
+
+<span class="c1"># Template Filters</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposures,cve</span>
+<span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geeknik,pikpikcu,dhiyaneshdk</span>
+<span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical,high,medium</span>
+
+<span class="c1"># Template Allowlist</span>
+<span class="nt">include-tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dos,fuzz</span><span class="w"> </span><span class="c1"># Tag based inclusion (allows overwriting nuclei-ignore list)</span>
+<span class="nt">include-templates</span><span class="p">:</span><span class="w"> </span><span class="c1"># Template based inclusion (allows overwriting nuclei-ignore list)</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vulnerabilities/xxx</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">misconfiguration/xxxx</span>
+
+<span class="c1"># Template Denylist</span>
+<span class="nt">exclude-tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span><span class="w"> </span><span class="c1"># Tag based exclusion</span>
+<span class="nt">exclude-templates</span><span class="p">:</span><span class="w"> </span><span class="c1"># Template based exclusion</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vulnerabilities/xxx</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">misconfiguration/xxxx</span>
+
+<span class="c1"># Rate Limit configuration</span>
+<span class="nt">rate-limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span>
+<span class="nt">bulk-size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="nt">concurrency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+</code></pre></div>
+<p>일단 설정이 되면, 설정 파일을 기본적으로 사용합니다. <code>-config</code> 플래그를 통해 사용자 정의 설정 파일을 추가적으로 제공할 수 있습니다.</p>
+<div class="admonition info">
+<p class="admonition-title">사용자 정의 파일로 nuclei 실행하기</p>
+<div class="highlight"><pre><span></span><code>nuclei -config project.yaml -list urls.txt
+</code></pre></div>
+</div>
+<h2 id="nuclei_7">Nuclei <strong>신고</strong><a class="headerlink" href="#nuclei_7" title="Permanent link">&para;</a></h2>
+<p>Nuclei는 GitHub, GitLab, Jira integration 을 지원하는 <a href="https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021">v2.3.0</a> 버전과 함께 신고 모듈을 제공합니다. 이는 발견된 결과에 따라 지원되는 플랫폼에서 자동으로 신고 내역을 생성할 수 있게 해줍니다.</p>
+<table>
+  <tr>
+    <th>Platform</th>
+    <td>GitHub</td>
+    <td>GitLab</td>
+    <td>Jira</td>
+    <td>Markdown</td>
+    <td>SARIF</td>
+    <td>Elasticsearch</td>
+
+  </tr>
+  <tr>
+    <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+  </tr>
+</table>
+
+<p><code>-rc, -report-config</code> 플래그는 통합을 위해 플랫폼의 세부 정보를 읽기 위해 설정 파일을 제공할 수 있습니다. 지원되는 모든 플랫폼에 대한 <a href="https://github.com/projectdiscovery/nuclei/blob/master/v2/cmd/nuclei/issue-tracker-config.yaml">예시 파일</a> 입니다.</p>
+<p>예를 들어, Github 에서 신고 내역을 생성하기 위해 다음의 내용을 담은 설정 파일을 생성하고 적절한 값들을 바꾸어 봅니다.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># GitHub contains configuration options for GitHub issue tracker</span>
+
+<span class="nt">github</span><span class="p">:</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$user&quot;</span>
+<span class="w">  </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$user&quot;</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$token&quot;</span>
+<span class="w">  </span><span class="nt">project-name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;testing-project&quot;</span>
+<span class="w">  </span><span class="nt">issue-label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Nuclei&quot;</span>
+</code></pre></div>
+<p>Elasticsearch의 결과들을 저장하기 위해 다음의 내용을 담은 설정 파일을 생성하고 적절한 값들을 바꾸어 봅니다.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># elasticsearch contains configuration options for elasticsearch exporter</span>
+<span class="nt">elasticsearch</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># IP for elasticsearch instance</span>
+<span class="w">  </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+<span class="w">  </span><span class="c1"># Port is the port of elasticsearch instance</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9200</span>
+<span class="w">  </span><span class="c1"># IndexName is the name of the elasticsearch index</span>
+<span class="w">  </span><span class="nt">index-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nuclei</span>
+</code></pre></div>
+<p><strong>신고 모듈과 함께 Nuclei 실행하기</strong></p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-rc<span class="w"> </span>issue-tracker.yaml
+</code></pre></div>
+<p>비슷하게 다른 플랫폼들도 설정할 수 있습니다. 신고 모듈은 중복되는 신고 내역을 생성하지 않기 위해서 기본적인 필터링과 중복 체크를 지원합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">allow-list</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">high,critical</span>
+</code></pre></div>
+<p>위는 심각도가 <strong>high</strong> 이고 <strong>critical</strong> 로 식별되는 이슈들에 대해서만 신고 내역을 생성합니다. 비슷하게도 <code>deny-list</code> 설정은 특정 심각도의 이슈들을 제외할 수 있습니다.</p>
+<p>같은 에셋에 대해 주기적인 스캔을 실행한다면, 신고 모듈이 비교하고 <strong>유니크한 이슈들에 대한 신고 내역을 생성</strong> 하는 주어진 디렉토리에서의 유효한 발견에 대해서 로컬 복사본을 생성하는 <code>-rdb, -report-db</code> 플래그를 고려해볼 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-rc<span class="w"> </span>issue-tracker.yaml<span class="w"> </span>-rdb<span class="w"> </span>prod
+</code></pre></div>
+<p><strong><ins>Markdown 추출</ins></strong></p>
+<p>Nuclei는 <code>-me, -markdown-export</code> 플래그를 통해 유효한 발견들을 마크다운 형식으로 추출하는 것을 지원합니다. 이 플래그는 마크다운 형식의 결과를 저장하기 위해 입력으로 디렉토리를 사용합니다.</p>
+<p>마크다운 형식의 결과에서 요청/응답을 포함하는 것은 선택 사항입니다. 혹은 <code>-irr, -include-rr</code> 플래그가 <code>-me</code>와 함께 사용될 때 포함됩니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-irr<span class="w"> </span>-markdown-export<span class="w"> </span>reports
+</code></pre></div>
+<p><strong><ins>SARIF 추출</ins></strong></p>
+<p>Nuclei는 <code>-se, -sarif-export</code> 플래그를 통해 유효한 발견들을 SARIF 형식으로 추출하는 것을 지원합니다. 이 플래그는 SARIF 형식의 결과를 저장하기 위해 입력으로 파일을 사용합니다.</p>
+<p>요청-응답 정보는 마크다운 문법 형식이고, SARIF의 응답 영역에 저장됩니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-sarif-export<span class="w"> </span>report.sarif
+</code></pre></div>
+<h2 id="scan-metrics">Scan <strong>Metrics</strong><a class="headerlink" href="#scan-metrics" title="Permanent link">&para;</a></h2>
+<p>Nuclei는 <strong>localhost:9092/metrics</strong> 에 접속 가능하며 <code>-metrics</code> 플래그를 사용하면 로컬 포트 <code>9092</code>에서 실행 중인 scan metrics를 볼 수 있습니다. 기본 포트는 <code>-metrics-port</code> 플래그를 사용하여 설정 할 수 있습니다.</p>
+<p><code>nuclei -t cves/ -l urls.txt -metrics</code> 로 nuclei가 실행된 동안 <code>metrics</code>로 응답을 요청한 예시입니다.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9092/metrics<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:00:03&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;hosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;matched&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;99&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;350&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rps&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;132&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;startedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-27T18:02:18.886745+05:30&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;256&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;352&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="passive-scan">Passive Scan<a class="headerlink" href="#passive-scan" title="Permanent link">&para;</a></h2>
+<p>Nuclei는 파일 지원을 통해 HTTP 기반 템플릿에 대한 수동 모드 스캔을 지원합니다. 이 기능을 통해 다른 도구에서 수집된 로컬에 저장된 HTTP 응답 데이터에 대해 HTTP 기반 템플릿을 실행할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-passive<span class="w"> </span>-target<span class="w"> </span>http_data
+</code></pre></div>
+<div class="admonition info">
+<p>수동모드는 <code>{{BasedURL}}</code> 혹은 <code>{{BasedURL/}}</code>을 기본 경로로 가지는 템플릿들에 대해 제한됩니다.</p>
+</div>
+<h2 id="_3"><strong>기여</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/projectdiscovery/nuclei-templates">Nuclei templates</a> 는 nuclei 프로젝트의 기반입니다. 이 프로젝트를 위해 새로운 탬플릿을 작성하거나 제출해주시는 분께 감사드립니다. 그리고 이러한 기여는 저희가 프로젝트를 계속 지속할 큰 동기가 됩니다. </p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>Nuclei is distributed under MIT <a href="https://github.com/projectdiscovery/nuclei/blob/master/LICENSE.md">License</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2023 ProjectDiscovery, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/pdnuclei" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.877163d5.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.1688372e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["tabs", "content.action.edit"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.1b3b2620.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../../search/main.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1784 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <!-- Snitcher analytics code -->
+    <script>
+        !function(s,n,i,t,c,h){s.SnitchObject=i;s[i]||(s[i]=function(){
+        (s[i].q=s[i].q||[]).push(arguments)});s[i].l=+new Date;c=n.createElement(t);
+        h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8419641.js';
+        h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
+
+        snid('verify', '8419641');
+    </script>
+
+    <!-- clearbitscripts analytics code -->
+    <script async src="https://tag.clearbitscripts.com/v1/pk_dba61775644268d3609bf7dd90c0642b/tags.js"></script>
+    
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.">
+      
+      
+        <link rel="canonical" href="https://nuclei.projectdiscovery.io/templating-guide/helper-functions/">
+      
+      
+      <link rel="shortcut icon" href="../../static/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Helper Functions - Nuclei - Community Powered Vulnerability Scanner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.18dbb20c.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.0ec9b792.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-165996103-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#helper-functions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-header-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../static/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Nuclei - Community Powered Vulnerability Scanner
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Helper Functions
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../nuclei/get-started/" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          Templating Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../template-examples/http/" class="md-tabs__link">
+          Template Examples
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../faq/nuclei/" class="md-tabs__link">
+          FAQ
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../static/logo.png" alt="logo">
+
+    </a>
+    Nuclei - Community Powered Vulnerability Scanner
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/#nuclei-features" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/#code-contribution" title="Contribution" class="md-nav__link">
+      Contribution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../nuclei/get-started/#license" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Templating Guide
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Templating Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Templating Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../#template-details" title="Template Details" class="md-nav__link">
+      Template Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/http#raw-http-requests" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/http#http-payloads" title="HTTP payloads" class="md-nav__link">
+      HTTP payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/http#unsafe-http-requests" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/http#advance-requests" title="Advance HTTP" class="md-nav__link">
+      Advance HTTP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocols/code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9">
+    
+    <label class="md-nav__link" for="nav-3-9">
+      Operators
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Operators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Operators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../operators/matchers/" title="Matchers" class="md-nav__link">
+      Matchers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../operators/extractors/" title="Extractors" class="md-nav__link">
+      Extractors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interactsh/" title="OOB Testing" class="md-nav__link">
+      OOB Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Helper Functions
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Helper Functions" class="md-nav__link md-nav__link--active">
+      Helper Functions
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#helper-functions" class="md-nav__link">
+    Helper functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deserialization-helper-functions" class="md-nav__link">
+    Deserialization helper functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-helper-functions" class="md-nav__link">
+    JSON helper functions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../variables/" title="Variables" class="md-nav__link">
+      Variables
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preprocessors/" title="Preprocessors" class="md-nav__link">
+      Preprocessors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multiprotocol/" title="Multi Protocol Execution" class="md-nav__link">
+      Multi Protocol Execution
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Template Examples
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Template Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Template Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-raw/" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-smuggling/" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-payloads/" title="HTTP Payloads" class="md-nav__link">
+      HTTP Payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-race-conditions/" title="Race Condition" class="md-nav__link">
+      Race Condition
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/helper-functions/" title="Helpers" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      FAQ
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        FAQ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/nuclei/" title="Nuclei FAQ" class="md-nav__link">
+      Nuclei FAQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/templates/" title="Templates FAQ" class="md-nav__link">
+      Templates FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#helper-functions" class="md-nav__link">
+    Helper functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deserialization-helper-functions" class="md-nav__link">
+    Deserialization helper functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-helper-functions" class="md-nav__link">
+    JSON helper functions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/projectdiscovery/nuclei-docs/edit/main/docs/templating-guide/helper-functions.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Helper Functions</h1>
+                
+                <h4 id="helper-functions">Helper functions<a class="headerlink" href="#helper-functions" title="Permanent link">&para;</a></h4>
+<p>Here is the list of all supported helper functions can be used in the RAW requests / Network requests.</p>
+<table>
+<thead>
+<tr>
+<th>Helper function</th>
+<th>Description</th>
+<th>Example</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aes_gcm(key, plaintext interface{}) []byte</td>
+<td>AES GCM encrypts a string with key</td>
+<td><code>{{hex_encode(aes_gcm("AES256Key-32Characters1234567890", "exampleplaintext"))}}</code></td>
+<td><code>ec183a153b8e8ae7925beed74728534b57a60920c0b009eaa7608a34e06325804c096d7eebccddea3e5ed6c4</code></td>
+</tr>
+<tr>
+<td>base64(src interface{}) string</td>
+<td>Base64 encodes a string</td>
+<td><code>base64("Hello")</code></td>
+<td><code>SGVsbG8=</code></td>
+</tr>
+<tr>
+<td>base64_decode(src interface{}) []byte</td>
+<td>Base64 decodes a string</td>
+<td><code>base64_decode("SGVsbG8=")</code></td>
+<td><code>Hello</code></td>
+</tr>
+<tr>
+<td>base64_py(src interface{}) string</td>
+<td>Encodes string to base64 like python (with new lines)</td>
+<td><code>base64_py("Hello")</code></td>
+<td><code>SGVsbG8=\n</code></td>
+</tr>
+<tr>
+<td>bin_to_dec(binaryNumber number &#124; string) float64</td>
+<td>Transforms the input binary number into a decimal format</td>
+<td><code>bin_to_dec("0b1010")</code><br><code>bin_to_dec(1010)</code></td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td>compare_versions(versionToCheck string, constraints ...string) bool</td>
+<td>Compares the first version argument with the provided constraints</td>
+<td><code>compare_versions('v1.0.0', '&gt;v0.0.1', '&lt;v1.0.1')</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>concat(arguments ...interface{}) string</td>
+<td>Concatenates the given number of arguments to form a string</td>
+<td><code>concat("Hello", 123, "world)</code></td>
+<td><code>Hello123world</code></td>
+</tr>
+<tr>
+<td>contains(input, substring interface{}) bool</td>
+<td>Verifies if a string contains a substring</td>
+<td><code>contains("Hello", "lo")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>contains_all(input interface{}, substrings ...string) bool</td>
+<td>Verifies if any input contains all of the substrings</td>
+<td><code>contains("Hello everyone", "lo", "every")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>contains_any(input interface{}, substrings ...string) bool</td>
+<td>Verifies if an input contains any of substrings</td>
+<td><code>contains("Hello everyone", "abc", "llo")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>date_time(dateTimeFormat string, optionalUnixTime interface{}) string</td>
+<td>Returns the formatted date time using simplified or <code>go</code> style layout for the current or the given unix time</td>
+<td><code>date_time("%Y-%M-%D %H:%m")</code><br><code>date_time("%Y-%M-%D %H:%m", 1654870680)</code><br><code>date_time("2006-01-02 15:04", unix_time())</code></td>
+<td><code>2022-06-10 14:18</code></td>
+</tr>
+<tr>
+<td>dec_to_hex(number number &#124; string) string</td>
+<td>Transforms the input number into hexadecimal format</td>
+<td><code>dec_to_hex(7001)"</code></td>
+<td><code>1b59</code></td>
+</tr>
+<tr>
+<td>ends_with(str string, suffix ...string) bool</td>
+<td>Checks if the string ends with any of the provided substrings</td>
+<td><code>ends_with("Hello", "lo")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>generate_java_gadget(gadget, cmd, encoding interface{}) string</td>
+<td>Generates a Java Deserialization Gadget</td>
+<td><code>generate_java_gadget("dns", "{{interactsh-url}}", "base64")</code></td>
+<td><code>rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAABc3IADGphdmEubmV0LlVSTJYlNzYa/ORyAwAHSQAIaGFzaENvZGVJAARwb3J0TAAJYXV0aG9yaXR5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAEZmlsZXEAfgADTAAEaG9zdHEAfgADTAAIcHJvdG9jb2xxAH4AA0wAA3JlZnEAfgADeHD//////////3QAAHQAAHEAfgAFdAAFcHh0ACpjYWhnMmZiaW41NjRvMGJ0MHRzMDhycDdlZXBwYjkxNDUub2FzdC5mdW54</code></td>
+</tr>
+<tr>
+<td>generate_jwt(json, algorithm, signature, unixMaxAge) []byte</td>
+<td>Generates a JSON Web Token (JWT) using the claims provided in a JSON string, the signature, and the specified algorithm</td>
+<td><code>generate_jwt("{\"name\":\"John Doe\",\"foo\":\"bar\"}", "HS256", "hello-world")</code></td>
+<td><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJuYW1lIjoiSm9obiBEb2UifQ.EsrL8lIcYJR_Ns-JuhF3VCllCP7xwbpMCCfHin_WT6U</code></td>
+</tr>
+<tr>
+<td>gzip(input string) string</td>
+<td>Compresses the input using GZip</td>
+<td><code>base64(gzip("Hello"))</code></td>
+<td><code>+H4sIAAAAAAAA//JIzcnJBwQAAP//gonR9wUAAAA=</code></td>
+</tr>
+<tr>
+<td>gzip_decode(input string) string</td>
+<td>Decompresses the input using GZip</td>
+<td><code>gzip_decode(hex_decode("1f8b08000000000000fff248cdc9c907040000ffff8289d1f705000000"))</code></td>
+<td><code>Hello</code></td>
+</tr>
+<tr>
+<td>hex_decode(input interface{}) []byte</td>
+<td>Hex decodes the given input</td>
+<td><code>hex_decode("6161")</code></td>
+<td><code>aa</code></td>
+</tr>
+<tr>
+<td>hex_encode(input interface{}) string</td>
+<td>Hex encodes the given input</td>
+<td><code>hex_encode("aa")</code></td>
+<td><code>6161</code></td>
+</tr>
+<tr>
+<td>hex_to_dec(hexNumber number &#124; string) float64</td>
+<td>Transforms the input hexadecimal number into decimal format</td>
+<td><code>hex_to_dec("ff")</code><br><code>hex_to_dec("0xff")</code></td>
+<td><code>255</code></td>
+</tr>
+<tr>
+<td>hmac(algorithm, data, secret) string</td>
+<td>hmac function that accepts a hashing function type with data and secret</td>
+<td><code>hmac("sha1", "test", "scrt")</code></td>
+<td><code>8856b111056d946d5c6c92a21b43c233596623c6</code></td>
+</tr>
+<tr>
+<td>html_escape(input interface{}) string</td>
+<td>HTML escapes the given input</td>
+<td><code>html_escape("&lt;body&gt;test&lt;/body&gt;")</code></td>
+<td><code>&amp;lt;body&amp;gt;test&amp;lt;/body&amp;gt;</code></td>
+</tr>
+<tr>
+<td>html_unescape(input interface{}) string</td>
+<td>HTML un-escapes the given input</td>
+<td><code>html_unescape("&amp;lt;body&amp;gt;test&amp;lt;/body&amp;gt;")</code></td>
+<td><code>&lt;body&gt;test&lt;/body&gt;</code></td>
+</tr>
+<tr>
+<td>index(stringOrSlice any, index int) string</td>
+<td>receive string or []string return the string of the index</td>
+<td>1.<code>index(split("www.example.com", "."), 1)</code> </br>  2.<code>index("www.example.com",1)</code></td>
+<td>1.<code>example</code> </br> </br>  </br> </br> 2.<code>w</code></td>
+</tr>
+<tr>
+<td>join(separator string, elements ...interface{}) string</td>
+<td>Joins the given elements using the specified separator</td>
+<td><code>join("_", 123, "hello", "world")</code></td>
+<td><code>123_hello_world</code></td>
+</tr>
+<tr>
+<td>json_minify(json) string</td>
+<td>Minifies a JSON string by removing unnecessary whitespace</td>
+<td><code>json_minify("{ \"name\": \"John Doe\", \"foo\": \"bar\" }")</code></td>
+<td><code>{"foo":"bar","name":"John Doe"}</code></td>
+</tr>
+<tr>
+<td>json_prettify(json) string</td>
+<td>Prettifies a JSON string by adding indentation</td>
+<td><code>json_prettify("{\"foo\":\"bar\",\"name\":\"John Doe\"}")</code></td>
+<td><code>{\n \"foo\": \"bar\",\n \"name\": \"John Doe\"\n}</code></td>
+</tr>
+<tr>
+<td>len(arg interface{}) int</td>
+<td>Returns the length of the input</td>
+<td>1.<code>len("Hello")</code>  </br> 2. <code>len(split("www.example.com","."))</code></td>
+<td>1. <code>5</code>             </br>   </br> 2. <code>3</code></td>
+</tr>
+<tr>
+<td>line_ends_with(str string, suffix ...string) bool</td>
+<td>Checks if any line of the string ends with any of the provided substrings</td>
+<td><code>line_ends_with("Hello\nHi", "lo")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>line_starts_with(str string, prefix ...string) bool</td>
+<td>Checks if any line of the string starts with any of the provided substrings</td>
+<td><code>line_starts_with("Hi\nHello", "He")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>md5(input interface{}) string</td>
+<td>Calculates the MD5 (Message Digest) hash of the input</td>
+<td><code>md5("Hello")</code></td>
+<td><code>8b1a9953c4611296a827abf8c47804d7</code></td>
+</tr>
+<tr>
+<td>mmh3(input interface{}) string</td>
+<td>Calculates the MMH3 (MurmurHash3) hash of an input</td>
+<td><code>mmh3("Hello")</code></td>
+<td><code>316307400</code></td>
+</tr>
+<tr>
+<td>oct_to_dec(octalNumber number &#124; string) float64</td>
+<td>Transforms the input octal number into a decimal format</td>
+<td><code>oct_to_dec("0o1234567")</code><br><code>oct_to_dec(1234567)</code></td>
+<td><code>342391</code></td>
+</tr>
+<tr>
+<td>print_debug(args ...interface{})</td>
+<td>Prints the value of a given input or expression. Used for debugging.</td>
+<td><code>print_debug(1+2, "Hello")</code></td>
+<td><code>3 Hello</code></td>
+</tr>
+<tr>
+<td>rand_base(length uint, optionalCharSet string) string</td>
+<td>Generates a random sequence of given length string from an optional charset (defaults to letters and numbers)</td>
+<td><code>rand_base(5, "abc")</code></td>
+<td><code>caccb</code></td>
+</tr>
+<tr>
+<td>rand_char(optionalCharSet string) string</td>
+<td>Generates a random character from an optional character set (defaults to letters and numbers)</td>
+<td><code>rand_char("abc")</code></td>
+<td><code>a</code></td>
+</tr>
+<tr>
+<td>rand_int(optionalMin, optionalMax uint) int</td>
+<td>Generates a random integer between the given optional limits (defaults to 0 - MaxInt32)</td>
+<td><code>rand_int(1, 10)</code></td>
+<td><code>6</code></td>
+</tr>
+<tr>
+<td>rand_text_alpha(length uint, optionalBadChars string) string</td>
+<td>Generates a random string of letters, of given length, excluding the optional cutset characters</td>
+<td><code>rand_text_alpha(10, "abc")</code></td>
+<td><code>WKozhjJWlJ</code></td>
+</tr>
+<tr>
+<td>rand_text_alphanumeric(length uint, optionalBadChars string) string</td>
+<td>Generates a random alphanumeric string, of given length without the optional cutset characters</td>
+<td><code>rand_text_alphanumeric(10, "ab12")</code></td>
+<td><code>NthI0IiY8r</code></td>
+</tr>
+<tr>
+<td>rand_ip(cidr ...string) string</td>
+<td>Generates a random IP address</td>
+<td><code>rand_ip("192.168.0.0/24")</code></td>
+<td><code>192.168.0.171</code></td>
+</tr>
+<tr>
+<td>rand_text_numeric(length uint, optionalBadNumbers string) string</td>
+<td>Generates a random numeric string of given length without the optional set of undesired numbers</td>
+<td><code>rand_text_numeric(10, 123)</code></td>
+<td><code>0654087985</code></td>
+</tr>
+<tr>
+<td>regex(pattern, input string) bool</td>
+<td>Tests the given regular expression against the input string</td>
+<td><code>regex("H([a-z]+)o", "Hello")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>remove_bad_chars(input, cutset interface{}) string</td>
+<td>Removes the desired characters from the input</td>
+<td><code>remove_bad_chars("abcd", "bc")</code></td>
+<td><code>ad</code></td>
+</tr>
+<tr>
+<td>repeat(str string, count uint) string</td>
+<td>Repeats the input string the given amount of times</td>
+<td><code>repeat("../", 5)</code></td>
+<td><code>../../../../../</code></td>
+</tr>
+<tr>
+<td>replace(str, old, new string) string</td>
+<td>Replaces a given substring in the given input</td>
+<td><code>replace("Hello", "He", "Ha")</code></td>
+<td><code>Hallo</code></td>
+</tr>
+<tr>
+<td>replace_regex(source, regex, replacement string) string</td>
+<td>Replaces substrings matching the given regular expression in the input</td>
+<td><code>replace_regex("He123llo", "(\\d+)", "")</code></td>
+<td><code>Hello</code></td>
+</tr>
+<tr>
+<td>reverse(input string) string</td>
+<td>Reverses the given input</td>
+<td><code>reverse("abc")</code></td>
+<td><code>cba</code></td>
+</tr>
+<tr>
+<td>sha1(input interface{}) string</td>
+<td>Calculates the SHA1 (Secure Hash 1) hash of the input</td>
+<td><code>sha1("Hello")</code></td>
+<td><code>f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0</code></td>
+</tr>
+<tr>
+<td>sha256(input interface{}) string</td>
+<td>Calculates the SHA256 (Secure Hash 256) hash of the input</td>
+<td><code>sha256("Hello")</code></td>
+<td><code>185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969</code></td>
+</tr>
+<tr>
+<td>split(input string, n int) []string</td>
+<td>if split has 2 parameters and second is an int,It splits string as slice of string, and len of each string is n and last of them is no more than n</td>
+<td><code>split("abcdefg", 2)</code></td>
+<td><code>[ab cd ef g]</code></td>
+</tr>
+<tr>
+<td>split(input string, separator string,  optionalChunkSize) []string</td>
+<td>if split has 3 parameters or 2 parameters and second is string, It return a string slice where each substring is separated by the separator string and slice length no larger than optionalChunkSize. But if optionalChunkSize is negative, it's no limited and same as optionalChunkSize not set.</td>
+<td>1.<code>split("ab,cd,efg", ",", 2)</code>  </br>  2.<code>split("ab,cd,efg", ",", -1)</code> </br> 3.<code>split("ab,cd,efg", ",")</code></td>
+<td>1.<code>[ab cdefg]</code> </br> </br></br> 2.<code>[ab cd efg]</code> </br></br></br> 3.<code>[ab cd efg]</code></td>
+</tr>
+<tr>
+<td>starts_with(str string, prefix ...string) bool</td>
+<td>Checks if the string starts with any of the provided substrings</td>
+<td><code>starts_with("Hello", "He")</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>to_lower(input string) string</td>
+<td>Transforms the input into lowercase characters</td>
+<td><code>to_lower("HELLO")</code></td>
+<td><code>hello</code></td>
+</tr>
+<tr>
+<td>to_unix_time(input string, layout string) int</td>
+<td>Parses a string date time using default or user given layouts, then returns its Unix timestamp</td>
+<td><code>to_unix_time("2022-01-13T16:30:10+00:00")</code><br><code>to_unix_time("2022-01-13 16:30:10")</code><br><code>to_unix_time("13-01-2022 16:30:10". "02-01-2006 15:04:05")</code></td>
+<td><code>1642091410</code></td>
+</tr>
+<tr>
+<td>to_upper(input string) string</td>
+<td>Transforms the input into uppercase characters</td>
+<td><code>to_upper("hello")</code></td>
+<td><code>HELLO</code></td>
+</tr>
+<tr>
+<td>trim(input, cutset string) string</td>
+<td>Returns a slice of the input with all leading and trailing Unicode code points contained in cutset removed</td>
+<td><code>trim("aaaHelloddd", "ad")</code></td>
+<td><code>Hello</code></td>
+</tr>
+<tr>
+<td>trim_left(input, cutset string) string</td>
+<td>Returns a slice of the input with all leading Unicode code points contained in cutset removed</td>
+<td><code>trim_left("aaaHelloddd", "ad")</code></td>
+<td><code>Helloddd</code></td>
+</tr>
+<tr>
+<td>trim_prefix(input, prefix string) string</td>
+<td>Returns the input without the provided leading prefix string</td>
+<td><code>trim_prefix("aaHelloaa", "aa")</code></td>
+<td><code>Helloaa</code></td>
+</tr>
+<tr>
+<td>trim_right(input, cutset string) string</td>
+<td>Returns a string, with all trailing Unicode code points contained in cutset removed</td>
+<td><code>trim_right("aaaHelloddd", "ad")</code></td>
+<td><code>aaaHello</code></td>
+</tr>
+<tr>
+<td>trim_space(input string) string</td>
+<td>Returns a string, with all leading and trailing white space removed, as defined by Unicode</td>
+<td><code>trim_space("  Hello  ")</code></td>
+<td><code>"Hello"</code></td>
+</tr>
+<tr>
+<td>trim_suffix(input, suffix string) string</td>
+<td>Returns input without the provided trailing suffix string</td>
+<td><code>trim_suffix("aaHelloaa", "aa")</code></td>
+<td><code>aaHello</code></td>
+</tr>
+<tr>
+<td>unix_time(optionalSeconds uint) float64</td>
+<td>Returns the current Unix time (number of seconds elapsed since January 1, 1970 UTC) with the added optional seconds</td>
+<td><code>unix_time(10)</code></td>
+<td><code>1639568278</code></td>
+</tr>
+<tr>
+<td>url_decode(input string) string</td>
+<td>URL decodes the input string</td>
+<td><code>url_decode("https:%2F%2Fprojectdiscovery.io%3Ftest=1")</code></td>
+<td><code>https://projectdiscovery.io?test=1</code></td>
+</tr>
+<tr>
+<td>url_encode(input string) string</td>
+<td>URL encodes the input string</td>
+<td><code>url_encode("https://projectdiscovery.io/test?a=1")</code></td>
+<td><code>https%3A%2F%2Fprojectdiscovery.io%2Ftest%3Fa%3D1</code></td>
+</tr>
+<tr>
+<td>wait_for(seconds uint)</td>
+<td>Pauses the execution for the given amount of seconds</td>
+<td><code>wait_for(10)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>zlib(input string) string</td>
+<td>Compresses the input using Zlib</td>
+<td><code>base64(zlib("Hello"))</code></td>
+<td><code>eJzySM3JyQcEAAD//wWMAfU=</code></td>
+</tr>
+<tr>
+<td>zlib_decode(input string) string</td>
+<td>Decompresses the input using Zlib</td>
+<td><code>zlib_decode(hex_decode("789cf248cdc9c907040000ffff058c01f5"))</code></td>
+<td><code>Hello</code></td>
+</tr>
+<tr>
+<td>resolve(host string, format string) string</td>
+<td>Resolves a host using a dns type that you define</td>
+<td><code>resolve("localhost",4)</code></td>
+<td><code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td>ip_format(ip string, format string) string</td>
+<td>It takes an input ip and converts it to another format according to this <a href="https://github.com/projectdiscovery/mapcidr/wiki/IP-Format-Index">legend</a>, the second parameter indicates the conversion index and must be between 1 and 11</td>
+<td><code>ip_format("127.0.0.1", 3)</code></td>
+<td><code>0177.0.0.01</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="deserialization-helper-functions">Deserialization helper functions<a class="headerlink" href="#deserialization-helper-functions" title="Permanent link">&para;</a></h4>
+<p>Nuclei allows payload generation for a few common gadget from <a href="https://github.com/frohoff/ysoserial">ysoserial</a>.</p>
+<p><strong>Supported Payload:</strong></p>
+<ul>
+<li><code>dns</code> (URLDNS)</li>
+<li><code>commons-collections3.1</code></li>
+<li><code>commons-collections4.0</code></li>
+<li><code>jdk7u21</code></li>
+<li><code>jdk8u20</code></li>
+<li><code>groovy1</code></li>
+</ul>
+<p><strong>Supported encodings:</strong></p>
+<ul>
+<li><code>base64</code> (default)</li>
+<li><code>gzip-base64</code></li>
+<li><code>gzip</code></li>
+<li><code>hex</code></li>
+<li><code>raw</code></li>
+</ul>
+<p><strong>Deserialization helper function format:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">generate_java_gadget(payload</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">encoding</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<p><strong>Deserialization helper function example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">generate_java_gadget(&quot;commons-collections3.1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;wget</span><span class="nv"> </span><span class="s">http://{{interactsh-url}}&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;base64&quot;</span><span class="nv">)</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<h4 id="json-helper-functions">JSON helper functions<a class="headerlink" href="#json-helper-functions" title="Permanent link">&para;</a></h4>
+<p>Nuclei allows manipulate JSON strings in different ways, here is a list of its functions:</p>
+<ul>
+<li><code>generate_jwt</code>, to generates a JSON Web Token (JWT) using the claims provided in a JSON string, the signature, and the specified algorithm.</li>
+<li><code>json_minify</code>, to minifies a JSON string by removing unnecessary whitespace.</li>
+<li><code>json_prettify</code>, to prettifies a JSON string by adding indentation.</li>
+</ul>
+<p><strong>Examples</strong></p>
+<p><strong><code>generate_jwt</code></strong></p>
+<p>To generate a JSON Web Token (JWT), you have to supply the JSON that you want to sign, <em>at least</em>.</p>
+<p>Here is a list of supported algorithms for generating JWTs with <code>generate_jwt</code> function <em>(case-insensitive)</em>:</p>
+<ul>
+<li><code>HS256</code></li>
+<li><code>HS384</code></li>
+<li><code>HS512</code></li>
+<li><code>RS256</code></li>
+<li><code>RS384</code></li>
+<li><code>RS512</code></li>
+<li><code>PS256</code></li>
+<li><code>PS384</code></li>
+<li><code>PS512</code></li>
+<li><code>ES256</code></li>
+<li><code>ES384</code></li>
+<li><code>ES512</code></li>
+<li><code>EdDSA</code></li>
+<li><code>NONE</code></li>
+</ul>
+<p>Empty string ("") also means <code>NONE</code>.</p>
+<p>Format:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">generate_jwt(json</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">algorithm</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">signature</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">maxAgeUnix)</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<blockquote>
+<p>Arguments other than <code>json</code> are optional.</p>
+</blockquote>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">json</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"> </span><span class="c1"># required</span>
+<span class="w">    </span><span class="no">{</span>
+<span class="w">      </span><span class="no">&quot;foo&quot;: &quot;bar&quot;,</span>
+<span class="w">      </span><span class="no">&quot;name&quot;: &quot;John Doe&quot;</span>
+<span class="w">    </span><span class="no">}</span>
+<span class="w">  </span><span class="nt">alg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;HS256&quot;</span><span class="w"> </span><span class="c1"># optional</span>
+<span class="w">  </span><span class="nt">sig</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;this_is_secret&quot;</span><span class="w"> </span><span class="c1"># optional</span>
+<span class="w">  </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{to_unix_time(&quot;2032-12-30T16:30:10+00:00&quot;)}}&#39;</span><span class="w"> </span><span class="c1"># optional</span>
+<span class="w">  </span><span class="nt">jwt</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{generate_jwt(json,</span><span class="nv"> </span><span class="s">&quot;{{alg}}&quot;,</span><span class="nv"> </span><span class="s">&quot;{{sig}}&quot;,</span><span class="nv"> </span><span class="s">&quot;{{age}}&quot;)}}&#39;</span>
+</code></pre></div></p>
+<blockquote>
+<p>The <code>maxAgeUnix</code> argument is to set the expiration <code>"exp"</code> JWT standard claim, as well as the <code>"iat"</code> claim when you call the function.</p>
+</blockquote>
+<p><strong><code>json_minify</code></strong></p>
+<p>Format:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">json_minify(json)</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">json</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">{</span>
+<span class="w">      </span><span class="no">&quot;foo&quot;: &quot;bar&quot;,</span>
+<span class="w">      </span><span class="no">&quot;name&quot;: &quot;John Doe&quot;</span>
+<span class="w">    </span><span class="no">}</span>
+<span class="w">  </span><span class="nt">minify</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{json_minify(json}}&#39;</span>
+</code></pre></div>
+<p><code>minify</code> variable output:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;foo&quot;</span><span class="p">:</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;John Doe&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p><strong><code>json_prettify</code></strong></p>
+<p>Format:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">json_prettify(json)</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">variables</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">json</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;foo&quot;:&quot;bar&quot;,&quot;name&quot;:&quot;John</span><span class="nv"> </span><span class="s">Doe&quot;}&#39;</span>
+<span class="w">  </span><span class="nt">pretty</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{json_prettify(json}}&#39;</span>
+</code></pre></div>
+<p><code>pretty</code> variable output:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;foo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong><code>resolve</code></strong></p>
+<p>Format:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">resolve(host</span><span class="p p-Indicator">,</span><span class="nv">format)</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<p>Here is a list of formats available for dns type:</p>
+<ul>
+<li><code>4</code> or <code>a</code></li>
+<li><code>6</code> or <code>aaaa</code></li>
+<li><code>cname</code></li>
+<li><code>ns</code></li>
+<li><code>txt</code></li>
+<li><code>srv</code></li>
+<li><code>ptr</code></li>
+<li><code>mx</code></li>
+<li><code>soa</code></li>
+<li><code>caa</code></li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../interactsh/" title="OOB Testing" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                OOB Testing
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../variables/" title="Variables" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Variables
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2023 ProjectDiscovery, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/pdnuclei" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.877163d5.min.js"></script>
+      <script src="../../assets/javascripts/bundle.1688372e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs", "content.action.edit"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.1b3b2620.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2448 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <!-- Snitcher analytics code -->
+    <script>
+        !function(s,n,i,t,c,h){s.SnitchObject=i;s[i]||(s[i]=function(){
+        (s[i].q=s[i].q||[]).push(arguments)});s[i].l=+new Date;c=n.createElement(t);
+        h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8419641.js';
+        h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
+
+        snid('verify', '8419641');
+    </script>
+
+    <!-- clearbitscripts analytics code -->
+    <script async src="https://tag.clearbitscripts.com/v1/pk_dba61775644268d3609bf7dd90c0642b/tags.js"></script>
+    
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.">
+      
+      
+        <link rel="canonical" href="https://nuclei.projectdiscovery.io/nuclei/get-started/">
+      
+      
+      <link rel="shortcut icon" href="../../static/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Index - Nuclei - Community Powered Vulnerability Scanner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.18dbb20c.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.0ec9b792.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-165996103-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#automate-vulnerability-scans-with-nuclei" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-header-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../static/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Nuclei - Community Powered Vulnerability Scanner
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Index
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../templating-guide/" class="md-tabs__link">
+          Templating Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../template-examples/http/" class="md-tabs__link">
+          Template Examples
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../faq/nuclei/" class="md-tabs__link">
+          FAQ
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../static/logo.png" alt="logo">
+
+    </a>
+    Nuclei - Community Powered Vulnerability Scanner
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Index
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Index" class="md-nav__link md-nav__link--active">
+      Index
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#automate-vulnerability-scans-with-nuclei" class="md-nav__link">
+    Automate Vulnerability Scans with Nuclei
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-features" class="md-nav__link">
+    Nuclei Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-installation" class="md-nav__link">
+    Nuclei Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-templates" class="md-nav__link">
+    Nuclei Templates
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuclei Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-templates" class="md-nav__link">
+    Public Templates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-templates" class="md-nav__link">
+    Custom Templates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-usage" class="md-nav__link">
+    Nuclei Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-nuclei" class="md-nav__link">
+    Running Nuclei
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Nuclei">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuclei-filters" class="md-nav__link">
+    Nuclei Filters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    Rate Limits
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traffic-tagging" class="md-nav__link">
+    Traffic Tagging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-exclusion" class="md-nav__link">
+    Template Exclusion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headless-mode" class="md-nav__link">
+    Headless Mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-headless-options" class="md-nav__link">
+    -headless-options
+  </a>
+  
+    <nav class="md-nav" aria-label="-headless-options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uncover-integration" class="md-nav__link">
+    Uncover Integration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mass-scanning-using-nuclei" class="md-nav__link">
+    Mass Scanning using Nuclei
+  </a>
+  
+    <nav class="md-nav" aria-label="Mass Scanning using Nuclei">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-scan-strategy-to-use" class="md-nav__link">
+    Which Scan Strategy to Use?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrency-bulk-size" class="md-nav__link">
+    Concurrency &amp; Bulk-Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    Stream
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-config" class="md-nav__link">
+    Nuclei Config
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-reporting" class="md-nav__link">
+    Nuclei Reporting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scan-metrics" class="md-nav__link">
+    Scan Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passive-scan" class="md-nav__link">
+    Passive Scan
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-contribution" class="md-nav__link">
+    Code Contribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="#nuclei-features" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="#code-contribution" title="Contribution" class="md-nav__link">
+      Contribution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="#license" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Templating Guide
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Templating Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Templating Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/#template-details" title="Template Details" class="md-nav__link">
+      Template Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#raw-http-requests" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#http-payloads" title="HTTP payloads" class="md-nav__link">
+      HTTP payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#unsafe-http-requests" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/http#advance-requests" title="Advance HTTP" class="md-nav__link">
+      Advance HTTP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/protocols/code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9">
+    
+    <label class="md-nav__link" for="nav-3-9">
+      Operators
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Operators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Operators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/operators/matchers/" title="Matchers" class="md-nav__link">
+      Matchers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/operators/extractors/" title="Extractors" class="md-nav__link">
+      Extractors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/interactsh/" title="OOB Testing" class="md-nav__link">
+      OOB Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/helper-functions/" title="Helper Functions" class="md-nav__link">
+      Helper Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/variables/" title="Variables" class="md-nav__link">
+      Variables
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/preprocessors/" title="Preprocessors" class="md-nav__link">
+      Preprocessors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../templating-guide/multiprotocol/" title="Multi Protocol Execution" class="md-nav__link">
+      Multi Protocol Execution
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Template Examples
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Template Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Template Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-raw/" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-smuggling/" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-payloads/" title="HTTP Payloads" class="md-nav__link">
+      HTTP Payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/http-race-conditions/" title="Race Condition" class="md-nav__link">
+      Race Condition
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../template-examples/helper-functions/" title="Helpers" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      FAQ
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        FAQ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/nuclei/" title="Nuclei FAQ" class="md-nav__link">
+      Nuclei FAQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/templates/" title="Templates FAQ" class="md-nav__link">
+      Templates FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#automate-vulnerability-scans-with-nuclei" class="md-nav__link">
+    Automate Vulnerability Scans with Nuclei
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-features" class="md-nav__link">
+    Nuclei Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-installation" class="md-nav__link">
+    Nuclei Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-templates" class="md-nav__link">
+    Nuclei Templates
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuclei Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-templates" class="md-nav__link">
+    Public Templates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-templates" class="md-nav__link">
+    Custom Templates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-usage" class="md-nav__link">
+    Nuclei Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-nuclei" class="md-nav__link">
+    Running Nuclei
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Nuclei">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuclei-filters" class="md-nav__link">
+    Nuclei Filters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    Rate Limits
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traffic-tagging" class="md-nav__link">
+    Traffic Tagging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-exclusion" class="md-nav__link">
+    Template Exclusion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headless-mode" class="md-nav__link">
+    Headless Mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-headless-options" class="md-nav__link">
+    -headless-options
+  </a>
+  
+    <nav class="md-nav" aria-label="-headless-options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uncover-integration" class="md-nav__link">
+    Uncover Integration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mass-scanning-using-nuclei" class="md-nav__link">
+    Mass Scanning using Nuclei
+  </a>
+  
+    <nav class="md-nav" aria-label="Mass Scanning using Nuclei">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-scan-strategy-to-use" class="md-nav__link">
+    Which Scan Strategy to Use?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrency-bulk-size" class="md-nav__link">
+    Concurrency &amp; Bulk-Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    Stream
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-config" class="md-nav__link">
+    Nuclei Config
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuclei-reporting" class="md-nav__link">
+    Nuclei Reporting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scan-metrics" class="md-nav__link">
+    Scan Metrics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passive-scan" class="md-nav__link">
+    Passive Scan
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-contribution" class="md-nav__link">
+    Code Contribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/projectdiscovery/nuclei-docs/edit/main/docs/nuclei/get-started.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Index</h1>
+                
+                <h2 id="automate-vulnerability-scans-with-nuclei">Automate Vulnerability Scans with <strong>Nuclei</strong><a class="headerlink" href="#automate-vulnerability-scans-with-nuclei" title="Permanent link">&para;</a></h2>
+<p>Nuclei can help you ensure the security of complex networks / applications. With vulnerability scans,
+Nuclei can identify security issues on your network. Once configured, Nuclei can
+provide detailed information on each vulnerability, including:</p>
+<ul>
+<li>Severity</li>
+<li>Impact</li>
+<li>Description</li>
+<li>Remediation</li>
+</ul>
+<p>Once you've set up templates, you can automate scans of your systems with every change
+to your network, and with every discovery of new security issues.</p>
+<p>In this Getting Started guide, we describe how you can set up Nuclei to automate
+vulnerability scans on a relatively simple network. You can then use our <a href="https://nuclei.projectdiscovery.io/templating-guide/">Templating
+Guide</a> to customize Nuclei for your networks.</p>
+<h2 id="nuclei-features"><strong>Nuclei</strong> Features<a class="headerlink" href="#nuclei-features" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Features.</p>
+<ul>
+<li><strong>HTTP</strong>, <strong>DNS</strong>, <strong>TCP</strong>, <strong>SSL</strong>, <strong>FILE</strong> protocol support</li>
+<li>Fully configurable templates.</li>
+<li>Large scale scanning.</li>
+<li>Out of band based detection.</li>
+<li>Easily write your own templates.</li>
+</ul>
+</div>
+<h2 id="nuclei-installation"><strong>Nuclei</strong> Installation<a class="headerlink" href="#nuclei-installation" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Go</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nuclei require latest <strong>GO</strong> version to install successfully.</p>
+</div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Brew</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>brew install nuclei
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Supported in <strong>macOS</strong> (or Linux)</p>
+</div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Docker</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>docker pull projectdiscovery/nuclei:latest
+</code></pre></div>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Github</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>git clone https://github.com/projectdiscovery/nuclei.git; \
+cd nuclei/v2/cmd/nuclei; \
+go build; \
+mv nuclei /usr/local/bin/; \
+nuclei -version;
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nuclei require the latest <strong>GO</strong> version to install successfully.</p>
+</div>
+</div>
+<input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><label for="__tabbed_1_5">Binary</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>https://github.com/projectdiscovery/nuclei/releases
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Download the latest binary for your OS.</li>
+<li>Unzip the ready to run binary.</li>
+</ul>
+</div>
+</div>
+<input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><label for="__tabbed_1_6">Helm</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>git clone https://github.com/projectdiscovery/nuclei.git
+cd nuclei/helm
+helm upgrade --install nuclei . -f values.yaml 
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This Helm chart creates two primary resources (intended to be configured via <code>values.yaml</code>):</p>
+<ul>
+<li>
+<p>A Kubernetes CronJob to run Nuclei on a defined schedule</p>
+</li>
+<li>
+<p>An <a href="https://github.com/projectdiscovery/interactsh">Interactsh</a> service for Nuclei to use</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="nuclei-templates">Nuclei <strong>Templates</strong><a class="headerlink" href="#nuclei-templates" title="Permanent link">&para;</a></h2>
+<h3 id="public-templates">Public Templates<a class="headerlink" href="#public-templates" title="Permanent link">&para;</a></h3>
+<p>Nuclei has built-in support for automatic template download/update from <a href="https://github.com/projectdiscovery/nuclei-templates"><strong>nuclei templates</strong></a> project which provides <a href="https://github.com/projectdiscovery/nuclei-templates#-community">community-contributed</a> list of ready-to-use templates that is constantly updated.</p>
+<p>Nuclei checks for new community template releases upon each execution and automatically downloads the latest version when available. optionally, this feature can be disabled using the <code>-duc</code> cli flag or the configuration file.</p>
+<h3 id="custom-templates">Custom Templates<a class="headerlink" href="#custom-templates" title="Permanent link">&para;</a></h3>
+<p>Users can create custom templates on a personal public / private GitHub / AWS Bucket that they wish to run / update while using nuclei from any environment without manually downloading the GitHub repository everywhere.</p>
+<p>To use this feature, users need to set the following environment variables:</p>
+<details>
+<summary>For GitHub Project</summary>
+<pre>
+
+export GITHUB_TOKEN=gh_XXX
+export GITHUB_TEMPLATE_REPO=my_nuclei_template
+
+</pre>
+</details>
+
+<details>
+<summary>For GitLab Project</summary>
+<pre>
+
+export GITLAB_SERVER_URL=https://gitlab.com
+# The GitLab token must have the read_api and read_repository scope
+export GITLAB_TOKEN=XXXXXXXXXX
+# Comma separated list of repository IDs (not names)
+export GITLAB_REPOSITORY_IDS=12345,67890
+
+</pre>
+</details>
+
+<details>
+<summary>For AWS Bucket
+</summary>
+<pre>
+
+export AWS_ACCESS_KEY=AKIAXXXXXXXX
+export AWS_SECRET_KEY=XXXXXX
+export AWS_REGION=us-xxx-1
+export AWS_TEMPLATE_BUCKET=aws_bucket_name
+
+</pre>
+</details>
+
+<details>
+<summary>For Azure Blob Storage
+</summary>
+<pre>
+
+export AZURE_TENANT_ID=00000000-0000-0000-0000-000000000000
+export AZURE_CLIENT_ID=00000000-0000-0000-0000-000000000000
+export AZURE_CLIENT_SECRET=00000000-0000-0000-0000-000000000000
+export AZURE_SERVICE_URL=https://XXXXXXXXXX.blob.core.windows.net/
+export AZURE_CONTAINER_NAME=templates
+
+</pre>
+</details>
+
+<p>Environment variables can also be provided to disable download from default and custom template locations:</p>
+<div class="highlight"><pre><span></span><code>export DISABLE_NUCLEI_TEMPLATES_PUBLIC_DOWNLOAD=true # Disable download from the default nuclei-templates project
+export DISABLE_NUCLEI_TEMPLATES_GITHUB_DOWNLOAD=true # Disable download from public / private GitHub project(s)
+export DISABLE_NUCLEI_TEMPLATES_GITLAB_DOWNLOAD=true # Disable download from public / private GitLab project(s)
+export DISABLE_NUCLEI_TEMPLATES_AWS_DOWNLOAD=true # Disable download from public / private AWS Bucket(s)
+export DISABLE_NUCLEI_TEMPLATES_AZURE_DOWNLOAD=true # Disable download from public / private Azure Blob Storage
+</code></pre></div>
+<p>Once the environment variables are set, following command to download the custom templates:</p>
+<div class="highlight"><pre><span></span><code>nuclei -update-templates
+</code></pre></div>
+<p>This command will clone the repository containing the custom templates to the default nuclei templates directory (<code>$HOME/nuclei-templates/github/</code>).</p>
+<p>The directory structure of the custom templates looks as follows:</p>
+<div class="highlight"><pre><span></span><code>tree<span class="w"> </span><span class="nv">$HOME</span>/nuclei-templates/
+
+nuclei-templates/
+└──<span class="w"> </span>github/<span class="nv">$GH_REPO_NAME</span><span class="w"> </span><span class="c1"># Custom templates downloaded from public / private GitHub project</span>
+└──<span class="w"> </span>gitlab/<span class="nv">$GL_REPO_NAME</span><span class="w"> </span><span class="c1"># Custom templates downloaded from public / private GitLab project</span>
+└──<span class="w"> </span>s3/<span class="nv">$BUCKET_NAME</span><span class="w"> </span><span class="c1"># Custom templates downloaded from public / private AWS Bucket</span>
+└──<span class="w"> </span>azure/<span class="nv">$CONTAINER_NAME</span><span class="w"> </span><span class="c1"># Custom templates downloaded from public / private Azure Blob Storage</span>
+</code></pre></div>
+<p>Users can then use the custom templates with the <code>-t</code> flag as follows:</p>
+<div class="highlight"><pre><span></span><code>nuclei -t github/my_custom_template -u https://example.com
+</code></pre></div>
+<p>The nuclei engine can be updated to latest version by using the <code>-update</code> flag.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Writing your own unique templates will always keep you one step ahead of others.</p>
+</div>
+<h2 id="nuclei-usage"><strong>Nuclei</strong> Usage<a class="headerlink" href="#nuclei-usage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>nuclei -h
+</code></pre></div>
+<p>This will display help for the tool. Here are all the switches it supports.</p>
+<div class="highlight"><pre><span></span><code>Nuclei is a fast, template based vulnerability scanner focusing
+on extensive configurability, massive extensibility and ease of use.
+
+Usage:
+  nuclei [flags]
+
+Flags:
+TARGET:
+   -u, -target string[]       target URLs/hosts to scan
+   -l, -list string           path to file containing a list of target URLs/hosts to scan (one per line)
+   -resume string             resume scan using resume.cfg (clustering will be disabled)
+   -sa, -scan-all-ips         scan all the IP&#39;s associated with dns record
+   -iv, -ip-version string[]  IP version to scan of hostname (4,6) - (default 4)
+
+TEMPLATES:
+   -nt, -new-templates                    run only new templates added in latest nuclei-templates release
+   -ntv, -new-templates-version string[]  run new templates added in specific version
+   -as, -automatic-scan                   automatic web scan using wappalyzer technology detection to tags mapping
+   -t, -templates string[]                list of template or template directory to run (comma-separated, file)
+   -tu, -template-url string[]            list of template urls to run (comma-separated, file)
+   -w, -workflows string[]                list of workflow or workflow directory to run (comma-separated, file)
+   -wu, -workflow-url string[]            list of workflow urls to run (comma-separated, file)
+   -validate                              validate the passed templates to nuclei
+   -nss, -no-strict-syntax                disable strict syntax check on templates
+   -td, -template-display                 displays the templates content
+   -tl                                    list all available templates
+
+FILTERING:
+   -a, -author string[]               templates to run based on authors (comma-separated, file)
+   -tags string[]                     templates to run based on tags (comma-separated, file)
+   -etags, -exclude-tags string[]     templates to exclude based on tags (comma-separated, file)
+   -itags, -include-tags string[]     tags to be executed even if they are excluded either by default or configuration
+   -id, -template-id string[]         templates to run based on template ids (comma-separated, file)
+   -eid, -exclude-id string[]         templates to exclude based on template ids (comma-separated, file)
+   -it, -include-templates string[]   templates to be executed even if they are excluded either by default or configuration
+   -et, -exclude-templates string[]   template or template directory to exclude (comma-separated, file)
+   -em, -exclude-matchers string[]    template matchers to exclude in result
+   -s, -severity value[]              templates to run based on severity. Possible values: info, low, medium, high, critical, unknown
+   -es, -exclude-severity value[]     templates to exclude based on severity. Possible values: info, low, medium, high, critical, unknown
+   -pt, -type value[]                 templates to run based on protocol type. Possible values: dns, file, http, headless, tcp, workflow, ssl, websocket, whois
+   -ept, -exclude-type value[]        templates to exclude based on protocol type. Possible values: dns, file, http, headless, tcp, workflow, ssl, websocket, whois
+   -tc, -template-condition string[]  templates to run based on expression condition
+
+OUTPUT:
+   -o, -output string            output file to write found issues/vulnerabilities
+   -sresp, -store-resp           store all request/response passed through nuclei to output directory
+   -srd, -store-resp-dir string  store all request/response passed through nuclei to custom directory (default &quot;output&quot;)
+   -silent                       display findings only
+   -nc, -no-color                disable output content coloring (ANSI escape codes)
+   -j, -jsonl                    write output in JSONL(ines) format
+   -irr, -include-rr -omit-raw   include request/response pairs in the JSON, JSONL, and Markdown outputs (for findings only) [DEPRECATED use -omit-raw] (default true)
+   -or, -omit-raw                omit request/response pairs in the JSON, JSONL, and Markdown outputs (for findings only)
+   -nm, -no-meta                 disable printing result metadata in cli output
+   -ts, -timestamp               enables printing timestamp in cli output
+   -rdb, -report-db string       nuclei reporting database (always use this to persist report data)
+   -ms, -matcher-status          display match failure status
+   -me, -markdown-export string  directory to export results in markdown format
+   -se, -sarif-export string     file to export results in SARIF format
+   -je, -json-export string      file to export results in JSON format
+   -jle, -jsonl-export string    file to export results in JSONL(ine) format
+
+CONFIGURATIONS:
+   -config string                        path to the nuclei configuration file
+   -fr, -follow-redirects                enable following redirects for http templates
+   -fhr, -follow-host-redirects          follow redirects on the same host
+   -mr, -max-redirects int               max number of redirects to follow for http templates (default 10)
+   -dr, -disable-redirects               disable redirects for http templates
+   -rc, -report-config string            nuclei reporting module configuration file
+   -H, -header string[]                  custom header/cookie to include in all http request in header:value format (cli, file)
+   -V, -var value                        custom vars in key=value format
+   -r, -resolvers string                 file containing resolver list for nuclei
+   -sr, -system-resolvers                use system DNS resolving as error fallback
+   -dc, -disable-clustering              disable clustering of requests
+   -passive                              enable passive HTTP response processing mode
+   -fh2, -force-http2                    force http2 connection on requests
+   -ev, -env-vars                        enable environment variables to be used in template
+   -cc, -client-cert string              client certificate file (PEM-encoded) used for authenticating against scanned hosts
+   -ck, -client-key string               client key file (PEM-encoded) used for authenticating against scanned hosts
+   -ca, -client-ca string                client certificate authority file (PEM-encoded) used for authenticating against scanned hosts
+   -sml, -show-match-line                show match lines for file templates, works with extractors only
+   -ztls                                 use ztls library with autofallback to standard one for tls13 [Deprecated] autofallback to ztls is enabled by default
+   -sni string                           tls sni hostname to use (default: input domain name)
+   -lfa, -allow-local-file-access        allows file (payload) access anywhere on the system
+   -lna, -restrict-local-network-access  blocks connections to the local / private network
+   -i, -interface string                 network interface to use for network scan
+   -at, -attack-type string              type of payload combinations to perform (batteringram,pitchfork,clusterbomb)
+   -sip, -source-ip string               source ip address to use for network scan
+   -config-directory string              override the default config path ($home/.config)
+   -rsr, -response-size-read int         max response size to read in bytes (default 10485760)
+   -rss, -response-size-save int         max response size to read in bytes (default 1048576)
+   -reset                                reset removes all nuclei configuration and data files (including nuclei-templates)
+   -tlsi, -tls-impersonate               enable experimental client hello (ja3) tls randomization
+
+INTERACTSH:
+   -iserver, -interactsh-server string  interactsh server url for self-hosted instance (default: oast.pro,oast.live,oast.site,oast.online,oast.fun,oast.me)
+   -itoken, -interactsh-token string    authentication token for self-hosted interactsh server
+   -interactions-cache-size int         number of requests to keep in the interactions cache (default 5000)
+   -interactions-eviction int           number of seconds to wait before evicting requests from cache (default 60)
+   -interactions-poll-duration int      number of seconds to wait before each interaction poll request (default 5)
+   -interactions-cooldown-period int    extra time for interaction polling before exiting (default 5)
+   -ni, -no-interactsh                  disable interactsh server for OAST testing, exclude OAST based templates
+
+FUZZING:
+   -ft, -fuzzing-type string  overrides fuzzing type set in template (replace, prefix, postfix, infix)
+   -fm, -fuzzing-mode string  overrides fuzzing mode set in template (multiple, single)
+
+UNCOVER:
+   -uc, -uncover                  enable uncover engine
+   -uq, -uncover-query string[]   uncover search query
+   -ue, -uncover-engine string[]  uncover search engine (shodan,censys,fofa,shodan-idb,quake,hunter,zoomeye,netlas,criminalip,publicwww,hunterhow) (default shodan)
+   -uf, -uncover-field string     uncover fields to return (ip,port,host) (default &quot;ip:port&quot;)
+   -ul, -uncover-limit int        uncover results to return (default 100)
+   -ur, -uncover-ratelimit int    override ratelimit of engines with unknown ratelimit (default 60 req/min) (default 60)
+
+RATE-LIMIT:
+   -rl, -rate-limit int               maximum number of requests to send per second (default 150)
+   -rlm, -rate-limit-minute int       maximum number of requests to send per minute
+   -bs, -bulk-size int                maximum number of hosts to be analyzed in parallel per template (default 25)
+   -c, -concurrency int               maximum number of templates to be executed in parallel (default 25)
+   -hbs, -headless-bulk-size int      maximum number of headless hosts to be analyzed in parallel per template (default 10)
+   -headc, -headless-concurrency int  maximum number of headless templates to be executed in parallel (default 10)
+
+OPTIMIZATIONS:
+   -timeout int                        time to wait in seconds before timeout (default 10)
+   -retries int                        number of times to retry a failed request (default 1)
+   -ldp, -leave-default-ports          leave default HTTP/HTTPS ports (eg. host:80,host:443)
+   -mhe, -max-host-error int           max errors for a host before skipping from scan (default 30)
+   -te, -track-error string[]          adds given error to max-host-error watchlist (standard, file)
+   -nmhe, -no-mhe                      disable skipping host from scan based on errors
+   -project                            use a project folder to avoid sending same request multiple times
+   -project-path string                set a specific project path
+   -spm, -stop-at-first-match          stop processing HTTP requests after the first match (may break template/workflow logic)
+   -stream                             stream mode - start elaborating without sorting the input
+   -ss, -scan-strategy value           strategy to use while scanning(auto/host-spray/template-spray) (default auto)
+   -irt, -input-read-timeout duration  timeout on input read (default 3m0s)
+   -nh, -no-httpx                      disable httpx probing for non-url input
+   -no-stdin                           disable stdin processing
+
+HEADLESS:
+   -headless                        enable templates that require headless browser support (root user on Linux will disable sandbox)
+   -page-timeout int                seconds to wait for each page in headless mode (default 20)
+   -sb, -show-browser               show the browser on the screen when running templates with headless mode
+   -ho, -headless-options string[]  start headless chrome with additional options
+   -sc, -system-chrome              use local installed Chrome browser instead of nuclei installed
+   -lha, -list-headless-action      list available headless actions
+
+DEBUG:
+   -debug                    show all requests and responses
+   -dreq, -debug-req         show all sent requests
+   -dresp, -debug-resp       show all received responses
+   -p, -proxy string[]       list of http/socks5 proxy to use (comma separated or file input)
+   -pi, -proxy-internal      proxy all internal requests
+   -ldf, -list-dsl-function  list all supported DSL function signatures
+   -tlog, -trace-log string  file to write sent requests trace log
+   -elog, -error-log string  file to write sent requests error log
+   -version                  show nuclei version
+   -hm, -hang-monitor        enable nuclei hang monitoring
+   -v, -verbose              show verbose output
+   -profile-mem string       optional nuclei memory profile dump file
+   -vv                       display templates loaded for scan
+   -svd, -show-var-dump      show variables dump for debugging
+   -ep, -enable-pprof        enable pprof debugging server
+   -tv, -templates-version   shows the version of the installed nuclei-templates
+   -hc, -health-check        run diagnostic check up
+
+UPDATE:
+   -up, -update                      update nuclei engine to the latest released version
+   -ut, -update-templates            update nuclei-templates to latest released version
+   -ud, -update-template-dir string  custom directory to install / update nuclei-templates
+   -duc, -disable-update-check       disable automatic nuclei/templates update check
+
+STATISTICS:
+   -stats                    display statistics about the running scan
+   -sj, -stats-json          display statistics in JSONL(ines) format
+   -si, -stats-interval int  number of seconds to wait between showing a statistics update (default 5)
+   -m, -metrics              expose nuclei metrics on a port
+   -mp, -metrics-port int    port to expose nuclei metrics on (default 9092)
+</code></pre></div>
+<h2 id="running-nuclei">Running <strong>Nuclei</strong><a class="headerlink" href="#running-nuclei" title="Permanent link">&para;</a></h2>
+<p>Nuclei templates can be primarily executed in two ways,</p>
+<p>1) <strong>Templates</strong> (<code>-t/templates</code>)</p>
+<p>As default, all the templates (except nuclei-ignore list) gets executed from default template installation path.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com
+</code></pre></div>
+<p>Custom template directory or multiple template directory can be executed as follows,</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-t<span class="w"> </span>exposures/
+</code></pre></div>
+<p>Custom template Github repos are downloaded under <code>github</code> directory. Custom repo templates can be passed as follows</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-t<span class="w"> </span>github/private-repo
+</code></pre></div>
+<p>Similarly, Templates can be executed against list of URLs.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-list<span class="w"> </span>http_urls.txt
+</code></pre></div>
+<p>2) <strong>Workflows</strong> (<code>-w/workflows</code>)</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-w<span class="w"> </span>workflows/
+</code></pre></div>
+<p>Similarly, Workflows can be executed against list of URLs.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-list<span class="w"> </span>http_urls.txt<span class="w"> </span>-w<span class="w"> </span>workflows/wordpress-workflow.yaml
+</code></pre></div>
+<h3 id="nuclei-filters">Nuclei <strong>Filters</strong><a class="headerlink" href="#nuclei-filters" title="Permanent link">&para;</a></h3>
+<p>Nuclei engine supports three basic filters to customize template execution.</p>
+<ol>
+<li>
+<p>Tags (<code>-tags</code>)</p>
+<p>Filter based on tags field available in the template.</p>
+</li>
+<li>
+<p>Severity (<code>-severity</code>)</p>
+<p>Filter based on severity field available in the template.</p>
+</li>
+<li>
+<p>Author (<code>-author</code>)</p>
+<p>Filter based on author field available in the template.</p>
+</li>
+</ol>
+<p>As default, Filters are applied on installed path of templates and can be customized with manual template path input.</p>
+<p>For example, below command will run all the templates installed at <code>~/nuclei-templates/</code> directory and has <code>cve</code> tags in it.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-tags<span class="w"> </span>cve
+</code></pre></div>
+<p>And this example will run all the templates available under <code>~/nuclei-templates/exposures/</code> directory and has <code>config</code> tag in it.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-tags<span class="w"> </span>config<span class="w"> </span>-t<span class="w"> </span>exposures/
+</code></pre></div>
+<p>Multiple filters works together with AND condition, below example runs all template with <code>cve</code> tags AND has <code>critical</code> OR <code>high</code> severity AND <code>geeknik</code> as author of template.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-u<span class="w"> </span>https://example.com<span class="w"> </span>-tags<span class="w"> </span>cve<span class="w"> </span>-severity<span class="w"> </span>critical,high<span class="w"> </span>-author<span class="w"> </span>geeknik
+</code></pre></div>
+<p>Multiple filters can also be combined using the template condition flag (<code>-tc</code>) that allows complex expressions like the following ones:</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-tc<span class="w"> </span><span class="s2">&quot;contains(id,&#39;xss&#39;) || contains(tags,&#39;xss&#39;)&quot;</span>
+nuclei<span class="w"> </span>-tc<span class="w"> </span><span class="s2">&quot;contains(tags,&#39;cve&#39;) &amp;&amp; contains(tags,&#39;ssrf&#39;)&quot;</span>
+nuclei<span class="w"> </span>-tc<span class="w"> </span><span class="s2">&quot;contains(name, &#39;Local File Inclusion&#39;)&quot;</span>
+</code></pre></div>
+<p>The supported fields are:</p>
+<ul>
+<li><code>id</code> string</li>
+<li><code>name</code> string</li>
+<li><code>description</code> string</li>
+<li><code>tags</code> slice of strings</li>
+<li><code>authors</code> slice of strings</li>
+<li><code>severity</code> string</li>
+<li><code>protocol</code> string</li>
+<li><code>http_method</code> slice of strings</li>
+<li><code>body</code> string (containing all request bodies if any)</li>
+<li><code>matcher_type</code> slice of string</li>
+<li><code>extractor_type</code> slice of string</li>
+<li><code>description</code> string</li>
+</ul>
+<p>Also, every key-value pair from the template metadata section is accessible. All fields can be combined with logical operators (<code>||</code> and <code>&amp;&amp;</code>) and used with DSL helper functions.</p>
+<p>Similarly, all filters are supported in workflows as well.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-w<span class="w"> </span>workflows/wordpress-workflow.yaml<span class="w"> </span>-severity<span class="w"> </span>critical,high<span class="w"> </span>-list<span class="w"> </span>http_urls.txt
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Workflows</p>
+<p>In Workflows, Nuclei filters are applied on templates or sub-templates running via workflows, not on the workflows itself.</p>
+</div>
+<h3 id="rate-limits">Rate <strong>Limits</strong><a class="headerlink" href="#rate-limits" title="Permanent link">&para;</a></h3>
+<p>Nuclei have multiple rate limit controls for multiple factors, including a number of templates to execute in parallel, a number of hosts to be scanned in parallel for each template, and the global number of request / per second you wanted to make/limit using nuclei, here is an example of each flag with description.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rate-limit</td>
+<td>Control the total number of request to send per seconds</td>
+</tr>
+<tr>
+<td>bulk-size</td>
+<td>Control the number of hosts to process in parallel for each template</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Control the number of templates to process in parallel</td>
+</tr>
+</tbody>
+</table>
+<p>Feel free to play with these flags to tune your nuclei scan speed and accuracy.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>rate-limit</code> flag takes precedence over the other two flags, the number of requests/seconds can't go beyond the value defined for <code>rate-limit</code> flag regardless the value of <code>c</code> and <code>bulk-size</code> flag.</p>
+</div>
+<h3 id="traffic-tagging">Traffic <strong>Tagging</strong><a class="headerlink" href="#traffic-tagging" title="Permanent link">&para;</a></h3>
+<p>Many BugBounty platform/programs requires you to identify the HTTP traffic you make, this can be achieved by setting custom header using config file at <code>$HOME/.config/nuclei/config.yaml</code> or CLI flag <code>-H / header</code></p>
+<div class="admonition info">
+<p class="admonition-title">Setting custom header using config file</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Headers to include with each request.</span>
+<span class="nt">header</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;X-BugBounty-Hacker:</span><span class="nv"> </span><span class="s">h1/geekboy&#39;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;User-Agent:</span><span class="nv"> </span><span class="s">Mozilla/5.0</span><span class="nv"> </span><span class="s">(Windows</span><span class="nv"> </span><span class="s">NT</span><span class="nv"> </span><span class="s">10.0;</span><span class="nv"> </span><span class="s">WOW64)</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">nuclei&#39;</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Setting custom header using CLI flag</p>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">nuclei -header &#39;User-Agent</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mozilla/5.0 (Windows NT 10.0; WOW64) / nuclei&#39; -list urls.txt -tags cves</span>
+</code></pre></div>
+</div>
+<h3 id="template-exclusion">Template <strong>Exclusion</strong><a class="headerlink" href="#template-exclusion" title="Permanent link">&para;</a></h3>
+<p>Nuclei supports a variety of methods for excluding / blocking templates from execution. By default, <strong>nuclei</strong> excludes the tags/templates listed below from execution to avoid unexpected fuzz based scans and some that are not supposed to run for mass scan, and these can be easily overwritten  with nuclei configuration file / flags.</p>
+<ul>
+<li>Default <a href="https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore">Template ignore</a> list.</li>
+</ul>
+<div class="admonition danger">
+<p><strong>nuclei-ignore</strong> file is not supposed to be updated / edited / removed by user, to overwrite default ignore list, utilize <a href="https://nuclei.projectdiscovery.io/nuclei/get-started/#nuclei-config">nuclei configuration</a> file. </p>
+</div>
+<p>Nuclei engine supports two ways to manually exclude templates from scan,</p>
+<ol>
+<li>
+<p>Exclude Templates (<code>-exclude-templates/exclude</code>)</p>
+<p><strong>exclude-templates</strong> flag is used to exclude single or multiple templates and directory, multiple <code>-exclude-templates</code> flag can be used to provide multiple values.</p>
+</li>
+<li>
+<p>Exclude Tags (<code>-exclude-tags/etags</code>)</p>
+<p><strong>exclude-tags</strong> flag is used to exclude templates based in defined tags, single or multiple can be used to exclude templates.</p>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Example of excluding single template</p>
+<div class="highlight"><pre><span></span><code>nuclei -list urls.txt -t cves/ -exclude-templates cves/2020/CVE-2020-XXXX.yaml
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Example of multiple template exclusion</p>
+<div class="highlight"><pre><span></span><code>nuclei -list urls.txt -exclude-templates exposed-panels/ -exclude-templates technologies/
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Example of excluding templates with single tag</p>
+<div class="highlight"><pre><span></span><code>nuclei -l urls.txt -t cves/ -etags xss
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Example of excluding templates with multiple tags</p>
+<div class="highlight"><pre><span></span><code>nuclei -l urls.txt -t cves/ -etags sqli,rce
+</code></pre></div>
+</div>
+<p>To easily overwrite <a href="https://github.com/projectdiscovery/nuclei-templates/blob/master/.nuclei-ignore">nuclei-ignore</a>, Nuclei engine supports <strong>include-tags</strong> / <strong>include-templates</strong> flag.</p>
+<div class="admonition info">
+<p class="admonition-title">Example of running blocked templates</p>
+<div class="highlight"><pre><span></span><code>nuclei -l urls.txt -include-tags iot,misc,fuzz
+</code></pre></div>
+</div>
+<h3 id="headless-mode">Headless Mode<a class="headerlink" href="#headless-mode" title="Permanent link">&para;</a></h3>
+<h2 id="-headless-options"><em><code>-headless-options</code></em><a class="headerlink" href="#-headless-options" title="Permanent link">&para;</a></h2>
+<p>Additional chrome options can be specified using <code>-headless-options</code>, for example -</p>
+<div class="highlight"><pre><span></span><code><span class="go">nuclei -u https://tesla.com -headless -headless-options --no-sandbox,proxy-server=http://127.0.0.1:8080</span>
+</code></pre></div>
+<h3 id="uncover-integration">Uncover <strong>Integration</strong><a class="headerlink" href="#uncover-integration" title="Permanent link">&para;</a></h3>
+<p>Nuclei supports integration with <a href="https://github.com/projectdiscovery/uncover">uncover</a> to execute templates against hosts returned by uncover for the given query.</p>
+<p>Here are uncover options to use -
+<div class="highlight"><pre><span></span><code><span class="go">nuclei -h uncover</span>
+
+<span class="go">UNCOVER:</span>
+<span class="go">   -uc, -uncover                  enable uncover engine</span>
+<span class="go">   -uq, -uncover-query string[]   uncover search query</span>
+<span class="go">   -ue, -uncover-engine string[]  uncover search engine (shodan,shodan-idb,fofa,censys,quake,hunter,zoomeye,netlas,criminalip) (default shodan)</span>
+<span class="go">   -uf, -uncover-field string     uncover fields to return (ip,port,host) (default &quot;ip:port&quot;)</span>
+<span class="go">   -ul, -uncover-limit int        uncover results to return (default 100)</span>
+<span class="go">   -ucd, -uncover-delay int       delay between uncover query requests in seconds (0 to disable) (default 1)</span>
+</code></pre></div>
+You have to set the API key of the engine you are using as an environment variable in your shell.
+<div class="highlight"><pre><span></span><code>export SHODAN_API_KEY=xxx
+export CENSYS_API_ID=xxx
+export CENSYS_API_SECRET=xxx
+export FOFA_EMAIL=xxx
+export FOFA_KEY=xxx
+export QUAKE_TOKEN=xxx
+export HUNTER_API_KEY=xxx
+export ZOOMEYE_API_KEY=xxx
+</code></pre></div>
+Required API keys can be obtained by signing up on the following platforms <a href="https://account.shodan.io/register">Shodan</a>, <a href="https://censys.io/register">Censys</a>, <a href="https://fofa.info/toLogin">Fofa</a>, <a href="https://quake.360.net/quake/#/index">Quake</a>, <a href="https://user.skyeye.qianxin.com/user/register?next=https%3A//hunter.qianxin.com/api/uLogin&amp;fromLogin=1">Hunter</a> and <a href="https://www.zoomeye.org/login">ZoomEye</a> .</p>
+<p>Example of template execution using a search query.
+<div class="highlight"><pre><span></span><code>export SHODAN_API_KEY=xxx
+nuclei -id &#39;CVE-2021-26855&#39; -uq &#39;vuln:CVE-2021-26855&#39; -ue shodan
+</code></pre></div>
+It can also read queries from templates metadata and execute template against hosts returned by uncover for that query.</p>
+<p>Example of template execution using template-defined search queries.</p>
+<p>Template snippet of <a href="https://github.com/projectdiscovery/nuclei-templates/blob/master/cves/2021/CVE-2021-26855.yaml">CVE-2021-26855</a></p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">shodan-query</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;vuln:CVE-2021-26855&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="go">nuclei -t cves/2021/CVE-2021-26855.yaml -uncover</span>
+<span class="go">nuclei -tags cve -uncover</span>
+</code></pre></div>
+<p>We can update the nuclei configuration file to include these tags for all scans.</p>
+<h2 id="mass-scanning-using-nuclei"><strong>Mass Scanning</strong> using Nuclei<a class="headerlink" href="#mass-scanning-using-nuclei" title="Permanent link">&para;</a></h2>
+<p>Nuclei fully utilises resources to optimise scanning speed. However, when scanning <strong>thousands</strong>, if not <strong>millions, of targets</strong>, scanning using default parameter values is bound to cause some performance issues ex: low RPS, Slow Scans, Process Killed, High RAM consumption, etc. this is due to limited resources and network I/O. Hence following parameters need to be tuned based on system configuration and targets. </p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Short</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scan-strategy</td>
+<td>-ss</td>
+<td>Scan Strategy to Use (auto/host-spray/template-spray)</td>
+</tr>
+<tr>
+<td>bulk-size</td>
+<td>-bs</td>
+<td>Max Number of targets to scan in parallel</td>
+</tr>
+<tr>
+<td>concurrency</td>
+<td>-c</td>
+<td>Max Number of templates to use in parallel while scanning</td>
+</tr>
+<tr>
+<td>stream</td>
+<td>-</td>
+<td>stream mode - start elaborating without sorting the input</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+</div>
+<p>These are common parameters that need to be tuned . apart from these <code>-rate-limit</code>,<code>-retries</code>,<code>-timeout</code>,<code>-max-host-error</code> also need to be tuned based on targets that are being scanned</p>
+<h3 id="which-scan-strategy-to-use">Which Scan Strategy to Use?<a class="headerlink" href="#which-scan-strategy-to-use" title="Permanent link">&para;</a></h3>
+<p><strong>scan-strategy</strong> option can have three possible values</p>
+<ul>
+<li><code>host-spray</code>     : All templates are iterated over each target.</li>
+<li><code>template-spray</code> : Each template is iterated over all targets.</li>
+<li><code>auto</code>(Default)  : Placeholder of <code>template-spray</code> for now.</li>
+</ul>
+<p>User should select <strong>Scan Strategy</strong> based on number of targets and Each strategy has its own pros &amp; cons.</p>
+<ul>
+<li>When targets &lt; 1000 . <code>template-spray</code> should be used . this strategy is slightly faster than <code>host-spray</code> but uses more RAM and doesnot optimally reuse connections.</li>
+<li>When targets &gt; 1000 . <code>host-spray</code> should be used . this strategy uses less RAM than <code>template-spray</code> and reuses HTTP connections along with some minor improvements and these are crucial when mass scanning.</li>
+</ul>
+<h3 id="concurrency-bulk-size">Concurrency &amp; Bulk-Size<a class="headerlink" href="#concurrency-bulk-size" title="Permanent link">&para;</a></h3>
+<p>Whatever the <code>scan-strategy</code> is <code>-concurrency</code> and <code>-bulk-size</code> are crucial for tuning any type of scan. While tuning these parameters following points should be noted.</p>
+<p><strong>If <code>scan-strategy</code> is template-spray</strong></p>
+<ul>
+<li><code>-concurrency</code> &lt; <code>bulk-size</code> (Ex: <code>-concurrency 10 -bulk-size 200</code>)</li>
+</ul>
+<p><strong>If <code>scan-strategy</code> is host-spray</strong></p>
+<ul>
+<li><code>-concurrency</code> &gt; <code>bulk-size</code> (Ex: <code>-concurrency 200 -bulk-size 10</code>) </li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p><code>-concurrency</code> x <code>-bulk-size</code> &lt;= 2500 (depending on system config)</p>
+<h3 id="stream">Stream<a class="headerlink" href="#stream" title="Permanent link">&para;</a></h3>
+<p>This option should only be enabled if targets &gt; 10k . This skips any type of sorting or preprocessing on target list.</p>
+<h2 id="nuclei-config">Nuclei <strong>Config</strong><a class="headerlink" href="#nuclei-config" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p>Since release of <a href="https://blog.projectdiscovery.io/nuclei-v2-3-0-release/">v.2.3.2</a> nuclei uses <a href="https://github.com/projectdiscovery/goflags">goflags</a> for clean CLI experience and long/short formatted flags.</p>
+<p><a href="https://github.com/projectdiscovery/goflags">goflags</a> comes with auto-generated config file support that coverts all available CLI flags into config file, basically you can define all CLI flags into config file to avoid repetitive CLI flags that loads as default for every scan of nuclei.</p>
+<p>Default path of nuclei config file is <code>$HOME/.config/nuclei/config.yaml</code>, uncomment and configure the flags you wish to run as default.</p>
+</div>
+<p>Here is an example config file:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Headers to include with all HTTP request</span>
+<span class="nt">header</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;X-BugBounty-Hacker:</span><span class="nv"> </span><span class="s">h1/geekboy&#39;</span>
+
+<span class="c1"># Directory based template execution</span>
+<span class="nt">templates</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cves/</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vulnerabilities/</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">misconfiguration/</span>
+
+<span class="c1"># Tags based template execution</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposures,cve</span>
+
+<span class="c1"># Template Filters</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposures,cve</span>
+<span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geeknik,pikpikcu,dhiyaneshdk</span>
+<span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical,high,medium</span>
+
+<span class="c1"># Template Allowlist</span>
+<span class="nt">include-tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dos,fuzz</span><span class="w"> </span><span class="c1"># Tag based inclusion (allows overwriting nuclei-ignore list)</span>
+<span class="nt">include-templates</span><span class="p">:</span><span class="w"> </span><span class="c1"># Template based inclusion (allows overwriting nuclei-ignore list)</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vulnerabilities/xxx</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">misconfiguration/xxxx</span>
+
+<span class="c1"># Template Denylist</span>
+<span class="nt">exclude-tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span><span class="w"> </span><span class="c1"># Tag based exclusion</span>
+<span class="nt">exclude-templates</span><span class="p">:</span><span class="w"> </span><span class="c1"># Template based exclusion</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vulnerabilities/xxx</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">misconfiguration/xxxx</span>
+
+<span class="c1"># Rate Limit configuration</span>
+<span class="nt">rate-limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span>
+<span class="nt">bulk-size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="nt">concurrency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+</code></pre></div>
+<p>Once configured, <strong>config file be used as default</strong>, additionally custom config file can be also provided using <code>-config</code> flag.</p>
+<div class="admonition info">
+<p class="admonition-title">Running nuclei with custom config file</p>
+<div class="highlight"><pre><span></span><code>nuclei -config project.yaml -list urls.txt
+</code></pre></div>
+</div>
+<h2 id="nuclei-reporting">Nuclei <strong>Reporting</strong><a class="headerlink" href="#nuclei-reporting" title="Permanent link">&para;</a></h2>
+<p>Nuclei comes with reporting module support with the release of <a href="https://nuclei.projectdiscovery.io/releases/nuclei-changelog/#nuclei-v230-10-march-2021">v2.3.0</a> supporting GitHub, GitLab, and Jira integration, this allows nuclei engine to create automatic tickets on the supported platform based on found results.</p>
+<table>
+  <tr>
+    <th>Platform</th>
+    <td>GitHub</td>
+    <td>GitLab</td>
+    <td>Jira</td>
+    <td>Markdown</td>
+    <td>SARIF</td>
+    <td>Elasticsearch</td>
+    <td>Splunk HEC</td>
+  </tr>
+  <tr>
+    <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+  </tr>
+</table>
+
+<p><code>-rc, -report-config</code> flag can be used to provide a config file to read configuration details of the platform to integrate. Here is an <a href="https://github.com/projectdiscovery/nuclei/blob/master/v2/cmd/nuclei/issue-tracker-config.yaml">example config file</a> for all supported platforms.</p>
+<p>For example, to create tickets on GitHub, create a config file with the following content and replace the appropriate values:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># GitHub contains configuration options for GitHub issue tracker</span>
+
+<span class="nt">github</span><span class="p">:</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$user&quot;</span>
+<span class="w">  </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$user&quot;</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$token&quot;</span>
+<span class="w">  </span><span class="nt">project-name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;testing-project&quot;</span>
+<span class="w">  </span><span class="nt">issue-label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Nuclei&quot;</span>
+</code></pre></div>
+<p>To store results in Elasticsearch, create a config file with the following content and replace the appropriate values:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># elasticsearch contains configuration options for elasticsearch exporter</span>
+<span class="nt">elasticsearch</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># IP for elasticsearch instance</span>
+<span class="w">  </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+<span class="w">  </span><span class="c1"># Port is the port of elasticsearch instance</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9200</span>
+<span class="w">  </span><span class="c1"># IndexName is the name of the elasticsearch index</span>
+<span class="w">  </span><span class="nt">index-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nuclei</span>
+</code></pre></div>
+<p>To forward results to Splunk HEC, create a config file with the following content and replace the appropriate values:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># splunkhec contains configuration options for splunkhec exporter</span>
+<span class="nt">splunkhec</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Hostname for splunkhec instance</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$hec_host&quot;</span>
+<span class="w">  </span><span class="c1"># Port is the port of splunkhec instance</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8088</span>
+<span class="w">  </span><span class="c1"># IndexName is the name of the splunkhec index</span>
+<span class="w">  </span><span class="nt">index-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nuclei</span>
+<span class="w">  </span><span class="c1"># SSL enables ssl for splunkhec connection</span>
+<span class="w">  </span><span class="nt">ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># SSLVerification disables SSL verification for splunkhec</span>
+<span class="w">  </span><span class="nt">ssl-verification</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># HEC Token for the splunkhec instance</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$hec_token&quot;</span><span class="w">  </span>
+</code></pre></div>
+<p>To forward results to Jira, create a config file with the following content and replace the appropriate values:</p>
+<p>The Jira reporting options allows for custom fields, as well as using variables from the Nuclei templates in those custom fields. 
+The supported variables currently are: <code>$CVSSMetrics</code>, <code>$CVEID</code>, <code>$CWEID</code>, <code>$Host</code>, <code>$Severity</code>, <code>$CVSSScore</code>, <code>$Name</code></p>
+<p>In addition, Jira is strict when it comes to custom field entry. If the field is a dropdown, Jira accepts only the case sensitive specific string and the API call is slightly different. To support this, there are three types of customfields.
+<code>name</code> is the dropdown value
+<code>id</code> is the ID value of the dropdown
+<code>freeform</code> is if the customfield the entry of any value</p>
+<p>To avoid duplication, the JQL query run can be slightly modified by the config file.
+The <code>CLOSED_STATUS</code> can be changed in the Jira template file using the <code>status-not</code> variable.
+<code>summary ~ TEMPLATE_NAME AND summary ~ HOSTNAME AND status != CLOSED_STATUS</code></p>
+<div class="highlight"><pre><span></span><code><span class="nt">jira</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># cloud is the boolean which tells if Jira instance is running in the cloud or on-prem version is used</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># update-existing is the boolean which tells if the existing, opened issue should be updated or new one should be created</span>
+<span class="w">  </span><span class="nt">update-existing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="c1"># URL is the jira application url</span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://localhost/jira</span>
+<span class="w">  </span><span class="c1"># account-id is the account-id of the Jira user or username in case of on-prem Jira</span>
+<span class="w">  </span><span class="nt">account-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-account-id</span>
+<span class="w">  </span><span class="c1"># email is the email of the user for Jira instance</span>
+<span class="w">  </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test@test.com</span>
+<span class="w">  </span><span class="c1"># token is the token for Jira instance or password in case of on-prem Jira</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-token</span>
+<span class="w">  </span><span class="c1">#project-name is the name of the project.</span>
+<span class="w">  </span><span class="nt">project-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-project-name</span>
+<span class="w">  </span><span class="c1">#issue-type is the name of the created issue type (case sensitive)</span>
+<span class="w">  </span><span class="nt">issue-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bug</span>
+<span class="w">  </span><span class="c1"># SeverityAsLabel (optional) sends the severity as the label of the created issue</span>
+<span class="w">  </span><span class="c1"># User custom fields for Jira Cloud instead</span>
+<span class="w">  </span><span class="nt">severity-as-label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># Whatever your final status is that you want to use as a closed ticket - Closed, Done, Remediated, etc</span>
+<span class="w">  </span><span class="c1"># When checking for duplicates, the JQL query will filter out status&#39;s that match this.</span>
+<span class="w">  </span><span class="c1"># If it finds a match _and_ the ticket does have this status, a new one will be created.</span>
+<span class="w">  </span><span class="nt">status-not</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Closed</span>
+<span class="w">  </span><span class="c1"># Customfield supports name, id and freeform. name and id are to be used when the custom field is a dropdown.</span>
+<span class="w">  </span><span class="c1"># freeform can be used if the custom field is just a text entry</span>
+<span class="w">  </span><span class="c1"># Variables can be used to pull various pieces of data from the finding itself. </span>
+<span class="w">  </span><span class="c1"># Supported variables: $CVSSMetrics, $CVEID, $CWEID, $Host, $Severity, $CVSSScore, $Name</span>
+<span class="w">  </span><span class="nt">custom_fields</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">customfield_00001</span><span class="p">:</span><span class="w"> </span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Nuclei&quot;</span>
+<span class="w">    </span><span class="nt">customfield_00002</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">freeform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CVSSMetrics</span>
+<span class="w">    </span><span class="nt">customfield_00003</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">freeform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CVSSScore</span>
+</code></pre></div>
+<p><strong>Running nuclei with reporting module:</strong></p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-rc<span class="w"> </span>issue-tracker.yaml
+</code></pre></div>
+<p>Similarly, other platforms can be configured. Reporting module also supports basic filtering and duplicate checks to avoid duplicate ticket creation.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">allow-list</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">high,critical</span>
+</code></pre></div>
+<p>This will ensure to only creating tickets for issues identified with <strong>high</strong> and <strong>critical</strong> severity; similarly, <code>deny-list</code> can be used to exclude issues with a specific severity.</p>
+<p>If you are running periodic scans on the same assets, you might want to consider <code>-rdb, -report-db</code> flag that creates a local copy of the valid findings in the given directory utilized by reporting module to compare and <strong>create tickets for unique issues only</strong>.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-rc<span class="w"> </span>issue-tracker.yaml<span class="w"> </span>-rdb<span class="w"> </span>prod
+</code></pre></div>
+<p><strong><ins>Markdown Export</ins></strong></p>
+<p>Nuclei supports markdown export of valid findings with <code>-me, -markdown-export</code> flag, this flag takes directory as input to store markdown formatted reports.</p>
+<p>Including request/response in the markdown report is optional, and included when <code>-irr, -include-rr</code> flag is used along with <code>-me</code>.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-irr<span class="w"> </span>-markdown-export<span class="w"> </span>reports
+</code></pre></div>
+<p>Optionally, the markdown exports can be sorted by template, host, or severity by setting the enviroment variable: <code>MARKDOWN_EXPORT_SORT_MODE</code> to <code>template</code>, <code>host</code>, or <code>severity</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>export MARKDOWN_EXPORT_SORT_MODE=severity
+</code></pre></div>
+<p><strong><ins>SARIF Export</ins></strong></p>
+<p>Nuclei supports SARIF export of valid findings with <code>-se, -sarif-export</code> flag. This flag takes a file as input to store SARIF formatted report.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-l<span class="w"> </span>urls.txt<span class="w"> </span>-t<span class="w"> </span>cves/<span class="w"> </span>-sarif-export<span class="w"> </span>report.sarif
+</code></pre></div>
+<p>It is also possible to visualize Nuclei results using <strong>sarif</strong> file.</p>
+<ol>
+<li>
+<p>By Uploading SARIF File to <a href="https://microsoft.github.io/sarif-web-component/">SARIF Viewer</a></p>
+</li>
+<li>
+<p>By Uploading SARIF File to Github Actions</p>
+</li>
+</ol>
+<p>more info <a href="https://github.com/projectdiscovery/nuclei/pull/2925">here</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+</div>
+<p>These are <strong>not official</strong> viewers of Nuclei and <code>Nuclei</code> has no liability towards any of these options to visualize <strong>Nuclei</strong> results. These are just some publicly available options to visualize SARIF File.</p>
+<h2 id="scan-metrics">Scan <strong>Metrics</strong><a class="headerlink" href="#scan-metrics" title="Permanent link">&para;</a></h2>
+<p>Nuclei expose running scan metrics on a local port <code>9092</code> when <code>-metrics</code> flag is used and can be accessed at <strong>localhost:9092/metrics</strong>, default port to expose scan information is configurable using <code>-metrics-port</code> flag.</p>
+<p>Here is an example to query <code>metrics</code> while running nuclei as following <code>nuclei -t cves/ -l urls.txt -metrics</code></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9092/metrics<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:00:03&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;hosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;matched&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;percent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;99&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;350&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rps&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;132&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;startedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-27T18:02:18.886745+05:30&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;256&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;352&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="passive-scan">Passive Scan<a class="headerlink" href="#passive-scan" title="Permanent link">&para;</a></h2>
+<p>Nuclei engine supports passive mode scanning for HTTP based template utilizing file support, with this support we can run HTTP based templates against locally stored HTTP response data collected from any other tool.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-passive<span class="w"> </span>-target<span class="w"> </span>http_data
+</code></pre></div>
+<div class="admonition info">
+<p>Passive mode support is limited for templates having <code>{{BasedURL}}</code> or <code>{{BasedURL/}}</code> as base path.</p>
+</div>
+<h2 id="code-contribution"><strong>Code</strong> Contribution<a class="headerlink" href="#code-contribution" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/projectdiscovery/nuclei-templates">Nuclei templates</a> are the base of the nuclei project. We appreciate it if you can write and submit new templates to keep this project alive, and one of the reasons to keep us motivated to keep working on this project. </p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>Nuclei is distributed under MIT <a href="https://github.com/projectdiscovery/nuclei/blob/master/LICENSE.md">License</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../.." title="Index" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Index
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../templating-guide/" title="Introduction" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Introduction
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2023 ProjectDiscovery, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/pdnuclei" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.877163d5.min.js"></script>
+      <script src="../../assets/javascripts/bundle.1688372e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs", "content.action.edit"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.1b3b2620.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1984 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <!-- Snitcher analytics code -->
+    <script>
+        !function(s,n,i,t,c,h){s.SnitchObject=i;s[i]||(s[i]=function(){
+        (s[i].q=s[i].q||[]).push(arguments)});s[i].l=+new Date;c=n.createElement(t);
+        h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8419641.js';
+        h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
+
+        snid('verify', '8419641');
+    </script>
+
+    <!-- clearbitscripts analytics code -->
+    <script async src="https://tag.clearbitscripts.com/v1/pk_dba61775644268d3609bf7dd90c0642b/tags.js"></script>
+    
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn how to use Nuclei engine to write your own custom security checks with very simple and easy to use templating syntax.">
+      
+      
+        <link rel="canonical" href="https://nuclei.projectdiscovery.io/templating-guide/protocols/http/">
+      
+      
+      <link rel="shortcut icon" href="../../../static/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Base HTTP - Nuclei - Community Powered Vulnerability Scanner</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.18dbb20c.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.0ec9b792.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-165996103-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#headers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-header-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../../static/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Nuclei - Community Powered Vulnerability Scanner
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Base HTTP
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../nuclei/get-started/" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          Templating Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../template-examples/http/" class="md-tabs__link">
+          Template Examples
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../faq/nuclei/" class="md-tabs__link">
+          FAQ
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nuclei.projectdiscovery.io/" title="Nuclei - Community Powered Vulnerability Scanner" class="md-nav__button md-logo" aria-label="Nuclei - Community Powered Vulnerability Scanner">
+      
+  <img src="../../../static/logo.png" alt="logo">
+
+    </a>
+    Nuclei - Community Powered Vulnerability Scanner
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/projectdiscovery/nuclei-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/#nuclei-features" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/#code-contribution" title="Contribution" class="md-nav__link">
+      Contribution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../nuclei/get-started/#license" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Templating Guide
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Templating Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Templating Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../#template-details" title="Template Details" class="md-nav__link">
+      Template Details
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3" checked>
+    
+    <label class="md-nav__link" for="nav-3-3">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Base HTTP
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Base HTTP" class="md-nav__link md-nav__link--active">
+      Base HTTP
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    Headers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    Body
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session" class="md-nav__link">
+    Session
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-condition" class="md-nav__link">
+    Request Condition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-http-template" class="md-nav__link">
+    Example HTTP Template
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raw-http-requests" class="md-nav__link">
+    RAW HTTP requests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-payloads" class="md-nav__link">
+    HTTP Payloads
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP Payloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attack-mode" class="md-nav__link">
+    Attack mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsafe-http-requests" class="md-nav__link">
+    Unsafe HTTP Requests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advance-requests" class="md-nav__link">
+    Advance Requests
+  </a>
+  
+    <nav class="md-nav" aria-label="Advance Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pipelining" class="md-nav__link">
+    Pipelining
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-pooling" class="md-nav__link">
+    Connection pooling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smuggling" class="md-nav__link">
+    Smuggling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#race-conditions" class="md-nav__link">
+    Race conditions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests-annotation" class="md-nav__link">
+    Requests Annotation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http#raw-http-requests" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http#http-payloads" title="HTTP payloads" class="md-nav__link">
+      HTTP payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http#unsafe-http-requests" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http#advance-requests" title="Advance HTTP" class="md-nav__link">
+      Advance HTTP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../code/" title="Code" class="md-nav__link">
+      Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9">
+    
+    <label class="md-nav__link" for="nav-3-9">
+      Operators
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Operators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Operators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operators/matchers/" title="Matchers" class="md-nav__link">
+      Matchers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operators/extractors/" title="Extractors" class="md-nav__link">
+      Extractors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interactsh/" title="OOB Testing" class="md-nav__link">
+      OOB Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper-functions/" title="Helper Functions" class="md-nav__link">
+      Helper Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../variables/" title="Variables" class="md-nav__link">
+      Variables
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../preprocessors/" title="Preprocessors" class="md-nav__link">
+      Preprocessors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../multiprotocol/" title="Multi Protocol Execution" class="md-nav__link">
+      Multi Protocol Execution
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Template Examples
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Template Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Template Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
+    
+    <label class="md-nav__link" for="nav-4-1">
+      HTTP
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="HTTP" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http/" title="Base HTTP" class="md-nav__link">
+      Base HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-raw/" title="Raw HTTP" class="md-nav__link">
+      Raw HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-fuzzing/" title="HTTP Fuzzing" class="md-nav__link">
+      HTTP Fuzzing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-smuggling/" title="Unsafe HTTP" class="md-nav__link">
+      Unsafe HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-payloads/" title="HTTP Payloads" class="md-nav__link">
+      HTTP Payloads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/http-race-conditions/" title="Race Condition" class="md-nav__link">
+      Race Condition
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/dns/" title="DNS" class="md-nav__link">
+      DNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/headless/" title="Headless" class="md-nav__link">
+      Headless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/network/" title="Network" class="md-nav__link">
+      Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../template-examples/helper-functions/" title="Helpers" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      FAQ
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        FAQ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../faq/nuclei/" title="Nuclei FAQ" class="md-nav__link">
+      Nuclei FAQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../faq/templates/" title="Templates FAQ" class="md-nav__link">
+      Templates FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    Headers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    Body
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session" class="md-nav__link">
+    Session
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-condition" class="md-nav__link">
+    Request Condition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-http-template" class="md-nav__link">
+    Example HTTP Template
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raw-http-requests" class="md-nav__link">
+    RAW HTTP requests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-payloads" class="md-nav__link">
+    HTTP Payloads
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP Payloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attack-mode" class="md-nav__link">
+    Attack mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsafe-http-requests" class="md-nav__link">
+    Unsafe HTTP Requests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advance-requests" class="md-nav__link">
+    Advance Requests
+  </a>
+  
+    <nav class="md-nav" aria-label="Advance Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pipelining" class="md-nav__link">
+    Pipelining
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-pooling" class="md-nav__link">
+    Connection pooling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smuggling" class="md-nav__link">
+    Smuggling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#race-conditions" class="md-nav__link">
+    Race conditions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests-annotation" class="md-nav__link">
+    Requests Annotation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/projectdiscovery/nuclei-docs/edit/main/docs/templating-guide/protocols/http.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Base HTTP</h1>
+                
+                <div class="admonition info">
+<p class="admonition-title">Requests</p>
+<p>Nuclei offers extensive support for various features related to HTTP protocol. Raw and Model based HTTP requests are supported, along with options Non-RFC client requests support too. Payloads can also be specified and raw requests can be transformed based on payload values along with many more capabilities that are shown later on this Page.</p>
+<p>HTTP Requests start with a <code>request</code> block which specifies the start of the requests for the template.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Start the requests for the template right here</span>
+<span class="nt">http</span><span class="p">:</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Method</p>
+<p>Request method can be <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, <strong>DELETE</strong>, etc. depending on the needs.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Method is the method for the request</span>
+<span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GET</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Redirects</p>
+<p>Redirection conditions can be specified per each template. By default, redirects are not followed. However, if desired, they can be enabled with <code>redirects: true</code> in request details. 10 redirects are followed at maximum by default which should be good enough for most use cases. More fine grained control can be exercised over number of redirects followed by using <code>max-redirects</code> field.</p>
+</div>
+<p>An example of the usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GET</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;{{BaseURL}}/login.php&quot;</span>
+<span class="w">    </span><span class="nt">redirects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">max-redirects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Currently redirects are defined per template, not per request.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Path</p>
+<p>The next part of the requests is the <strong>path</strong> of the request path. Dynamic variables can be placed in the path to modify its behavior on runtime.</p>
+<p>Variables start with <code>{{</code> and end with <code>}}</code> and are case-sensitive.</p>
+<p><strong>{{BaseURL}}</strong> - This will replace on runtime in the request by the input URL as specified in the target file.</p>
+<p><strong>{{RootURL}}</strong> - This will replace on runtime in the request by the root URL as specified in the target file.</p>
+<p><strong>{{Hostname}}</strong> - Hostname variable is replaced by the hostname including port of the target on runtime.</p>
+<p><strong>{{Host}}</strong> - This will replace on runtime in the request by the input host as specified in the target file.</p>
+<p><strong>{{Port}}</strong> - This will replace on runtime in the request by the input port as specified in the target file.</p>
+<p><strong>{{Path}}</strong> - This will replace on runtime in the request by the input path as specified in the target file.</p>
+<p><strong>{{File}}</strong> - This will replace on runtime in the request by the input filename as specified in the target file.</p>
+<p><strong>{{Scheme}}</strong> - This will replace on runtime in the request by protocol scheme as specified in the target file.</p>
+</div>
+<p>An example is provided below - <a href="https://example.com:443/foo/bar.php">https://example.com:443/foo/bar.php</a></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{BaseURL}}</td>
+<td><a href="https://example.com:443/foo/bar.php">https://example.com:443/foo/bar.php</a></td>
+</tr>
+<tr>
+<td>{{RootURL}}</td>
+<td><a href="https://example.com:443">https://example.com:443</a></td>
+</tr>
+<tr>
+<td>{{Hostname}}</td>
+<td>example.com:443</td>
+</tr>
+<tr>
+<td>{{Host}}</td>
+<td>example.com</td>
+</tr>
+<tr>
+<td>{{Port}}</td>
+<td>443</td>
+</tr>
+<tr>
+<td>{{Path}}</td>
+<td>/foo</td>
+</tr>
+<tr>
+<td>{{File}}</td>
+<td>bar.php</td>
+</tr>
+<tr>
+<td>{{Scheme}}</td>
+<td>https</td>
+</tr>
+</tbody>
+</table>
+<p>Some sample dynamic variable replacement examples:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{BaseURL}}/.git/config&quot;</span>
+<span class="c1"># This path will be replaced on execution with BaseURL</span>
+<span class="c1"># If BaseURL is set to  https://abc.com then the</span>
+<span class="c1"># path will get replaced to the following: https://abc.com/.git/config</span>
+</code></pre></div>
+<p>Multiple paths can also be specified in one request which will be requested for the target.</p>
+<h4 id="headers">Headers<a class="headerlink" href="#headers" title="Permanent link">&para;</a></h4>
+<p>Headers can also be specified to be sent along with the requests. Headers are placed in form of key/value pairs. An example header configuration looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># headers contain the headers for the request</span>
+<span class="nt">headers</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Custom user-agent header</span>
+<span class="w">  </span><span class="nt">User-Agent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some-Random-User-Agent</span>
+<span class="w">  </span><span class="c1"># Custom request origin</span>
+<span class="w">  </span><span class="nt">Origin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://google.com</span>
+</code></pre></div>
+<h4 id="body">Body<a class="headerlink" href="#body" title="Permanent link">&para;</a></h4>
+<p>Body specifies a body to be sent along with the request. For instance:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Body is a string sent along with the request</span>
+<span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{\&quot;some</span><span class="nv"> </span><span class="s">random</span><span class="nv"> </span><span class="s">JSON\&quot;}&quot;</span>
+
+<span class="c1"># Body is a string sent along with the request</span>
+<span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin=test&quot;</span>
+</code></pre></div>
+<h4 id="session">Session<a class="headerlink" href="#session" title="Permanent link">&para;</a></h4>
+<p>To maintain cookie based browser like session between multiple requests, you can simply use <code>cookie-reuse: true</code> in your template, Useful in cases where you want to maintain session between series of request to complete the exploit chain and to perform authenticated scans. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># cookie-reuse accepts boolean input and false as default</span>
+<span class="nt">cookie-reuse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<h4 id="request-condition">Request Condition<a class="headerlink" href="#request-condition" title="Permanent link">&para;</a></h4>
+<p>Request condition allows checking for the condition between multiple requests for writing complex checks and exploits involving various HTTP requests to complete the exploit chain.</p>
+<p>The functionality will be automatically enabled if DSL matchers/extractors contain numbers as a suffix with respective attributes.</p>
+<p>For example, the attribute <code>status_code</code> will point to the effective status code of the current request/response pair in elaboration. Previous responses status codes are accessible by suffixing the attribute name with <code>_n</code>, where n is the n-th ordered request 1-based. So if the template has four requests and we are currently at number 3:
+- <code>status_code</code>: will refer to the response code of request number 3
+- <code>status_code_1</code> and <code>status_code_2</code> will refer to the response codes of the sequential responses number one and two </p>
+<p>For example with <code>status_code_1</code>, <code>status_code_3</code>, and<code>body_2</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dsl</span>
+<span class="w">        </span><span class="nt">dsl</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;status_code_1</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">404</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">status_code_2</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">200</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">contains((body_2),</span><span class="nv"> </span><span class="s">&#39;secret_string&#39;)&quot;</span>
+</code></pre></div>
+<p>Note: request conditions might require more memory as all attributes of previous responses are kept in memory</p>
+<h4 id="example-http-template"><strong>Example HTTP Template</strong><a class="headerlink" href="#example-http-template" title="Permanent link">&para;</a></h4>
+<p>The final template file for the <code>.git/config</code> file mentioned above is as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git-config</span>
+
+<span class="nt">info</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Git Config File</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ice3man</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">medium</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Searches for the pattern /.git/config on passed URLs.</span>
+
+<span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GET</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;{{BaseURL}}/.git/config&quot;</span>
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">word</span>
+<span class="w">        </span><span class="nt">words</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;[core]&quot;</span>
+</code></pre></div>
+<h3 id="raw-http-requests">RAW HTTP requests<a class="headerlink" href="#raw-http-requests" title="Permanent link">&para;</a></h3>
+<p>Another way to create request is using raw requests which comes with more flexibility and support of DSL helper functions, like the following ones (as of now it's suggested to leave the <code>Host</code> header as in the example with the variable <code>{{Hostname}}</code>), All the Matcher, Extractor capabilities can be used with RAW requests in same the way described above. </p>
+<div class="highlight"><pre><span></span><code><span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST /path2/ HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+
+<span class="w">        </span><span class="no">a=test&amp;b=pd</span>
+</code></pre></div>
+<p>Requests can be fine-tuned to perform the exact tasks as desired. Nuclei requests are fully configurable meaning you can configure and define each and every single thing about the requests that will be sent to the target servers.</p>
+<p>RAW request format also supports <a href="https://nuclei.projectdiscovery.io/templating-guide/helper-functions/">various helper functions</a> letting us do run time manipulation with input. An example of the using a helper function in the header. </p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">GET /manager/html HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Authorization: Basic {{base64(&#39;username:password&#39;)}} # Helper function to encode input at run time.</span>
+</code></pre></div>
+<p>To make a request to the URL specified as input without any additional tampering, a blank Request URI can be used as specified below which will make the request to user specified input.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">GET HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+</code></pre></div>
+<h3 id="http-payloads">HTTP Payloads<a class="headerlink" href="#http-payloads" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nuclei engine supports payloads module that allow to run various type of payloads in multiple format, It's possible to define placeholders with simple keywords (or using brackets <code>{{helper_function(variable)}}</code> in case mutator functions are needed), and perform <strong>batteringram</strong>, <strong>pitchfork</strong> and <strong>clusterbomb</strong> attacks. The wordlist for these attacks needs to be defined during the request definition under the Payload field, with a name matching the keyword, Nuclei supports both file based and in template wordlist support and Finally all DSL functionalities are fully available and supported, and can be used to manipulate the final values.</p>
+<p>Payloads are defined using variable name and can be referenced in the request in between <code>§ §</code> or <code>{{ }}</code> marker.</p>
+</div>
+<p>An example of the using payloads with local wordlist:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1"># HTTP Intruder fuzzing using local wordlist.</span>
+
+<span class="w">    </span><span class="nt">payloads</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">params.txt</span>
+<span class="w">      </span><span class="nt">header</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local.txt</span>
+</code></pre></div>
+<p>An example of the using payloads with in template wordlist support:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1"># HTTP Intruder fuzzing using in template wordlist.</span>
+
+<span class="w">    </span><span class="nt">payloads</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guest</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+</code></pre></div>
+<p><strong>Note:</strong> be careful while selecting attack type, as unexpected input will break the template. </p>
+<p>For example, if you used <code>clusterbomb</code> or <code>pitchfork</code> as attack type and defined only one variable in the payload section, template will fail to compile, as <code>clusterbomb</code> or <code>pitchfork</code> expect more than one variable to use in the template. </p>
+<h4 id="attack-mode">Attack mode<a class="headerlink" href="#attack-mode" title="Permanent link">&para;</a></h4>
+<p>Nuclei engine supports multiple attack types, including <code>batteringram</code> as default type which generally used to fuzz single parameter, <code>clusterbomb</code> and <code>pitchfork</code> for fuzzing multiple parameters which works same as classical burp intruder.</p>
+<table>
+  <tr>
+    <th>Type</th>
+    <td>batteringram</td>
+    <td>pitchfork</td>
+    <td>clusterbomb</td>
+
+  </tr>
+  <tr>
+    <th>Support</th>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+    <td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg>
+    </td>
+  </tr>
+</table>
+
+<div class="admonition abstract">
+<p class="admonition-title">batteringram</p>
+<p>The battering ram attack type places the same payload value in all positions. It uses only one payload set. It loops through the payload set and replaces all positions with the payload value.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">pitchfork</p>
+<p>The pitchfork attack type uses one payload set for each position. It places the first payload in the first position, the second payload in the second position, and so on.</p>
+<p>It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">clusterbomb</p>
+<p>The cluster bomb attack tries all different combinations of payloads. It still puts the first payload in the first position, and the second payload in the second position. But when it loops through the payload sets, it tries all combinations.</p>
+<p>It then loops through all payload sets at the same time. The first request uses the first payload from each payload set, the second request uses the second payload from each payload set, and so on.</p>
+<p>This attack type is useful for a brute-force attack. Load a list of commonly used usernames in the first payload set, and a list of commonly used passwords in the second payload set. The cluster bomb attack will then try all combinations.</p>
+<p>More details <a href="https://www.sjoerdlangkemper.nl/2017/08/02/burp-intruder-attack-types/">here</a>. </p>
+</div>
+<p>An example of the using <code>clusterbomb</code> attack to fuzz.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST /?file={{path}} HTTP/1.1</span>
+<span class="w">        </span><span class="no">User-Agent: {{header}}</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+
+<span class="w">    </span><span class="nt">payloads</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helpers/wordlists/prams.txt</span>
+<span class="w">      </span><span class="nt">header</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helpers/wordlists/header.txt</span>
+<span class="w">    </span><span class="nt">attack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clusterbomb</span><span class="w"> </span><span class="c1"># Defining HTTP fuzz attack type</span>
+</code></pre></div>
+<h4 id="unsafe-http-requests">Unsafe HTTP Requests<a class="headerlink" href="#unsafe-http-requests" title="Permanent link">&para;</a></h4>
+<p>Nuclei supports <a href="https://github.com/projectdiscovery/rawhttp">rawhttp</a> for complete request control and customization allowing <strong>any kind of malformed requests</strong> for issues like HTTP request smuggling, Host header injection, CRLF with malformed characters and more.</p>
+<p><strong>rawhttp</strong> library is disabled by default and can be enabled by including <code>unsafe: true</code> in the request block. </p>
+<p>Here is an example of HTTP request smuggling detection template using <code>rawhttp</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|+</span>
+<span class="w">        </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+<span class="w">        </span><span class="no">Content-Length: 150</span>
+<span class="w">        </span><span class="no">Transfer-Encoding: chunked</span>
+
+<span class="w">        </span><span class="no">0</span>
+
+<span class="w">        </span><span class="no">GET /post?postId=5 HTTP/1.1</span>
+<span class="w">        </span><span class="no">User-Agent: a&quot;/&gt;&lt;script&gt;alert(1)&lt;/script&gt;</span>
+<span class="w">        </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+<span class="w">        </span><span class="no">Content-Length: 5</span>
+
+<span class="w">        </span><span class="no">x=1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|+</span>
+<span class="w">        </span><span class="no">GET /post?postId=5 HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+
+<span class="w">    </span><span class="nt">unsafe</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># Enables rawhttp client</span>
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dsl</span>
+<span class="w">        </span><span class="nt">dsl</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;contains(body,</span><span class="nv"> </span><span class="s">&quot;&lt;script&gt;alert(1)&lt;/script&gt;&quot;)&#39;</span>
+</code></pre></div>
+<h3 id="advance-requests">Advance Requests<a class="headerlink" href="#advance-requests" title="Permanent link">&para;</a></h3>
+<p>We’ve enriched nuclei to allow advanced scanning of web servers. Users can now use multiple options to tune HTTP request workflows.</p>
+<h4 id="pipelining">Pipelining<a class="headerlink" href="#pipelining" title="Permanent link">&para;</a></h4>
+<p>HTTP Pipelining support has been added which allows multiple HTTP requests to be sent on the same connection inspired from <a href="https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn">http-desync-attacks-request-smuggling-reborn</a>.</p>
+<p>Before running HTTP pipelining based templates, make sure the running target supports HTTP Pipeline connection, otherwise nuclei engine fallbacks to standard HTTP request engine. </p>
+<p>If you want to confirm the given domain or list of subdomains supports HTTP Pipelining, <a href="https://github.com/projectdiscovery/">httpx</a> has a flag <code>-pipeline</code> to do so.</p>
+<p>An example configuring showing pipelining attributes of nuclei.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">unsafe</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">pipeline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">pipeline-concurrent-connections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">40</span>
+<span class="w">    </span><span class="nt">pipeline-requests-per-connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25000</span>
+</code></pre></div>
+<p>An example template demonstrating pipelining capabilities of nuclei has been provided below-</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline-testing</span>
+<span class="nt">info</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline testing</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdteam</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+
+<span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|+</span>
+<span class="w">        </span><span class="no">GET /{{path}} HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Referer: {{BaseURL}}</span>
+
+<span class="w">    </span><span class="nt">attack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batteringram</span>
+<span class="w">    </span><span class="nt">payloads</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path_wordlist.txt</span>
+
+<span class="w">    </span><span class="nt">unsafe</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">pipeline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">pipeline-concurrent-connections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">40</span>
+<span class="w">    </span><span class="nt">pipeline-requests-per-connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25000</span>
+
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status</span>
+<span class="w">        </span><span class="nt">part</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">header</span>
+<span class="w">        </span><span class="nt">status</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+</code></pre></div>
+<h4 id="connection-pooling">Connection pooling<a class="headerlink" href="#connection-pooling" title="Permanent link">&para;</a></h4>
+<p>While the earlier versions of nuclei did not do connection pooling, users can now configure templates to either use HTTP connection pooling or not. This allows for faster scanning based on requirement.</p>
+<p>To enable connection pooling in the template, <code>threads</code> attribute can be defined with respective number of threads you wanted to use in the payloads sections.</p>
+<p><code>Connection: Close</code> header can not be used in HTTP connection pooling template, otherwise engine will fail and fallback to standard HTTP requests with pooling.</p>
+<p>An example template using HTTP connection pooling-</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fuzzing-example</span>
+<span class="nt">info</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Connection pooling example</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdteam</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+
+<span class="nt">http</span><span class="p">:</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">GET /protected HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Authorization: Basic {{base64(&#39;admin:§password§&#39;)}}</span>
+
+<span class="w">    </span><span class="nt">attack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batteringram</span>
+<span class="w">    </span><span class="nt">payloads</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password.txt</span>
+<span class="w">    </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">40</span>
+
+<span class="w">    </span><span class="nt">matchers-condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">and</span>
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status</span>
+<span class="w">        </span><span class="nt">status</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">word</span>
+<span class="w">        </span><span class="nt">words</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Unique</span><span class="nv"> </span><span class="s">string&quot;</span>
+<span class="w">        </span><span class="nt">part</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body</span>
+</code></pre></div>
+<h4 id="smuggling">Smuggling<a class="headerlink" href="#smuggling" title="Permanent link">&para;</a></h4>
+<p>HTTP Smuggling is a class of Web-Attacks recently made popular by <a href="https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn">Portswigger’s Research</a> into the topic. For an in-depth overview, please visit the article linked above.</p>
+<p>In the open source space, detecting http smuggling is difficult particularly due to the requests for detection being malformed by nature. Nuclei is able to reliably detect HTTP Smuggling vulnerabilities utilising the <a href="https://github.com/projectdiscovery/rawhttp">rawhttp</a> engine.</p>
+<p>The most basic example of an HTTP Smuggling vulnerability is CL.TE Smuggling. An example template to detect a CE.TL HTTP Smuggling vulnerability is provided below using the <code>unsafe: true</code> attribute for rawhttp based requests.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CL-TE-http-smuggling</span>
+
+<span class="nt">info</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP request smuggling, basic CL.TE vulnerability</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdteam</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+<span class="w">  </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te</span>
+
+<span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|+</span>
+<span class="w">      </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">      </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">      </span><span class="no">Connection: keep-alive</span>
+<span class="w">      </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+<span class="w">      </span><span class="no">Content-Length: 6</span>
+<span class="w">      </span><span class="no">Transfer-Encoding: chunked</span>
+
+<span class="w">      </span><span class="no">0</span>
+
+<span class="w">      </span><span class="no">G      </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|+</span>
+<span class="w">      </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">      </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">      </span><span class="no">Connection: keep-alive</span>
+<span class="w">      </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+<span class="w">      </span><span class="no">Content-Length: 6</span>
+<span class="w">      </span><span class="no">Transfer-Encoding: chunked</span>
+
+<span class="w">      </span><span class="no">0</span>
+
+<span class="w">      </span><span class="no">G</span>
+
+<span class="w">    </span><span class="nt">unsafe</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">word</span>
+<span class="w">        </span><span class="nt">words</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;Unrecognized</span><span class="nv"> </span><span class="s">method</span><span class="nv"> </span><span class="s">GPOST&#39;</span>
+</code></pre></div>
+<p>More examples are available in <a href="https://nuclei.projectdiscovery.io/template-examples/http-smuggling/">template-examples</a> section for smuggling templates.</p>
+<h4 id="race-conditions">Race conditions<a class="headerlink" href="#race-conditions" title="Permanent link">&para;</a></h4>
+<p>Race Conditions are another class of bugs not easily automated via traditional tooling. Burp Suite introduced a Gate mechanism to Turbo Intruder where all the bytes for all the requests are sent expect the last one at once which is only sent together for all requests synchronizing the send event.</p>
+<p>We have implemented <strong>Gate</strong> mechanism in nuclei engine and allow them run via templates which makes the testing for this specific bug class simple and portable.</p>
+<p>To enable race condition check within template, <code>race</code> attribute can be set to <code>true</code> and <code>race_count</code> defines the number of simultaneous request you want to initiate.</p>
+<p>Below is an example template where the same request is repeated for 10 times using the gate logic.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">race-condition-testing</span>
+
+<span class="nt">info</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Race condition testing</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdteam</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+
+<span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST /coupons HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+
+<span class="w">        </span><span class="no">promo_code=20OFF        </span>
+
+<span class="w">    </span><span class="nt">race</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">race_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status</span>
+<span class="w">        </span><span class="nt">part</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">header</span>
+<span class="w">        </span><span class="nt">status</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+</code></pre></div>
+<p>You can simply replace the <code>POST</code> request with any suspected vulnerable request and change the <code>race_count</code> as per your need, and it's ready to run.</p>
+<div class="highlight"><pre><span></span><code>nuclei<span class="w"> </span>-t<span class="w"> </span>race.yaml<span class="w"> </span>-target<span class="w"> </span>https://api.target.com
+</code></pre></div>
+<p><strong>Multi request race condition testing</strong></p>
+<p>For the scenario when multiple requests needs to be sent in order to exploit the race condition, we can make use of threads.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">race</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p><code>threads</code> is a total number of request you wanted make with the template to perform race condition testing.</p>
+<p>Below is an example template where multiple (5) unique request will be sent at the same time using the gate logic.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">multi-request-race</span>
+
+<span class="nt">info</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Race condition testing with multiple requests</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pd-team</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+
+<span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">        </span><span class="no">Pragma: no-cache</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Cache-Control: no-cache, no-transform</span>
+<span class="w">        </span><span class="no">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0</span>
+
+<span class="w">        </span><span class="no">id=1</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">        </span><span class="no">Pragma: no-cache</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Cache-Control: no-cache, no-transform</span>
+<span class="w">        </span><span class="no">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0</span>
+
+<span class="w">        </span><span class="no">id=2</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">        </span><span class="no">Pragma: no-cache</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Cache-Control: no-cache, no-transform</span>
+<span class="w">        </span><span class="no">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0</span>
+
+<span class="w">        </span><span class="no">id=3</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">        </span><span class="no">Pragma: no-cache</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Cache-Control: no-cache, no-transform</span>
+<span class="w">        </span><span class="no">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0</span>
+
+<span class="w">        </span><span class="no">id=4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">        </span><span class="no">Pragma: no-cache</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">        </span><span class="no">Cache-Control: no-cache, no-transform</span>
+<span class="w">        </span><span class="no">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0</span>
+
+<span class="w">        </span><span class="no">id=5</span>
+
+<span class="w">    </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">race</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<h3 id="requests-annotation">Requests Annotation<a class="headerlink" href="#requests-annotation" title="Permanent link">&para;</a></h3>
+<p>Request inline annotations allow performing per request properties/behavior override. They are very similar to python/java class annotations and must be put on the request just before the RFC line. Currently, only the following overrides are supported:</p>
+<ul>
+<li><code>@Host:</code> which overrides the real target of the request (usually the host/ip provided as input). It supports syntax with ip/domain, port, and scheme, for example: <code>domain.tld</code>, <code>domain.tld:port</code>, <code>http://domain.tld:port</code></li>
+<li><code>@tls-sni:</code> which overrides the SNI Name of the TLS request (usually the hostname provided as input). It supports any literals. The special value <code>request.host</code> uses the <code>Host</code> header and <code>interactsh-url</code> uses an interactsh generated URL.</li>
+<li><code>@timeout:</code> which overrides the timeout for the request to a custom duration. It supports durations formatted as string. If no duration is specified, the default Timeout flag value is used.</li>
+</ul>
+<p>The following example shows the annotations within a request:</p>
+<p><div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">@Host: https://projectdiscovery.io:443</span>
+<span class="w">  </span><span class="no">POST / HTTP/1.1</span>
+<span class="w">  </span><span class="no">Pragma: no-cache</span>
+<span class="w">  </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">  </span><span class="no">Cache-Control: no-cache, no-transform</span>
+<span class="w">  </span><span class="no">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0</span>
+</code></pre></div>
+This is particularly useful, for example, in the case of templates with multiple requests, where one request after the initial one needs to be performed to a specific host (for example, to check an API validity):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">http</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># this request will be sent to {{Hostname}} to get the token</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">GET /getkey HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: {{Hostname}}</span>
+
+<span class="w">      </span><span class="c1"># This request will be sent instead to https://api.target.com:443 to verify the token validity</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">@Host: https://api.target.com:443</span>
+<span class="w">        </span><span class="no">GET /api/key={{token}} HTTP/1.1</span>
+<span class="w">        </span><span class="no">Host: api.target.com:443</span>
+
+<span class="w">    </span><span class="nt">extractors</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">token</span>
+<span class="w">        </span><span class="nt">part</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body</span>
+<span class="w">        </span><span class="nt">regex</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># random extractor of strings between prefix and suffix</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;prefix(.*)suffix&#39;</span>
+
+<span class="w">    </span><span class="nt">matchers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">word</span>
+<span class="w">        </span><span class="nt">part</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body</span>
+<span class="w">        </span><span class="nt">words</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">valid token</span>
+</code></pre></div>
+<p>Example of a custom <code>timeout</code> annotations - </p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">@timeout: 25s</span>
+<span class="w">  </span><span class="no">POST /conf_mail.php HTTP/1.1</span>
+<span class="w">  </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">  </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+
+<span class="w">  </span><span class="no">mail_address=%3B{{cmd}}%3B&amp;button=%83%81%81%5B%83%8B%91%97%90M</span>
+</code></pre></div>
+<p>Example of <code>sni</code> annotation with <code>interactsh-url</code> - </p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">@tls-sni: interactsh-url</span>
+<span class="w">  </span><span class="no">POST /conf_mail.php HTTP/1.1</span>
+<span class="w">  </span><span class="no">Host: {{Hostname}}</span>
+<span class="w">  </span><span class="no">Content-Type: application/x-www-form-urlencoded</span>
+
+<span class="w">  </span><span class="no">mail_address=%3B{{cmd}}%3B&amp;button=%83%81%81%5B%83%8B%91%97%90M</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../" title="Introduction" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../http-fuzzing/" title="HTTP Fuzzing" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                HTTP Fuzzing
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2023 ProjectDiscovery, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/pdnuclei" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.877163d5.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.1688372e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["tabs", "content.action.edit"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.1b3b2620.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../../search/main.js"></script>
+      
+    
+  </body>
+</html>
