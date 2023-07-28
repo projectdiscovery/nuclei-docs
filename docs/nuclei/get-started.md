@@ -347,11 +347,12 @@ OPTIMIZATIONS:
    -no-stdin                           disable stdin processing
 
 HEADLESS:
-   -headless                    enable templates that require headless browser support (root user on Linux will disable sandbox)
-   -page-timeout int            seconds to wait for each page in headless mode (default 20)
-   -sb, -show-browser           show the browser on the screen when running templates with headless mode
-   -sc, -system-chrome          use local installed Chrome browser instead of nuclei installed
-   -lha, -list-headless-action  list available headless actions
+   -headless                        enable templates that require headless browser support (root user on Linux will disable sandbox)
+   -page-timeout int                seconds to wait for each page in headless mode (default 20)
+   -sb, -show-browser               show the browser on the screen when running templates with headless mode
+   -ho, -headless-options string[]  start headless chrome with additional options
+   -sc, -system-chrome              use local installed Chrome browser instead of nuclei installed
+   -lha, -list-headless-action      list available headless actions
 
 DEBUG:
    -debug                    show all requests and responses
@@ -594,6 +595,20 @@ To easily overwrite [nuclei-ignore](https://github.com/projectdiscovery/nuclei-t
     ```
     nuclei -l urls.txt -include-tags iot,misc,fuzz
     ```
+
+### Headless Mode
+
+*`-headless-options`*
+----
+
+Additional chrome options can be specified using `-headless-options`, for example -
+
+
+```console
+nuclei -u https://tesla.com -headless -headless-options --no-sandbox,proxy-server=http://127.0.0.1:8080
+```
+
+
 ### Uncover **Integration**
 
 Nuclei supports integration with [uncover](https://github.com/projectdiscovery/uncover) to execute templates against hosts returned by uncover for the given query.
@@ -919,6 +934,14 @@ Including request/response in the markdown report is optional, and included when
 
 ```bash
 nuclei -l urls.txt -t cves/ -irr -markdown-export reports
+```
+
+Optionally, the markdown exports can be sorted by template, host, or severity by setting the enviroment variable: `MARKDOWN_EXPORT_SORT_MODE` to `template`, `host`, or `severity`.
+
+Example:
+
+```
+export MARKDOWN_EXPORT_SORT_MODE=severity
 ```
 
 **<ins>SARIF Export</ins>**
